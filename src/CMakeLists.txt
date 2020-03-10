@@ -52,12 +52,15 @@ file(GLOB SOURCES_GFX
 # Find any version 2.X of SFML, first trying 2.5 or above (for which CMake configuration changed)
 find_package(SFML 2.5 QUIET COMPONENTS graphics window system)
     if(SFML_FOUND)
+
         message(STATUS "Found SFML ${SFML_VERSION_MAJOR}.${SFML_VERSION_MINOR}.${SFML_VERSION_PATCH}")
         add_executable (vec2dTest  ${TEST_DIR}/UnitTests/Vec2dTest.cpp ${CACHE_SOURCES})
 	target_link_libraries(vec2dTest sfml-graphics sfml-window sfml-system)
-#	add_executable (circularBodyTest  ${TEST_DIR}/UnitTests/CircularBodyTest.cpp ${CACHE_SOURCES})
-#	target_link_libraries(circularBodyTest sfml-graphics sfml-window sfml-system)
+        add_executable (circularBodyTest  ${TEST_DIR}/UnitTests/CircularBodyTest.cpp ${CACHE_SOURCES})
+        target_link_libraries(circularBodyTest sfml-graphics sfml-window sfml-system)
+
     else()
+
         set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
         find_package(SFML 2 COMPONENTS graphics window system)
         if(SFML_FOUND)
@@ -70,8 +73,8 @@ find_package(SFML 2.5 QUIET COMPONENTS graphics window system)
 	    
 	    add_executable (vec2dTest ${TEST_DIR}/UnitTests/Vec2dTest.cpp ${CACHE_SOURCES})
             target_link_libraries(vec2dTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-#            add_executable (circularBodyTest ${TEST_DIR}/UnitTests/CircularBodyTest.cpp ${CACHE_SOURCES})
-#            target_link_libraries(circularBodyTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+            add_executable (circularBodyTest ${TEST_DIR}/UnitTests/CircularBodyTest.cpp ${CACHE_SOURCES})
+            target_link_libraries(circularBodyTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 
         else()
             message(STATUS "SFML NOT FOUND ! ")
