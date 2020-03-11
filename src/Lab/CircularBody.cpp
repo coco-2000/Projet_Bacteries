@@ -19,7 +19,7 @@ CircularBody::CircularBody(const CircularBody& other)
 }
 /**
  * @brief CircularBody::getPosition
- * @return
+ * @return position actuelle du corps
  */
 const Vec2d& CircularBody::getPosition() const
 {
