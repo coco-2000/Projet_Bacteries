@@ -27,8 +27,6 @@ la surcharge respecte la structure deja employée par ces fonctions qui instaure
 Nous avons utilisé la surcharge externe pour l'opérateur << car on ne cherche pas à modifier la classe ostream.
 De plus il est préférable lorsque c'est possible de faire une surcharge externe.
 
-/**
-**/
 
 *************************************************
 ##Q1.3
@@ -48,6 +46,22 @@ qu'ils soient modifiés par erreurs.
 - Nous avons déclaré la fonctions isColliding, les deux fonctions contains,
 les accesseurs de postion et de rayon ainsi que les operateurs > et & en
 constants car ils ne modifiaient aucuns attribut de la classe
+
+*************************************************
+##Q2.1
+
+PetriDish herite de CircularBody. Elle est donc un CircularBody.
+
+*************************************************
+##Q2.2
+
+addBacterium et addNurtiment ne sont pas considérées comme const car elles modifient les attributs.
+
+*************************************************
+##Q2.3
+
+Pour empecher la copie, on place "= delete" à la fin du prototype du constructeur de copie.
+Pour supprimer l'usage de l'opérateur d'affectation, on place "= delete" à la fin prototype de la surcharge de l'operateur =.
 
 
 
