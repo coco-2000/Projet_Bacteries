@@ -1,4 +1,4 @@
-/*
+﻿/*
  * prjsv 2016
  * Marco Antognini
  */
@@ -19,6 +19,9 @@ std::string const DEFAULT_CFG = "app.json";
 // Define the location of the font file (could be in the config instead of here)
 std::string const FONT_LOCATION = RES_LOCATION + "sansation.ttf";
 
+
+//assiette de Petri
+constexpr int epaisseur_anneau = 5;
 
 class Config
 {
@@ -94,6 +97,8 @@ public:
 	const double nutrimentB_resistance_factor;
 	const double nutrimentB_poison_factor;
 	const double nutrimentB_nutritive_factor;
+
+
 };
 
 #endif // INFOSV_CONFIG_HPP

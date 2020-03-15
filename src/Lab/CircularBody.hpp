@@ -31,7 +31,7 @@ public :
    std::ostream& affiche(std::ostream& out)        const;
 
 
-private :
+protected :
 
     Vec2d position;
     double radius;
