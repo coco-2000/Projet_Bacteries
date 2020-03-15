@@ -42,21 +42,30 @@ sf::Sprite buildSprite(Vec2d const& position, double size, sf::Texture const& te
 }
 
 sf::Text buildText(std::string const& msg, Vec2d const& position, sf::Font const& font, unsigned int size,
-                   sf::Color color)
+                   sf::Color color, float rotation)
 {
     sf::Text txt(msg, font, size);
     txt.setPosition(position);
-#if SFML_VERSION_MAJOR >= 2 && (SFML_VERSION_MINOR > 3)
     txt.setFillColor(color);
-//	txt.setColor(color);
-#else
-    txt.setColor(color);
-#endif    
     txt.setCharacterSize(size);
+	/*
     auto const bounds = txt.getLocalBounds();
     txt.setOrigin(bounds.width / 2, bounds.height / 2);
-
+	*/
+	if (rotation != 0.f) {
+		txt.setRotation(rotation);
+	}
     return txt;
+}
+
+sf::RectangleShape getTextBox(sf::Text& text) {
+    sf::FloatRect fRect(text.getGlobalBounds());
+    sf::Vector2f size(fRect.width,fRect.height);
+    sf::RectangleShape rect;
+    rect.setSize(size);
+    rect.setPosition(text.getPosition());
+    rect.setFillColor(sf::Color(255,255,255,200));
+    return rect;
 }
 
 sf::CircleShape buildCircle(Vec2d const& position, double radius, sf::Color color)

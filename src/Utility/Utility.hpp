@@ -1,10 +1,11 @@
 /*
- * prjsv
- * 2013-20
- * Marco Antognini & Jamila Sam
+ * prjsv 2015
+ * 2013, 2014
+ * Marco Antognini
  */
 
-#pragma once
+#ifndef INFOSV_UTILITY_HPP
+#define INFOSV_UTILITY_HPP
 
 #include <Utility/Types.hpp>
 #include <Utility/Vec2d.hpp>
@@ -54,7 +55,9 @@ sf::Sprite buildSprite(Vec2d const& position, double size, sf::Texture const& te
  * @return a text with all these parameters set
  */
 sf::Text buildText(std::string const& msg, Vec2d const& position, sf::Font const& font, unsigned int size,
-                   sf::Color color);
+                   sf::Color color, float rotation = 0.f);
+
+sf::RectangleShape getTextBox(sf::Text& text);
 
 /*!
  * @brief Construct a circle with a sf::CircleShape.
@@ -178,4 +181,4 @@ void map_erase_if(Map& m, F pred);
 
 #include "Utility.tpp"
 
-
+#endif // INFOSV_UTILITY_HPP
