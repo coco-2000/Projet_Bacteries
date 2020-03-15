@@ -28,8 +28,7 @@ public :
     bool operator&      (CircularBody const& other) const;
     bool operator>      (Vec2d const& point)        const;
 
-    std::ostream& affiche(std::ostream& out)        const;
-
+   std::ostream& affiche(std::ostream& out)        const;
 
 
 private :
@@ -37,7 +36,7 @@ private :
     Vec2d position;
     double radius;
 
-    void copie(const CircularBody& body);
+    void copie           (const CircularBody& body);
 };
 
 std::ostream& operator<<(std::ostream& out, CircularBody const& body);

@@ -68,9 +68,9 @@ void CircularBody::move(const Vec2d& vector)
     position += vector;
 }
 /**
- * @brief CircularBody::contains
- * @param other
- * @return
+ * @brief CircularBody::contains verifier les inclusions
+ * @param other est celui pour lequel on verifie s'il est contenu dans l'instance courante
+ * @return vrai s'il est contenu
  */
 bool CircularBody::contains(const CircularBody& other) const
 {
@@ -78,9 +78,9 @@ bool CircularBody::contains(const CircularBody& other) const
 }
 
 /**
- * @brief CircularBody::isColliding
- * @param other
- * @return
+ * @brief CircularBody::isColliding vérifier les collisions
+ * @param other est celui pour lequel on vérifie s'il entre en collision avec l'instance courante
+ * @return vrai s'ils sont en collision
  */
 bool CircularBody::isColliding(const CircularBody& other) const
 {
@@ -88,9 +88,9 @@ bool CircularBody::isColliding(const CircularBody& other) const
 }
 
 /**
- * @brief CircularBody::contains
- * @param point
- * @return
+ * @brief CircularBody::contains verifier l'inclusion d'un point
+ * @param point : celui pour lequel on vérifie l'inclusion
+ * @return vrai s'il est contenu
  */
 bool CircularBody::contains(const Vec2d& point) const
 {
@@ -98,9 +98,9 @@ bool CircularBody::contains(const Vec2d& point) const
 }
 
 /**
- * @brief CircularBody::operator >
- * @param other
- * @return
+ * @brief CircularBody::operator > verifier les inclusions
+ * @param other est celui pour lequel on verifie s'il est contenu dans l'instance courante
+ * @return vrai s'il est contenu
  */
 bool CircularBody::operator>(CircularBody const& other) const
 {
@@ -108,9 +108,9 @@ bool CircularBody::operator>(CircularBody const& other) const
 }
 
 /**
- * @brief CircularBody::operator &
- * @param other
- * @return
+ * @brief CircularBody::operator & vérifier les collisions
+ * @param other est celui pour lequel on vérifie s'il entre en collision avec l'instance courante
+ * @return vrai s'ils sont en collision
  */
 bool CircularBody::operator&(CircularBody const& other) const
 {
@@ -118,9 +118,9 @@ bool CircularBody::operator&(CircularBody const& other) const
 }
 
 /**
- * @brief CircularBody::operator >
- * @param point
- * @return
+ * @brief CircularBody::operator > verifier l'inclusion d'un point
+ * @param point : celui pour lequel on vérifie l'inclusion
+ * @return vrai s'il est contenu
  */
 bool CircularBody::operator>(Vec2d const& point) const
 {
@@ -138,9 +138,9 @@ void CircularBody::copie(const CircularBody& body)
 }
 
 /**
- * @brief CircularBody::affiche
- * @param out
- * @return
+ * @brief CircularBody::affiche affiche la position et le rayon du CircularBody
+ * @param out : flux de sortie
+ * @return le flux passé en paramètre
  */
 std::ostream& CircularBody::affiche(std::ostream& out) const
 {
@@ -151,7 +151,7 @@ std::ostream& CircularBody::affiche(std::ostream& out) const
 }
 
 /**
- * @brief operator <<
+ * @brief operator << affiche la position et le rayon du CircularBody
  * @param out
  * @param body
  * @return
@@ -160,3 +160,4 @@ std::ostream& operator<<(std::ostream& out, CircularBody const& body)
 {
     return body.affiche(out);
 }
+
