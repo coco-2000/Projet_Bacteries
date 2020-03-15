@@ -1,0 +1,59 @@
+{
+	"folders":
+	[
+		{
+			"path": "../src"
+		}
+	],
+	"build_systems":
+	[
+		{
+			"name": "Bacteria_Simulator_SSV_2020_STEP1 - all",
+			"cmd": ["/usr/bin/ninja", "-f", "build.ninja", "all"],
+			"working_dir": "${project_path}",
+			"file_regex": "^(..[^:]*)(?::|\\()([0-9]+)(?::|\\))(?:([0-9]+):)?\\s*(.*)"
+		},
+		{
+			"name": "Bacteria_Simulator_SSV_2020_STEP1 - clean",
+			"cmd": ["/usr/bin/ninja", "-f", "build.ninja", "clean"],
+			"working_dir": "${project_path}",
+			"file_regex": "^(..[^:]*)(?::|\\()([0-9]+)(?::|\\))(?:([0-9]+):)?\\s*(.*)"
+		},
+		{
+			"name": "Bacteria_Simulator_SSV_2020_STEP1 - edit_cache",
+			"cmd": ["/usr/bin/ninja", "-f", "build.ninja", "edit_cache"],
+			"working_dir": "${project_path}",
+			"file_regex": "^(..[^:]*)(?::|\\()([0-9]+)(?::|\\))(?:([0-9]+):)?\\s*(.*)"
+		},
+		{
+			"name": "Bacteria_Simulator_SSV_2020_STEP1 - vec2dTest",
+			"cmd": ["/usr/bin/ninja", "-f", "build.ninja", "vec2dTest"],
+			"working_dir": "${project_path}",
+			"file_regex": "^(..[^:]*)(?::|\\()([0-9]+)(?::|\\))(?:([0-9]+):)?\\s*(.*)"
+		},
+		{
+			"name": "Bacteria_Simulator_SSV_2020_STEP1 - vec2dTest/fast",
+			"cmd": ["/usr/bin/ninja", "-f", "build.ninja", "vec2dTest/fast"],
+			"working_dir": "${project_path}",
+			"file_regex": "^(..[^:]*)(?::|\\()([0-9]+)(?::|\\))(?:([0-9]+):)?\\s*(.*)"
+		},
+		{
+			"name": "Bacteria_Simulator_SSV_2020_STEP1 - rebuild_cache",
+			"cmd": ["/usr/bin/ninja", "-f", "build.ninja", "rebuild_cache"],
+			"working_dir": "${project_path}",
+			"file_regex": "^(..[^:]*)(?::|\\()([0-9]+)(?::|\\))(?:([0-9]+):)?\\s*(.*)"
+		},
+		{
+			"name": "Bacteria_Simulator_SSV_2020_STEP1 - circularBodyTest",
+			"cmd": ["/usr/bin/ninja", "-f", "build.ninja", "circularBodyTest"],
+			"working_dir": "${project_path}",
+			"file_regex": "^(..[^:]*)(?::|\\()([0-9]+)(?::|\\))(?:([0-9]+):)?\\s*(.*)"
+		},
+		{
+			"name": "Bacteria_Simulator_SSV_2020_STEP1 - circularBodyTest/fast",
+			"cmd": ["/usr/bin/ninja", "-f", "build.ninja", "circularBodyTest/fast"],
+			"working_dir": "${project_path}",
+			"file_regex": "^(..[^:]*)(?::|\\()([0-9]+)(?::|\\))(?:([0-9]+):)?\\s*(.*)"
+		}
+	]
+}
