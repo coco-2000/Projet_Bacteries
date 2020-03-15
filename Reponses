@@ -1,0 +1,61 @@
+#Projet programmation orientée objet (SSV)
+
+##REPONSES du groupe *No groupe* (Emma Boehly & Constance De Trogoff)
+
+*************************************************
+##Q1.1
+
+
+- Les opérateurs > et & utilisent des fonctionnalités qui ont déjà été
+programmé dans les fonctions contains et isColliding, il suffit donc
+leur faire retourner les résultats de ces dernières fonctions.
+
+
+*************************************************
+##Q1.2
+
+Nous avons utilisé la surcharge interne pour les opérateur > et &.
+
+Pour l'opérateur > qui s'utilise comme body > point et body1 > body2, la surchage interne a été choisie car
+il existe une asymétrie entre les 2 opérandes ; il s'agit de vérifier si l'une est contenue dans l'autre.
+Il n'y a donc pas de raison de passer les 2 opérandes en paramètre sur un même pied d'égalité.
+
+Les surcharges & et > appellent les fonctions contains et isColliding et nous avons fait en sorte que
+la surcharge respecte la structure deja employée par ces fonctions qui instaurent une asymétrie entre les opérandes.
+
+
+Nous avons utilisé la surcharge externe pour l'opérateur << car on ne cherche pas à modifier la classe ostream.
+De plus il est préférable lorsque c'est possible de faire une surcharge externe.
+
+/**
+**/
+
+*************************************************
+##Q1.3
+
+
+- Nous avons passés par référence constante les arguments de type
+CircularBody des fonctions contains et isColliding, des operateurs
+>, = et & et du constructeur de copie ainsi que les arguments de type Vec2d
+de l'accesseur de position, des fonctions move et contains et de l'opérateur
+> car ces objets pouvant être de grande taille, les passer par référence
+permet d'éviter de les copier. Les désigner comme constants permet d'éviter
+qu'ils soient modifiés par erreurs.
+
+*************************************************
+##Q1.4
+
+- Nous avons déclaré la fonctions isColliding, les deux fonctions contains,
+les accesseurs de postion et de rayon ainsi que les operateurs > et & en
+constants car ils ne modifiaient aucuns attribut de la classe
+
+
+
+
+
+
+
+
+
+
+
