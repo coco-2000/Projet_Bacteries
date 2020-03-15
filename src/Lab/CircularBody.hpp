@@ -20,9 +20,9 @@ public :
 
     bool contains       (const CircularBody& other) const;
     bool isColliding    (const CircularBody& other) const;
-    bool contains       (const Vec2d point)         const;
+    bool contains       (const Vec2d& point)         const;
 
-    CircularBody& operator=(CircularBody const&);
+    CircularBody& operator=(CircularBody const& other);
 
     bool operator>      (CircularBody const& other) const;
     bool operator&      (CircularBody const& other) const;

@@ -92,7 +92,7 @@ bool CircularBody::isColliding(const CircularBody& other) const
  * @param point
  * @return
  */
-bool CircularBody::contains(const Vec2d point) const
+bool CircularBody::contains(const Vec2d& point) const
 {
     return (distance(position, point) <= radius);
 }
