@@ -7,8 +7,8 @@
 
 
 - Les opérateurs > et & utilisent des fonctionnalités qui ont déjà été
-programmé dans les fonctions contains et isColliding, il suffit donc
-leur faire retourner les résultats de ces dernières fonctions.
+programmé dans les methodes contains et isColliding, il suffit donc
+leur faire retourner les résultats de ces dernières methodes.
 
 
 *************************************************
@@ -20,8 +20,8 @@ Pour l'opérateur > qui s'utilise comme body > point et body1 > body2, la surcha
 il existe une asymétrie entre les 2 opérandes ; il s'agit de vérifier si l'une est contenue dans l'autre.
 Il n'y a donc pas de raison de passer les 2 opérandes en paramètre sur un même pied d'égalité.
 
-Les surcharges & et > appellent les fonctions contains et isColliding et nous avons fait en sorte que
-la surcharge respecte la structure deja employée par ces fonctions qui instaurent une asymétrie entre les opérandes.
+Les surcharges & et > appellent les methodes contains et isColliding et nous avons fait en sorte que
+la surcharge respecte la structure deja employée par ces methodes qui instaurent une asymétrie entre les opérandes.
 
 
 Nous avons utilisé la surcharge externe pour l'opérateur << car on ne cherche pas à modifier la classe ostream.
@@ -35,7 +35,7 @@ De plus il est préférable lorsque c'est possible de faire une surcharge extern
 - Nous avons passés par référence constante les arguments de type
 CircularBody des fonctions contains et isColliding, des operateurs
 >, = et & et du constructeur de copie ainsi que les arguments de type Vec2d
-de l'accesseur de position, des fonctions move et contains et de l'opérateur
+de l'accesseur de position, des methodes move et contains et de l'opérateur
 > car ces objets pouvant être de grande taille, les passer par référence
 permet d'éviter de les copier. Les désigner comme constants permet d'éviter
 qu'ils soient modifiés par erreurs.
@@ -55,13 +55,28 @@ PetriDish herite de CircularBody. Elle est donc un CircularBody.
 *************************************************
 ##Q2.2
 
-addBacterium et addNurtiment ne sont pas considérées comme const car elles modifient les attributs.
+addBacterium et addNurtiment ne sont pas considérées comme const car elles modifient
+les attributs.
 
 *************************************************
 ##Q2.3
 
 Pour empecher la copie, on place "= delete" à la fin du prototype du constructeur de copie.
-Pour supprimer l'usage de l'opérateur d'affectation, on place "= delete" à la fin prototype de la surcharge de l'operateur =.
+Pour supprimer l'usage de l'opérateur d'affectation,
+on place "= delete" à la fin prototype de la surcharge de l'operateur =.
+
+*************************************************
+##Q2.4
+
+Lors de la destruction d'une assiette de Petri, il faut également que les bactéries
+et les nutriments vers lesquels elle pointe soient détruis.
+Le destructeur de la calsse PetriDish doit donc faire appel à la methode reset()
+
+*************************************************
+
+
+
+
 
 
 
