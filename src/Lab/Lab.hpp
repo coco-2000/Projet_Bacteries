@@ -13,6 +13,6 @@ public:
 
 private :
 
-    bool contains(const CircularBody&);
     PetriDish petri;
+    bool contains(const CircularBody&) const;
 };

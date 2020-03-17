@@ -1,7 +1,7 @@
 #pragma once
 #include "CircularBody.hpp"
 #include "Utility/Types.hpp"
-#include "Application.hpp"
+#include <SFML/Graphics.hpp>
 
 
 class Nutriment : public CircularBody
@@ -37,4 +37,6 @@ public :
 
 private :
     Quantity quantity_;
+
+    void DisplayQuantity(sf::RenderTarget& target) const;
 };

@@ -1,6 +1,7 @@
 #include "CircularBody.hpp"
 #include"../Utility/Vec2d.hpp"
 #include <iostream>
+#include "Utility/Vec2d.hpp"
 
 /**
  * @brief CircularBody::CircularBody Constructeur
@@ -168,5 +169,10 @@ std::ostream& CircularBody::affiche(std::ostream& out) const
 std::ostream& operator<<(std::ostream& out, CircularBody const& body)
 {
     return body.affiche(out);
+}
+
+const Vec2d& CircularBody::decalage(const Vec2d& vector) const
+{
+    return vector + position;
 }
 
