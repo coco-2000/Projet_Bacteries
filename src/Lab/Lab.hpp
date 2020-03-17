@@ -4,10 +4,13 @@
 class Lab
 {
 public:
+
+     Lab(const PetriDish& Petri, const Application& application);
      void update(sf::Time dt);
      void drawOn(sf::RenderTarget& targetWindow) const;
+
 private :
-    PetriDish Petri;
+    PetriDish* Petri;
 
 
 
