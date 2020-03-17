@@ -21,13 +21,12 @@ bool PetriDish::addBacterium(Bacterium* bacterie)
 
 bool PetriDish::addNutriment(Nutriment* nutriment)
 {
-
-    bool conditions = true;
-
-    if (conditions)
+    if (contains(*nutriment))
+    {
         lesNutriments.push_back(nutriment);
+    }
 
-    return conditions;
+    return contains(*nutriment);
 }
 
 void PetriDish::reset()
