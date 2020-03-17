@@ -14,19 +14,12 @@ leur faire retourner les résultats de ces dernières methodes.
 *************************************************
 ##Q1.2
 
-Nous avons utilisé la surcharge interne pour les opérateur > et &.
-
-Pour l'opérateur > qui s'utilise comme body > point et body1 > body2, la surchage interne a été choisie car
-il existe une asymétrie entre les 2 opérandes ; il s'agit de vérifier si l'une est contenue dans l'autre.
-Il n'y a donc pas de raison de passer les 2 opérandes en paramètre sur un même pied d'égalité.
-
-Les surcharges & et > appellent les methodes contains et isColliding et nous avons fait en sorte que
-la surcharge respecte la structure deja employée par ces methodes qui instaurent une asymétrie entre les opérandes.
-
+Nous avons utilisé la surcharge externe pour les opérateur > et & car il est préférable d'utiliser
+la surcharge externe lorsqu'elle ne fait ni appel aux getteurs de la classe ni aux attributs private.
+Or les opérateurs > et & utilisent des methodes publiques de la classe CircularBody.
 
 Nous avons utilisé la surcharge externe pour l'opérateur << car on ne cherche pas à modifier la classe ostream.
 De plus il est préférable lorsque c'est possible de faire une surcharge externe.
-
 
 *************************************************
 ##Q1.3
@@ -50,13 +43,16 @@ constants car ils ne modifiaient aucuns attribut de la classe
 *************************************************
 ##Q2.1
 
+Pour modéliser l'assiette comme un corps circulaire, nous avons fait en sorte que
 PetriDish herite de CircularBody. Elle est donc un CircularBody.
 
 *************************************************
 ##Q2.2
 
 addBacterium et addNurtiment ne sont pas considérées comme const car elles modifient
-les attributs.
+les attributs. De même pour la methode update qui pourrait engendré des modifications sur les attributs
+
+En revanche, la methode drawOn peut être considérée comme const car elle s'occupe simplement de dessiner l'assiette de Petri.
 
 *************************************************
 ##Q2.3

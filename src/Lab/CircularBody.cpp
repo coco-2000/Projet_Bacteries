@@ -58,21 +58,6 @@ bool CircularBody::contains(const Vec2d& point) const
     return (distance(position, point) <= radius);
 }
 
-bool CircularBody::operator>(CircularBody const& other) const
-{
-    return contains(other);
-}
-
-bool CircularBody::operator&(CircularBody const& other) const
-{
-    return isColliding(other);
-}
-
-bool CircularBody::operator>(Vec2d const& point) const
-{
-    return contains(point);
-}
-
 void CircularBody::copie(const CircularBody& body)
 {
     position = body.position;
@@ -98,3 +83,17 @@ Vec2d CircularBody::decalage(const Vec2d& vector) const
     return vector + position;
 }
 
+bool operator>      (CircularBody const& body1, CircularBody const& body2)
+{
+    return body1.contains(body2);
+}
+
+bool operator&      (CircularBody const& body1, CircularBody const& body2)
+{
+    return body1.isColliding(body2);
+}
+
+bool operator>      (CircularBody  const& body, Vec2d const& point)
+{
+    return body.contains(point);
+}

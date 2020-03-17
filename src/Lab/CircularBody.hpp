@@ -87,31 +87,11 @@ public :
     CircularBody& operator=(CircularBody const& other);
 
     /**
-     * @brief CircularBody::operator > verifier les inclusions
-     * @param other est celui pour lequel on verifie s'il est contenu dans l'instance courante
-     * @return vrai s'il est contenu
-     */
-    bool operator>      (CircularBody const& other) const;
-
-    /**
-     * @brief CircularBody::operator & vérifier les collisions
-     * @param other est celui pour lequel on vérifie s'il entre en collision avec l'instance courante
-     * @return vrai s'ils sont en collision
-     */
-    bool operator&      (CircularBody const& other) const;
-
-    /**
-     * @brief CircularBody::operator > verifier l'inclusion d'un point
-     * @param point : celui pour lequel on vérifie l'inclusion
-     * @return vrai s'il est contenu
-     */
-    bool operator>      (Vec2d const& point)        const;
-
-    /**
      * @brief CircularBody::affiche affiche la position et le rayon du CircularBody
      * @param out : flux de sortie
      * @return le flux passé en paramètre
      */
+
     std::ostream& affiche(std::ostream& out)        const;
 
 
@@ -134,3 +114,34 @@ protected :
  * @return Le flux de sortie
  */
 std::ostream& operator<<(std::ostream& out, CircularBody const& body);
+
+/**
+ * @brief operator > verifier les inclusions
+ * @param body1 on verifie s'il contient body2
+ * @param body2 on verifie s'il est contenu dans body1
+ * @return vrai si body2 est contenu dans body1
+ */
+bool operator>(CircularBody const& body1, CircularBody const& body2);
+
+/**
+ * @brief operator & verifier les collisions
+ * @param body1 on verifie s'il est en collision avec body2
+ * @param body2
+ * @return vrai s'ils sont en collision
+ */
+bool operator&(CircularBody const& body1, CircularBody const& body2);
+
+/**
+ * @brief operator > verifier l'inclusion d'un point
+ * @param body on verifie s'il contient le point
+ * @param point onverfifie s'il contient le body
+ * @return vrai si le point est contenu dans le body
+ */
+bool operator>(CircularBody  const& body, Vec2d const& point);
+
+
+
+
+
+
+

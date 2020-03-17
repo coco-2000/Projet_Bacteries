@@ -5,6 +5,8 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
+constexpr int epaisseur_anneau(5);
+
 class PetriDish : public CircularBody
 {
 public:

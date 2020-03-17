@@ -58,7 +58,6 @@ void PetriDish::update(sf::Time dt)
 
 void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
 {
-    constexpr int epaisseur_anneau(5);
     auto border = buildAnnulus(position, radius, sf::Color::Black, epaisseur_anneau);
     targetWindow.draw(border);
 }
