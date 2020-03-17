@@ -20,9 +20,6 @@ std::string const DEFAULT_CFG = "app.json";
 std::string const FONT_LOCATION = RES_LOCATION + "sansation.ttf";
 
 
-//assiette de Petri
-constexpr int epaisseur_anneau = 5;
-
 class Config
 {
 private:
