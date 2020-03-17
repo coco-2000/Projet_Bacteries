@@ -25,11 +25,7 @@ public :
 
     CircularBody& operator=(CircularBody const& other);
 
-    bool operator>      (CircularBody const& other) const;
-    bool operator&      (CircularBody const& other) const;
-    bool operator>      (Vec2d const& point)        const;
-
-   std::ostream& affiche(std::ostream& out)        const;
+    std::ostream& affiche(std::ostream& out)        const;
 
 
 protected :
@@ -41,3 +37,34 @@ protected :
 };
 
 std::ostream& operator<<(std::ostream& out, CircularBody const& body);
+
+/**
+ * @brief operator > verifier les inclusions
+ * @param body1 on verifie s'il contient body2
+ * @param body2 on verifie s'il est contenu dans body1
+ * @return vrai si body2 est contenu dans body1
+ */
+bool operator>(CircularBody const& body1, CircularBody const& body2);
+
+/**
+ * @brief operator & verifier les collisions
+ * @param body1 on verifie s'il est en collision avec body2
+ * @param body2
+ * @return vrai s'ils sont en collision
+ */
+bool operator&(CircularBody const& body1, CircularBody const& body2);
+
+/**
+ * @brief operator > verifier l'inclusion d'un point
+ * @param body on verifie s'il contient le point
+ * @param point onverfifie s'il contient le body
+ * @return vrai si le point est contenu dans le body
+ */
+bool operator>(CircularBody  const& body, Vec2d const& point);
+
+
+
+
+
+
+

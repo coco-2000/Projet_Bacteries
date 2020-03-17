@@ -108,36 +108,6 @@ bool CircularBody::contains(const Vec2d& point) const
 }
 
 /**
- * @brief CircularBody::operator > verifier les inclusions
- * @param other est celui pour lequel on verifie s'il est contenu dans l'instance courante
- * @return vrai s'il est contenu
- */
-bool CircularBody::operator>(CircularBody const& other) const
-{
-    return contains(other);
-}
-
-/**
- * @brief CircularBody::operator & vérifier les collisions
- * @param other est celui pour lequel on vérifie s'il entre en collision avec l'instance courante
- * @return vrai s'ils sont en collision
- */
-bool CircularBody::operator&(CircularBody const& other) const
-{
-    return isColliding(other);
-}
-
-/**
- * @brief CircularBody::operator > verifier l'inclusion d'un point
- * @param point : celui pour lequel on vérifie l'inclusion
- * @return vrai s'il est contenu
- */
-bool CircularBody::operator>(Vec2d const& point) const
-{
-    return contains(point);
-}
-
-/**
  * @brief CircularBody::copie
  * @param body
  */
@@ -176,3 +146,17 @@ const Vec2d& CircularBody::decalage(const Vec2d& vector) const
     return vector + position;
 }
 
+bool operator>      (CircularBody const& body1, CircularBody const& body2)
+{
+    return body1.contains(body2);
+}
+
+bool operator&      (CircularBody const& body1, CircularBody const& body2)
+{
+    return body1.isColliding(body2);
+}
+
+bool operator>      (CircularBody  const& body, Vec2d const& point)
+{
+    return body.contains(point);
+}
