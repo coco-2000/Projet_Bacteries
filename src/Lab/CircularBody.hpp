@@ -8,22 +8,89 @@ class CircularBody
 {
 public :
 
+    /**
+     * @brief CircularBody::CircularBody Constructeur
+     * @param position Coordonnées de la position du CircularBody
+     * @param radius Rayon du CircularBody
+     */
     CircularBody(Vec2d position, double radius);
+
+    /**
+     * @brief CircularBody::CircularBody Constructeur de copie
+     * @param other CircularBody à copier
+     */
     CircularBody(const CircularBody& other);
 
+    /**
+     * @brief CircularBody::getPosition Accesseur de position
+     * @return Position actuelle de l'instance courante
+     */
     const Vec2d& getPosition()  const;
+
+    /**
+     * @brief CircularBody::getRadius Accesseur de rayon
+     * @return Rayon actuel de l'instance courante
+     */
     double getRadius()          const;
 
+    /**
+     * @brief CircularBody::setPosition Manipulateur de position
+     * @param pos Coordonnées de la nouvelle position à assigner à l'instance courante
+     */
     void setPosition    (const Vec2d& pos);
-    void setRadius      (double rayon);
-    void move           (const Vec2d& vector);
-    const Vec2d& decalage(const Vec2d& vector) const;
 
+    /**
+     * @brief CircularBody::setRadius Manipulateur de rayon
+     * @param rayon Valeur du nouveau rayon à assigner à l'instance courante
+     */
+    void setRadius      (double rayon);
+
+    /**
+     * @brief CircularBody::move Ajoute à la position de l'instance courante un vecteur de déplacement (permet de faire bouger le CircularBody)
+     * @param vector Coordonnées du vecteur de déplacement
+     */
+    void move           (const Vec2d& vector);
+
+    /**
+     * @brief decalage Donne position d'un objet qui doit se touver à côté de l'instance courante
+     * @param vector Vecteur de décalage
+     * @return Les coordonnées décalées par rapport à la position de l'instance courante
+     */
+    Vec2d decalage(const Vec2d& vector) const;
+
+    /**
+     * @brief CircularBody::contains Vérifie les inclusions
+     * @param other CircularBody pour lequel on verifie s'il est contenu dans l'instance courante
+     * @return vrai si other est contenu dans l'instance courante
+     */
     bool contains       (const CircularBody& other) const;
+
+    /**
+     * @brief CircularBody::isColliding vérifier les collisions
+     * @param other est celui pour lequel on vérifie s'il entre en collision avec l'instance courante
+     * @return vrai s'ils sont en collision
+     */
     bool isColliding    (const CircularBody& other) const;
+
+    /**
+     * @brief CircularBody::contains verifier l'inclusion d'un point
+     * @param point : celui pour lequel on vérifie l'inclusion
+     * @return vrai s'il est contenu
+     */
     bool contains       (const Vec2d& point)         const;
 
+    /**
+     * @brief CircularBody::operator = Copie les valeurs des attributs de other dans l'instance courante
+     * @param other CircularBody à copier
+     * @return L'instance courante après sa copie
+     */
     CircularBody& operator=(CircularBody const& other);
+
+    /**
+     * @brief CircularBody::affiche affiche la position et le rayon du CircularBody
+     * @param out : flux de sortie
+     * @return le flux passé en paramètre
+     */
 
     std::ostream& affiche(std::ostream& out)        const;
 
@@ -33,9 +100,19 @@ protected :
     Vec2d position;
     double radius;
 
+    /**
+     * @brief CircularBody::copie
+     * @param body
+     */
     void copie           (const CircularBody& body);
 };
 
+/**
+ * @brief operator << affiche la position et le rayon du CircularBody
+ * @param out
+ * @param body
+ * @return
+ */
 std::ostream& operator<<(std::ostream& out, CircularBody const& body);
 
 /**
