@@ -8,4 +8,10 @@ public:
      void drawOn(sf::RenderTarget& targetWindow) const;
 private :
     PetriDish Petri;
+
+
+
+
+
+    bool contains(const CircularBody&);
 };
