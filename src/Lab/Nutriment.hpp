@@ -31,13 +31,8 @@ public :
      * @brief drawOn Dessine un nutriment
      * @param target
      */
-    void drawOn(sf::RenderTarget& target) const;
-
-    /**
-     * @brief getConfig Simplfifie l'accès aux paramètres
-     * @return Paramètre de simulation souhaité
-     */
-    j::Value const& getConfig() const;
+   void drawOn(sf::RenderTarget& target) const;
+   j::Value const& getConfig() const;
 
 
 private :

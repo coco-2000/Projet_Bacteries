@@ -48,3 +48,4 @@ j::Value const& Nutriment::getConfig() const
 {
     return getAppConfig()["nutriments"];
 }
+

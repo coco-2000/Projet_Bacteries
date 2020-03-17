@@ -1,20 +1,18 @@
-# pragma once
+#pragma once
 #include "PetriDish.hpp"
+#include <SFML/Graphics.hpp>
 
 class Lab
 {
 public:
 
-     Lab(const PetriDish& Petri, const Application& application);
+     Lab();
      void update(sf::Time dt);
      void drawOn(sf::RenderTarget& targetWindow) const;
+     void reset();
 
 private :
-    PetriDish* Petri;
-
-
-
-
 
     bool contains(const CircularBody&);
+    PetriDish petri;
 };

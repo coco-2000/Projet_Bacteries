@@ -88,8 +88,8 @@ find_package(SFML 2.5 QUIET COMPONENTS graphics window system)
       target_link_libraries(vec2dTest sfml-graphics sfml-window sfml-system)
 
       #Graphical tests:
-#      add_executable (nutrimentTest  ${TEST_DIR}/GraphicalTests/NutrimentTest.cpp ${SOURCES_GFX})
-#      target_link_libraries(nutrimentTest sfml-graphics sfml-window sfml-system)
+      add_executable (nutrimentTest  ${TEST_DIR}/GraphicalTests/NutrimentTest.cpp ${SOURCES_GFX})
+      target_link_libraries(nutrimentTest sfml-graphics sfml-window sfml-system)
       
     else()
         set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
@@ -114,8 +114,8 @@ find_package(SFML 2.5 QUIET COMPONENTS graphics window system)
             target_link_libraries(vec2dTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 	    
 	    #Graphical tests:
-#	    add_executable(nutrimentTest ${TEST_DIR}/GraphicalTests/NutrimentTest.cpp ${SOURCES_GFX})
-#            target_link_libraries(nutrimentTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+            add_executable(nutrimentTest ${TEST_DIR}/GraphicalTests/NutrimentTest.cpp ${SOURCES_GFX})
+            target_link_libraries(nutrimentTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 
 
         else()

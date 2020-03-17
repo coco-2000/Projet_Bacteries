@@ -32,6 +32,7 @@
  *
  * Note that `simulation` and `world` usually mean the same thing here.
  */
+class Lab;
 class Application
 {
 public:
