@@ -1,6 +1,7 @@
 #include "Nutriment.hpp"
 #include "Application.hpp"
 #include "Utility/Utility.hpp"
+#include <string>
 
 constexpr unsigned int TAILLE_OBJ_GRAPHIQUE(6);
 
@@ -42,9 +43,19 @@ void Nutriment::drawOn(sf::RenderTarget& target) const
          // adapte la taille du Sprite au rayon du nutriment:
          nutrimentSprite.setScale(2 * radius / getAppTexture(getConfig()["texture"].toString()).getSize().x, 2 * radius / getAppTexture(getConfig()["texture"].toString()).getSize().y);
         target.draw(nutrimentSprite);
+        DisplayQuantity(target);
 }
 
 j::Value const& Nutriment::getConfig() const
 {
     return getAppConfig()["nutriments"];
+}
+
+void Nutriment::DisplayQuantity(sf::RenderTarget& target) const
+{
+    if(isDebugOn())
+    {
+        auto const text = buildText(std::to_string(quantity_), decalage({5,10}), getAppFont(), 15, sf::Color::Black, 0);
+        target.draw(text);
+    }
 }

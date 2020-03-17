@@ -42,4 +42,6 @@ public :
 
 private :
     Quantity quantity_;
+
+    void DisplayQuantity(sf::RenderTarget& target) const;
 };

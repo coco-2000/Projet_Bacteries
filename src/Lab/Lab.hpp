@@ -12,9 +12,5 @@ public:
 private :
     PetriDish* Petri;
 
-
-
-
-
-    bool contains(const CircularBody&);
+    bool contains(const CircularBody&) const;
 };

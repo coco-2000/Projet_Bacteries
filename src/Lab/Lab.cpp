@@ -1,11 +1,9 @@
-
 #include "Lab.hpp"
-#include "CircularBody.hpp"
 
 
-bool contains(const CircularBody& corps)
+bool Lab::contains(const CircularBody& corps) const
 {
-    return contains(corps);
+    return (*Petri > corps);
 }
 
 Lab(const PetriDish& Petri, const Application& application){}

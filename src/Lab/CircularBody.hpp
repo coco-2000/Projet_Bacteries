@@ -17,6 +17,7 @@ public :
     void setPosition    (const Vec2d& pos);
     void setRadius      (double rayon);
     void move           (const Vec2d& vector);
+    const Vec2d& decalage(const Vec2d& vector) const;
 
     bool contains       (const CircularBody& other) const;
     bool isColliding    (const CircularBody& other) const;
