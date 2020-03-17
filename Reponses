@@ -77,11 +77,8 @@ Le destructeur de la calsse PetriDish doit donc faire appel à la methode reset(
 
 Comme pour le moment, faire évoluer un Lab c'est simplement faire évoluer son assiette de Petri unique
 et le dessiner c'est aussi dessiner cette assiette de Petri, la methode Lab::drawOn devrait faire appel
-à la methode PetriDish::drawOn qui permet de dessiner l'assiette de Petri
-
-
-
-
+à la methode PetriDish::drawOn qui permet de dessiner l'assiette de Petri et à la methode PetriDish::update
+qui permet de faire évoluer l'assiette.
 
 *************************************************
 ##Q2.7

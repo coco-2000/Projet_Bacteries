@@ -2,20 +2,12 @@
 #include "../Utility/Utility.hpp"
 #include "CircularBody.hpp"
 
-/**
- * @brief PetriDish::PetriDish constructeur de PetriDish appel le constructeur de CircularBody
- * @param position
- * @param radius
- */
+
 PetriDish::PetriDish(Vec2d position, double radius)
     : CircularBody (position, radius)
 {}
 
-/**
- * @brief PetriDish::addBacterium peuple l'assiette
- * @param bacterie ajoutée à l'assiette
- * @return vrai si la bacterie a pu être placé dans l'assiette
- */
+
 bool PetriDish::addBacterium(Bacterium* bacterie)
 {
     bool conditions = true;
@@ -26,11 +18,7 @@ bool PetriDish::addBacterium(Bacterium* bacterie)
     return conditions;
 }
 
-/**
- * @brief PetriDish::addNutriment place nutriments dans l'assiette
- * @param nutriment ajouté à l'assiette
- * @return vrai si le nutriment a pu être placé dans l'assiette
- */
+
 bool PetriDish::addNutriment(Nutriment* nutriment)
 {
 
@@ -42,10 +30,6 @@ bool PetriDish::addNutriment(Nutriment* nutriment)
     return conditions;
 }
 
-/**
- * @brief PetriDish::reset supprime toutes les bacteries et tous les
- * nutriments placés dans l'assiette
- */
 void PetriDish::reset()
 {
     for (auto& bacterie : lesBacteries)
@@ -61,28 +45,17 @@ void PetriDish::reset()
     }
 }
 
-/**
- * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
- * avec les bactéries et les nutriments qu'elle contient
- */
 PetriDish::~PetriDish()
 {
     reset();
 }
 
-/**
- * @brief PetriDish::update
- * @param dt
- */
+
 void PetriDish::update(sf::Time dt)
 {
     //faire evoluer les bacteries
 }
 
-/**
- * @brief PetriDish::drawOn
- * @param targetWindow
- */
 void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
 {
     constexpr int epaisseur_anneau(5);
