@@ -79,6 +79,24 @@ Le destructeur de la calsse PetriDish doit donc faire appel à la methode reset(
 
 
 
+*************************************************
+##Q2.7
+
+Si la classe Nutriment est un type de CircularBody alors on peut la considérer
+comme une sous-classe de la super-classe CircularBody. Il s'agit alors d'établir
+une relation d'héritage entre les 2 classes : Nutriment hérite de CircularBody.
+
+*************************************************
+##Q2.8
+
+Le type double est couramment utilisé et pour des éléments très différents.
+Son sens est donc très général et il peut être difficile de comprendre à
+quel type d'objets il fait référence. L'utilisation du type Quantity permet de
+spécifier ce qu'il représente et établit un lien sémantique entre les
+différents éléments auxquels ils s'appliquent.
+
+
+
 
 
 
