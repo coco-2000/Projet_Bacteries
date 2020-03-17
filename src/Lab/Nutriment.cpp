@@ -1,9 +1,7 @@
 #include "Nutriment.hpp"
 #include "Application.hpp"
 #include "Utility/Utility.hpp"
-#include <string>
 
-constexpr unsigned int TAILLE_OBJ_GRAPHIQUE(6);
 
 Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
     : CircularBody(position, quantity), quantity_(quantity) {};
@@ -55,7 +53,7 @@ void Nutriment::DisplayQuantity(sf::RenderTarget& target) const
 {
     if(isDebugOn())
     {
-        auto const text = buildText(std::to_string(quantity_), decalage({5,10}), getAppFont(), 15, sf::Color::Black, 0);
+        auto const text = buildText(std::to_string(quantity_), decalage({10,10}), getAppFont(), TAILLE_FONTE, sf::Color::Black, 0);
         target.draw(text);
     }
 }

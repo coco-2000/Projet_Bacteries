@@ -128,9 +128,9 @@ protected :
 };
 
 /**
- * @brief operator << affiche la position et le rayon du CircularBody
- * @param out
- * @param body
- * @return
+ * @brief operator << Affiche la position et le rayon du CircularBody
+ * @param out Flux de sortie
+ * @param body CircularBody dont on affiche les attributs
+ * @return Le flux de sortie
  */
 std::ostream& operator<<(std::ostream& out, CircularBody const& body);

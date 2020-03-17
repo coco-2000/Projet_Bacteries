@@ -6,7 +6,7 @@ constexpr double ratio_rayon(0.45);
 
 bool Lab::contains(const CircularBody& corps) const
 {
-    return (*Petri > corps);
+    return (petri > corps);
 }
 
 Lab::Lab()

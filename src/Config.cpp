@@ -36,7 +36,7 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
 ,nutrimentB_max_qty(mConfig["nutriments"]["B"]["quantity"]["max"].toInt())
 ,nutrimentB_resistance_factor(mConfig["nutriments"]["B"]["resistance factor"].toDouble())
 ,nutrimentB_poison_factor(mConfig["nutriments"]["B"]["poison factor"].toDouble())
-,nutrimentB_nutritive_factor(mConfig["nutriments"]["B"]["nutritive factor"].toDouble())								   
+,nutrimentB_nutritive_factor(mConfig["nutriments"]["B"]["nutritive factor"].toDouble())
 {}
 
 // TODO : getter for debug

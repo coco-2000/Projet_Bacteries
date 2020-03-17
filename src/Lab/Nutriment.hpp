@@ -3,6 +3,8 @@
 #include "Utility/Types.hpp"
 #include <SFML/Graphics.hpp>
 
+constexpr unsigned int TAILLE_OBJ_GRAPHIQUE(6);
+constexpr unsigned int TAILLE_FONTE(15);
 
 class Nutriment : public CircularBody
 {

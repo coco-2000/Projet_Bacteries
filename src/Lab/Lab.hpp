@@ -10,9 +10,10 @@ public:
      void update(sf::Time dt);
      void drawOn(sf::RenderTarget& targetWindow) const;
      void reset();
+     bool contains(const CircularBody&) const;
 
 private :
 
     PetriDish petri;
-    bool contains(const CircularBody&) const;
+
 };
