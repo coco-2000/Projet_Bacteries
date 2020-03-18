@@ -33,7 +33,14 @@ public:
       * sera appelé pour faire fonctionner la touche 'R'
       */
      void reset();
+
+     /**
+      * @brief contains Verifie si un CIrcularBody est à l'interueur de son assiette de Petri
+      * @return true si le CircularBody est à l'interieur false sinon
+      */
      bool contains(const CircularBody&) const;
+
+     void addNutriment(Nutriment* nutriment);
 
 private :
 

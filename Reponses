@@ -92,9 +92,22 @@ quel type d'objets il fait référence. L'utilisation du type Quantity permet de
 spécifier ce qu'il représente et établit un lien sémantique entre les
 différents éléments auxquels ils s'appliquent.
 
+*************************************************
 
+##Q2.9
 
+La méthode getEnv renvoie une instance de type Lab sur laquelle s'applique la
+méthode addNutriment, or celle-ci a été implémenté dans la classe PetriDish.
+Il faut donc crée une nouvelle méthode addNutriment cette fois dans la classe
+Lab qui appellera celle de PetriDish pour permettre l'ajout de nutriments à
+l'assiette de Petri lorsque l'on appuie sur la touche 'N'.
 
+On veut dessiner les nutriments placés dans un tableau qui est un attribut de
+la classe PetriDish qui elle-même est utilisée par la classe Lab.
+La méthode drawOn de la classe Lab fait appel à la méthode drawOn de la classe
+PetriDish. C'est donc cette dernière que l'on modifier pour qu'elle boucle sur
+l'ensemble du tableau de nutriments en appelant à chaque fois la méthode
+drawOn de la classe Nutriment qui elle se charge de dessiner un nutriment.
 
 
 

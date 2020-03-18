@@ -1,6 +1,7 @@
 #include "Nutriment.hpp"
 #include "Application.hpp"
 #include "Utility/Utility.hpp"
+#include "Config.hpp"
 
 
 Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
@@ -8,16 +9,16 @@ Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
 
 Quantity Nutriment::takeQuantity(Quantity prelevement)
 {
-    if(prelevement < quantity_)
-    {
-        quantity_ -= prelevement;
+        TestPrelevement(prelevement);
+        setQuantity(quantity_ - prelevement);
         return prelevement;
-    }
-    else
+}
+
+void Nutriment:: TestPrelevement(Quantity& prelevement)
+{
+    if(prelevement > quantity_)
     {
         prelevement -= quantity_;
-        quantity_ = 0.0;
-        return prelevement;
     }
 }
 
@@ -56,4 +57,9 @@ void Nutriment::DisplayQuantity(sf::RenderTarget& target) const
         auto const text = buildText(std::to_string(quantity_), decalage({10,10}), getAppFont(), TAILLE_FONTE, sf::Color::Black, 0);
         target.draw(text);
     }
+}
+
+void update(sf::Time dt)
+{
+    auto growth = getConfig()["growth"]["speed"] * dt.asSeconds();
 }

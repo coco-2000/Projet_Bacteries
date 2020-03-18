@@ -67,6 +67,8 @@ public:
 private :
     std::vector<Bacterium*> lesBacteries;
     std::vector<Nutriment*> lesNutriments;
+
+    double temperature;
 };
 
 

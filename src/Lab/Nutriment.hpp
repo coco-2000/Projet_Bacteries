@@ -24,6 +24,12 @@ public :
     Quantity takeQuantity(Quantity prelevement);
 
     /**
+     * @brief Nutriment::TestPrelevement Ajuste la quantité prélever en fonction de celle disponible
+     * @param prelevement Quantité voulant être prélever
+     */
+    void TestPrelevement(Quantity& prelevement);
+
+    /**
      * @brief Nutriment::setQuantity Manipulateur de quantité, actualise égalment le rayon du nutriment
      * @param quantity Nouvelle quantité à assigner à quantité (+ rayon)
      */
@@ -35,6 +41,8 @@ public :
      */
    void drawOn(sf::RenderTarget& target) const;
    j::Value const& getConfig() const;
+
+   void update(sf::Time dt);
 
 
 private :

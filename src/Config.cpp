@@ -25,6 +25,11 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
 , generator_nutriment_prob(mConfig["generator"]["nutriment"]["prob"].toDouble())
 
 // nutriments
+,nutriment_growth_speed(mConfig["nutriments"]["growth"]["speed"].toDouble())
+,nutriment_growth_min_temperature(mConfig["nutriments"]["growth"]["min temperature"].toDouble())
+,nutriment_growth_max_temperature(mConfig["nutriments"]["growth"]["max temperature"].toDouble())
+,nutriment_quantity_max(mConfig["nutriments"]["quantity"]["max"].toInt())
+
 ,nutrimentA_growth_speed(mConfig["nutriments"]["A"]["growth"]["speed"].toInt()),nutrimentA_min_temperature(mConfig["nutriments"]["A"]["growth"]["min temperature"].toInt())
 ,nutrimentA_max_temperature(mConfig["nutriments"]["A"]["growth"]["max temperature"].toInt())
 ,nutrimentA_min_qty(mConfig["nutriments"]["A"]["quantity"]["min"].toInt())
@@ -37,6 +42,9 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
 ,nutrimentB_resistance_factor(mConfig["nutriments"]["B"]["resistance factor"].toDouble())
 ,nutrimentB_poison_factor(mConfig["nutriments"]["B"]["poison factor"].toDouble())
 ,nutrimentB_nutritive_factor(mConfig["nutriments"]["B"]["nutritive factor"].toDouble())
+
+// petri dish
+,temperature_default(mConfig["petri dish"]["temperature"]["default"].toInt())
 {}
 
 // TODO : getter for debug

@@ -1,10 +1,11 @@
 #include "PetriDish.hpp"
 #include "../Utility/Utility.hpp"
 #include "CircularBody.hpp"
+#include "Config.hpp"
 
 
 PetriDish::PetriDish(Vec2d position, double radius)
-    : CircularBody (position, radius)
+    : CircularBody (position, radius), temperature(getShortConfig().temperature_default)
 {}
 
 
@@ -59,5 +60,10 @@ void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
 {
     auto border = buildAnnulus(position, radius, sf::Color::Black, epaisseur_anneau);
     targetWindow.draw(border);
+
+    for(auto nutriment : lesNutriments)
+    {
+        nutriment->drawOn(targetWindow);
+    }
 }
 

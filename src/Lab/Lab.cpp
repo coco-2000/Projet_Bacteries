@@ -26,3 +26,8 @@ void Lab::reset()
 {
     petri.reset();
 }
+
+void Lab::addNutriment(Nutriment* nutriment)
+{
+    petri.addNutriment(nutriment);
+}
