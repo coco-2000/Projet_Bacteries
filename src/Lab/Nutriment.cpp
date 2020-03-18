@@ -59,7 +59,7 @@ void Nutriment::DisplayQuantity(sf::RenderTarget& target) const
     }
 }
 
-void update(sf::Time dt)
+void Nutriment::update(sf::Time dt)
 {
     auto growth = getConfig()["growth"]["speed"] * dt.asSeconds();
 }
