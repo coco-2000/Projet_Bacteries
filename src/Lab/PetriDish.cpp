@@ -5,7 +5,7 @@
 
 
 PetriDish::PetriDish(Vec2d position, double radius)
-    : CircularBody (position, radius), temperature(getShortConfig().temperature_default)
+    : CircularBody (position, radius)
 {}
 
 
