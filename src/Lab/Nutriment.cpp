@@ -33,7 +33,7 @@ void Nutriment::setQuantity(Quantity quantity)
         quantity_ = 0.0;
     }
 
-    radius = quantity_;
+    setRadius(quantity_);
 }
 
 void Nutriment::drawOn(sf::RenderTarget& target) const
@@ -59,4 +59,17 @@ void Nutriment::DisplayQuantity(sf::RenderTarget& target) const
     }
 }
 
+void Nutriment::update(sf::Time dt)
+{
+    auto growth =  getConfig()["growth"]["speed"].toDouble() * dt.asSeconds();
 
+    if (ConditionCroissance())
+    {
+        setQuantity(quantity_*growth);
+    }
+}
+
+bool Nutriment::ConditionCroissance() const
+{
+    return (quantity_ <= getConfig()["quantity"]["max"].toDouble());
+}

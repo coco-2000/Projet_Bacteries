@@ -44,6 +44,8 @@ public :
 
    void update(sf::Time dt);
 
+   bool ConditionCroissance() const;
+
 
 private :
     Quantity quantity_;
