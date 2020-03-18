@@ -54,7 +54,7 @@ void Nutriment::DisplayQuantity(sf::RenderTarget& target) const
 {
     if(isDebugOn())
     {
-        auto const text = buildText(std::to_string(quantity_), decalage({10,10}), getAppFont(), TAILLE_FONTE, sf::Color::Black, 0);
+        auto const text = buildText(std::to_string((int)quantity_), decalage({10,10}), getAppFont(), TAILLE_FONTE, sf::Color::Black, 0);
         target.draw(text);
     }
 }
