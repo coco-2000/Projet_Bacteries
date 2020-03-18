@@ -1,11 +1,11 @@
 #include "PetriDish.hpp"
 #include "../Utility/Utility.hpp"
 #include "CircularBody.hpp"
-#include "Config.hpp"
+#include "Application.hpp"
 
 
 PetriDish::PetriDish(Vec2d position, double radius)
-    : CircularBody (position, radius), temperature(getShortConfig().temperature_default)
+    : CircularBody (position, radius), temperature(getAppConfig()["petri dish"]["temperature"]["default"].toDouble())
 {}
 
 
@@ -50,10 +50,26 @@ PetriDish::~PetriDish()
     reset();
 }
 
+Temperature PetriDish::getTemperature() const
+{
+    return temperature;
+}
+
 
 void PetriDish::update(sf::Time dt)
 {
-    //faire evoluer les bacteries
+    if (ConditionCroissance())
+    {
+        for(auto nutriment : lesNutriments)
+        {
+            nutriment->update(dt);
+        }
+    }
+}
+
+bool PetriDish::ConditionCroissance() const
+{
+    return (getAppConfig()["nutriments"]["growth"]["min temperature"].toDouble() <= temperature) and (getAppConfig()["nutriments"]["growth"]["max temperature"].toDouble() >= temperature);
 }
 
 void PetriDish::drawOn(sf::RenderTarget& targetWindow) const

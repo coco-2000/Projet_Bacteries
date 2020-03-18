@@ -12,7 +12,7 @@
     },
     "generator" : {
         "nutriment" : {
-            "delay" : 1.e7,
+            "delay" : 1.7,
             "prob" : 0.8
         }
     },
@@ -370,5 +370,5 @@
     },
     "world" : {
         "size" : 1000
-    },
+    }
 }

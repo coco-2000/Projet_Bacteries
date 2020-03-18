@@ -76,11 +76,6 @@ public:
 	const double generator_nutriment_prob;
 
 	//nutriments
-    const double nutriment_growth_speed;
-    const double nutriment_growth_min_temperature;
-    const double nutriment_growth_max_temperature;
-    const double nutriment_quantity_max;
-
     const int nutrimentA_growth_speed;
 	const int nutrimentA_min_temperature;
 	const int nutrimentA_max_temperature;
@@ -98,9 +93,6 @@ public:
 	const double nutrimentB_resistance_factor;
 	const double nutrimentB_poison_factor;
 	const double nutrimentB_nutritive_factor;
-
-    //petri dish
-    const int temperature_default;
 
 
 };
