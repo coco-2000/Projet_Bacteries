@@ -37,12 +37,14 @@ void PetriDish::reset()
         delete bacterie;
         bacterie = nullptr;
     }
+    lesBacteries = std::vector<Bacterium*>();
 
     for (auto& nutriment : lesNutriments)
     {
         delete nutriment;
         nutriment = nullptr;
     }
+    lesNutriments = std::vector<Nutriment*>();
 }
 
 PetriDish::~PetriDish()

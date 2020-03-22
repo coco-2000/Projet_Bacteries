@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 constexpr int epaisseur_anneau(5);
+
 typedef double Temperature;
 
 class PetriDish : public CircularBody
