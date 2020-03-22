@@ -62,7 +62,7 @@ void PetriDish::update(sf::Time dt)
     bool ConditionCroissance = (getAppConfig()["nutriments"]["growth"]["min temperature"].toDouble() <= temperature) and
             (getAppConfig()["nutriments"]["growth"]["max temperature"].toDouble() >= temperature);
 
-    if (true)//ConditionCroissance)
+    if (ConditionCroissance)
     {
         for(auto nutriment : lesNutriments)
         {
@@ -82,3 +82,12 @@ void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
     }
 }
 
+void PetriDish::increaseTemperature()
+{
+    temperature += getAppConfig()["petri dish"]["temperature"]["delta"].toDouble();
+}
+
+void PetriDish::decreaseTemperature()
+{
+    temperature -= getAppConfig()["petri dish"]["temperature"]["delta"].toDouble();
+}

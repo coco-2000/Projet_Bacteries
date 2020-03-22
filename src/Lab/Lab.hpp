@@ -40,6 +40,10 @@ public:
       */
      bool contains(const CircularBody&) const;
 
+     void increaseTemperature();
+
+     void decreaseTemperature();
+
      void addNutriment(Nutriment* nutriment);
 
 private :
