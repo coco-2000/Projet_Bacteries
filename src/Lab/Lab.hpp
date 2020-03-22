@@ -46,6 +46,8 @@ public:
 
      void addNutriment(Nutriment* nutriment);
 
+     double getTemperature() const;
+
 private :
 
     PetriDish petri;

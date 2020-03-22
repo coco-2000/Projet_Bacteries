@@ -810,7 +810,7 @@ void Application::drawOneControl(sf::RenderWindow& target
 	switch (control) {
 		case TEMPERATURE :
 			text = "Temperature : ";
-//		text += to_nice_string(mLab->getTemperature());
+            text += to_nice_string(mLab->getTemperature());
 			break;
 		case GRADIENT :
 			text = "Gradient exponent : ";

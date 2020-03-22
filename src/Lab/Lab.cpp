@@ -41,3 +41,8 @@ void Lab::decreaseTemperature()
 {
     petri.decreaseTemperature();
 }
+
+double Lab::getTemperature() const
+{
+    return petri.getTemperature();
+}
