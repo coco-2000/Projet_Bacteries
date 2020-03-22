@@ -31,3 +31,8 @@ void Lab::addNutriment(Nutriment* nutriment)
 {
     petri.addNutriment(nutriment);
 }
+
+double Lab::getTemperature() const
+{
+    return petri.getTemperature();
+}
