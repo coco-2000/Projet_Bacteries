@@ -528,13 +528,13 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
 
 				switch(mCurrentControl){
 					case TEMPERATURE :
-//						mLab->decreaseTemperature();
+//					mLab->decreaseTemperature();
 						break;
 					case GRADIENT :
 //						mLab->decreaseGradientExponent();
 						break;
 					case STATS:
-//						mStats->previous(); 
+//						mStats->previous();
 						break;
 					default:
 						break;

@@ -58,18 +58,17 @@ Temperature PetriDish::getTemperature() const
 
 void PetriDish::update(sf::Time dt)
 {
-    if (ConditionCroissance())
+
+    bool ConditionCroissance = (getAppConfig()["nutriments"]["growth"]["min temperature"].toDouble() <= temperature) and
+            (getAppConfig()["nutriments"]["growth"]["max temperature"].toDouble() >= temperature);
+
+    if (true)//ConditionCroissance)
     {
         for(auto nutriment : lesNutriments)
         {
             nutriment->update(dt);
         }
     }
-}
-
-bool PetriDish::ConditionCroissance() const
-{
-    return (getAppConfig()["nutriments"]["growth"]["min temperature"].toDouble() <= temperature) and (getAppConfig()["nutriments"]["growth"]["max temperature"].toDouble() >= temperature);
 }
 
 void PetriDish::drawOn(sf::RenderTarget& targetWindow) const

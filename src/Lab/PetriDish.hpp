@@ -66,8 +66,6 @@ public:
 
     Temperature getTemperature() const;
 
-    bool ConditionCroissance() const;
-
 
 private :
     std::vector<Bacterium*> lesBacteries;

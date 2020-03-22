@@ -65,7 +65,9 @@ Pour supprimer l'usage de l'opérateur d'affectation, on place "= delete"
 *************************************************
 ##Q2.4
 
-Lors de la destruction d'une assiette de Petri, il faut également que les bactéries
+Les bacteries et les nutriments n'existant pas en dehors de l'assiette de Petri,
+c'est l'assiette de Petri qui doit gérer leur destruction.
+Ainsi, lors de la destruction d'une assiette de Petri, il faut également que les bactéries
 et les nutriments vers lesquels elle pointe soient détruis.
 Le destructeur de la calsse PetriDish doit donc faire appel à la methode reset()
 

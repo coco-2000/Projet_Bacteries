@@ -45,10 +45,10 @@ public :
    void update(sf::Time dt);
 
    bool ConditionCroissance() const;
-
+   double getTemperature() const;
 
 private :
+    const double dist;
     Quantity quantity_;
-
     void DisplayQuantity(sf::RenderTarget& target) const;
 };

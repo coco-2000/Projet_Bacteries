@@ -2,10 +2,17 @@
 #include "Application.hpp"
 #include "Utility/Utility.hpp"
 #include "Config.hpp"
+#include "../Utility/Vec2d.hpp"
 
 
 Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
-    : CircularBody(position, quantity), quantity_(quantity) {};
+    : CircularBody(position, quantity),
+      dist(ratio_rayon*getApp().getLabSize().x - distance(getApp().getCentre(), position)),
+      quantity_(quantity)
+
+{
+
+};
 
 Quantity Nutriment::takeQuantity(Quantity prelevement)
 {
@@ -16,31 +23,21 @@ Quantity Nutriment::takeQuantity(Quantity prelevement)
 
 void Nutriment:: TestPrelevement(Quantity& prelevement)
 {
-    if(prelevement > quantity_)
-    {
-        prelevement -= quantity_;
-    }
+    if(prelevement > quantity_) prelevement -= quantity_;
 }
 
 void Nutriment::setQuantity(Quantity quantity)
 {
-    if(quantity >= 0)
-    {
-        quantity_ = quantity;
-    }
-    else
-    {
-        quantity_ = 0.0;
-    }
-
+    quantity >= 0 ? quantity_ = quantity : quantity_ = 0.0;
     setRadius(quantity_);
 }
 
 void Nutriment::drawOn(sf::RenderTarget& target) const
 {
-    auto nutrimentSprite = buildSprite(position, TAILLE_OBJ_GRAPHIQUE, getAppTexture(getConfig()["texture"].toString()));
+    auto texture = getConfig()["texture"].toString();
+    auto nutrimentSprite = buildSprite(position, TAILLE_OBJ_GRAPHIQUE, getAppTexture(texture));
          // adapte la taille du Sprite au rayon du nutriment:
-         nutrimentSprite.setScale(2 * radius / getAppTexture(getConfig()["texture"].toString()).getSize().x, 2 * radius / getAppTexture(getConfig()["texture"].toString()).getSize().y);
+         nutrimentSprite.setScale(2 * radius/getAppTexture(texture).getSize().x, 2 * radius / getAppTexture(texture).getSize().y);
         target.draw(nutrimentSprite);
         DisplayQuantity(target);
 }
@@ -54,22 +51,18 @@ void Nutriment::DisplayQuantity(sf::RenderTarget& target) const
 {
     if(isDebugOn())
     {
-        auto const text = buildText(std::to_string((int)quantity_), decalage({10,10}), getAppFont(), TAILLE_FONTE, sf::Color::Black, 0);
+        auto const text = buildText(std::to_string(static_cast<int>(quantity_)), decalage({10,10}), getAppFont(), TAILLE_FONTE, sf::Color::Black, 0);
         target.draw(text);
     }
 }
 
 void Nutriment::update(sf::Time dt)
 {
-    auto growth =  getConfig()["growth"]["speed"].toDouble() * dt.asSeconds();
-
-    if (ConditionCroissance())
+    auto growth =  getConfig()["growth"]["speed"].toDouble() * static_cast<double>(dt.asSeconds());
+    if (quantity_ <= 2 * getConfig()["quantity"]["max"].toDouble() &&
+            quantity_ + growth <= dist)
     {
-        setQuantity(quantity_*growth);
+        setQuantity(quantity_ + growth);
     }
 }
 
-bool Nutriment::ConditionCroissance() const
-{
-    return (quantity_ <= getConfig()["quantity"]["max"].toDouble());
-}
