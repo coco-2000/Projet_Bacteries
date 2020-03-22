@@ -82,3 +82,12 @@ void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
     }
 }
 
+void PetriDish::increaseTemperature()
+{
+    temperature += getAppConfig()["petri dish"]["temperature"]["delta"].toDouble();
+}
+
+void PetriDish::decreaseTemperature()
+{
+    temperature -= getAppConfig()["petri dish"]["temperature"]["delta"].toDouble();
+}

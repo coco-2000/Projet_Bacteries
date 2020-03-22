@@ -66,6 +66,8 @@ public:
 
     Temperature getTemperature() const;
 
+    void increaseTemperature();
+    void decreaseTemperature();
 
 private :
     std::vector<Bacterium*> lesBacteries;
