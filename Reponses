@@ -69,7 +69,7 @@ Les bacteries et les nutriments n'existant pas en dehors de l'assiette de Petri,
 c'est l'assiette de Petri qui doit gérer leur destruction.
 Ainsi, lors de la destruction d'une assiette de Petri, il faut également que les bactéries
 et les nutriments vers lesquels elle pointe soient détruis.
-Le destructeur de la calsse PetriDish doit donc faire appel à la methode reset()
+Le destructeur de la classe PetriDish doit donc faire appel à la methode reset() qui désalloue tous les pointeurs.
 
 *************************************************
 ##Q2.5

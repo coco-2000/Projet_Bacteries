@@ -5,8 +5,10 @@
 
 
 PetriDish::PetriDish(Vec2d position, double radius)
-    : CircularBody (position, radius), temperature(getAppConfig()["petri dish"]["temperature"]["default"].toDouble())
-{}
+    : CircularBody (position, radius)
+{
+    init_temperature();
+}
 
 
 bool PetriDish::addBacterium(Bacterium* bacterie)
@@ -37,12 +39,14 @@ void PetriDish::reset()
         delete bacterie;
         bacterie = nullptr;
     }
+    lesBacteries.clear();
 
     for (auto& nutriment : lesNutriments)
     {
         delete nutriment;
         nutriment = nullptr;
     }
+    lesNutriments.clear();
 }
 
 PetriDish::~PetriDish()
@@ -91,3 +95,12 @@ void PetriDish::decreaseTemperature()
 {
     temperature -= getAppConfig()["petri dish"]["temperature"]["delta"].toDouble();
 }
+
+void PetriDish::init_temperature()
+{
+    temperature = getAppConfig()["petri dish"]["temperature"]["default"].toDouble();
+}
+
+
+
+

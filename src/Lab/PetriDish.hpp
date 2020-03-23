@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 constexpr int epaisseur_anneau(5);
+
 typedef double Temperature;
 
 class PetriDish : public CircularBody
@@ -68,6 +69,7 @@ public:
 
     void increaseTemperature();
     void decreaseTemperature();
+    void init_temperature();
 
 private :
     std::vector<Bacterium*> lesBacteries;
