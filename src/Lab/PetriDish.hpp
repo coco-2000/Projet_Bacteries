@@ -14,7 +14,9 @@ class PetriDish : public CircularBody
 public:
 
     /**
-     * @brief PetriDish::PetriDish constructeur de PetriDish appel le constructeur de CircularBody
+     * @brief PetriDish::PetriDish constructeur de PetriDish appel le constructeur
+     * de CircularBody et initialise sa température à la valeur du fichier
+     * de configuration
      * @param position
      * @param radius
      */
