@@ -11,9 +11,6 @@ Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
       quantity_(quantity)
 {};
 
-Nutriment :: ~Nutriment()
-{}
-
 Quantity Nutriment::takeQuantity(Quantity prelevement)
 {
         TestPrelevement(prelevement);
@@ -65,4 +62,3 @@ void Nutriment::update(sf::Time dt)
         setQuantity(quantity_ + growth);
     }
 }
-
