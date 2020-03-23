@@ -113,7 +113,22 @@ PetriDish. C'est donc cette dernière que l'on modifier pour qu'elle boucle sur
 l'ensemble du tableau de nutriments en appelant à chaque fois la méthode
 drawOn de la classe Nutriment qui elle se charge de dessiner un nutriment.
 
+*************************************************
 
+##Q2.10
+
+Les nutriments ne croissent que si la température leur convient, la méthode
+Nutriment::update qui les fait évoluer doit donc être appelé que si les conditions
+portant sur la température sont respectées. Il suffit donc de tester la température
+dans la méthode PetriDish::update et d'appeller la méthode Nutriment::update que si
+la température convient.
+
+
+[Question Q2.10] On souhaite que la classe Lab ne donne pas d'accès à sa PetriDish via un getter. En utilisant Application::getAppEnv, comment permettre à Nutriment::update de connaître la température de l'assiette de Petri ? Répondez à cette question dans le fichier REPONSES et programmez ce qui est nécessaire.
+
+[Question Q2.11] Quelles méthodes de Lab et de PetriDish faut-il modifier et comment pour que la croissance des nutriments deviennent visible lors de l'exécution du test graphique ? Répondez à cette question dans votre fichier REPONSES et programmez les méthodes en question.
+
+[Question Q2.12] Quelles méthodes devez vous ajouter et dans quelles classes pour que appuyer sur 'PgUp' ou 'PgDn' permette respectivement d'augmenter ou diminuer la température de l'assiette de ["petri dish"]["temperature"]["delta"] (un double) ? Quelles méthode(s) devez vous également ajouter et à quelle(s) classe(s) pour que les touches 'R' et 'C' permettent aussi (en plus de ce qu'elles font) de réinitialiser l'attribut température à la valeur du fichier de configuration (["petri dish"]["temperature"]["default"]) tout en évitant toute duplication de code ? Répondez à ces question dans votre fichier REPONSES, programmez les méthodes suggérées et décommentez les lignes 532, 547 et 814 de Application.cpp.
 
 
 
