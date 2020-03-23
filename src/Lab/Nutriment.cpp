@@ -9,10 +9,10 @@ Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
     : CircularBody(position, quantity),
       dist(ratio_rayon*getApp().getLabSize().x - distance(getApp().getCentre(), position)),
       quantity_(quantity)
+{};
 
-{
-
-};
+Nutriment :: ~Nutriment()
+{}
 
 Quantity Nutriment::takeQuantity(Quantity prelevement)
 {

@@ -807,7 +807,7 @@ void Application::drawOneControl(sf::RenderWindow& target
 
 	sf::Color color (mCurrentControl == control ? sf::Color::Red : sf::Color::White);
 	std::string text("");
-	switch (control) {
+    switch (control) {
 		case TEMPERATURE :
 			text = "Temperature : ";
             text += to_nice_string(mLab->getTemperature());

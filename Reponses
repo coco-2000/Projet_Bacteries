@@ -109,7 +109,7 @@ l'assiette de Petri lorsque l'on appuie sur la touche 'N'.
 On veut dessiner les nutriments placés dans un tableau qui est un attribut de
 la classe PetriDish qui elle-même est utilisée par la classe Lab.
 La méthode drawOn de la classe Lab fait appel à la méthode drawOn de la classe
-PetriDish. C'est donc cette dernière que l'on modifier pour qu'elle boucle sur
+PetriDish. C'est donc cette dernière que l'on doit modifier pour qu'elle boucle sur
 l'ensemble du tableau de nutriments en appelant à chaque fois la méthode
 drawOn de la classe Nutriment qui elle se charge de dessiner un nutriment.
 
@@ -123,12 +123,37 @@ portant sur la température sont respectées. Il suffit donc de tester la tempé
 dans la méthode PetriDish::update et d'appeller la méthode Nutriment::update que si
 la température convient.
 
+*************************************************
 
-[Question Q2.10] On souhaite que la classe Lab ne donne pas d'accès à sa PetriDish via un getter. En utilisant Application::getAppEnv, comment permettre à Nutriment::update de connaître la température de l'assiette de Petri ? Répondez à cette question dans le fichier REPONSES et programmez ce qui est nécessaire.
+##Q2.11
 
-[Question Q2.11] Quelles méthodes de Lab et de PetriDish faut-il modifier et comment pour que la croissance des nutriments deviennent visible lors de l'exécution du test graphique ? Répondez à cette question dans votre fichier REPONSES et programmez les méthodes en question.
+Pour que la croissance des nutriments deviennent visibles il faut que leur rayon
+soit mis-à-jour. Il s'agit donc d'appeler la fonction setQuantity de la classe
+Nutriment dans la fonction Nutriment::update qui va modifier à la fois l'attribut
+quantité et l'attribut rayon du nutriment.
 
-[Question Q2.12] Quelles méthodes devez vous ajouter et dans quelles classes pour que appuyer sur 'PgUp' ou 'PgDn' permette respectivement d'augmenter ou diminuer la température de l'assiette de ["petri dish"]["temperature"]["delta"] (un double) ? Quelles méthode(s) devez vous également ajouter et à quelle(s) classe(s) pour que les touches 'R' et 'C' permettent aussi (en plus de ce qu'elles font) de réinitialiser l'attribut température à la valeur du fichier de configuration (["petri dish"]["temperature"]["default"]) tout en évitant toute duplication de code ? Répondez à ces question dans votre fichier REPONSES, programmez les méthodes suggérées et décommentez les lignes 532, 547 et 814 de Application.cpp.
+*************************************************
+
+##Q2.12
+
+Dans le fichier Application.cpp, les touches PageUp et PageDown appelle respectivement
+les méthodes increaseTemperature et decreaseTemperature associées à la classe Lab, il
+faut donc les implémenter de manière à ce que ces méthodes augmentent et diminuent la
+température de l'assiette de Petri. Cependant, la température est un attribut de la classe
+PetriDish auquel la classe Lab n'a pas accès. Il faut donc implémenter des méthodes
+increaseTemperature et decreaseTemperature dans la classe PetriDish également qui seront
+appelées par les méthodes de la classe Lab et seront en charge de modifier la température
+de l'assiette.
+
+
+
+Quelles méthodes devez vous ajouter et dans quelles classes pour que appuyer
+sur 'PgUp' ou 'PgDn' permette respectivement d'augmenter ou diminuer la température
+de l'assiette de ["petri dish"]["temperature"]["delta"] (un double) ? Quelles méthode(s)
+devez vous également ajouter et à quelle(s) classe(s) pour que les touches 'R' et 'C'
+permettent aussi (en plus de ce qu'elles font) de réinitialiser l'attribut température à
+la valeur du fichier de configuration (["petri dish"]["temperature"]["default"])
+tout en évitant toute duplication de code ? Répondez à ces question dans votre fichier REPONSES, programmez les méthodes suggérées et décommentez les lignes 532, 547 et 814 de Application.cpp.
 
 
 
