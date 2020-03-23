@@ -9,19 +9,6 @@ class CircularBody
 public :
 
     /**
-     * @brief CircularBody::CircularBody Constructeur
-     * @param position Coordonnées de la position du CircularBody
-     * @param radius Rayon du CircularBody
-     */
-    CircularBody(Vec2d position, double radius);
-
-    /**
-     * @brief CircularBody::CircularBody Constructeur de copie
-     * @param other CircularBody à copier
-     */
-    CircularBody(const CircularBody& other);
-
-    /**
      * @brief CircularBody::getPosition Accesseur de position
      * @return Position actuelle de l'instance courante
      */
@@ -32,18 +19,6 @@ public :
      * @return Rayon actuel de l'instance courante
      */
     double getRadius()          const;
-
-    /**
-     * @brief CircularBody::setPosition Manipulateur de position
-     * @param pos Coordonnées de la nouvelle position à assigner à l'instance courante
-     */
-    void setPosition    (const Vec2d& pos);
-
-    /**
-     * @brief CircularBody::setRadius Manipulateur de rayon
-     * @param rayon Valeur du nouveau rayon à assigner à l'instance courante
-     */
-    void setRadius      (double rayon);
 
     /**
      * @brief CircularBody::move Ajoute à la position de l'instance courante un vecteur de déplacement (permet de faire bouger le CircularBody)
@@ -99,6 +74,31 @@ protected :
 
     Vec2d position;
     double radius;
+
+    /**
+     * @brief CircularBody::CircularBody Constructeur
+     * @param position Coordonnées de la position du CircularBody
+     * @param radius Rayon du CircularBody
+     */
+    CircularBody(Vec2d position, double radius);
+
+    /**
+     * @brief CircularBody::CircularBody Constructeur de copie
+     * @param other CircularBody à copier
+     */
+    CircularBody(const CircularBody& other);
+
+    /**
+     * @brief CircularBody::setPosition Manipulateur de position
+     * @param pos Coordonnées de la nouvelle position à assigner à l'instance courante
+     */
+    void setPosition    (const Vec2d& pos);
+
+    /**
+     * @brief CircularBody::setRadius Manipulateur de rayon
+     * @param rayon Valeur du nouveau rayon à assigner à l'instance courante
+     */
+    void setRadius      (double rayon);
 
     /**
      * @brief CircularBody::copie
