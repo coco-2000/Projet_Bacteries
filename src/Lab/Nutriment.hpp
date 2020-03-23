@@ -16,6 +16,8 @@ public :
      */
     Nutriment(Quantity quantity, const Vec2d& position);
 
+    ~Nutriment();
+
     /**
      * @brief Nutriment::takeQuantity Prélève une quantité donnée de nutriments de l'instance courante
      * @param prelevement Quantité de nutriments à prélever
