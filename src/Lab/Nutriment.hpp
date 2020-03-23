@@ -16,8 +16,6 @@ public :
      */
     Nutriment(Quantity quantity, const Vec2d& position);
 
-    ~Nutriment();
-
     /**
      * @brief Nutriment::takeQuantity Prélève une quantité donnée de nutriments de l'instance courante
      * @param prelevement Quantité de nutriments à prélever
@@ -42,11 +40,23 @@ public :
      * @param target
      */
    void drawOn(sf::RenderTarget& target) const;
+
+   /**
+    * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux nutriments
+    * @return la valeur de getAppConfig()["nutriments"]
+    */
    j::Value const& getConfig() const;
 
+   /**
+    * @brief update Effectue la croissance d'un nutriment en mettant à jour sa quantité et son rayon
+    * @param dt Pas de temps après lequel lequel le nutriment est mise à jour
+    */
    void update(sf::Time dt);
 
-   bool ConditionCroissance() const;
+   /**
+    * @brief getTemperature Accesseur de température
+    * @return la température courante de l'assiette de Petri
+    */
    double getTemperature() const;
 
 private :

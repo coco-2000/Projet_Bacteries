@@ -44,7 +44,10 @@ public:
      */
     bool addNutriment(Nutriment* nutriment);
 
-    //à commenter
+    /**
+     * @brief update Effectue la croissance des nutriments de l'assiette de Petri en mettant à jour leur quantité et leur rayon
+     * @param dt Pas de temps après lequel lequel la simulation est mise à jour
+     */
     void update(sf::Time dt);
 
     /**
@@ -64,11 +67,27 @@ public:
      * avec les bactéries et les nutriments qu'elle contient
      */
     ~PetriDish();
-
+    /**
+     * @brief getTemperature Accesseur de temperature
+     * @return La temperature courante de l'assiette de Petri
+     */
     Temperature getTemperature() const;
 
+    /**
+     * @brief increaseTemperature Augmente la température de l'assiette de Petri
+     * Augmente d'un delta défini dans le fichier de configuration des paramètres
+     */
     void increaseTemperature();
+
+    /**
+     * @brief decreaseTemperature Réduit la température de l'assiette de Petri
+     * Augmente d'un delta défini dans le fichier de configuration des paramètres
+     */
     void decreaseTemperature();
+
+    /**
+     * @brief init_temperature Initialise la température de l'assiette de Petri à sa valeur par défaut
+     */
     void init_temperature();
 
 private :
