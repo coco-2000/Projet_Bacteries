@@ -38,21 +38,21 @@ public :
      * @param other CircularBody pour lequel on verifie s'il est contenu dans l'instance courante
      * @return vrai si other est contenu dans l'instance courante
      */
-    bool contains       (const CircularBody& other) const;
+    bool contains(const CircularBody& other) const;
 
     /**
      * @brief CircularBody::isColliding vérifier les collisions
      * @param other est celui pour lequel on vérifie s'il entre en collision avec l'instance courante
      * @return vrai s'ils sont en collision
      */
-    bool isColliding    (const CircularBody& other) const;
+    bool isColliding(const CircularBody& other) const;
 
     /**
      * @brief CircularBody::contains verifier l'inclusion d'un point
      * @param point : celui pour lequel on vérifie l'inclusion
      * @return vrai s'il est contenu
      */
-    bool contains       (const Vec2d& point)         const;
+    bool contains(const Vec2d& point) const;
 
     /**
      * @brief CircularBody::operator = Copie les valeurs des attributs de other dans l'instance courante
@@ -67,7 +67,7 @@ public :
      * @return le flux passé en paramètre
      */
 
-    std::ostream& affiche(std::ostream& out)        const;
+    std::ostream& affiche(std::ostream& out)  const;
 
 
 protected :
