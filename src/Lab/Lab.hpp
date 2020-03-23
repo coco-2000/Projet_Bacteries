@@ -44,6 +44,8 @@ public:
 
      void decreaseTemperature();
 
+     void init_temperature();
+
      void addNutriment(Nutriment* nutriment);
 
      double getTemperature() const;
