@@ -69,6 +69,7 @@ public:
 
     void increaseTemperature();
     void decreaseTemperature();
+    void init_temperature();
 
 private :
     std::vector<Bacterium*> lesBacteries;
