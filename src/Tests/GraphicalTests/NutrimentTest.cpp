@@ -1,12 +1,12 @@
 /*
- * prjsv
- * 2020
- * Marco Antognini & Jamila Sam
- * NutrimentTest FOR STEP2
+ * prjsv 2020
+ * Marco Antognini &Jamila Sam
+ * NutrimenTest for STEP 3
  */
 
 #include <Application.hpp>
-#include <Lab/Nutriment.hpp>
+#include <Lab/NutrimentA.hpp>
+#include <Lab/NutrimentB.hpp>
 
 class NutrimentTest : public Application
 {
@@ -44,8 +44,12 @@ void NutrimentTest::onEvent(sf::Event event, sf::RenderWindow&)
             break;
 
         case sf::Keyboard::N:
-			  lastCreated = new Nutriment(NUT_QTY, getCursorPositionInView());
-              getEnv().addNutriment(lastCreated);
+            if (event.key.shift) {
+                lastCreated = new NutrimentA(NUT_QTY, getCursorPositionInView());
+            } else {
+                lastCreated = new NutrimentB(NUT_QTY, getCursorPositionInView());
+            }
+            getEnv().addNutriment(lastCreated);
             break;
 
         // to test takeQuantity
@@ -60,5 +64,5 @@ void NutrimentTest::onEvent(sf::Event event, sf::RenderWindow&)
 
 std::string NutrimentTest::getHelpTextFile() const
 {
-	return RES_LOCATION + "nutriment_help_step2.txt";
+	return RES_LOCATION + "nutriment_help_step3.txt";
 }

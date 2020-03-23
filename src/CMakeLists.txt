@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Bacteria_Simulator_SSV_2020_STEP2)
+project(Bacteria_Simulator_SSV_2020_STEP3)
 
 # set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_STANDARD 14)
@@ -66,28 +66,35 @@ file(GLOB SOURCES_GFX
 #add_executable (circularBodyTest  ${TEST_DIR}/UnitTests/CircularBodyTest.cpp ${CACHE_SOURCES})
 #################################add_executable (ToricTest  ${TEST_DIR}/UnitTests/ToricTest.cpp ${CACHE_SOURCES})
 
-# add_custom_target(application-run
-#     COMMAND ./application
-#     DEPENDS application
-#     WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
-# )
+add_custom_target(application-run
+    COMMAND ./application
+    DEPENDS application
+    WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
+)
 # Find any version 2.X of SFML, first trying 2.5 or above (for which CMake configuration changed)
 find_package(SFML 2.5 QUIET COMPONENTS graphics window system)
     if(SFML_FOUND)
       message(STATUS "Found SFML ${SFML_VERSION_MAJOR}.${SFML_VERSION_MINOR}.${SFML_VERSION_PATCH}")
       
       #main application:
-      # not available at step 2
+       #not available at step 3
       #add_executable (application  ${TEST_DIR}/GraphicalTests/FinalApplication.cpp ${SOURCES_GFX})
       #target_link_libraries(application sfml-graphics sfml-window sfml-system)
 	
       #Units tests:
+#      add_executable (mutableTest  ${TEST_DIR}/UnitTests/MutablePropertyTest.cpp ${CB_SOURCES} ${CACHE_SOURCES})
+#      target_link_libraries(mutableTest sfml-graphics sfml-window sfml-system)
       add_executable (circularBodyTest  ${TEST_DIR}/UnitTests/CircularBodyTest.cpp ${CB_SOURCES} ${CACHE_SOURCES})
       target_link_libraries(circularBodyTest sfml-graphics sfml-window sfml-system)
       add_executable (vec2dTest  ${TEST_DIR}/UnitTests/Vec2dTest.cpp ${CACHE_SOURCES})
       target_link_libraries(vec2dTest sfml-graphics sfml-window sfml-system)
 
       #Graphical tests:
+#      add_executable (simpleBactTest  ${TEST_DIR}/GraphicalTests/SimpleBacteriaTest.cpp ${SOURCES_GFX})
+#      target_link_libraries(simpleBactTest sfml-graphics sfml-window sfml-system)
+      #bacteriaTest target only valid in step 3
+#      add_executable (bacteriaTest  ${TEST_DIR}/GraphicalTests/BacteriaTest.cpp ${SOURCES_GFX})
+#      target_link_libraries(bacteria Test sfml-graphics sfml-window sfml-system)
       add_executable (nutrimentTest  ${TEST_DIR}/GraphicalTests/NutrimentTest.cpp ${SOURCES_GFX})
       target_link_libraries(nutrimentTest sfml-graphics sfml-window sfml-system)
       
@@ -103,18 +110,25 @@ find_package(SFML 2.5 QUIET COMPONENTS graphics window system)
             include_directories(${SFML_INCLUDE_DIR})
 	    
 	    #main application:
-	    # not available at step 2
+	    #not available at step 3
             #add_executable(application ${TEST_DIR}/GraphicalTests/FinalApplication.cpp ${SOURCES_GFX})
             #target_link_libraries(application ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 
-	     #Units tests:
+	    #Units tests:
+#	    add_executable (mutableTest ${TEST_DIR}/UnitTests/MutablePropertyTest.cpp ${CB_SOURCES} ${CACHE_SOURCES})
+#            target_link_libraries(mutableTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
             add_executable (circularBodyTest ${TEST_DIR}/UnitTests/CircularBodyTest.cpp ${CB_SOURCES} ${CACHE_SOURCES})
             target_link_libraries(circularBodyTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 	    add_executable (vec2dTest ${TEST_DIR}/UnitTests/Vec2dTest.cpp ${CACHE_SOURCES})
             target_link_libraries(vec2dTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 	    
 	    #Graphical tests:
-            add_executable(nutrimentTest ${TEST_DIR}/GraphicalTests/NutrimentTest.cpp ${SOURCES_GFX})
+#	    add_executable(simpleBactTest ${TEST_DIR}/GraphicalTests/SimpleBacteriaTest.cpp ${SOURCES_GFX})
+#            target_link_libraries(simpleBactTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+	    ###bacteriaTest target only valid in step 3
+#	    add_executable(bacteriaTest ${TEST_DIR}/GraphicalTests/BacteriaTest.cpp ${SOURCES_GFX})
+#            target_link_libraries(bacteriaTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+	    add_executable(nutrimentTest ${TEST_DIR}/GraphicalTests/NutrimentTest.cpp ${SOURCES_GFX})
             target_link_libraries(nutrimentTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 
 

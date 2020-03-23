@@ -1,7 +1,8 @@
+
 /*
- * prjsv 2016- 2020
- *
- * Marco Antognini & Jamila Sam
+ * prjsv 2020
+ * Marco Antognini
+ * Application for STEP3
  */
 
 #include <Application.hpp>
@@ -15,7 +16,6 @@
 #include <algorithm>
 #include <cassert>
 //#include <Stats/Stats.hpp>
-
 namespace // anonymous
 {
 /* objects defined in anonymous namespaces cannot be used
@@ -139,6 +139,7 @@ Application::Application(int argc, char const** argv)
 , mPaused(false)  
 , mIsResetting(false)
 , mIsDragging(false)
+  // TODO: make it more general
 ,mCurrentControl(TEMPERATURE)
 ,isStatsOn(false)
 {
@@ -484,7 +485,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
         case sf::Keyboard::C:
 			delete mConfig;
             mConfig = new Config(mAppDirectory + mCfgFile); // reconstruct
-            getEnv().init_temperature();
+			getEnv().resetControls();
             break;
 
         // Toggle pause for simulation
@@ -529,13 +530,13 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
 
 				switch(mCurrentControl){
 					case TEMPERATURE :
-                mLab->decreaseTemperature();
+						mLab->decreaseTemperature();
 						break;
 					case GRADIENT :
 //						mLab->decreaseGradientExponent();
 						break;
 					case STATS:
-//						mStats->previous();
+//						mStats->previous(); 
 						break;
 					default:
 						break;
@@ -544,7 +545,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
         case sf::Keyboard::PageUp: // decrease current control
 				switch(mCurrentControl){
 					case TEMPERATURE :
-                        mLab->increaseTemperature();
+						mLab->increaseTemperature();
 						break;
 					case GRADIENT :
 //						mLab->increaseGradientExponent();
@@ -750,7 +751,6 @@ Config& getShortConfig()
     return getApp().getConfig();
 }
 
-
 j::Value& getAppConfig()
 {
     return getShortConfig().getJsonRead();
@@ -795,9 +795,8 @@ void Application::drawTitle(sf::RenderWindow& target
 								 , size_t font_size
 							) 
 {
-	/* by default nothong done */
+	// nothing by default
 }
-
 void Application::drawOneControl(sf::RenderWindow& target
 								 , Control control
 								 , size_t xcoord
@@ -808,18 +807,19 @@ void Application::drawOneControl(sf::RenderWindow& target
 
 	sf::Color color (mCurrentControl == control ? sf::Color::Red : sf::Color::White);
 	std::string text("");
-    switch (control) {
+	switch (control) {
 		case TEMPERATURE :
 			text = "Temperature : ";
-            text += to_nice_string(mLab->getTemperature());
+			text += to_nice_string(mLab->getTemperature());
 			break;
 		case GRADIENT :
 			text = "Gradient exponent : ";
-			text += "none";
+//			text += to_nice_string(mLab->getGradientExponent());
 			break;
 		case STATS :
 			text = "Current stat : ";
 			text += "none";
+//			text += (isStatsOn ? mStats->getCurrentTitle() : "none");
 			break;
 		default:
 			/* nothing to do */
@@ -836,6 +836,4 @@ void Application::drawOneControl(sf::RenderWindow& target
 #endif
 	target.draw(legend);
 }
-
-
 
