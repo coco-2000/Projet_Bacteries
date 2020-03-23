@@ -40,14 +40,35 @@ public:
       */
      bool contains(const CircularBody&) const;
 
+     /**
+      * @brief increaseTemperature permet d'augmenter la température
+      * des éléments du lab
+      */
      void increaseTemperature();
 
+     /**
+      * @brief decreaseTemperature permet de diminuer la température
+      * des éléments du lab
+      */
      void decreaseTemperature();
 
+     /**
+      * @brief init_temperature permet de réinitialiser la température
+      * des éléments du lab à la valeur du fichier de configuration
+      */
      void init_temperature();
 
+     /**
+      * @brief addNutriment permet de ajouter un nutriment au lab
+      * @param nutriment : celui qui est ajouté au lab
+      */
      void addNutriment(Nutriment* nutriment);
 
+     /**
+      * @brief getTemperature obtenir la temperature de l'assiette de petri
+      * du lab
+      * @return la température de l'assiette de petri
+      */
      double getTemperature() const;
 
 private :
