@@ -8,7 +8,7 @@
       },
 	"background" : "sand.png",
 	"debug background" : "sand.png",
-	"size"       : 1000
+        "size"       : 1000
     },
     "generator" : {
         "nutriment" : {
@@ -363,8 +363,8 @@
         "antialiasing level" : 4,
         "title" : "INFOSV Simulation",
         "simulation" : {
-	    "width":500,
-            "height":500
+            "width":1000,
+            "height":1000
          },
         "stats" : { "width" : 200 }
     },
