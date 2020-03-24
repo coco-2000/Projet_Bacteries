@@ -39,11 +39,6 @@ void Nutriment::drawOn(sf::RenderTarget& target) const
         DisplayQuantity(target);
 }
 
-j::Value const& Nutriment::getConfig() const
-{
-    return getAppConfig()["nutriments"];
-}
-
 void Nutriment::DisplayQuantity(sf::RenderTarget& target) const
 {
     if(isDebugOn())
@@ -62,3 +57,11 @@ void Nutriment::update(sf::Time dt)
         setQuantity(quantity_ + growth);
     }
 }
+
+bool Nutriment::ConditionTemperature(double temperature)
+{
+    return (getConfig()["growth"]["min temperature"].toDouble() <= temperature) and
+            (getConfig()["growth"]["max temperature"].toDouble() >= temperature);
+}
+
+

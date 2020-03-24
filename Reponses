@@ -97,7 +97,6 @@ spécifier ce qu'il représente et établit un lien sémantique entre les
 différents éléments auxquels ils s'appliquent.
 
 *************************************************
-
 ##Q2.9
 
 La méthode getEnv renvoie une instance de type Lab sur laquelle s'applique la
@@ -114,7 +113,6 @@ l'ensemble du tableau de nutriments en appelant à chaque fois la méthode
 drawOn de la classe Nutriment qui elle se charge de dessiner un nutriment.
 
 *************************************************
-
 ##Q2.10
 
 Les nutriments ne croissent que si la température leur convient, la méthode
@@ -124,7 +122,6 @@ dans la méthode PetriDish::update et d'appeller la méthode Nutriment::update q
 la température convient.
 
 *************************************************
-
 ##Q2.11
 
 Pour que la croissance des nutriments deviennent visibles il faut que leur rayon
@@ -133,7 +130,6 @@ Nutriment dans la fonction Nutriment::update qui va modifier à la fois l'attrib
 quantité et l'attribut rayon du nutriment.
 
 *************************************************
-
 ##Q2.12
 
 Dans le fichier Application.cpp, les touches PageUp et PageDown appelle respectivement
@@ -153,8 +149,41 @@ de l'assiette de ["petri dish"]["temperature"]["delta"] (un double) ? Quelles m�
 devez vous également ajouter et à quelle(s) classe(s) pour que les touches 'R' et 'C'
 permettent aussi (en plus de ce qu'elles font) de réinitialiser l'attribut température à
 la valeur du fichier de configuration (["petri dish"]["temperature"]["default"])
-tout en évitant toute duplication de code ? Répondez à ces question dans votre fichier REPONSES, programmez les méthodes suggérées et décommentez les lignes 532, 547 et 814 de Application.cpp.
+tout en évitant toute duplication de code ? Répondez à ces question dans votre fichier REPONSES,
+programmez les méthodes suggérées et décommentez les lignes 532, 547 et 814 de Application.cpp.
 
+
+*****************************************************
+#Q3.1
+
+Les classes Lab, PetriDish et Nutriment devraient hériter des classes Drawable et Updatable
+
+*****************************************************
+#Q3.2
+
+Mettre "virtual" devant le prototype des methodes drawOn et update de la superclasse Nutriment
+
+*****************************************************
+#Q3.3
+
+Comme il faut faire en sorte que la méthode getConfig ne soit pas
+définie concrètement au niveau de la classe Nutriment, elle devra donc être codée
+comme une méthode virtuelle pure. Elle sera ensuite redéfinie dans chaque sous classe
+Nutriment A et Nutriment B de manière spécifique
+
+*****************************************************
+#Q3.4
+
+masquage de getConfig
+
+*****************************************************
+#Q3.5
+
+La methode update de Lab doit appeler la methode update de NutrimentGenerator
+pour lui permettre de générer des sources de nutriments dans l'assiette de Petri
+qui lui est associée
+
+*****************************************************
 
 
 
