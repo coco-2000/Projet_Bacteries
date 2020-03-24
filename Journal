@@ -1,0 +1,24 @@
+1ère semaine : étape 1 :
+Création de la classe CircularBody
+reponse aux questions dans le fichier reponse
+
+L'étape 1 telle qu'elle a été sauvegardée dans un dossier séparé a été modifié pendant la semaine 2,
+alors que nous étions en train de coder la partie 2 :
+- les commentaires de CircularBody ont été déplacés du fichier .cpp au fichier .hpp
+- surcharges internes < et & changées en surchages externes.
+Nous voulions au départ mettres les surcharges < et & en externe pour les raisons qui sont indiquées dans le fichier réponse,
+mais suite à la proposition d'un assistant, nous avons reconsidéré cette option(d'ou la surchage interne dans le premier rendu).
+Après mure reflexion (cf fichier réponse) nous avons décidé de poursuivre notre 1ère idée et nous l'avons soumis à notre assistant
+attitré qui l'a validé.
+
+2ème semaine : étape 2 :
+
+Création de la classe PetriDish, de la classe Lab et de la classe Nutriment
+
+L'etape 2 telle qu'elle a été sauvegardée dans un dossier séparé a été modifié pendant la semaine 3,
+alors que nous étions entrain de coder la partie 3 :
+- supression de toutes les contantes globales que nous avions écrites en haut des fichier .hpp
+nous ne savions pas trop ou mettre ses constantes, surtout pour des variables simples qui étaient tutilisées une ou 2 fois
+dans des classes différente. Nous en avons conclu qu'il etait plus simple et plus lisible de laisser les valeurs numériques
+avec si besoin un commentaire précisant de quoi il s'agit
+- lors du codage de la partie 2, les nutriments n'avaient pas accès à la température dans laquelle la classe

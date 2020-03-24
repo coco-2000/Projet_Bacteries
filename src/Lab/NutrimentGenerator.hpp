@@ -5,6 +5,7 @@
 class NutrimentGenerator : public Updatable
 {
 public:
+    NutrimentGenerator();
     void update(sf::Time dt);
     void reset();
 private:

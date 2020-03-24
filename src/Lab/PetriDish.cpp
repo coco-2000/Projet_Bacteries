@@ -75,7 +75,8 @@ void PetriDish::update(sf::Time dt)
 
 void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
 {
-    auto border = buildAnnulus(position, radius, sf::Color::Black, epaisseur_anneau);
+    //on a ici décidé que l'epaisseur de l'anneau serait 5
+    auto border = buildAnnulus(position, radius, sf::Color::Black, 5);
     targetWindow.draw(border);
 
     for(auto nutriment : lesNutriments)
