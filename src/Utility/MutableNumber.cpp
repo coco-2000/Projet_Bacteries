@@ -3,10 +3,10 @@
 MutableNumber::MutableNumber(double value,
               double mutate_proba,
               double ecart_type,
-              bool hasMin = false,
-              double Min = 0,
-              bool hasMax = false,
-              double Max = 0)
+              bool hasMin,
+              double Min,
+              bool hasMax,
+              double Max)
     : mutation_proba(mutate_proba),
       EcartType(ecart_type),
       hasMin_(hasMin),
@@ -52,7 +52,7 @@ void MutableNumber::mutate()
     }
 }
 
-MutableNumber probability(double initialValue,
+MutableNumber MutableNumber::probability(double initialValue,
                           double mutationProbability,
                           double sigma)
 {
@@ -63,13 +63,13 @@ MutableNumber probability(double initialValue,
                           true, 1);
 }
 
-MutableNumber probability(j::Value const& config)
+MutableNumber MutableNumber::probability(j::Value const& config)
 {
     return probability(config["initial"].toDouble(),
                        config["rate"].toDouble(),
                        config["sigma"].toDouble());
 }
-MutableNumber positive(double initialValue,
+MutableNumber MutableNumber::positive(double initialValue,
                        double mutationProbability,
                        double sigma,
                        bool hasMax,
@@ -78,7 +78,7 @@ MutableNumber positive(double initialValue,
     return MutableNumber(initialValue, mutationProbability, sigma, true, 0, hasMax, max);
 }
 
-MutableNumber positive(j::Value const& config, bool hasMax, double max)
+MutableNumber MutableNumber::positive(j::Value const& config, bool hasMax = false, double max = 0)
 {
     return positive(config["initial"].toDouble(),
                     config["rate"].toDouble(),

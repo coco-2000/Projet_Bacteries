@@ -17,10 +17,10 @@ public:
     MutableNumber(double value,
                   double mutate_proba,
                   double ecart_type,
-                  bool hasMin,
-                  double Min,
-                  bool hasMax,
-                  double Max);
+                  bool hasMin = false,
+                  double Min = 0,
+                  bool hasMax = false,
+                  double Max = 0);
 
     /**
      * @brief MutableNumber Constructeur
@@ -71,7 +71,11 @@ public:
      * @param max Borne supérieure
      * @return Le MutableNumber généré à partir des paramètres passés en argument
      */
-    static MutableNumber positive(double initialValue, double mutationProbability, double sigma, bool hasMax, double max);
+    static MutableNumber positive(double initialValue,
+                                  double mutationProbability,
+                                  double sigma,
+                                  bool hasMax = false,
+                                  double max = 0);
 
     /**
      * @brief positive Génère un MutableNumber de type positif (valeurs minimale plafonnée à zéro)
