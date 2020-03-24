@@ -25,7 +25,7 @@ void Lab::drawOn(sf::RenderTarget& targetWindow) const
 void Lab::reset()
 {
     petri.reset();
-    init_temperature();
+    resetControls();
 }
 
 void Lab::addNutriment(Nutriment* nutriment)
@@ -48,7 +48,7 @@ double Lab::getTemperature() const
     return petri.getTemperature();
 }
 
-void Lab::init_temperature()
+void Lab::resetControls()
 {
     petri.init_temperature();
 }

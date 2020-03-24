@@ -56,7 +56,7 @@ public:
       * @brief init_temperature permet de réinitialiser la température
       * des éléments du lab à la valeur du fichier de configuration
       */
-     void init_temperature();
+     void resetControls();
 
      /**
       * @brief addNutriment permet de ajouter un nutriment au lab
