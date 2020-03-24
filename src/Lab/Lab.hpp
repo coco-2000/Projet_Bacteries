@@ -22,14 +22,14 @@ public:
       * pour le moment fait seulement évoluer l'assiette de Petri
       * @param dt l'intervalle de temps écoulé depuis le dernier update
       */
-     void update(sf::Time dt);
+     void update(sf::Time dt) override;
 
      /**
       * @brief drawOn dessiner un lab
       * pour le moment dessine seulement une assiette de Petri
       * @param targetWindow la fenetre dans laquelle le Lab est affiché
       */
-     void drawOn(sf::RenderTarget& targetWindow) const;
+     void drawOn(sf::RenderTarget& targetWindow) const override;
 
      /**
       * @brief reset vide l'assiette de Petri
@@ -77,7 +77,7 @@ public:
 
      /** @brief Destructeur
        */
-     ~Lab();
+     ~Lab() override;
 
 private :
 
