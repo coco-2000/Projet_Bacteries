@@ -21,6 +21,8 @@ public:
                   double Min,
                   bool hasMax,
                   double Max);
+
+
     MutableNumber(j::Value const& config);
     double get() const;
     void set(double value);
