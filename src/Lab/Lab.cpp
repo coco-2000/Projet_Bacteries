@@ -49,7 +49,7 @@ double Lab::getTemperature() const
     return petri.getTemperature();
 }
 
-void Lab::resetControls()
+void Lab::init_temperature()
 {
     petri.init_temperature();
 }
