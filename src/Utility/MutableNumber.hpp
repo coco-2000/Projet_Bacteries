@@ -4,6 +4,16 @@
 class MutableNumber
 {
 public:
+    /**
+     * @brief MutableNumber Constructeur de Classe
+     * @param value valeur du MutableNumber (qui est un nombre)
+     * @param mutate_proba Probabilité de mutation
+     * @param ecart_type Ecart type permettant la modification aléatoire de la valeur du nombre
+     * @param hasMin Indique si le nombre a une borne inférieure
+     * @param Min Borne inférieure
+     * @param hasMax Indique si le nombre a une borne inférieure
+     * @param Max Borne supérieure
+     */
     MutableNumber(double value,
                   double mutate_proba,
                   double ecart_type,
