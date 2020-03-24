@@ -5,12 +5,16 @@
 #include "NutrimentB.hpp"
 #include <cmath>
 
+NutrimentGenerator::NutrimentGenerator()
+    : compteur(sf::Time::Zero) //appeler la methode reset() ?
+{}
+
 void NutrimentGenerator::update(sf::Time dt)
 {
     sf::Time delta = sf::seconds(getAppConfig()["generator"]["nutriment"]["delay"].toDouble()) ;
     if(compteur >= delta )
     {
-        reset();
+        compteur = sf::Time::Zero;
 
         Vec2d position(normal(getApp().getLabSize().x/2, pow(getApp().getLabSize().x/4,2)),
                        normal(getApp().getLabSize().y/2, pow(getApp().getLabSize().y/4,2)));
@@ -28,7 +32,7 @@ void NutrimentGenerator::update(sf::Time dt)
     }
     else
     {
-         compteur + dt;
+         compteur += dt;
     }
 }
 
@@ -36,3 +40,4 @@ void NutrimentGenerator::reset()
 {
     compteur = sf::Time::Zero;
 }
+

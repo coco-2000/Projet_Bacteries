@@ -7,7 +7,6 @@
 #include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
 
-constexpr int epaisseur_anneau(5);
 
 typedef double Temperature;
 
