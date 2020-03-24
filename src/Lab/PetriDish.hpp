@@ -51,13 +51,13 @@ public:
      * @brief update Effectue la croissance des nutriments de l'assiette de Petri en mettant à jour leur quantité et leur rayon
      * @param dt Pas de temps après lequel lequel la simulation est mise à jour
      */
-    void update(sf::Time dt);
+    void update(sf::Time dt) override;
 
     /**
      * @brief drawOn dessiner l'assiette de petri
      * @param targetWindow la fenetre dans laquelle on affiche l'assiette de Petri
      */
-    void drawOn(sf::RenderTarget& targetWindow) const;
+    void drawOn(sf::RenderTarget& targetWindow) const override;
 
     /**
      * @brief PetriDish::reset supprime toutes les bacteries et tous les
@@ -93,7 +93,7 @@ public:
      * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
      * avec les bactéries et les nutriments qu'elle contient
      */
-    ~PetriDish();
+    ~PetriDish() override;
 
 private :
     std::vector<Bacterium*> lesBacteries;

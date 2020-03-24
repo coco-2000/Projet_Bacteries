@@ -51,11 +51,6 @@ void PetriDish::reset()
     init_temperature();
 }
 
-PetriDish::~PetriDish()
-{
-    reset();
-}
-
 Temperature PetriDish::getTemperature() const
 {
     return temperature;
@@ -100,6 +95,9 @@ void PetriDish::init_temperature()
     temperature = getAppConfig()["petri dish"]["temperature"]["default"].toDouble();
 }
 
-
+PetriDish::~PetriDish()
+{
+    reset();
+}
 
 
