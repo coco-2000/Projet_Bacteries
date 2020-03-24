@@ -167,4 +167,4 @@ inférieure et la borne supérieure. Il suffit alors de l'appeler dès que la va
 Mettre ces méthodes en dehors de la classe MutableNumber permet de ne pas avoir a crée
 une instance de MutableNumber pour les invoquer.
 
-
+*************************************************
