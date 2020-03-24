@@ -202,7 +202,9 @@ inférieure et la borne supérieure. Il suffit alors de l'appeler dès que la va
 
 ##Q3.7
 
-Mettre ces méthodes en dehors de la classe MutableNumber permet de ne pas avoir a crée
-une instance de MutableNumber pour les invoquer.
+Pour que ces méthodes puissent être accessible même en sans qu'aucune instance ne soit
+créée (uniquement au travers du nom de la classe), il faut les déclarer comme attributs
+de classe avec le mot clé static. On y accède ensuite au travers de l'opérateur de
+résolution de portée.
 
 *************************************************
