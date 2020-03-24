@@ -27,7 +27,6 @@ void Lab::reset()
 {
     petri.reset();
     generateur_nutriment.reset();
-    resetControls();
 }
 
 void Lab::addNutriment(Nutriment* nutriment)
@@ -55,6 +54,10 @@ void Lab::resetControls()
     petri.init_temperature();
 }
 
+Lab::~Lab()
+{
+    reset();
+}
 
 
 

@@ -34,6 +34,7 @@ public:
      /**
       * @brief reset vide l'assiette de Petri
       * sera appelé pour faire fonctionner la touche 'R'
+      * réinitialise le générateur de nutriments
       */
      void reset();
 
@@ -73,6 +74,8 @@ public:
       * @return la température de l'assiette de petri
       */
      double getTemperature() const;
+
+     ~Lab();
 
 private :
 

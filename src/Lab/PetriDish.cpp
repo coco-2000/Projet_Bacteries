@@ -47,6 +47,8 @@ void PetriDish::reset()
         nutriment = nullptr;
     }
     lesNutriments.clear();
+
+    init_temperature();
 }
 
 PetriDish::~PetriDish()

@@ -7,7 +7,7 @@
 
 void NutrimentGenerator::update(sf::Time dt)
 {
-    sf::Time delta = sf::seconds(float(getAppConfig()["generator"]["nutriment"]["delay"].toDouble())) ;
+    sf::Time delta = sf::seconds(getAppConfig()["generator"]["nutriment"]["delay"].toDouble()) ;
     if(compteur >= delta )
     {
         reset();
