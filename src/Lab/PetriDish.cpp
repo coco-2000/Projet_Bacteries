@@ -62,19 +62,12 @@ Temperature PetriDish::getTemperature() const
 
 void PetriDish::update(sf::Time dt)
 {
-
-    bool ConditionCroissance =
-            (getAppConfig()["nutriments"]["growth"]["min temperature"].toDouble()
-            <= temperature)
-            and (getAppConfig()["nutriments"]["growth"]["max temperature"].toDouble()
-            >= temperature);
-
-    if (ConditionCroissance)
+    for(auto& nutriment : lesNutriments)
     {
-        for(auto nutriment : lesNutriments)
-        {
-            nutriment->update(dt);
-        }
+        if(nutriment->ConditionTemperature(temperature))
+            {
+                nutriment->update(dt);
+            }
     }
 }
 

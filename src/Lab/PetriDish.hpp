@@ -4,12 +4,14 @@
 #include "CircularBody.hpp"
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include "Interface/Drawable.hpp"
+#include "Interface/Updatable.hpp"
 
 constexpr int epaisseur_anneau(5);
 
 typedef double Temperature;
 
-class PetriDish : public CircularBody
+class PetriDish : public CircularBody, public Drawable, public Updatable
 {
 public:
 
@@ -65,11 +67,6 @@ public:
     void reset();
 
     /**
-     * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
-     * avec les bactéries et les nutriments qu'elle contient
-     */
-    ~PetriDish();
-    /**
      * @brief getTemperature Accesseur de temperature
      * @return La temperature courante de l'assiette de Petri
      */
@@ -91,6 +88,12 @@ public:
      * @brief init_temperature Initialise la température de l'assiette de Petri à sa valeur par défaut
      */
     void init_temperature();
+
+    /**
+     * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
+     * avec les bactéries et les nutriments qu'elle contient
+     */
+    ~PetriDish();
 
 private :
     std::vector<Bacterium*> lesBacteries;

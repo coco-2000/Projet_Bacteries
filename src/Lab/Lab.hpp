@@ -1,10 +1,13 @@
 #pragma once
 #include "PetriDish.hpp"
 #include <SFML/Graphics.hpp>
+#include "Interface/Drawable.hpp"
+#include "Interface/Updatable.hpp"
+#include "NutrimentGenerator.hpp"
 
 constexpr double ratio_rayon(0.95/2);
 
-class Lab
+class Lab : public Drawable, public Updatable
 {
 public:
     /**
@@ -56,7 +59,7 @@ public:
       * @brief init_temperature permet de réinitialiser la température
       * des éléments du lab à la valeur du fichier de configuration
       */
-     void init_temperature();
+     void resetControls();
 
      /**
       * @brief addNutriment permet de ajouter un nutriment au lab
@@ -74,5 +77,6 @@ public:
 private :
 
     PetriDish petri;
+    NutrimentGenerator generateur_nutriment;
 
 };

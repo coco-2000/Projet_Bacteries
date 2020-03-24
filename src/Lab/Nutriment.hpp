@@ -2,11 +2,13 @@
 #include "CircularBody.hpp"
 #include "Utility/Types.hpp"
 #include <SFML/Graphics.hpp>
+#include "Interface/Drawable.hpp"
+#include "Interface/Updatable.hpp"
 
 constexpr unsigned int TAILLE_OBJ_GRAPHIQUE(6);
 constexpr unsigned int TAILLE_FONTE(15);
 
-class Nutriment : public CircularBody
+class Nutriment : public CircularBody, public Drawable, public Updatable
 {
 public :
     /**
@@ -39,25 +41,28 @@ public :
      * @brief drawOn Dessine un nutriment
      * @param target
      */
-   void drawOn(sf::RenderTarget& target) const;
+    virtual void drawOn(sf::RenderTarget& target) const;
 
    /**
     * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux nutriments
+    * Il s'agit d'une méthode virtuelle pure
     * @return la valeur de getAppConfig()["nutriments"]
     */
-   j::Value const& getConfig() const;
+    virtual j::Value const& getConfig() const = 0;
 
    /**
     * @brief update Effectue la croissance d'un nutriment en mettant à jour sa quantité et son rayon
     * @param dt Pas de temps après lequel lequel le nutriment est mise à jour
     */
-   void update(sf::Time dt);
+    virtual void update(sf::Time dt);
 
    /**
     * @brief getTemperature Accesseur de température
     * @return la température courante de l'assiette de Petri
     */
-   double getTemperature() const;
+    double getTemperature() const;
+
+    bool ConditionTemperature(double temperature);
 
 private :
     const double dist;
