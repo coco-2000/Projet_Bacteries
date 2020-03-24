@@ -75,6 +75,8 @@ public:
       */
      double getTemperature() const;
 
+     /** @brief Destructeur
+       */
      ~Lab();
 
 private :

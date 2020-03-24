@@ -32,6 +32,8 @@ void Nutriment::setQuantity(Quantity quantity)
 
 void Nutriment::drawOn(sf::RenderTarget& target) const
 {
+    unsigned int TAILLE_OBJ_GRAPHIQUE(6); //taille de l'objet graphique
+
     auto texture = getConfig()["texture"].toString();
     auto nutrimentSprite = buildSprite(position,
                                        TAILLE_OBJ_GRAPHIQUE,
@@ -45,6 +47,8 @@ void Nutriment::drawOn(sf::RenderTarget& target) const
 
 void Nutriment::DisplayQuantity(sf::RenderTarget& target) const
 {
+    unsigned int TAILLE_FONTE(15); // taille de fonte
+
     if(isDebugOn())
     {
         auto const text = buildText(std::to_string(static_cast<int>(quantity_)),

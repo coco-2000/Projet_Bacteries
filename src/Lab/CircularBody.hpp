@@ -101,8 +101,8 @@ protected :
     void setRadius      (double rayon);
 
     /**
-     * @brief CircularBody::copie
-     * @param body
+     * @brief CircularBody::copie Effectue la copie des attributs d'un autre corps dans l'instance courante
+     * @param body instance à copier
      */
     void copie           (const CircularBody& body);
 };
