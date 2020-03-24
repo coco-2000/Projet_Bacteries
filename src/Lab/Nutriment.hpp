@@ -5,9 +5,6 @@
 #include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
 
-constexpr unsigned int TAILLE_OBJ_GRAPHIQUE(6);
-constexpr unsigned int TAILLE_FONTE(15);
-
 class Nutriment : public CircularBody, public Drawable, public Updatable
 {
 public :
@@ -62,10 +59,20 @@ public :
     */
     double getTemperature() const;
 
+    /**
+     * @brief ConditionTemperature Vérifie les conditions portant sur la température pour la croissance des nutriments
+     * @param temperature Température courante
+     * @return true si les conditions sont respectées false sinon
+     */
     bool ConditionTemperature(double temperature);
 
 private :
     const double dist;
     Quantity quantity_;
+
+    /**
+     * @brief DisplayQuantity Affiche de la quantité du nutriment (si mode debugging activé)
+     * @param target Cible pour l'affichage
+     */
     void DisplayQuantity(sf::RenderTarget& target) const;
 };
