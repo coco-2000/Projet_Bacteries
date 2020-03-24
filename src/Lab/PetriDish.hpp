@@ -63,6 +63,7 @@ public:
     /**
      * @brief PetriDish::reset supprime toutes les bacteries et tous les
      * nutriments placés dans l'assiette
+     * réinitialise la température
      */
     void reset();
 
