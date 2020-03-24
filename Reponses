@@ -141,7 +141,13 @@ increaseTemperature et decreaseTemperature dans la classe PetriDish également q
 appelées par les méthodes de la classe Lab et seront en charge de modifier la température
 de l'assiette.
 
+Pour  réinitialiser l'attribut température nous avons crée une méthode init_temperature
+dans la classe Petridish ainsi que Lab (qui appelle celle de PetriDish) qui affecte à
+l'attribut température sa valeur par défaut. Dès lors, il a suffit d'appeler init_temperature
+dans la fonction Lab::reset (qui est elle-même appelé lorsqu'on appuie sur la touche 'R') et dans
+la fonction du fichier Application.cpp qui gère la touche 'C'.
 
+*************************************************
 
 Quelles méthodes devez vous ajouter et dans quelles classes pour que appuyer
 sur 'PgUp' ou 'PgDn' permette respectivement d'augmenter ou diminuer la température
@@ -184,8 +190,19 @@ pour lui permettre de générer des sources de nutriments dans l'assiette de Pet
 qui lui est associée
 
 *****************************************************
+##Q3.6
 
 
+Nous avons dû programmer une méthode set permettant d'attribuer une valeur au nombre,
+celle-ci doit donc se charger de vérifier le plafonnage de la valeur entre la borne
+inférieure et la borne supérieure. Il suffit alors de l'appeler dès que la valeur doit
+être modifiée (dans le constructeur par exemple).
 
+*************************************************
 
+##Q3.7
 
+Mettre ces méthodes en dehors de la classe MutableNumber permet de ne pas avoir a crée
+une instance de MutableNumber pour les invoquer.
+
+*************************************************

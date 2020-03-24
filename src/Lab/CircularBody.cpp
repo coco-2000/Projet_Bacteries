@@ -45,7 +45,9 @@ void CircularBody::move(const Vec2d& vector)
 
 bool CircularBody::contains(const CircularBody& other) const
 {
-    return ((radius >= other.radius) and (distance(position, other.position) <= radius - other.radius));
+    return ((radius >= other.radius)
+            and (distance(position, other.position)
+                 <= radius - other.radius));
 }
 
 bool CircularBody::isColliding(const CircularBody& other) const
