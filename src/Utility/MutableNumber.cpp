@@ -1,4 +1,5 @@
 #include "MutableNumber.hpp"
+#include "Application.hpp"
 
 MutableNumber::MutableNumber(double value,
               double mutate_proba,
@@ -12,9 +13,10 @@ MutableNumber::MutableNumber(double value,
       aBorneInf(a_borne_inf),
       aBorneSup(a_borne_sup),
       BorneInf(borne_inf),
-      BorneSup(borne_sup),
-      set(value)
-{}
+      BorneSup(borne_sup)
+{
+    set(value);
+}
 
 MutableNumber::MutableNumber(j::Value const& config)
     : MutableNumber(config["initial"].toDouble(),
@@ -23,7 +25,7 @@ MutableNumber::MutableNumber(j::Value const& config)
       config["clamp min"].toBool(),
       config["clamp max"].toBool(),
       config["min"].toDouble(),
-      config["max"].toDouble(),)
+      config["max"].toDouble())
 {}
 
 double MutableNumber::get() const
@@ -44,3 +46,6 @@ void MutableNumber::set(double value)
 }
 
 void MutableNumber::mutate()
+{
+    bernoulli(m)
+}

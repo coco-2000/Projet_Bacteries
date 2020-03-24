@@ -5,7 +5,7 @@ class MutableNumber
 {
 public:
     MutableNumber(double, double, double, bool, bool, double, double);
-    MutableNumber();
+    MutableNumber(j::Value const& config);
     double get() const;
     void set(double value);
     void mutate();
