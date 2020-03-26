@@ -1,24 +1,56 @@
-1ère semaine : étape 1 :
-Création de la classe CircularBody
-reponse aux questions dans le fichier reponse
+#Programmation II (SV)
 
-L'étape 1 telle qu'elle a été sauvegardée dans un dossier séparé a été modifié pendant la semaine 2,
-alors que nous étions en train de coder la partie 2 :
-- les commentaires de CircularBody ont été déplacés du fichier .cpp au fichier .hpp
-- surcharges internes < et & changées en surchages externes.
-Nous voulions au départ mettres les surcharges < et & en externe pour les raisons qui sont indiquées dans le fichier réponse,
-mais suite à la proposition d'un assistant, nous avons reconsidéré cette option(d'ou la surchage interne dans le premier rendu).
-Après mure reflexion (cf fichier réponse) nous avons décidé de poursuivre notre 1ère idée et nous l'avons soumis à notre assistant
-attitré qui l'a validé.
+##JOURNAL du groupe 1 (Emma Boehly, Constance de Trogoff)
 
-2ème semaine : étape 2 :
+*************************************************
+##Semaine 0
 
-Création de la classe PetriDish, de la classe Lab et de la classe Nutriment
+- inscription du groupe
+- lecture de l'énonce
 
-L'etape 2 telle qu'elle a été sauvegardée dans un dossier séparé a été modifié pendant la semaine 3,
-alors que nous étions entrain de coder la partie 3 :
-- supression de toutes les contantes globales que nous avions écrites en haut des fichier .hpp
-nous ne savions pas trop ou mettre ses constantes, surtout pour des variables simples qui étaient tutilisées une ou 2 fois
-dans des classes différente. Nous en avons conclu qu'il etait plus simple et plus lisible de laisser les valeurs numériques
-avec si besoin un commentaire précisant de quoi il s'agit
-- lors du codage de la partie 2, les nutriments n'avaient pas accès à la température dans laquelle la classe
+*************************************************
+##Semaine 1 - Partie 1
+
+- *ensemble* : création de la classe CircularBody
+               début du codage de la classe CircularBody
+               Installation de git
+               Répartition des tâches pour l'étape 2
+
+- La partie 1 a été modifié après son archivage :
+    - Commentaires de CircularBody placés dans l'entête
+    - Surcharges externes des opérateurs < et & (notre 1ère intuition mais après
+      discussion avec un assistant, il avait insisté sur la relation asymétrique
+      entre les 2 instances. Finalement notre assistant attitré nous a validé le
+      fait qu'il fallait préférer la surcharge externe lorsque celle-ci est possible)
+
+
+*************************************************
+##Semaine 2 - Partie 2
+
+- *Constance* : Création et implémentation des classes PetriDish et Lab (Partie 2.1)
+- *Emma* : Création et implémentation de la classe Nutriment (Partie 2.2)
+- *ensemble* : Modification sur la partie 1, correction des erreurs constatées lors des tests...
+
+- Problèmes : - Introduction de nouveaux raccourcis dans le fichier Config ? Non à éviter
+              - Comment traiter la condition portant sur le debordement de l'assiette lors de la
+                croissance des nutriments ? Vérification condition lors d'appel depuis les SuperClasses
+
+- La partie 2 a été modifié après son archivage :
+    - Supression des constantes globales crées dans les entêtes (au début crée pour un code
+      plus synthétique, au final la présence de constantes globales n'était pas souhaitée)
+    - Accès à la température pour la classe Nutriment (nous pensions que celle-ci n'avait
+      besoin d'être connu que par l'assiette de Petri)
+
+
+*************************************************
+##Semaine 3 - Partie 3
+
+- *Constance* : Création et implémentation des classes NutrimentA, NutrimentB et NutrimentGenerator (Partie 3.1)
+- *Emma* : Création et implémentation des classes MutableNumber et MutableColor (Partie 3.2)
+- *ensemble* : Modification de la partie 2, gestion des problèmes, modification des méthodes associées à la touche C
+
+- Problèmes : - Coder destructeur explicite ou pas ? Non pour CircularBody (géré par SousClasses),
+                NutrimentGenerator, Nutriment (géré par PetriDish), Oui pour Lab (appel de reset)
+
+
+*************************************************
