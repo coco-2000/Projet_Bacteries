@@ -150,25 +150,39 @@ la fonction du fichier Application.cpp qui gère la touche 'C'.
 *****************************************************
 #Q3.1
 
-Les classes Lab, PetriDish et Nutriment devraient hériter des classes Drawable et Updatable
+Les classes Lab, PetriDish et Nutriment devraient hériter des classes Drawable et Updatable car
+elles possèdent les methodes drawOn et update. Cela permet de rendre le code plus générique et
+de mieux structurer le programme. On sait directement quelles sont les classes qui seront dessinées
+et quelles sont les classes qui évolueront lors de l'affichage
+avec le temps.
 
 *****************************************************
 #Q3.2
 
-Mettre "virtual" devant le prototype des methodes drawOn et update de la superclasse Nutriment
+pas besoin de mettre "virtual" devant le prototype des methodes drawOn et update de la superclasse
+Nutriment car ces methodes sont déjà virtuelles et peuvent donc être redéfinie dans les sous classe
+de Nutriment
 
 *****************************************************
 #Q3.3
 
-Comme il faut faire en sorte que la méthode getConfig ne soit pas
-définie concrètement au niveau de la classe Nutriment, elle devra donc être codée
-comme une méthode virtuelle pure. Elle sera ensuite redéfinie dans chaque sous classe
-Nutriment A et Nutriment B de manière spécifique
+Il est nécessaire d'avoir dans la classe Nutriment le prototype de getConfig car de nombreuses
+methodes de nutriment font appel à getConfig
+Comme la méthode getConfig ne pas être définie concrètement au niveau de la classe Nutriment
+(car  elle est spécifique à ses sous classes), elle devra donc être codée
+comme une méthode virtuelle pure.
+Elle sera ensuite redéfinie dans chaque sous classe
+Nutriment A et Nutriment B de manière spécifique.
 
 *****************************************************
 #Q3.4
 
-masquage de getConfig
+Grace au polymorphisme, les methodes update et drawOn appellent la methode getConfig au moment de l'execution
+en fonction de s'il s'agit d'une instance de Nutriment A ou d'une instance de Nutriment B.
+En effet, la methode getConfig est une méthode virtuelle et s'exerce sur les instances réellement concernées
+grâce aux pointeurs de nutriment de la classe Petridish.
+Ainsi les conditions nécessaires pour la résolution dynamique des liens sont remplies et l'affichage graphique
+peut se faire de manière spécifique pour les nutriments A et nutriments B sans qu'il soit necessaire de modifier drawOn et update
 
 *****************************************************
 #Q3.5

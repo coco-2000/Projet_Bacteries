@@ -38,12 +38,11 @@ public :
      * @brief drawOn Dessine un nutriment
      * @param target
      */
-    virtual void drawOn(sf::RenderTarget& target) const;
+    void drawOn(sf::RenderTarget& target) const override;
 
    /**
     * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux nutriments
     * Il s'agit d'une méthode virtuelle pure
-    * @return la valeur de getAppConfig()["nutriments"]
     */
     virtual j::Value const& getConfig() const = 0;
 
@@ -51,7 +50,7 @@ public :
     * @brief update Effectue la croissance d'un nutriment en mettant à jour sa quantité et son rayon
     * @param dt Pas de temps après lequel lequel le nutriment est mise à jour
     */
-    virtual void update(sf::Time dt);
+    void update(sf::Time dt) override;
 
    /**
     * @brief getTemperature Accesseur de température
