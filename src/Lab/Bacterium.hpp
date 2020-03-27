@@ -3,7 +3,7 @@
 #include "../Interface/Drawable.hpp"
 #include "../Interface/Updatable.hpp"
 
-class Bacterium : public CircularBody public Drawable public Updatable
+class Bacterium : public CircularBody ,public Drawable, public Updatable
 {
 
 };
