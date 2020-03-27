@@ -29,7 +29,9 @@
 
 - *Constance* : Création et implémentation des classes PetriDish et Lab (Partie 2.1)
 - *Emma* : Création et implémentation de la classe Nutriment (Partie 2.2)
-- *ensemble* : Modification sur la partie 1, correction des erreurs constatées lors des tests...
+- *ensemble* : Croissance des nutriment (partie 2.2)
+               modification sur la partie 1,
+               correction des erreurs constatées lors des tests
 
 - Problèmes : - Introduction de nouveaux raccourcis dans le fichier Config ? Non à éviter
               - Comment traiter la condition portant sur le debordement de l'assiette lors de la
@@ -40,7 +42,10 @@
       plus synthétique, au final la présence de constantes globales n'était pas souhaitée)
     - Accès à la température pour la classe Nutriment (nous pensions que celle-ci n'avait
       besoin d'être connu que par l'assiette de Petri)
-
+    - modification de la classe update de PetriDish et de Nutriment car on verifiait les conditions sur
+      la température pour la croissance des nutriments dans la classe PetriDish.
+      Or ces conditions devaient être vérifiées dans la classe Nutriment pour permettre
+      le polymorphisme
 
 *************************************************
 ##Semaine 3 - Partie 3
