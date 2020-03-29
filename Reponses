@@ -211,6 +211,10 @@ résolution de portée.
 *************************************************
 ##Q3.8
 
+Mettre la methode clone de bacterie en protected car les bacteries doivent effectuer
+la division cellulaire elle-même sans avoir besoin du monde exterieur.
+Il en est de même pour la methode move : les bacteries se déplacent elles-mêmes.
+
 *************************************************
 ##Q3.9
 
