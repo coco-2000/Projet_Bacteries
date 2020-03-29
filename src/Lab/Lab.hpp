@@ -75,6 +75,9 @@ public:
       */
      double getTemperature() const;
 
+     bool doesCollideWithDish(CircularBody const& body);
+     Nutriment* getNutrimentColliding(CircularBody const& body) const;
+
      /** @brief Destructeur
        */
      ~Lab() override;

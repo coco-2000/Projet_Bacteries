@@ -22,7 +22,7 @@ public:
      * @brief get Accesseur de la couleur
      * @return La couleur sous une forme reconnue par SFML
      */
-    sf::Color get();
+    sf::Color get() const;
 
 
 private :

@@ -13,12 +13,12 @@ PetriDish::PetriDish(Vec2d position, double radius)
 
 bool PetriDish::addBacterium(Bacterium* bacterie)
 {
-    bool conditions = true;
-
-    if (conditions)
+    if (contains(*bacterie))
+    {
         lesBacteries.push_back(bacterie);
+    }
 
-    return conditions;
+    return contains(*bacterie);
 }
 
 

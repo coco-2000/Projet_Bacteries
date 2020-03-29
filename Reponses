@@ -201,7 +201,6 @@ inférieure et la borne supérieure. Il suffit alors de l'appeler dès que la va
 être modifiée (dans le constructeur par exemple).
 
 *************************************************
-
 ##Q3.7
 
 Pour que ces méthodes puissent être accessible même en sans qu'aucune instance ne soit
@@ -210,3 +209,24 @@ de classe avec le mot clé static. On y accède ensuite au travers de l'opérate
 résolution de portée.
 
 *************************************************
+##Q3.8
+
+*************************************************
+##Q3.9
+
+la methode void move(sf::Time dt) doit être virtuelle pure car nous ne pouvons pas définir
+cette fonctionnalité de façon générique pour une bactérie quelconque.
+
+*************************************************
+##Q3.10
+
+oui elle est virtuelle pure
+
+*************************************************
+##Q3.11
+
+appeller la methode get() de MutableColor qui retourne la couleur associée
+
+
+
+
