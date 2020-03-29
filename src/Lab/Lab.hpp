@@ -69,15 +69,32 @@ public:
      void addNutriment(Nutriment* nutriment);
 
      /**
+      * @brief addBacterium permet d'ajouter des bacteries au lab
+      * @param bacterie : celle qui est ajoutée au lab
+      */
+     void addBacterium(Bacterium* bacterie);
+
+     /**
       * @brief getTemperature obtenir la temperature de l'assiette de petri
       * du lab
       * @return la température de l'assiette de petri
       */
      double getTemperature() const;
 
+     /**
+      * @brief doesCollideWithDish regarde si le body rentre en collision
+      * avec l'assiette de petri
+      * @param body le corps qui peut rentrer en collision
+      * @return vrai s'il est en collision
+      */
      bool doesCollideWithDish(CircularBody const& body) const;
+
+     /**
+      * @brief getNutrimentColliding obtenir le nutriment en collision avec le body
+      * @param body le corps qui peut rentrer en collision avec le nutriment
+      * @return le nutriment qui est en collision avec le body
+      */
      Nutriment* getNutrimentColliding(CircularBody const& body) const;
-     void addBacterium(Bacterium* bacterie);
 
      /** @brief Destructeur
        */

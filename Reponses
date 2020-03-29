@@ -235,7 +235,7 @@ Non
 ##Q3.13
 
 créer une méthode getNutrimentColliding dans PetriDish qui sera appelée par la methode getNutrimentColliding
-de Lab et qui pourra ains avoir accés aux Nutriments de PetriDish
+de Lab et qui pourra ainsi avoir accés aux Nutriments de PetriDish
 
 **************************************************
 ##Q3.14

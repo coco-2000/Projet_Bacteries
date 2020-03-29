@@ -65,6 +65,10 @@ public :
      */
     bool ConditionTemperature(double temperature);
 
+    /**
+     * @brief isEmpty permet de savoir s'il n'y a plus de nutriment dans la souche
+     * @return vrai s'il n'y a plus de nutriment
+     */
     bool isEmpty();
 
 private :

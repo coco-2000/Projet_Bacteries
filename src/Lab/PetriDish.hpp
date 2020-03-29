@@ -49,6 +49,7 @@ public:
 
     /**
      * @brief update Effectue la croissance des nutriments de l'assiette de Petri en mettant à jour leur quantité et leur rayon
+     * Suprime les nutriments et les bacteries si besoin
      * @param dt Pas de temps après lequel lequel la simulation est mise à jour
      */
     void update(sf::Time dt) override;
@@ -102,7 +103,18 @@ private :
     std::vector<Bacterium*> lesBacteries;
     std::vector<Nutriment*> lesNutriments;
 
+    /**
+     * @brief update_bacteries assure le déplacement, les collisions et la consommation
+     * des nutriments pour toutes les bacteries de l'assiette de petri
+     * @param dt
+     */
     void update_bacteries (sf::Time dt);
+
+    /**
+     * @brief update_nutriments Effectue la croissance de tous les nutriments de l'assiette de Petri
+     * en mettant à jour leur quantité et leur rayon
+     * @param dt Pas de temps après lequel lequel la simulation est mise à jour
+     */
     void update_nutriments (sf::Time dt);
 
     Temperature temperature;
