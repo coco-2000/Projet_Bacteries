@@ -14,10 +14,6 @@ public :
               double radius, const MutableColor& couleur, bool abstinence = 0,
               std::map<std::string, MutableNumber>param_mutables = {});
 
-    virtual void move(sf::Time dt) const = 0;
-
-    Bacterium* clone(); // ecrire final ?
-
     bool en_vie(); //peut etre le remplacer par morte et inverser le bool
 
     //methode mutate
@@ -32,13 +28,21 @@ public :
 
     void update(sf::Time dt) override;
 
-private :
+    void consumeEnergy(Quantity qt);
+
+protected :
     MutableColor couleur;
     Vec2d direction;
     Quantity energie;
     bool abstinence;
     std::map<std::string, MutableNumber> param_mutables;
+    sf::Time compteur;
 
     void DisplayEnergy(sf::RenderTarget& target) const;
+    void collisionPetri();
+    void consumeNutriment(sf::Time dt);
+
+    virtual void move(sf::Time dt) = 0;
+    virtual Bacterium* clone() const; // ecrire final ?
 
 };

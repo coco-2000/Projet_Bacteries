@@ -10,9 +10,9 @@ Bacterium::Bacterium(Quantity energie, Vec2d position, Vec2d direction,
       energie(energie), abstinence(abstinence), param_mutables(param_mutables)
 {}
 
-Bacterium* Bacterium::clone()
+Bacterium* Bacterium::clone() const
 {
-    return(this);
+    return nullptr;
 }
 
 bool Bacterium::en_vie()
@@ -59,7 +59,38 @@ void Bacterium::DisplayEnergy(sf::RenderTarget& target) const
 void Bacterium::update(sf::Time dt)
 {
     move(dt);
-    if (getAppEnv().contains(*this))
+    collisionPetri();
+    consumeNutriment(dt);
+}
+
+void Bacterium::collisionPetri()
+{
+    if (getAppEnv().doesCollideWithDish(*this))
+    {
+        direction = -direction;
+    }
+}
+
+void Bacterium::consumeNutriment(sf::Time dt)
+{
+    Nutriment* nutriment_ptr = getAppEnv().getNutrimentColliding(*this);
+
+    if(nutriment_ptr != nullptr and !abstinence and compteur >= getDelay())
+    {
+        compteur = sf::Time::Zero;
+        double quantite_consommee = getConfig()["meal"]["max"].toDouble();
+        nutriment_ptr->takeQuantity(quantite_consommee);
+        nutriment_ptr = nullptr;
+    }
+    else
+    {
+      compteur += dt;
+    }
+}
+
+void Bacterium::consumeEnergy(Quantity qt)
+{
+    energie = energie - qt;
 }
 
 

@@ -89,15 +89,21 @@ public:
      */
     void init_temperature();
 
+    Nutriment* getNutrimentColliding(CircularBody const& body) const;
+
     /**
      * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
      * avec les bactéries et les nutriments qu'elle contient
      */
     ~PetriDish() override;
 
+
 private :
     std::vector<Bacterium*> lesBacteries;
     std::vector<Nutriment*> lesNutriments;
+
+    void update_bacteries (sf::Time dt);
+    void update_nutriments (sf::Time dt);
 
     Temperature temperature;
 };

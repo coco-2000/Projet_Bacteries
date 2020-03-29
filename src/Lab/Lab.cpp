@@ -2,15 +2,24 @@
 #include "CircularBody.hpp"
 #include "Application.hpp"
 
+Lab::Lab()
+    : petri(getApp().getCentre(), ratio_rayon*getApp().getLabSize().x )
+{}
 
 bool Lab::contains(const CircularBody& corps) const
 {
     return (petri > corps);
 }
 
-Lab::Lab()
-    : petri(getApp().getCentre(), ratio_rayon*getApp().getLabSize().x )
-{}
+bool Lab::doesCollideWithDish(CircularBody const& body) const
+{
+    return (body & petri);
+}
+
+Nutriment* Lab::getNutrimentColliding(CircularBody const& body) const
+{
+    return petri.getNutrimentColliding(body);
+}
 
 void Lab::update(sf::Time dt)
 {
@@ -32,6 +41,11 @@ void Lab::reset()
 void Lab::addNutriment(Nutriment* nutriment)
 {
     petri.addNutriment(nutriment);
+}
+
+void Lab::addBacterium(Bacterium* bacterie)
+{
+    petri.addBacterium(bacterie);
 }
 
 void Lab::increaseTemperature()

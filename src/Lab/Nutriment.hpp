@@ -65,6 +65,8 @@ public :
      */
     bool ConditionTemperature(double temperature);
 
+    bool isEmpty();
+
 private :
     const double dist;
     Quantity quantity_;

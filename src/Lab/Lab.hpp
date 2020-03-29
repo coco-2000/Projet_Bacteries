@@ -75,8 +75,9 @@ public:
       */
      double getTemperature() const;
 
-     bool doesCollideWithDish(CircularBody const& body);
+     bool doesCollideWithDish(CircularBody const& body) const;
      Nutriment* getNutrimentColliding(CircularBody const& body) const;
+     void addBacterium(Bacterium* bacterie);
 
      /** @brief Destructeur
        */

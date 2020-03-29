@@ -77,4 +77,7 @@ bool Nutriment::ConditionTemperature(double temperature)
             (getConfig()["growth"]["max temperature"].toDouble() >= temperature);
 }
 
-
+bool Nutriment::isEmpty()
+{
+    return(quantity_ <= 0);
+}

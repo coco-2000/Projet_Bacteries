@@ -227,6 +227,34 @@ oui elle est virtuelle pure
 
 appeller la methode get() de MutableColor qui retourne la couleur associée
 
+**************************************************
+##Q3.12
+Non
+
+**************************************************
+##Q3.13
+
+créer une méthode getNutrimentColliding dans PetriDish qui sera appelée par la methode getNutrimentColliding
+de Lab et qui pourra ains avoir accés aux Nutriments de PetriDish
+
+**************************************************
+##Q3.14
+la methode update de PetriDish doit appeler la méthode update de bacterie
+Pour plus de modularité, création de 2 methodes privées dans PetriDish :
+update_bacteries et update_nutriments qui sont appelées par la methode update de PetriDish
+De même, la methode drawOn de PertriDish doit appeler la methode drawOn de bacterie
+
+**************************************************
+##Q3.15
+
+C'est la PetriDish qui a la propriété des bacteries et des nutriments.
+C'est donc la methode update de PetriDish qui doit se charger de la mort des bacteries
+et de la disparition des nutriments.
+Création de la methode isEmpty() dans la classe Nutriment pour savoir si la quantite de nutriment est nulle.
+La methode update de PetriDish appelle donc  la methode en_vie() de bacterium pour savoir
+si elle n'a plus d'énergie ainsi qye la methode isEmpty() de nutriment
+
+
 
 
 

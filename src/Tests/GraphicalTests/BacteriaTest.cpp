@@ -27,7 +27,7 @@ public:
 
 	
 protected:
-	virtual Bacterium* clone() const
+    virtual Bacterium* clone() const
 		{
 			/* ne fait rien pour le moment
 			(cette méthode devra être modifiée lorsque vous aurez codé
@@ -36,10 +36,11 @@ protected:
 			return nullptr;
 		}
 	
-	virtual void move(sf::Time dt)
-		{
+
+    virtual void move(sf::Time dt)
+    {
 			consumeEnergy(0.1);
-		}
+    }
 };
 
 	
