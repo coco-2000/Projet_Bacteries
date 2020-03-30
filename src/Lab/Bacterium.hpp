@@ -75,6 +75,7 @@ public :
      */
     void consumeEnergy(Quantity qt);
 
+
 protected :
     MutableColor couleur;
     Vec2d direction;
@@ -101,7 +102,7 @@ protected :
      */
     void consumeNutriment(sf::Time dt);
 
-
-    virtual Bacterium* clone() const; // ecrire final ?
+    virtual void move(sf::Time dt) = 0;
+    virtual Bacterium* clone() const;
 
 };

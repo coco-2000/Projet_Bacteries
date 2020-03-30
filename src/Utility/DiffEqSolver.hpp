@@ -31,7 +31,7 @@ public:
 class MRU : public DiffEqFunction
 {
 public:
-    Vec2d f(Vec2d position, Vec2d speed) const;
+    virtual Vec2d f(Vec2d position, Vec2d speed) const;
 };
 
 enum class DiffEqAlgorithm {

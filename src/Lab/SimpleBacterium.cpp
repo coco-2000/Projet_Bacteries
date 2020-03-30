@@ -21,11 +21,13 @@ j::Value const& SimpleBacterium::getConfig() const
 
 void SimpleBacterium::move(sf::Time dt)
 {
-    Vec2d new_position(stepDiffEq(getPosition(), getSpeedVector(), dt, equation).position);
-
+    Vec2d new_position(stepDiffEq(getPosition(),
+                                  getSpeedVector(),
+                                  dt,
+                                  equation).position);
     consumeEnergy((new_position - getPosition()).length() * getEnergyReleased());
+    setPosition(new_position);
 
-    CircularBody::move(new_position);
 }
 
 Vec2d SimpleBacterium::getSpeedVector() const
@@ -34,3 +36,7 @@ Vec2d SimpleBacterium::getSpeedVector() const
     return direction * agrandissement;
 }
 
+SimpleBacterium* SimpleBacterium::clone() const
+{
+    return nullptr;
+}
