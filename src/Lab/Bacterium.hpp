@@ -84,6 +84,7 @@ protected :
     bool abstinence;
     std::map<std::string, MutableNumber> param_mutables;
     sf::Time compteur;
+    double proba_basculement;
 
     /**
      * @brief DisplayEnergy Affiche la quantité d'énergie de la bacterie (si mode debugging activé)
@@ -106,4 +107,7 @@ protected :
     virtual void move(sf::Time dt) = 0;
     virtual Bacterium* clone() const;
     virtual void graphisme_particulier(sf::RenderTarget& target) const = 0;
+
+    void tentative_basculement(double score, double ancien_score, double t_ecoule);
+    void basculement();
 };

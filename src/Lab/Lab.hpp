@@ -96,6 +96,13 @@ public:
       */
      Nutriment* getNutrimentColliding(CircularBody const& body) const;
 
+     double getPositionScore(const Vec2d& position) const;
+
+     void increaseGradientExponent();
+     void decreaseGradientExponent();
+     double getGradientExponent();
+     void init_puissance();
+
      /** @brief Destructeur
        */
      ~Lab() override;

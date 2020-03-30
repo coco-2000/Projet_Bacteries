@@ -288,4 +288,12 @@ La mise à jour de l'angle se fait uniquement lorsque la direction change, autre
 dit lorsque la bactérie rebondit sur une paroi. C'est donc la fonction
 Bacterium::CollisionPetri qui doit mettre à jour l'angle (en même temps que la direction)
 
+**************************************************
+##Q3.19
 
+Pour permettre de calculer le score d'une position donnée de l'assiette, il faut que
+la méthode Lab::getPositionScore appelle une méthode de PetriDish, on l'occurence
+on a crée PetriDish::getPositionScore. Celle-ci pourra faire une boucle sur l'ensemble
+des instances de son tableau de nutriment calculant pour chacun d'eux le score
+associée à la position et faisant leur somme, qu'elle peut ensuite retourner à la classe
+Lab.

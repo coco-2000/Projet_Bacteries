@@ -8,8 +8,6 @@
 #include "Interface/Updatable.hpp"
 
 
-typedef double Temperature;
-
 class PetriDish : public CircularBody, public Drawable, public Updatable
 {
 public:
@@ -54,6 +52,8 @@ public:
      */
     void update(sf::Time dt) override;
 
+    j::Value const& getConfig() const;
+
     /**
      * @brief drawOn dessiner l'assiette de petri
      * @param targetWindow la fenetre dans laquelle on affiche l'assiette de Petri
@@ -71,7 +71,7 @@ public:
      * @brief getTemperature Accesseur de temperature
      * @return La temperature courante de l'assiette de Petri
      */
-    Temperature getTemperature() const;
+    double getTemperature() const;
 
     /**
      * @brief increaseTemperature Augmente la température de l'assiette de Petri
@@ -98,10 +98,17 @@ public:
      */
     ~PetriDish() override;
 
+    double getPositionScore(const Vec2d& position) const;
+
+    void increaseGradientExponent();
+    void decreaseGradientExponent();
+    double getGradientExponent() const;
+    void init_puissance();
 
 private :
     std::vector<Bacterium*> lesBacteries;
     std::vector<Nutriment*> lesNutriments;
+    double puissance;
 
     /**
      * @brief update_bacteries assure le déplacement, les collisions et la consommation
@@ -117,7 +124,7 @@ private :
      */
     void update_nutriments (sf::Time dt);
 
-    Temperature temperature;
+    double temperature;
 };
 
 

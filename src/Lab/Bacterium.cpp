@@ -106,6 +106,24 @@ void Bacterium::consumeEnergy(Quantity qt)
     energie -= qt;
 }
 
+void Bacterium::tentative_basculement(double score, double ancien_score, double t_ecoule)
+{
+    double lambda(0.05);
 
+    if(score >= ancien_score)
+    {
+        lambda = 5;
+    }
+     proba_basculement = 1 - exp(- t_ecoule / lambda);
 
+     if(bernoulli(proba_basculement) == 1)
+     {
+         basculement();
+     }
+}
+
+void Bacterium::basculement()
+{
+
+}
 
