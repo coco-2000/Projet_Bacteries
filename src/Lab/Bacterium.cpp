@@ -7,9 +7,12 @@ Bacterium::Bacterium(Quantity energie, Vec2d position, Vec2d direction,
                      double radius, const MutableColor& couleur, bool abstinence,
                      std::map<std::string, MutableNumber> param_mutables)
 
-    : CircularBody(position, radius), couleur(couleur), direction(direction),
-      energie(energie), abstinence(abstinence), param_mutables(param_mutables)
-{}
+    : CircularBody(position, radius), couleur(couleur),
+      direction(direction), energie(energie), abstinence(abstinence),
+      param_mutables(param_mutables)
+{
+    angle = direction.angle();
+}
 
 Bacterium* Bacterium::clone() const
 {
@@ -39,7 +42,7 @@ Quantity Bacterium::getEnergyReleased() const
 void Bacterium::drawOn(sf::RenderTarget& target) const
 {
     target.draw(buildCircle(position, radius, couleur.get()));
-
+    graphisme_particulier(target);
     DisplayEnergy(target);
 }
 
@@ -61,15 +64,23 @@ void Bacterium::DisplayEnergy(sf::RenderTarget& target) const
 void Bacterium::update(sf::Time dt)
 {
     move(dt);
-    collisionPetri();
+    collisionPetri(dt);
     consumeNutriment(dt);
 }
 
-void Bacterium::collisionPetri()
+void Bacterium::collisionPetri(sf::Time dt)
 {
     if (getAppEnv().doesCollideWithDish(*this))
     {
         direction = -direction;
+
+        auto const angleDiff = angleDelta(direction.angle(), angle); // calcule la différence entre le nouvel
+                                                                          // angle de direction et l'ancien
+        auto dalpha = PI * dt.asSeconds();    // calcule dα
+        dalpha = std::min(dalpha, std::abs(angleDiff)); // on ne peut tourner plus que de angleDiff
+
+        dalpha = std::copysign(dalpha, angleDiff); // on tourne dans la direction indiquée par angleDiff
+        angle += dalpha; // angle de rotation mis à jour
     }
 }
 

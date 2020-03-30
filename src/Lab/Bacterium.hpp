@@ -78,6 +78,7 @@ public :
 
 protected :
     MutableColor couleur;
+    double angle;
     Vec2d direction;
     Quantity energie;
     bool abstinence;
@@ -94,7 +95,7 @@ protected :
      * @brief collisionPetri gère les collisions des bacteries
      * avec l'assiette de petri
      */
-    void collisionPetri();
+    void collisionPetri(sf::Time dt);
 
     /**
      * @brief consumeNutriment gère la consommation des bacteries
@@ -104,5 +105,5 @@ protected :
 
     virtual void move(sf::Time dt) = 0;
     virtual Bacterium* clone() const;
-    //virtual void graphisme_particulier(sf::RenderTarget& target) const = 0;
+    virtual void graphisme_particulier(sf::RenderTarget& target) const = 0;
 };

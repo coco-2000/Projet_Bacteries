@@ -18,6 +18,7 @@ public:
 
 private :
     MRU equation;
+    double t;
 
-    //void graphisme_particulier(sf::RenderTarget& target, sf::Time dt = 0) const;
+    void graphisme_particulier(sf::RenderTarget& target) const;
 };
