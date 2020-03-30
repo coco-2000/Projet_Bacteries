@@ -104,5 +104,5 @@ protected :
 
     virtual void move(sf::Time dt) = 0;
     virtual Bacterium* clone() const;
-
+    //virtual void graphisme_particulier(sf::RenderTarget& target) const = 0;
 };

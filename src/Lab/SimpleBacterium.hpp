@@ -2,7 +2,7 @@
 #include "Bacterium.hpp"
 #include "../Utility/DiffEqSolver.hpp"
 
-class SimpleBacterium : public Bacterium, public DiffEqFunction
+class SimpleBacterium : public Bacterium
 {
 public:
     SimpleBacterium(const Vec2d& position);
@@ -18,4 +18,6 @@ public:
 
 private :
     MRU equation;
+
+    //void graphisme_particulier(sf::RenderTarget& target, sf::Time dt = 0) const;
 };
