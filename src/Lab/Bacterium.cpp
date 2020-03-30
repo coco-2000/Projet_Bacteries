@@ -94,7 +94,3 @@ void Bacterium::consumeEnergy(Quantity qt)
 {
     energie -= qt;
 }
-
-
-
-

@@ -23,12 +23,11 @@ j::Value const& SimpleBacterium::getConfig() const
 
 void SimpleBacterium::move(sf::Time dt)
 {
-    Vec2d new_position(stepDiffEq(getPosition(),
-                                  getSpeedVector(),
-                                  dt,
-                                  equation).position);
+    Vec2d new_position(stepDiffEq(getPosition(),getSpeedVector(), dt, equation).position);
+
     consumeEnergy((new_position - getPosition()).length() * getEnergyReleased());
     setPosition(new_position);
+    std::cout << new_position.x << " ; "<<new_position.y<<std::endl;
 }
 
 Vec2d SimpleBacterium::getSpeedVector() const

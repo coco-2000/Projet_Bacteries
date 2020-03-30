@@ -13,7 +13,7 @@ bool Lab::contains(const CircularBody& corps) const
 
 bool Lab::doesCollideWithDish(CircularBody const& body) const
 {
-    return (body & petri);
+    return !(petri > body);
 }
 
 Nutriment* Lab::getNutrimentColliding(CircularBody const& body) const
