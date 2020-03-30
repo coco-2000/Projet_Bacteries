@@ -31,7 +31,7 @@ void SimpleBacterium::move(sf::Time dt)
                                   equation).position);
     consumeEnergy((new_position - getPosition()).length() * getEnergyReleased());
     setPosition(new_position);
-    t = dt.asSeconds();
+    t += 3 * dt.asSeconds();
 }
 
 Vec2d SimpleBacterium::getSpeedVector() const
@@ -52,13 +52,13 @@ void SimpleBacterium::graphisme_particulier(sf::RenderTarget& target) const
     auto set_of_points = sf::VertexArray(sf::TrianglesStrip);
       // ajout de points à l'ensemble:
     set_of_points.append({{0,0}, sf::Color::Black});
+
     for(int i(1); i < nb_point; ++i)
     {
-        set_of_points.append({{static_cast<float>(-i * getRadius() / 10.0),
+        set_of_points.append({{static_cast<float>(-i * (getRadius() / 10.0)),
                                static_cast<float>(getRadius() * sin(t) * sin(2 * i / 10.0))},
                               sf::Color::Black});
     }
-    target.draw(set_of_points);
 
     auto transform = sf::Transform(); // déclare une matrice de transformation
      // ici ensemble d'opérations comme des translations ou rotations faites sur transform:

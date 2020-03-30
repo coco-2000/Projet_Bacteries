@@ -276,4 +276,16 @@ possède son propre compteur qui évolue en fonction du temps de vie de l'instan
 On peut donc l'initialiser dans le constructeur avec la méthode uniform. Ce sera ensuite
 la méthode move qui le mettra à jour à chaque déplacement de l'instance.
 
+**************************************************
+##Q3.18
+
+L'angle de direction est relié à la direction de l'instance, on le déclare comme
+attribut de classe Bacterium. On peut donc l'initialiser dans le constructeur de
+Bacterium. Cependant, comme l'angle de direction est lié à la direction, il faut
+l'initialiser dans le corps du constructeur en convertissant le vecteur direction
+en angle.
+La mise à jour de l'angle se fait uniquement lorsque la direction change, autrement
+dit lorsque la bactérie rebondit sur une paroi. C'est donc la fonction
+Bacterium::CollisionPetri qui doit mettre à jour l'angle (en même temps que la direction)
+
 
