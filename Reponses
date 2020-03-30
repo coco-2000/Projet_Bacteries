@@ -272,6 +272,12 @@ Ensuite, nous pouvons ajouter un attribut equation de type MRU à la classe Simp
 d'utiliser la méthode f pour déterminer le déplacement de l'instance de type
 SimpleBacterium.
 
+**************************************************
+##Q3.17
 
+t doit être déclaré en tant qu'attribut de classe car chaque instance de SimpleBacterium
+possède son propre compteur qui évolue en fonction du temps de vie de l'instance.
+On peut donc l'initialiser dans le constructeur avec la méthode uniform. Ce sera ensuite
+la méthode move qui le mettra à jour à chaque déplacement de l'instance.
 
 
