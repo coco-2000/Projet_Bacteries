@@ -4,7 +4,7 @@
  */
 
 #include <Application.hpp>
-#include <SimpleBacterium.hpp>
+#include <../Lab/SimpleBacterium.hpp>
 
 class SimpleBacteriaTest : public Application
 {

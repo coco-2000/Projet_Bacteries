@@ -1,6 +1,7 @@
 #include "Bacterium.hpp"
 #include "../Utility/Utility.hpp"
 #include "Application.hpp"
+#include "CircularBody.hpp"
 
 Bacterium::Bacterium(Quantity energie, Vec2d position, Vec2d direction,
                      double radius, const MutableColor& couleur, bool abstinence,
@@ -90,7 +91,7 @@ void Bacterium::consumeNutriment(sf::Time dt)
 
 void Bacterium::consumeEnergy(Quantity qt)
 {
-    energie = energie - qt;
+    energie -= qt;
 }
 
 

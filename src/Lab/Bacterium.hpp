@@ -7,7 +7,7 @@
 #include "Utility/Types.hpp"
 #include <string>
 
-class Bacterium : public CircularBody ,public Drawable, public Updatable
+class Bacterium : public CircularBody, public Drawable, public Updatable
 {
 public :
 
@@ -75,6 +75,7 @@ public :
      */
     void consumeEnergy(Quantity qt);
 
+
 protected :
     MutableColor couleur;
     Vec2d direction;
@@ -102,6 +103,6 @@ protected :
     void consumeNutriment(sf::Time dt);
 
     virtual void move(sf::Time dt) = 0;
-    virtual Bacterium* clone() const; // ecrire final ?
+    virtual Bacterium* clone() const;
 
 };
