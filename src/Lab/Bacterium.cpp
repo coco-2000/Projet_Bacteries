@@ -39,6 +39,7 @@ Quantity Bacterium::getEnergyReleased() const
 void Bacterium::drawOn(sf::RenderTarget& target) const
 {
     target.draw(buildCircle(position, radius, couleur.get()));
+
     DisplayEnergy(target);
 }
 
