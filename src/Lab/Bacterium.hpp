@@ -7,7 +7,7 @@
 #include "Utility/Types.hpp"
 #include <string>
 
-class Bacterium : public CircularBody ,public Drawable, public Updatable
+class Bacterium : public CircularBody, public Drawable, public Updatable
 {
 public :
 
@@ -101,7 +101,7 @@ protected :
      */
     void consumeNutriment(sf::Time dt);
 
-    virtual void move(sf::Time dt) = 0;
+
     virtual Bacterium* clone() const; // ecrire final ?
 
 };

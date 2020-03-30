@@ -5,6 +5,7 @@
  */
 
 #include <Utility/DiffEqSolver.hpp>
+#include "Vec2d.hpp"
 
 DiffEqResult stepDiffEq(Vec2d position, Vec2d speed, sf::Time dt, DiffEqFunction const& eq, DiffEqAlgorithm algo)
 {
@@ -39,4 +40,9 @@ DiffEqResult stepDiffEq(Vec2d position, Vec2d speed, sf::Time dt, DiffEqFunction
 			
 			
     } // switch algo
+}
+
+Vec2d MRU::f(Vec2d position, Vec2d speed) const
+{
+    return {0, 0};
 }

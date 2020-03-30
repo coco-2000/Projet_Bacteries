@@ -24,7 +24,7 @@ public :
      * @brief CircularBody::move Ajoute à la position de l'instance courante un vecteur de déplacement (permet de faire bouger le CircularBody)
      * @param vector Coordonnées du vecteur de déplacement
      */
-    void move           (const Vec2d& vector);
+    virtual void move           (const Vec2d& vector);
 
     /**
      * @brief decalage Donne position d'un objet qui doit se touver à côté de l'instance courante

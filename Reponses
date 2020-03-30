@@ -254,6 +254,19 @@ Création de la methode isEmpty() dans la classe Nutriment pour savoir si la qua
 La methode update de PetriDish appelle donc  la methode en_vie() de bacterium pour savoir
 si elle n'a plus d'énergie ainsi qye la methode isEmpty() de nutriment
 
+**************************************************
+##Q3.16
+
+La classe DiffEqFunction est une classe abstraite car elle contient une méthode f
+virtuelle pure. Cette méthode permet de modéliser une force ce dont nous avons justement
+besoin. Il s'agit donc de créer une nouvelle classe (MRU en l'occurence) qui hérite de
+DiffEqFunction et qui définit la méthode f selon nos conditions, autrement dit elle
+renvoit un vecteur force nulle indépendamment des vitesses et positions de l'instance (on
+peut d'ailleurs surcharger la méthode f en ne lui faisant pas prendre de paramètres).
+Ensuite, nous pouvons ajouter un attribut equation de type MRU à la classe SimpleBacterium
+(car elle a une équation qui régit son déplacement = composition) qui nous permet
+d'utiliser la méthode f pour déterminer le déplacement de l'instance de type
+SimpleBacterium.
 
 
 
