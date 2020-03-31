@@ -7,11 +7,10 @@ Bacterium::Bacterium(Quantity energie, Vec2d position, Vec2d direction,
                      double radius, const MutableColor& couleur, bool abstinence,
                      std::map<std::string, MutableNumber> param_mutables)
 
-    : CircularBody(position, radius), couleur(couleur),
-      direction(direction), energie(energie), abstinence(abstinence),
+    : CircularBody(position, radius), couleur(couleur), energie(energie), abstinence(abstinence),
       param_mutables(param_mutables)
 {
-    angle = direction.angle();
+    setDirection(direction);
 }
 
 Bacterium* Bacterium::clone() const
@@ -39,6 +38,12 @@ Quantity Bacterium::getEnergyReleased() const
     return getConfig()["energy"]["consumption factor"].toDouble();
 }
 
+void Bacterium::setDirection(Vec2d dir)
+{
+    direction = dir;
+    angle = direction.angle();
+}
+
 void Bacterium::drawOn(sf::RenderTarget& target) const
 {
     target.draw(buildCircle(position, radius, couleur.get()));
@@ -63,7 +68,9 @@ void Bacterium::DisplayEnergy(sf::RenderTarget& target) const
 
 void Bacterium::update(sf::Time dt)
 {
+    tps_basculement += dt;
     move(dt);
+    tentative_basculement();
     collisionPetri(dt);
     consumeNutriment(dt);
 }
@@ -106,24 +113,61 @@ void Bacterium::consumeEnergy(Quantity qt)
     energie -= qt;
 }
 
-void Bacterium::tentative_basculement(double score, double ancien_score, double t_ecoule)
+void Bacterium::tentative_basculement()
 {
     double lambda(0.05);
 
-    if(score >= ancien_score)
+    if(getAppEnv().getPositionScore(getPosition()) >= ancien_score)
     {
         lambda = 5;
     }
-     proba_basculement = 1 - exp(- t_ecoule / lambda);
+     proba_basculement = 1 - exp(- tps_basculement.asSeconds() / lambda);
 
      if(bernoulli(proba_basculement) == 1)
      {
          basculement();
+         tps_basculement = sf::Time::Zero;
      }
 }
 
 void Bacterium::basculement()
 {
+    if(getConfig()["tumble"]["algo"] == "single random vector")
+    {
+        strategie1();
+    }
+    else if(getConfig()["tumble"]["algo"] == "best of N")
+    {
+        strategie2();
+    }
+}
+
+void Bacterium::setScore(double score)
+{
+    if(score > 0)
+    {
+        ancien_score = score;
+    }
+}
+
+void Bacterium::strategie1()
+{
+    direction = Vec2d::fromRandomAngle();
 
 }
 
+void Bacterium::strategie2()
+{
+    int N(20); // nb de directions aléatoires à générer
+
+    for(int i(0); i < N; ++i)
+    {
+        Vec2d new_dir (Vec2d::fromRandomAngle());
+
+        if(getAppEnv().getPositionScore(getPosition() + new_dir)
+           > getAppEnv().getPositionScore(getPosition() + direction))
+        {
+            setDirection(new_dir);
+        }
+    }
+}

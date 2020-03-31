@@ -297,3 +297,6 @@ on a crée PetriDish::getPositionScore. Celle-ci pourra faire une boucle sur l'e
 des instances de son tableau de nutriment calculant pour chacun d'eux le score
 associée à la position et faisant leur somme, qu'elle peut ensuite retourner à la classe
 Lab.
+
+**************************************************
+##Q3.20

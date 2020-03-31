@@ -75,6 +75,9 @@ public :
      */
     void consumeEnergy(Quantity qt);
 
+    void setScore(double score);
+    void setDirection(Vec2d direction);
+
 
 protected :
     MutableColor couleur;
@@ -85,6 +88,9 @@ protected :
     std::map<std::string, MutableNumber> param_mutables;
     sf::Time compteur;
     double proba_basculement;
+
+    double ancien_score;
+    sf::Time tps_basculement;
 
     /**
      * @brief DisplayEnergy Affiche la quantité d'énergie de la bacterie (si mode debugging activé)
@@ -108,6 +114,10 @@ protected :
     virtual Bacterium* clone() const;
     virtual void graphisme_particulier(sf::RenderTarget& target) const = 0;
 
-    void tentative_basculement(double score, double ancien_score, double t_ecoule);
+    void tentative_basculement();
     void basculement();
+
+    void strategie1();
+    void strategie2();
+
 };

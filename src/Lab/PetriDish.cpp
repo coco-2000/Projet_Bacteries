@@ -70,6 +70,7 @@ void PetriDish::update_bacteries (sf::Time dt)
     {
         if(bacterie->en_vie())
         {
+            bacterie->setScore(getPositionScore(bacterie->getPosition()));
             bacterie->update(dt);
         }
         else
@@ -160,7 +161,7 @@ double PetriDish::getPositionScore(const Vec2d& position) const
 {
     double somme(0);
 
-    for(auto nutriment : lesNutriments)
+    for(auto& nutriment : lesNutriments)
     {
         somme += nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), puissance);
     }

@@ -36,7 +36,7 @@ void SimpleBacterium::move(sf::Time dt)
 
 Vec2d SimpleBacterium::getSpeedVector() const
 {
-    double agrandissement(5.0);
+    double agrandissement(20.0);
     return direction * agrandissement;
 }
 
