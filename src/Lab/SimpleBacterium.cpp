@@ -12,11 +12,31 @@ SimpleBacterium::SimpleBacterium(const Vec2d& position)
                 position,
                 Vec2d::fromRandomAngle(),
                 uniform(getConfig()["radius"]["min"].toDouble(), getConfig()["radius"]["max"].toDouble()),
-                getConfig()["color"]),
-                t(uniform(0.0, M_PI))
+                getConfig()["color"],
+                {{"speed", MutableNumber(getConfig()["speed"])},
+                 {"tumble better", MutableNumber::positive(getConfig()["tumble"]["better"])},
+                 {"tumble worse", MutableNumber::positive(getConfig()["tumble"]["worse"])}}),
+       t(uniform(0.0, M_PI))
 {}
 
+SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d direction,
+                double radius, const MutableColor& couleur,
+                std::map<std::string, MutableNumber> param_mutables,
+                bool abstinence, MRU equation)
+    : Bacterium(energie, position, direction, radius, couleur,
+                param_mutables, abstinence), equation(equation)
+{}
 
+/*SimpleBacterium::SimpleBacterium(const SimpleBacterium& autre)
+    : Bacterium(autre), equation(autre.equation)
+{}*/
+
+
+SimpleBacterium* SimpleBacterium::copie() const
+{
+    return new SimpleBacterium(energie / 2, getPosition(), direction, radius,
+                               couleur, param_mutables, abstinence, equation);
+}
 
 j::Value const& SimpleBacterium::getConfig() const
 {
@@ -36,13 +56,14 @@ void SimpleBacterium::move(sf::Time dt)
 
 Vec2d SimpleBacterium::getSpeedVector() const
 {
-    double agrandissement(20.0);
-    return direction * agrandissement;
+    return direction * getProperty("speed").get();
 }
 
 SimpleBacterium* SimpleBacterium::clone() const
 {
-    return nullptr;
+    SimpleBacterium cop(*copie());
+    cop.mutate();
+    return new SimpleBacterium(cop);
 }
 
 void SimpleBacterium::graphisme_particulier(sf::RenderTarget& target) const
@@ -65,4 +86,55 @@ void SimpleBacterium::graphisme_particulier(sf::RenderTarget& target) const
      transform.translate(getPosition());
      transform.rotate(angle / DEG_TO_RAD);
      target.draw(set_of_points, transform);
+}
+
+void SimpleBacterium::tentative_basculement()
+{
+    double lambda(getProperty("tumble worse").get());
+
+    if(getAppEnv().getPositionScore(getPosition()) >= ancien_score)
+    {
+        lambda = getProperty("tumble better").get();
+    }
+     proba_basculement = 1 - exp(- tps_basculement.asSeconds() / lambda);
+
+     if(bernoulli(proba_basculement) == 1)
+     {
+         basculement();
+         tps_basculement = sf::Time::Zero;
+     }
+}
+
+void SimpleBacterium::basculement()
+{
+    if(getConfig()["tumble"]["algo"] == "single random vector")
+    {
+        strategie1();
+    }
+    else if(getConfig()["tumble"]["algo"] == "best of N")
+    {
+        strategie2();
+    }
+}
+
+void SimpleBacterium::strategie1()
+{
+    direction = Vec2d::fromRandomAngle();
+
+}
+
+void SimpleBacterium::strategie2()
+{
+    int N(20); // nb de directions aléatoires à générer
+
+    for(int i(0); i < N; ++i)
+    {
+        Vec2d new_dir (Vec2d::fromRandomAngle());
+
+        if(getAppEnv().getPositionScore(getPosition() + new_dir)
+           > getAppEnv().getPositionScore(getPosition() + direction))
+        {
+            setDirection(new_dir);
+        }
+    }
 }

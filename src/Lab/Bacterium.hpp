@@ -17,19 +17,20 @@ public :
      * @param position Coordonnées de la position intiale de la bacterie
      * @param direction Direction du déplacement initiale de la bacterie
      * @param couleur couleur initiale de la bacterie
-     * @param abstinence si la bacterie consomme des nutriments ou non
      * @param param_mutables ensemble de paramètres numériques mutables
+     * @param abstinence si la bacterie consomme des nutriments ou non
      */
     Bacterium(Quantity energie, Vec2d position, Vec2d direction,
-              double radius, const MutableColor& couleur, bool abstinence = 0,
-              std::map<std::string, MutableNumber>param_mutables = {});
+              double radius, const MutableColor& couleur,
+              std::map<std::string, MutableNumber>param_mutables = {},
+              bool abstinence = 0);
+
     /**
      * @brief en_vie savoir si la bacterie a suffisamment d'energie pour etre en vie
      * @return vrai si l'energie est suffisante
      */
     bool en_vie();
 
-    //methode mutate
     /**
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries
      * Il s'agit d'une méthode virtuelle pure
@@ -75,8 +76,12 @@ public :
      */
     void consumeEnergy(Quantity qt);
 
-    void setScore(double score);
     void setDirection(Vec2d direction);
+
+    void addProperty(const std::string&, MutableNumber);
+    MutableNumber getProperty(const std::string&) const;
+
+    void setScore(double score);
 
 
 protected :
@@ -84,13 +89,13 @@ protected :
     double angle;
     Vec2d direction;
     Quantity energie;
-    bool abstinence;
     std::map<std::string, MutableNumber> param_mutables;
-    sf::Time compteur;
-    double proba_basculement;
+    bool abstinence;
 
-    double ancien_score;
+    sf::Time compteur;
     sf::Time tps_basculement;
+    double ancien_score;
+
 
     /**
      * @brief DisplayEnergy Affiche la quantité d'énergie de la bacterie (si mode debugging activé)
@@ -111,13 +116,10 @@ protected :
     void consumeNutriment(sf::Time dt);
 
     virtual void move(sf::Time dt) = 0;
-    virtual Bacterium* clone() const;
+    virtual Bacterium* clone() const = 0;
     virtual void graphisme_particulier(sf::RenderTarget& target) const = 0;
-
-    void tentative_basculement();
-    void basculement();
-
-    void strategie1();
-    void strategie2();
+    virtual void tentative_basculement();
+    void mutate();
+    virtual Bacterium* copie() const = 0;
 
 };

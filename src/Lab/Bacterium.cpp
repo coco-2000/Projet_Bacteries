@@ -4,19 +4,38 @@
 #include "CircularBody.hpp"
 
 Bacterium::Bacterium(Quantity energie, Vec2d position, Vec2d direction,
-                     double radius, const MutableColor& couleur, bool abstinence,
-                     std::map<std::string, MutableNumber> param_mutables)
+                     double radius, const MutableColor& couleur,
+                     std::map<std::string, MutableNumber> param_mutables,
+                     bool abstinence)
 
-    : CircularBody(position, radius), couleur(couleur), energie(energie), abstinence(abstinence),
-      param_mutables(param_mutables)
+    : CircularBody(position, radius), couleur(couleur), energie(energie),
+      param_mutables(param_mutables), abstinence(abstinence)
 {
     setDirection(direction);
 }
 
-Bacterium* Bacterium::clone() const
+/*Bacterium::Bacterium(const Bacterium& autre)
+    : CircularBody(autre), couleur(autre.couleur), energie(autre.energie),
+      param_mutables(autre.param_mutables), abstinence(autre.abstinence)
 {
-    return nullptr;
+    setDirection(autre.direction);
+}*/
+
+/*Bacterium* Bacterium::clone() const
+{
+    return (*this).clone();
+}*/
+
+void Bacterium::mutate()
+{
+    couleur.mutate();
+
+    for(auto& param : param_mutables)
+    {
+        param.second.mutate();
+    }
 }
+
 
 bool Bacterium::en_vie()
 {
@@ -73,6 +92,12 @@ void Bacterium::update(sf::Time dt)
     tentative_basculement();
     collisionPetri(dt);
     consumeNutriment(dt);
+
+    if(energie >= getEnergy())
+    {
+        clone();
+        setDirection(-direction);
+    }
 }
 
 void Bacterium::collisionPetri(sf::Time dt)
@@ -113,35 +138,6 @@ void Bacterium::consumeEnergy(Quantity qt)
     energie -= qt;
 }
 
-void Bacterium::tentative_basculement()
-{
-    double lambda(0.05);
-
-    if(getAppEnv().getPositionScore(getPosition()) >= ancien_score)
-    {
-        lambda = 5;
-    }
-     proba_basculement = 1 - exp(- tps_basculement.asSeconds() / lambda);
-
-     if(bernoulli(proba_basculement) == 1)
-     {
-         basculement();
-         tps_basculement = sf::Time::Zero;
-     }
-}
-
-void Bacterium::basculement()
-{
-    if(getConfig()["tumble"]["algo"] == "single random vector")
-    {
-        strategie1();
-    }
-    else if(getConfig()["tumble"]["algo"] == "best of N")
-    {
-        strategie2();
-    }
-}
-
 void Bacterium::setScore(double score)
 {
     if(score > 0)
@@ -150,24 +146,26 @@ void Bacterium::setScore(double score)
     }
 }
 
-void Bacterium::strategie1()
+void Bacterium::addProperty(const std::string& key, MutableNumber valeur)
 {
-    direction = Vec2d::fromRandomAngle();
-
+    if(param_mutables.find(key) != param_mutables.end())
+    {
+        throw std::invalid_argument("ajout d'une propriété associée à une clé déjà existante");
+    }
+    else
+    {
+        param_mutables[key] = valeur;
+    }
 }
 
-void Bacterium::strategie2()
+MutableNumber Bacterium::getProperty(const std::string& key) const
 {
-    int N(20); // nb de directions aléatoires à générer
-
-    for(int i(0); i < N; ++i)
+    if(param_mutables.find(key) == param_mutables.end())
     {
-        Vec2d new_dir (Vec2d::fromRandomAngle());
-
-        if(getAppEnv().getPositionScore(getPosition() + new_dir)
-           > getAppEnv().getPositionScore(getPosition() + direction))
-        {
-            setDirection(new_dir);
-        }
+        throw std::out_of_range("recherche de la valeur d'une clé invalide ");
+    }
+    else
+    {
+        return param_mutables.find(key)->second;
     }
 }

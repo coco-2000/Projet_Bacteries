@@ -300,3 +300,21 @@ Lab.
 
 **************************************************
 ##Q3.20
+
+
+**************************************************
+##Q3.21
+
+La méthode de mutation est commune à toutes les bactéries et agit sur l'attribut
+param_mutables qui est un attribut déclarer dans la classe Bacterium. Pour éviter
+d'avoir à répliquer un même code dans différentes sous-classe, il vaut donc mieux que
+la méthode de mutation, mutate appartiennent à la classe Bacterium.
+
+**************************************************
+##Q3.22
+
+Puisque toutes les bactéries possèdent un attribut param_mutables, elles peuvent toutes
+avoir besoin d'accéder ou d'ajouter un nouveau paramètre mutable. Par conséquent, les
+méthodes addProperty et getProperty peuvent être codé dans la classe Bacterium
+
+
