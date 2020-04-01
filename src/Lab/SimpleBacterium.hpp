@@ -20,13 +20,7 @@ public:
 
     Vec2d getSpeedVector() const;
 
-    SimpleBacterium* clone() const;
-
     SimpleBacterium* copie() const;
-
-
-
-
 
 private :
     MRU equation;

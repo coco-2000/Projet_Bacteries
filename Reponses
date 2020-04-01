@@ -317,4 +317,12 @@ Puisque toutes les bactéries possèdent un attribut param_mutables, elles peuve
 avoir besoin d'accéder ou d'ajouter un nouveau paramètre mutable. Par conséquent, les
 méthodes addProperty et getProperty peuvent être codé dans la classe Bacterium
 
+**************************************************
+##Q3.23
 
+Puisque la méthode de division est la même pour toutes les bactéries, on implémente la
+méthode clone dans la classe Bacterium. Celle-ci se charge d'appeler une méthode clone
+dans la classe SimpleBacterium qui renvoie un pointeur sur une copie de l'instance
+courante (donc du même type que la bactérie qui se divise),puis elle effectue toutes
+les modifications induites par la division (energie, mutation, direction) avant de
+retourner elle aussi un pointeur sur la bactérie nouvellement créée.

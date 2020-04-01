@@ -105,10 +105,14 @@ public:
     double getGradientExponent() const;
     void init_puissance();
 
+    void ajout_annexe(Bacterium*);
+
 private :
     std::vector<Bacterium*> lesBacteries;
     std::vector<Nutriment*> lesNutriments;
     double puissance;
+    double temperature;
+    std::vector<Bacterium*> annexe;
 
     /**
      * @brief update_bacteries assure le déplacement, les collisions et la consommation
@@ -124,7 +128,7 @@ private :
      */
     void update_nutriments (sf::Time dt);
 
-    double temperature;
+    void init_annexe();
 };
 
 

@@ -116,7 +116,7 @@ protected :
     void consumeNutriment(sf::Time dt);
 
     virtual void move(sf::Time dt) = 0;
-    virtual Bacterium* clone() const = 0;
+    virtual Bacterium* clone();
     virtual void graphisme_particulier(sf::RenderTarget& target) const = 0;
     virtual void tentative_basculement();
     void mutate();

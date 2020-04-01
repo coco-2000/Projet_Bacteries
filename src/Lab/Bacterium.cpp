@@ -21,10 +21,24 @@ Bacterium::Bacterium(Quantity energie, Vec2d position, Vec2d direction,
     setDirection(autre.direction);
 }*/
 
-/*Bacterium* Bacterium::clone() const
+Bacterium* Bacterium::clone()
 {
-    return (*this).clone();
-}*/
+    if(energie >= getEnergy())
+    {
+        Bacterium* copie((*this).copie());
+        copie->energie /= 2;
+        copie->mutate();
+
+        energie /= 2;
+        setDirection(-direction);
+
+        return copie;
+    }
+    else
+    {
+        return nullptr;
+    }
+}
 
 void Bacterium::mutate()
 {
@@ -92,12 +106,7 @@ void Bacterium::update(sf::Time dt)
     tentative_basculement();
     collisionPetri(dt);
     consumeNutriment(dt);
-
-    if(energie >= getEnergy())
-    {
-        clone();
-        setDirection(-direction);
-    }
+    getAppEnv().ajout_annexe(Bacterium::clone());
 }
 
 void Bacterium::collisionPetri(sf::Time dt)

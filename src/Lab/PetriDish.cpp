@@ -66,6 +66,9 @@ void PetriDish::update(sf::Time dt)
 
 void PetriDish::update_bacteries (sf::Time dt)
 {
+    append(lesBacteries, annexe);
+    init_annexe();
+
     for(auto& bacterie : lesBacteries)
     {
         if(bacterie->en_vie())
@@ -189,4 +192,14 @@ void PetriDish::init_puissance()
     puissance = (getConfig()["gradient"]["exponent"]["max"].toDouble()
                + getConfig()["gradient"]["exponent"]["min"].toDouble())
               / 2;
+}
+
+void PetriDish::init_annexe()
+{
+    annexe = {};
+}
+
+void PetriDish::ajout_annexe(Bacterium* clone)
+{
+    annexe.push_back(clone);
 }

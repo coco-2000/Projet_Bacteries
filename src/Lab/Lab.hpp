@@ -102,6 +102,7 @@ public:
      void decreaseGradientExponent();
      double getGradientExponent();
      void init_puissance();
+     void ajout_annexe(Bacterium* clone);
 
      /** @brief Destructeur
        */

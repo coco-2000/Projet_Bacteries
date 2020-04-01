@@ -97,3 +97,8 @@ void Lab::init_puissance()
 {
     return petri.init_puissance();
 }
+
+void Lab::ajout_annexe(Bacterium* clone)
+{
+    petri.ajout_annexe(clone);
+}

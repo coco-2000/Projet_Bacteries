@@ -34,7 +34,7 @@ SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d directi
 
 SimpleBacterium* SimpleBacterium::copie() const
 {
-    return new SimpleBacterium(energie / 2, getPosition(), direction, radius,
+    return new SimpleBacterium(energie, getPosition(), direction, radius,
                                couleur, param_mutables, abstinence, equation);
 }
 
@@ -59,12 +59,12 @@ Vec2d SimpleBacterium::getSpeedVector() const
     return direction * getProperty("speed").get();
 }
 
-SimpleBacterium* SimpleBacterium::clone() const
+/*SimpleBacterium* SimpleBacterium::clone() const
 {
     SimpleBacterium cop(*copie());
     cop.mutate();
     return new SimpleBacterium(cop);
-}
+}*/
 
 void SimpleBacterium::graphisme_particulier(sf::RenderTarget& target) const
 {
