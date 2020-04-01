@@ -4,20 +4,52 @@
 #include "CircularBody.hpp"
 
 Bacterium::Bacterium(Quantity energie, Vec2d position, Vec2d direction,
-                     double radius, const MutableColor& couleur, bool abstinence,
-                     std::map<std::string, MutableNumber> param_mutables)
+                     double radius, const MutableColor& couleur,
+                     std::map<std::string, MutableNumber> param_mutables,
+                     bool abstinence)
 
-    : CircularBody(position, radius), couleur(couleur),
-      direction(direction), energie(energie), abstinence(abstinence),
-      param_mutables(param_mutables)
+    : CircularBody(position, radius), couleur(couleur), energie(energie),
+      param_mutables(param_mutables), abstinence(abstinence)
 {
-    angle = direction.angle();
+    setDirection(direction);
 }
 
-Bacterium* Bacterium::clone() const
+/*Bacterium::Bacterium(const Bacterium& autre)
+    : CircularBody(autre), couleur(autre.couleur), energie(autre.energie),
+      param_mutables(autre.param_mutables), abstinence(autre.abstinence)
 {
-    return nullptr;
+    setDirection(autre.direction);
+}*/
+
+Bacterium* Bacterium::clone()
+{
+    if(energie >= getEnergy())
+    {
+        Bacterium* copie((*this).copie());
+        copie->energie /= 2;
+        copie->mutate();
+
+        energie /= 2;
+        setDirection(-direction);
+
+        return copie;
+    }
+    else
+    {
+        return nullptr;
+    }
 }
+
+void Bacterium::mutate()
+{
+    couleur.mutate();
+
+    for(auto& param : param_mutables)
+    {
+        param.second.mutate();
+    }
+}
+
 
 bool Bacterium::en_vie()
 {
@@ -37,6 +69,12 @@ sf::Time Bacterium::getDelay() const
 Quantity Bacterium::getEnergyReleased() const
 {
     return getConfig()["energy"]["consumption factor"].toDouble();
+}
+
+void Bacterium::setDirection(Vec2d dir)
+{
+    direction = dir;
+    angle = direction.angle();
 }
 
 void Bacterium::drawOn(sf::RenderTarget& target) const
@@ -63,9 +101,12 @@ void Bacterium::DisplayEnergy(sf::RenderTarget& target) const
 
 void Bacterium::update(sf::Time dt)
 {
+    tps_basculement += dt;
     move(dt);
+    tentative_basculement();
     collisionPetri(dt);
     consumeNutriment(dt);
+    getAppEnv().ajout_annexe(Bacterium::clone());
 }
 
 void Bacterium::collisionPetri(sf::Time dt)
@@ -105,3 +146,38 @@ void Bacterium::consumeEnergy(Quantity qt)
 {
     energie -= qt;
 }
+
+
+
+void Bacterium::setScore(double score)
+{
+    if(score > 0)
+    {
+        ancien_score = score;
+    }
+}
+
+void Bacterium::addProperty(const std::string& key, MutableNumber valeur)
+{
+    if(param_mutables.find(key) != param_mutables.end())
+    {
+        throw std::invalid_argument("ajout d'une propriété associée à une clé déjà existante");
+    }
+    else
+    {
+        param_mutables[key] = valeur;
+    }
+}
+
+MutableNumber Bacterium::getProperty(const std::string& key) const
+{
+    if(param_mutables.find(key) == param_mutables.end())
+    {
+        throw std::out_of_range("recherche de la valeur d'une clé invalide ");
+    }
+    else
+    {
+        return param_mutables.find(key)->second;
+    }
+}
+

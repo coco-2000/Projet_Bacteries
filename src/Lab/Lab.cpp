@@ -73,5 +73,32 @@ Lab::~Lab()
     reset();
 }
 
+double Lab::getPositionScore(const Vec2d& position) const
+{
+    return petri.getPositionScore(position);
+}
 
+void Lab::increaseGradientExponent()
+{
+    petri.increaseGradientExponent();
+}
 
+void Lab::decreaseGradientExponent()
+{
+    petri.decreaseGradientExponent();
+}
+
+double Lab::getGradientExponent()
+{
+    return petri.getGradientExponent();
+}
+
+void Lab::init_puissance()
+{
+    return petri.init_puissance();
+}
+
+void Lab::ajout_annexe(Bacterium* clone)
+{
+    petri.ajout_annexe(clone);
+}

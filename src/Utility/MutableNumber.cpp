@@ -31,6 +31,7 @@ double MutableNumber::get() const
 {
     return valeur;
 }
+
 void MutableNumber::set(double value)
 {
     if((!hasMin_ or value > Min_) and (!hasMax_ or value < Max_))
@@ -75,10 +76,15 @@ MutableNumber MutableNumber::positive(double initialValue,
                        bool hasMax,
                        double max)
 {
-    return MutableNumber(initialValue, mutationProbability, sigma, true, 0, hasMax, max);
+    return MutableNumber(initialValue,
+                         mutationProbability,
+                         sigma,
+                         true, 0,
+                         hasMax, max);
 }
 
-MutableNumber MutableNumber::positive(j::Value const& config, bool hasMax = false, double max = 0)
+MutableNumber MutableNumber::positive(j::Value const& config,
+                                      bool hasMax, double max)
 {
     return positive(config["initial"].toDouble(),
                     config["rate"].toDouble(),

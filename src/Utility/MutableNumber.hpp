@@ -84,7 +84,9 @@ public:
      * @param max Borne supérieure
      * @return Le MutableNumber généré à partir des paramètres du fichier de configuration et de la borne passée en argument
      */
-    static MutableNumber positive(j::Value const& config, bool hasMax, double max);
+    static MutableNumber positive(j::Value const& config,
+                                  bool hasMax = false,
+                                  double max = 0);
 
 private :
     double valeur;

@@ -12,11 +12,31 @@ SimpleBacterium::SimpleBacterium(const Vec2d& position)
                 position,
                 Vec2d::fromRandomAngle(),
                 uniform(getConfig()["radius"]["min"].toDouble(), getConfig()["radius"]["max"].toDouble()),
-                getConfig()["color"]),
-                t(uniform(0.0, M_PI))
+                getConfig()["color"],
+                {{"speed", MutableNumber(getConfig()["speed"])},
+                 {"tumble better", MutableNumber::positive(getConfig()["tumble"]["better"])},
+                 {"tumble worse", MutableNumber::positive(getConfig()["tumble"]["worse"])}}),
+       t(uniform(0.0, M_PI))
 {}
 
+SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d direction,
+                double radius, const MutableColor& couleur,
+                std::map<std::string, MutableNumber> param_mutables,
+                bool abstinence)
+    : Bacterium(energie, position, direction, radius, couleur,
+                param_mutables, abstinence)
+{}
 
+/*SimpleBacterium::SimpleBacterium(const SimpleBacterium& autre)
+    : Bacterium(autre), equation(autre.equation)
+{}*/
+
+
+SimpleBacterium* SimpleBacterium::copie() const
+{
+    return new SimpleBacterium(energie, getPosition(), direction, radius,
+                               couleur, param_mutables, abstinence);
+}
 
 j::Value const& SimpleBacterium::getConfig() const
 {
@@ -30,19 +50,20 @@ void SimpleBacterium::move(sf::Time dt)
     consumeEnergy((new_position - getPosition()).length() * getEnergyReleased());
     setPosition(new_position);
 
-    t += dt.asSeconds();
+    t += 3 * dt.asSeconds();
 }
 
 Vec2d SimpleBacterium::getSpeedVector() const
 {
-    double agrandissement(5.0);
-    return direction * agrandissement;
+    return direction * getProperty("speed").get();
 }
 
-SimpleBacterium* SimpleBacterium::clone() const
+/*SimpleBacterium* SimpleBacterium::clone() const
 {
-    return nullptr;
-}
+    SimpleBacterium cop(*copie());
+    cop.mutate();
+    return new SimpleBacterium(cop);
+}*/
 
 void SimpleBacterium::graphisme_particulier(sf::RenderTarget& target) const
 {
@@ -50,18 +71,70 @@ void SimpleBacterium::graphisme_particulier(sf::RenderTarget& target) const
 
     auto set_of_points = sf::VertexArray(sf::TrianglesStrip);
       // ajout de points à l'ensemble:
-    set_of_points.append({{0,0}, sf::Color::Red});
+
+    set_of_points.append({{0,0}, sf::Color::Black});
+
     for(int i(1); i < nb_point; ++i)
     {
-        set_of_points.append({{static_cast<float>(-i * getRadius() / 10.0),
+        set_of_points.append({{static_cast<float>(-i * (getRadius() / 10.0)),
                                static_cast<float>(getRadius() * sin(t) * sin(2 * i / 10.0))},
                               sf::Color::Red});
     }
-    target.draw(set_of_points);
 
      auto transform = sf::Transform(); // déclare une matrice de transformation
      // ici ensemble d'opérations comme des translations ou rotations faites sur transform:
      transform.translate(getPosition());
      transform.rotate(angle / DEG_TO_RAD);
      target.draw(set_of_points, transform);
+}
+
+void SimpleBacterium::tentative_basculement()
+{
+    double lambda(getProperty("tumble worse").get());
+
+    if(getAppEnv().getPositionScore(getPosition()) >= ancien_score)
+    {
+        lambda = getProperty("tumble better").get();
+    }
+     proba_basculement = 1 - exp(- tps_basculement.asSeconds() / lambda);
+
+     if(bernoulli(proba_basculement) == 1)
+     {
+         basculement();
+         tps_basculement = sf::Time::Zero;
+     }
+}
+
+void SimpleBacterium::basculement()
+{
+    if(getConfig()["tumble"]["algo"] == "single random vector")
+    {
+        strategie1();
+    }
+    else if(getConfig()["tumble"]["algo"] == "best of N")
+    {
+        strategie2();
+    }
+}
+
+void SimpleBacterium::strategie1()
+{
+    direction = Vec2d::fromRandomAngle();
+
+}
+
+void SimpleBacterium::strategie2()
+{
+    int N(20); // nb de directions aléatoires à générer
+
+    for(int i(0); i < N; ++i)
+    {
+        Vec2d new_dir (Vec2d::fromRandomAngle());
+
+        if(getAppEnv().getPositionScore(getPosition() + new_dir)
+           > getAppEnv().getPositionScore(getPosition() + direction))
+        {
+            setDirection(new_dir);
+        }
+    }
 }

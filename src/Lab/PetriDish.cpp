@@ -8,6 +8,7 @@ PetriDish::PetriDish(Vec2d position, double radius)
     : CircularBody (position, radius)
 {
     init_temperature();
+    init_puissance();
 }
 
 
@@ -51,7 +52,7 @@ void PetriDish::reset()
     init_temperature();
 }
 
-Temperature PetriDish::getTemperature() const
+double PetriDish::getTemperature() const
 {
     return temperature;
 }
@@ -65,10 +66,14 @@ void PetriDish::update(sf::Time dt)
 
 void PetriDish::update_bacteries (sf::Time dt)
 {
+    append(lesBacteries, annexe);
+    init_annexe();
+
     for(auto& bacterie : lesBacteries)
     {
         if(bacterie->en_vie())
         {
+            bacterie->setScore(getPositionScore(bacterie->getPosition()));
             bacterie->update(dt);
         }
         else
@@ -117,19 +122,24 @@ void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
     }
 }
 
+j::Value const& PetriDish::getConfig() const
+{
+    return getAppConfig()["petri dish"];
+}
+
 void PetriDish::increaseTemperature()
 {
-    temperature += getAppConfig()["petri dish"]["temperature"]["delta"].toDouble();
+    temperature += getConfig()["temperature"]["delta"].toDouble();
 }
 
 void PetriDish::decreaseTemperature()
 {
-    temperature -= getAppConfig()["petri dish"]["temperature"]["delta"].toDouble();
+    temperature -= getConfig()["temperature"]["delta"].toDouble();
 }
 
 void PetriDish::init_temperature()
 {
-    temperature = getAppConfig()["petri dish"]["temperature"]["default"].toDouble();
+    temperature = getConfig()["temperature"]["default"].toDouble();
 }
 
 Nutriment* PetriDish::getNutrimentColliding(CircularBody const& body) const
@@ -150,4 +160,46 @@ PetriDish::~PetriDish()
     reset();
 }
 
+double PetriDish::getPositionScore(const Vec2d& position) const
+{
+    double somme(0);
 
+    for(auto& nutriment : lesNutriments)
+    {
+        somme += nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), puissance);
+    }
+
+    return somme;
+}
+
+void PetriDish::increaseGradientExponent()
+{
+    puissance += getConfig()["gradient"]["exponent"]["delta"].toDouble();
+}
+
+void PetriDish::decreaseGradientExponent()
+{
+    puissance -= getConfig()["gradient"]["exponent"]["delta"].toDouble();
+}
+
+double PetriDish::getGradientExponent() const
+{
+    return puissance;
+}
+
+void PetriDish::init_puissance()
+{
+    puissance = (getConfig()["gradient"]["exponent"]["max"].toDouble()
+               + getConfig()["gradient"]["exponent"]["min"].toDouble())
+              / 2;
+}
+
+void PetriDish::init_annexe()
+{
+    annexe = {};
+}
+
+void PetriDish::ajout_annexe(Bacterium* clone)
+{
+    annexe.push_back(clone);
+}
