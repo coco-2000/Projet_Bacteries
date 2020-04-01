@@ -22,9 +22,9 @@ SimpleBacterium::SimpleBacterium(const Vec2d& position)
 SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d direction,
                 double radius, const MutableColor& couleur,
                 std::map<std::string, MutableNumber> param_mutables,
-                bool abstinence, MRU equation)
+                bool abstinence)
     : Bacterium(energie, position, direction, radius, couleur,
-                param_mutables, abstinence), equation(equation)
+                param_mutables, abstinence)
 {}
 
 /*SimpleBacterium::SimpleBacterium(const SimpleBacterium& autre)
@@ -35,7 +35,7 @@ SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d directi
 SimpleBacterium* SimpleBacterium::copie() const
 {
     return new SimpleBacterium(energie, getPosition(), direction, radius,
-                               couleur, param_mutables, abstinence, equation);
+                               couleur, param_mutables, abstinence);
 }
 
 j::Value const& SimpleBacterium::getConfig() const

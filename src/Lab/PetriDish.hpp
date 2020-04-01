@@ -52,6 +52,10 @@ public:
      */
     void update(sf::Time dt) override;
 
+    /**
+     * @brief getConfig Raccourci pour accéder aux paramètres associée à l'assiette de Petri
+     * @return la valeur de getAppConfig()["petri dish"]
+     */
     j::Value const& getConfig() const;
 
     /**
@@ -98,13 +102,45 @@ public:
      */
     ~PetriDish() override;
 
+    /**
+     * @brief getPositionScore Calcule le score associée à une position donnée dans
+     *                         l'assiette de Petri
+     * @param position Coordonnées de la position dont il faut calculer le score
+     * @return Score associée à la position
+     */
     double getPositionScore(const Vec2d& position) const;
 
+    /**
+     * @brief increaseGradientExponent Augmente l'attribut puissance de l'assiette de
+     *        Petri qui est associée au paramètre "Gradient exponent"
+     */
     void increaseGradientExponent();
+
+    /**
+     * @brief decreaseGradientExponent Diminue l'attribut puissance de l'assiette de
+     *        Petri qui est associée au paramètre "Gradient exponent"
+     */
     void decreaseGradientExponent();
+
+    /**
+     * @brief getGradientExponent Accesseur de l'attribut puissance de l'assiette de
+     *        Petri qui est associée au paramètre "Gradient exponent"
+     * @return la valeur du paramètre "Gradient exponent"
+     */
     double getGradientExponent() const;
+
+    /**
+     * @brief init_puissance Initialise l'attribut puissance de l'assiette de
+     *        Petri qui est associée au paramètre "Gradient exponent" en fonction du
+     *        fichier de configuration
+     */
     void init_puissance();
 
+    /**
+     * @brief ajout_annexe Ajoute un pointeur sur une bactérie le vecteur annexe
+     *                     de l'assiette de Petri
+     * @param clone Pointeur sur la bactérie à ajouter (créée par clonage en l'occurence)
+     */
     void ajout_annexe(Bacterium*);
 
 private :
@@ -128,6 +164,10 @@ private :
      */
     void update_nutriments (sf::Time dt);
 
+    /**
+     * @brief init_annexe Initialise le vecteur annexe de l'assiette de Petri
+     *                    à un vecteur vide
+     */
     void init_annexe();
 };
 

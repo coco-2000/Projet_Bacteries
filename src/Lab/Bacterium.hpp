@@ -12,10 +12,11 @@ class Bacterium : public CircularBody, public Drawable, public Updatable
 public :
 
     /**
-     * @brief Bacterium::Bacterium Constructeur
+     * @brief Bacterium Constructeur
      * @param energie niveau d'énergie intiale de la bacterie
      * @param position Coordonnées de la position intiale de la bacterie
      * @param direction Direction du déplacement initiale de la bacterie
+     * @param radius Rayon initiale de la bactérie
      * @param couleur couleur initiale de la bacterie
      * @param param_mutables ensemble de paramètres numériques mutables
      * @param abstinence si la bacterie consomme des nutriments ou non
@@ -34,7 +35,7 @@ public :
     /**
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries
      * Il s'agit d'une méthode virtuelle pure
-     * @return
+     * @return la valeur associée à getAppConfig()["bacterium"]
      */
     virtual j::Value const& getConfig() const = 0;
 
@@ -76,11 +77,31 @@ public :
      */
     void consumeEnergy(Quantity qt);
 
+    /**
+     * @brief setDirection Manipulateur de direction
+     * @param direction Vecteur à assigner à la direction de l'instance courante
+     */
     void setDirection(Vec2d direction);
 
-    void addProperty(const std::string&, MutableNumber);
-    MutableNumber getProperty(const std::string&) const;
+    /**
+     * @brief addProperty Ajoute à l'ensemble des paramètres mutables numériques de la bactérie une valeur numérique mutable donnée
+     * @param key Clé (=nom) du paramètre mutable à ajouter
+     * @param valeur Valeur associée à la clé, sous forme de MutableNumber
+     */
+    void addProperty(const std::string& key, MutableNumber valeur);
 
+    /**
+     * @brief getProperty Accesseur d'un paramètre mutable
+     * @param key Clé (=nom) du paramètre mutable à renvoyer
+     * @return La valeur, sous forme de MutableNumber, du paramètre associé à la clé
+     */
+    MutableNumber getProperty(const std::string& key) const;
+
+    /**
+     * @brief setScore Manipulateur du score
+     * @param score Score à assigner à l'attribut ancien_score
+     *              (score avant mise à jour) de l'instance courante
+     */
     void setScore(double score);
 
 
@@ -111,15 +132,49 @@ protected :
 
     /**
      * @brief consumeNutriment gère la consommation des bacteries
-     * @param dt Pas de temps après lequel lequel la simulation est mise à jour
+     * @param dt Pas de temps après lequel la simulation est mise à jour
      */
     void consumeNutriment(sf::Time dt);
 
+    /**
+     * @brief move Méthode virtuelle pure de déplacement des bactéries
+     *        (à redéfinir dans les sous-classes)
+     * @param dt Pas de temps depuis le dernier déplacement de l'instance courante
+     */
     virtual void move(sf::Time dt) = 0;
+
+    /**
+     * @brief clone Méthode de division commune à toutes les bactéries
+     * @return Un pointeut su la nouvelle bactérie issue de l'instance courante, dont
+     *         les paramètres ont pu muter, si les conditions de division sont remplies
+     * divise par 2 l'énergie de la bactérie d'origine et de celle clonée et
+     * inverse la direction de déplacement de la bactérie d'origine
+     */
     virtual Bacterium* clone();
+
+    /**
+     * @brief graphisme_particulier Méthode virtuelle pure permettant d'ajouter
+     *        des détails graphiques aux bactéries selon leur sous-classe
+     * @param target Cible pour l'affichage
+     */
     virtual void graphisme_particulier(sf::RenderTarget& target) const = 0;
+
+    /**
+     * /!\ Définit dans la sous-classe SimpleBacterium
+     * @brief tentative_basculement Décide si la bactérie doit basculer ou non
+     */
     virtual void tentative_basculement();
+
+    /**
+     * @brief mutate Méthode de mutation d'une bactérie
+     */
     void mutate();
+
+    /**
+     * @brief copie Méthode virtuelle pure effectuant la copie d'une instance avec
+     *              tous ses attributs
+     * @return Un pointeur sur la nouvelle bactérie copiée de l'instance courante
+     */
     virtual Bacterium* copie() const = 0;
 
 };

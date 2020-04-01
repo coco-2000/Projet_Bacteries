@@ -66,7 +66,6 @@ public :
      * @param out : flux de sortie
      * @return le flux passé en paramètre
      */
-
     std::ostream& affiche(std::ostream& out)  const;
 
 
