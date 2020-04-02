@@ -301,7 +301,20 @@ Lab.
 **************************************************
 ##Q3.20
 
+On a crée l'attribut tps_basculement dans la classe SimpleBacterium qui est mis
+à jour au début de la fonction SimpleBacterium::move et réinitialisé dans
+SimpleBacterium::tentative_basculement lorsque le basculement est effectué.
+L'attribut tps_basculement sert pour le basculement, une fonctionnalité
+proposée par la classe SimpleBacterium. Il est donc plus cohérent de le déclarer
+dans SimpleBacterium comme c'est la seule classe à l'utiliser.
 
+On a crée l'attribut ancien_score dans la classe Bacterium car sa mise à jour s'initie
+dans la classe PetriDish et s'applique sur une bactérie. Le score étant un attribut
+pouvant être réutilisé pour n'importe quel instance de bactérie, il semblait plus
+cohérent de définir une fonction setScore dans Bacterium qui met à jour la valeur de
+l'ancien_score plutôt que de juste protoyper la méthode dans Bacterium pour la définir dans
+SimpleBacterium. Aussi, comme on utilise l'attribut ancien_score dans Bacterium, nous
+l'avons déclaré dans cette classe.
 
 
 **************************************************

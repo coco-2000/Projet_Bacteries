@@ -114,7 +114,6 @@ protected :
     bool abstinence;
 
     sf::Time compteur;
-    sf::Time tps_basculement;
     double ancien_score;
 
 
@@ -163,7 +162,7 @@ protected :
      * /!\ Définit dans la sous-classe SimpleBacterium
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
      */
-    virtual void tentative_basculement();
+    virtual void tentative_basculement() = 0;
 
     /**
      * @brief mutate Méthode de mutation d'une bactérie

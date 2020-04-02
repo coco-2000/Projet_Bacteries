@@ -13,10 +13,10 @@ public:
 
     /**
      * @brief SimpleBacterium Constructeur
-     * @param energie Niveau d'énergie intiale de la bacterie
+     * @param energie Niveau d'énergie intial de la bacterie
      * @param position Coordonnées de la position intiale de la bacterie
      * @param direction Direction du déplacement initiale de la bacterie
-     * @param radius Rayon initiale de la bactérie
+     * @param radius Rayon initial de la bactérie
      * @param couleur Couleur initiale de la bacterie
      * @param param_mutables Ensemble de paramètres numériques mutables
      * @param abstinence Si la bacterie consomme des nutriments ou non
@@ -60,7 +60,7 @@ public:
 private :
     MRU equation;
     double t;
-    double proba_basculement;
+    sf::Time tps_basculement;
 
     /**
      * Redéfinition d'une méthode virtuelle pure

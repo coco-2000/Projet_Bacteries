@@ -101,7 +101,6 @@ void Bacterium::DisplayEnergy(sf::RenderTarget& target) const
 
 void Bacterium::update(sf::Time dt)
 {
-    tps_basculement += dt;
     move(dt);
     tentative_basculement();
     collisionPetri(dt);
@@ -133,6 +132,7 @@ void Bacterium::consumeNutriment(sf::Time dt)
     {
         compteur = sf::Time::Zero;
         double quantite_consommee = getConfig()["meal"]["max"].toDouble();
+        energie += quantite_consommee;
         nutriment_ptr->takeQuantity(quantite_consommee);
         nutriment_ptr = nullptr;
     }
@@ -163,7 +163,7 @@ void Bacterium::addProperty(const std::string& key, MutableNumber valeur)
     }
     else
     {
-        param_mutables[key] = valeur;
+        param_mutables.at(key) = valeur;
     }
 }
 

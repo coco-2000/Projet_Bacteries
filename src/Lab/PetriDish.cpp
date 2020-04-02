@@ -66,7 +66,7 @@ void PetriDish::update(sf::Time dt)
 
 void PetriDish::update_bacteries (sf::Time dt)
 {
-    append(lesBacteries, annexe);
+    append(annexe, lesBacteries);
     init_annexe();
 
     for(auto& bacterie : lesBacteries)

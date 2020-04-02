@@ -18,8 +18,8 @@ public:
                   double mutate_proba,
                   double ecart_type,
                   bool hasMin = false,
-                  double Min = 0,
                   bool hasMax = false,
+                  double Min = 0,
                   double Max = 0);
 
     /**

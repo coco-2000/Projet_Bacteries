@@ -13,7 +13,7 @@ SimpleBacterium::SimpleBacterium(const Vec2d& position)
                 Vec2d::fromRandomAngle(),
                 uniform(getConfig()["radius"]["min"].toDouble(), getConfig()["radius"]["max"].toDouble()),
                 getConfig()["color"],
-                {{"speed", MutableNumber(getConfig()["speed"])},
+                {{"speed", MutableNumber::positive(getConfig()["speed"])},
                  {"tumble better", MutableNumber::positive(getConfig()["tumble"]["better"])},
                  {"tumble worse", MutableNumber::positive(getConfig()["tumble"]["worse"])}}),
        t(uniform(0.0, M_PI))
@@ -45,12 +45,17 @@ j::Value const& SimpleBacterium::getConfig() const
 
 void SimpleBacterium::move(sf::Time dt)
 {
+    tps_basculement += dt;
     Vec2d new_position(stepDiffEq(getPosition(),
                                   getSpeedVector(),
                                   dt,
                                   equation).position);
-    consumeEnergy((new_position - getPosition()).length() * getEnergyReleased());
-    setPosition(new_position);
+    if((new_position - getPosition()).lengthSquared() >= 0.001)
+    {
+        consumeEnergy((new_position - getPosition()).length() * getEnergyReleased());
+        setPosition(new_position);
+    }
+
     t += 3 * dt.asSeconds();
 }
 
@@ -96,7 +101,8 @@ void SimpleBacterium::tentative_basculement()
     {
         lambda = getProperty("tumble better").get();
     }
-     proba_basculement = 1 - exp(- tps_basculement.asSeconds() / lambda);
+
+    double proba_basculement = 1 - exp(- tps_basculement.asSeconds() / lambda);
 
      if(bernoulli(proba_basculement) == 1)
      {

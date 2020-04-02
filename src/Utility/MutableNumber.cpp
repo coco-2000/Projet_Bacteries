@@ -4,8 +4,8 @@ MutableNumber::MutableNumber(double value,
               double mutate_proba,
               double ecart_type,
               bool hasMin,
-              double Min,
               bool hasMax,
+              double Min,
               double Max)
     : mutation_proba(mutate_proba),
       EcartType(ecart_type),
@@ -22,8 +22,8 @@ MutableNumber::MutableNumber(j::Value const& config)
       config["rate"].toDouble(),
       config["sigma"].toDouble(),
       config["clamp min"].toBool(),
-      config["min"].toDouble(),
       config["clamp max"].toBool(),
+      config["min"].toDouble(),
       config["max"].toDouble())
 {}
 
