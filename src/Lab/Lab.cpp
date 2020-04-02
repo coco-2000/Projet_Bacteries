@@ -3,7 +3,7 @@
 #include "Application.hpp"
 
 Lab::Lab()
-    : petri(getApp().getCentre(), ratio_rayon*getApp().getLabSize().x )
+    : petri(getApp().getCentre(), ratio_rayon*getApp().getLabSize().x)
 {}
 
 bool Lab::contains(const CircularBody& corps) const

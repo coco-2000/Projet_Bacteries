@@ -25,14 +25,10 @@ Bacterium* Bacterium::clone()
 {
     if(energie >= getEnergy())
     {
-        Bacterium* copie((*this).copie());
-        copie->energie /= 2;
-        copie->mutate();
-
         energie /= 2;
         setDirection(-direction);
 
-        return copie;
+        return this->copie();
     }
     else
     {

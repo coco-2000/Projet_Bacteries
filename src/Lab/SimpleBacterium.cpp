@@ -34,8 +34,12 @@ SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d directi
 
 SimpleBacterium* SimpleBacterium::copie() const
 {
-    return new SimpleBacterium(energie, getPosition(), direction, radius,
+    SimpleBacterium div(energie, getPosition(), direction, radius,
                                couleur, param_mutables, abstinence);
+    div.energie /= 2;
+    div.mutate();
+
+    return new SimpleBacterium(div);
 }
 
 j::Value const& SimpleBacterium::getConfig() const

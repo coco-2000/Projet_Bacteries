@@ -2,6 +2,7 @@
 #include "../Utility/Utility.hpp"
 #include "CircularBody.hpp"
 #include "Application.hpp"
+#include <vector>
 
 
 PetriDish::PetriDish(Vec2d position, double radius)
@@ -9,6 +10,7 @@ PetriDish::PetriDish(Vec2d position, double radius)
 {
     init_temperature();
     init_puissance();
+    init_annexe();
 }
 
 
@@ -66,9 +68,6 @@ void PetriDish::update(sf::Time dt)
 
 void PetriDish::update_bacteries (sf::Time dt)
 {
-    append(annexe, lesBacteries);
-    init_annexe();
-
     for(auto& bacterie : lesBacteries)
     {
         if(bacterie->en_vie())
@@ -82,7 +81,15 @@ void PetriDish::update_bacteries (sf::Time dt)
             bacterie = nullptr;
         }
     }
+    if(!annexe.empty())
+    {
+        append(annexe, lesBacteries);
+        init_annexe();
+    }
+
     lesBacteries.erase(std::remove(lesBacteries.begin(), lesBacteries.end(), nullptr), lesBacteries.end());
+
+
 }
 
 void PetriDish::update_nutriments (sf::Time dt)
@@ -196,7 +203,7 @@ void PetriDish::init_puissance()
 
 void PetriDish::init_annexe()
 {
-    annexe = {};
+    annexe.clear();
 }
 
 void PetriDish::ajout_annexe(Bacterium* clone)
