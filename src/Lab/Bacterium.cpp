@@ -143,6 +143,8 @@ void Bacterium::consumeEnergy(Quantity qt)
     energie -= qt;
 }
 
+
+
 void Bacterium::setScore(double score)
 {
     if(score > 0)
@@ -174,3 +176,4 @@ MutableNumber Bacterium::getProperty(const std::string& key) const
         return param_mutables.find(key)->second;
     }
 }
+
