@@ -12,7 +12,7 @@ MutableColor::MutableColor(j::Value const& config)
 
 void MutableColor::mutate()
 {
-    for(auto couleur : RGBA)
+    for(auto& couleur : RGBA)
     {
         couleur.mutate();
     }

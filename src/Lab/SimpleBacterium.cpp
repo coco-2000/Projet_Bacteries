@@ -79,16 +79,16 @@ void SimpleBacterium::graphisme_particulier(sf::RenderTarget& target) const
 {
     int nb_point(30);
 
-    auto set_of_points = sf::VertexArray(sf::TrianglesStrip);
+    auto set_of_points = sf::VertexArray(sf::LinesStrip);
       // ajout de points à l'ensemble:
 
-    set_of_points.append({{0,0}, sf::Color::Black});
+    set_of_points.append({{0,0}, couleur.get()});
 
     for(int i(1); i < nb_point; ++i)
     {
         set_of_points.append({{static_cast<float>(-i * (getRadius() / 10.0)),
                                static_cast<float>(getRadius() * sin(t) * sin(2 * i / 10.0))},
-                              sf::Color::Red});
+                              couleur.get()});
     }
 
      auto transform = sf::Transform(); // déclare une matrice de transformation
