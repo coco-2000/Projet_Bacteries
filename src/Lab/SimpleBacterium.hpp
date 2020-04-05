@@ -55,8 +55,7 @@ public:
      * @brief copie Effectue la copie d'une instance avec tous ses attributs
      * @return Un pointeur sur la nouvelle bactérie copiée de l'instance courante
      */
-
-    SimpleBacterium* copie() const;
+    SimpleBacterium* clone() override;
 
 private :
     MRU equation;

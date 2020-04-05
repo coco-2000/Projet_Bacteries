@@ -27,7 +27,7 @@ SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d directi
                 param_mutables, abstinence)
 {}
 
-
+/**
 SimpleBacterium* SimpleBacterium::clone()
 {
     SimpleBacterium div(energie, getPosition(), direction, radius,
@@ -36,6 +36,12 @@ SimpleBacterium* SimpleBacterium::clone()
     div.mutate();
 
     return new SimpleBacterium(div);
+}
+**/
+
+SimpleBacterium* SimpleBacterium::clone()
+{
+    return new SimpleBacterium(*this);
 }
 
 j::Value const& SimpleBacterium::getConfig() const
@@ -46,10 +52,8 @@ j::Value const& SimpleBacterium::getConfig() const
 void SimpleBacterium::move(sf::Time dt)
 {
     tps_basculement += dt;
-    Vec2d new_position(stepDiffEq(getPosition(),
-                                  getSpeedVector(),
-                                  dt,
-                                  equation).position);
+    Vec2d new_position(stepDiffEq(getPosition(), getSpeedVector(), dt,equation).position);
+
     if((new_position - getPosition()).lengthSquared() >= 0.001)
     {
         consumeEnergy((new_position - getPosition()).length() * getEnergyReleased());
@@ -77,7 +81,7 @@ void SimpleBacterium::graphisme_particulier(sf::RenderTarget& target) const
     {
         set_of_points.append({{static_cast<float>(-i * (getRadius() / 10.0)),
                                static_cast<float>(getRadius() * sin(t) * sin(2 * i / 10.0))},
-                              couleur.get()});
+                               couleur.get()});
     }
 
      auto transform = sf::Transform(); // déclare une matrice de transformation
@@ -120,7 +124,6 @@ void SimpleBacterium::basculement()
 void SimpleBacterium::strategie1()
 {
     direction = Vec2d::fromRandomAngle();
-
 }
 
 void SimpleBacterium::strategie2()

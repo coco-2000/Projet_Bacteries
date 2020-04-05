@@ -209,7 +209,7 @@ de classe avec le mot clé static. On y accède ensuite au travers de l'opérate
 résolution de portée.
 
 *************************************************
-##Q3.8
+##Q3.8s
 
 Mettre la methode clone de bacterie en protected car les bacteries doivent effectuer
 la division cellulaire elle-même sans avoir besoin du monde exterieur.

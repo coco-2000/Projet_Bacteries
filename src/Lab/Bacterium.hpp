@@ -88,7 +88,7 @@ public :
      * @param key Clé (=nom) du paramètre mutable à ajouter
      * @param valeur Valeur associée à la clé, sous forme de MutableNumber
      */
-    void addProperty(const std::string& key, MutableNumber valeur);
+    void addProperty(const std::string& key, const MutableNumber& valeur);
 
     /**
      * @brief getProperty Accesseur d'un paramètre mutable
@@ -149,19 +149,21 @@ protected :
      * divise par 2 l'énergie de la bactérie d'origine et de celle clonée et
      * inverse la direction de déplacement de la bactérie d'origine
      */
-    virtual Bacterium* clone();
+    virtual Bacterium* clone() = 0;
+
+    void divide();
 
     /**
      * @brief graphisme_particulier Permet d'ajouter des détails graphiques aux bactéries selon leur sous-classe
      * @param target Cible pour l'affichage
      */
-    virtual void graphisme_particulier(sf::RenderTarget& target) const;
+    virtual void graphisme_particulier(sf::RenderTarget& target) const {}
 
     /**
      * /!\ Définit dans la sous-classe SimpleBacterium
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
      */
-    virtual void tentative_basculement();
+    virtual void tentative_basculement() {}
 
     /**
      * @brief mutate Méthode de mutation d'une bactérie

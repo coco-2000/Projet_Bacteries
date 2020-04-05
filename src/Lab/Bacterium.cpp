@@ -21,18 +21,30 @@ Bacterium::Bacterium(Quantity energie, Vec2d position, Vec2d direction,
     setDirection(autre.direction);
 }*/
 
-Bacterium* Bacterium::clone()
+/*Bacterium* Bacterium::clone()
 {
     if(energie >= getEnergy())
     {
         energie /= 2;
         setDirection(-direction);
 
-        return (*this).clone();
+        return clone();
     }
     else
     {
         return nullptr;
+    }
+}*/
+
+void Bacterium::divide()
+{
+    if(energie >= getEnergy())
+    {
+        energie /= 2;
+        Bacterium* copie(clone());
+        copie->mutate();
+        getAppEnv().ajout_annexe(copie);
+        setDirection(-direction);
     }
 }
 
@@ -101,7 +113,8 @@ void Bacterium::update(sf::Time dt)
     tentative_basculement();
     collisionPetri(dt);
     consumeNutriment(dt);
-    getAppEnv().ajout_annexe(Bacterium::clone());
+    //getAppEnv().ajout_annexe(Bacterium::clone());
+    divide();
 }
 
 void Bacterium::collisionPetri(sf::Time dt)
@@ -153,7 +166,7 @@ void Bacterium::setScore(double score)
     }
 }
 
-void Bacterium::addProperty(const std::string& key, MutableNumber valeur)
+void Bacterium::addProperty(const std::string& key, const MutableNumber& valeur)
 {
     if(param_mutables.find(key) != param_mutables.end())
     {
@@ -177,8 +190,5 @@ MutableNumber Bacterium::getProperty(const std::string& key) const
     }
 }
 
-void Bacterium::tentative_basculement()
-{}
 
-void Bacterium::graphisme_particulier(sf::RenderTarget& target) const
-{}
+
