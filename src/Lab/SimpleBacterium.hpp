@@ -26,8 +26,6 @@ public:
                     std::map<std::string, MutableNumber> param_mutables,
                     bool abstinence);
 
-    //SimpleBacterium(const SimpleBacterium& autre);
-
     /**
      * Redéfinition d'une méthode virtuelle pure
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries simples
