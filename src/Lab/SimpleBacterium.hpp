@@ -33,14 +33,14 @@ public:
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries simples
      * @return La valeur associée à getAppConfig()["simple bacterium"]
      */
-    j::Value const& getConfig() const;
+    j::Value const& getConfig() const override;
 
     /**
      * Redéfinition d'une méthode virtuelle pure
      * @brief move Déplace une bactérie
      * @param dt Pas de temps depuis le dernier déplacement de l'instance courante
      */
-    void move(sf::Time dt);
+    void move(sf::Time dt) override;
 
     /**
      * @brief getSpeedVector Permet d'accéder au vecteur de vitesse qui détermine
@@ -55,7 +55,7 @@ public:
      * @brief copie Effectue la copie d'une instance avec tous ses attributs
      * @return Un pointeur sur la nouvelle bactérie copiée de l'instance courante
      */
-    SimpleBacterium* copie() const;
+    SimpleBacterium* copie() const override;
 
 private :
     MRU equation;
@@ -67,12 +67,12 @@ private :
      * @brief graphisme_particulier Permet d'ajouter des détails graphiques spécifiques aux bactéries simples
      * @param target Cible pour l'affichage
      */
-    void graphisme_particulier(sf::RenderTarget& target) const;
+    void graphisme_particulier(sf::RenderTarget& target) const override;
 
     /**
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
      */
-    void tentative_basculement();
+    void tentative_basculement() override;
 
     /**
      * @brief basculement effectue le basculement de l'instance courante
