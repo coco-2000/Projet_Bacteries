@@ -86,7 +86,9 @@ private :
     /**
      * @brief strategie2 Deuxième façon d'effectuer le basculement :
      * Générer N direction et retenir celle qui a le meilleur score
-     * associer à l'étiquette "best of N" dans le fichier de configuration
+     * associer à l'helperétiquette "best of N" dans le fichier de configuration
      */
     void strategie2();
+
+    double helperPositionScore (const Vec2d& offset);
 };

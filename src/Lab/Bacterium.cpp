@@ -14,28 +14,6 @@ Bacterium::Bacterium(Quantity energie, Vec2d position, Vec2d direction,
     setDirection(direction);
 }
 
-/*Bacterium::Bacterium(const Bacterium& autre)
-    : CircularBody(autre), couleur(autre.couleur), energie(autre.energie),
-      param_mutables(autre.param_mutables), abstinence(autre.abstinence)
-{
-    setDirection(autre.direction);
-}*/
-
-/*Bacterium* Bacterium::clone()
-{
-    if(energie >= getEnergy())
-    {
-        energie /= 2;
-        setDirection(-direction);
-
-        return clone();
-    }
-    else
-    {
-        return nullptr;
-    }
-}*/
-
 void Bacterium::divide()
 {
     if(energie >= getEnergy())
@@ -94,16 +72,15 @@ void Bacterium::drawOn(sf::RenderTarget& target) const
 
 void Bacterium::DisplayEnergy(sf::RenderTarget& target) const
 {
-    unsigned int TAILLE_FONTE(15); // taille de fonte
+    constexpr unsigned int TAILLE_FONTE(15); // taille de fonte
 
     if(isDebugOn())
     {
-        auto const text = buildText(std::to_string(static_cast<int>(energie)),
-                                    decalage({10,10}),
-                                    getAppFont(),
-                                    TAILLE_FONTE,
-                                    sf::Color::Red, 0);
-        target.draw(text);
+        target.draw(buildText(std::to_string(static_cast<int>(energie)),
+                              decalage({10,10}),
+                              getAppFont(),
+                              TAILLE_FONTE,
+                              sf::Color::Red, 0));
     }
 }
 
@@ -113,7 +90,6 @@ void Bacterium::update(sf::Time dt)
     tentative_basculement();
     collisionPetri(dt);
     consumeNutriment(dt);
-    //getAppEnv().ajout_annexe(Bacterium::clone());
     divide();
 }
 
@@ -137,10 +113,10 @@ void Bacterium::consumeNutriment(sf::Time dt)
 {
     Nutriment* nutriment_ptr = getAppEnv().getNutrimentColliding(*this);
 
-    if(nutriment_ptr != nullptr and !abstinence and compteur >= getDelay())
+    if(nutriment_ptr != nullptr and compteur >= getDelay() and !abstinence)
     {
         compteur = sf::Time::Zero;
-        double quantite_consommee = getConfig()["meal"]["max"].toDouble();
+        const double quantite_consommee = getConfig()["meal"]["max"].toDouble();
         energie += quantite_consommee;
         nutriment_ptr->takeQuantity(quantite_consommee);
         nutriment_ptr = nullptr;

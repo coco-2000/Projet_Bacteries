@@ -17,6 +17,7 @@ SimpleBacterium::SimpleBacterium(const Vec2d& position)
                  {"tumble better", MutableNumber::positive(getConfig()["tumble"]["better"])},
                  {"tumble worse", MutableNumber::positive(getConfig()["tumble"]["worse"])}}),
        t(uniform(0.0, M_PI))
+
 {}
 
 SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d direction,
@@ -26,18 +27,6 @@ SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d directi
     : Bacterium(energie, position, direction, radius, couleur,
                 param_mutables, abstinence)
 {}
-
-/**
-SimpleBacterium* SimpleBacterium::clone()
-{
-    SimpleBacterium div(energie, getPosition(), direction, radius,
-                               couleur, param_mutables, abstinence);
-    div.energie /= 2;
-    div.mutate();
-
-    return new SimpleBacterium(div);
-}
-**/
 
 SimpleBacterium* SimpleBacterium::clone()
 {
@@ -51,8 +40,9 @@ j::Value const& SimpleBacterium::getConfig() const
 
 void SimpleBacterium::move(sf::Time dt)
 {
+    constexpr int COEFF_T = 3;
     tps_basculement += dt;
-    Vec2d new_position(stepDiffEq(getPosition(), getSpeedVector(), dt,equation).position);
+    const Vec2d new_position(stepDiffEq(getPosition(), getSpeedVector(), dt,equation).position);
 
     if((new_position - getPosition()).lengthSquared() >= 0.001)
     {
@@ -60,7 +50,7 @@ void SimpleBacterium::move(sf::Time dt)
         setPosition(new_position);
     }
 
-    t += 3 * dt.asSeconds();
+    t += COEFF_T * dt.asSeconds();
 }
 
 Vec2d SimpleBacterium::getSpeedVector() const
@@ -70,9 +60,9 @@ Vec2d SimpleBacterium::getSpeedVector() const
 
 void SimpleBacterium::graphisme_particulier(sf::RenderTarget& target) const
 {
-    int nb_point(30);
+    constexpr int nb_point(30);
 
-    auto set_of_points = sf::VertexArray(sf::LinesStrip);
+    sf::VertexArray set_of_points = sf::VertexArray(sf::LinesStrip);
       // ajout de points à l'ensemble:
 
     set_of_points.append({{0,0}, couleur.get()});
@@ -100,7 +90,7 @@ void SimpleBacterium::tentative_basculement()
         lambda = getProperty("tumble better").get();
     }
 
-    double proba_basculement = 1 - exp(- tps_basculement.asSeconds() / lambda);
+    const double proba_basculement = 1 - exp(- tps_basculement.asSeconds() / lambda);
 
      if(bernoulli(proba_basculement) == 1)
      {
@@ -126,16 +116,19 @@ void SimpleBacterium::strategie1()
     direction = Vec2d::fromRandomAngle();
 }
 
+double SimpleBacterium::helperPositionScore (const Vec2d& offset)
+{
+    return getAppEnv().getPositionScore(getPosition() + offset);
+}
 void SimpleBacterium::strategie2()
 {
-    int N(20); // nb de directions aléatoires à générer
+    constexpr int N(20); // nb de directions aléatoires à générer
 
     for(int i(0); i < N; ++i)
     {
-        Vec2d new_dir (Vec2d::fromRandomAngle());
+        const Vec2d new_dir (Vec2d::fromRandomAngle());
 
-        if(getAppEnv().getPositionScore(getPosition() + new_dir)
-           > getAppEnv().getPositionScore(getPosition() + direction))
+        if(helperPositionScore (new_dir) > helperPositionScore(direction))
         {
             setDirection(new_dir);
         }

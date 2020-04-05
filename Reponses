@@ -209,11 +209,17 @@ de classe avec le mot clé static. On y accède ensuite au travers de l'opérate
 résolution de portée.
 
 *************************************************
-##Q3.8s
+##Q3.8
 
-Mettre la methode clone de bacterie en protected car les bacteries doivent effectuer
-la division cellulaire elle-même sans avoir besoin du monde exterieur.
-Il en est de même pour la methode move : les bacteries se déplacent elles-mêmes.
+Les bacteries sont dessinables, simulables et sont des corps circulaires. La classe bacterie hérite donc de Drawable,
+Ubdatable et de CircularBody
+
+On a choisi de mettre les methodes move, divide, clone et mutate en protected dans Bacterie
+car les bacteries devraient pouvoir se déplacer,  effectuer la division cellulaire et les mutations d'elle-même
+sans avoir besoin du monde exterieur.
+De plus ces methodes seront certainement appelées par la methode update qui est propre à la bacterie.
+
+La methode drawOn a ete déclaré const car elle ne modifie pas les attributs de la bactérie
 
 *************************************************
 ##Q3.9
@@ -224,27 +230,35 @@ cette fonctionnalité de façon générique pour une bactérie quelconque.
 *************************************************
 ##Q3.10
 
-oui elle est virtuelle pure
+oui la méthode getConfig doit être virtuelle pure car elle créé un racourci pour accéder à des
+propriétés spécifiques aux différents types de bactéries.
 
 *************************************************
 ##Q3.11
 
-appeller la methode get() de MutableColor qui retourne la couleur associée
+Pour retrouver la couleur SFML de la bactérie à partir de son attribut de type MutableColor
+il faut appeller la methode get() de MutableColor qui retourne la couleur associée
 
 **************************************************
 ##Q3.12
-Non
+
+Le fait qu'aucune méthode de déplacement concrète n'existe encore n'est pas un frein à l'écriture de la méthode update
+car move est une méthode virtuelle pure qui sera redéfinie dans les sous classe de bacterium.
+Bacterium est une classe abstraite donc elle n'est pas instanciable. Grace au polymorphisme, la methode move sera masquée
+par celle redéfinie dans l'une des sous classe
 
 **************************************************
 ##Q3.13
 
-créer une méthode getNutrimentColliding dans PetriDish qui sera appelée par la methode getNutrimentColliding
+La classe PetriDish ne donne pas d'accès à sa collection de nutriment. On a donc décidé de créer
+une méthode getNutrimentColliding dans PetriDish qui sera appelée par la methode getNutrimentColliding
 de Lab et qui pourra ainsi avoir accés aux Nutriments de PetriDish
 
 **************************************************
 ##Q3.14
-la methode update de PetriDish doit appeler la méthode update de bacterie
-Pour plus de modularité, création de 2 methodes privées dans PetriDish :
+
+Pour permettre la simulation de l'évolution des bactéries, la methode update de PetriDish doit appeler la méthode update de bacterie
+Pour plus de modularité, on a créé 2 methodes privées dans PetriDish :
 update_bacteries et update_nutriments qui sont appelées par la methode update de PetriDish
 De même, la methode drawOn de PertriDish doit appeler la methode drawOn de bacterie
 

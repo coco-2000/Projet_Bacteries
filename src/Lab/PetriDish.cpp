@@ -115,7 +115,7 @@ void PetriDish::update_nutriments (sf::Time dt)
 void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
 {
     //on a ici décidé que l'epaisseur de l'anneau serait 5
-    auto border = buildAnnulus(position, radius, sf::Color::Black, 5);
+    const auto border = buildAnnulus(position, radius, sf::Color::Black, 5);
     targetWindow.draw(border);
 
     for(auto nutriment : lesNutriments)
@@ -162,11 +162,6 @@ Nutriment* PetriDish::getNutrimentColliding(CircularBody const& body) const
     return nullptr;
 }
 
-PetriDish::~PetriDish()
-{
-    reset();
-}
-
 double PetriDish::getPositionScore(const Vec2d& position) const
 {
     double somme(0);
@@ -209,4 +204,9 @@ void PetriDish::init_annexe()
 void PetriDish::ajout_annexe(Bacterium* clone)
 {
     annexe.push_back(clone);
+}
+
+PetriDish::~PetriDish()
+{
+    reset();
 }

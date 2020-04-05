@@ -13,7 +13,12 @@ bool Lab::contains(const CircularBody& corps) const
 
 bool Lab::doesCollideWithDish(CircularBody const& body) const
 {
-    return !(petri > body);
+    /*
+     * Comme l'assiete de petri constitue la limite de l'éspace dans lequel se deplacent les
+     * CircularBody, le fait de ne plus etre contenu dans une PetriDish équivaut à en sortir
+     */
+
+    return !contains(body);
 }
 
 Nutriment* Lab::getNutrimentColliding(CircularBody const& body) const

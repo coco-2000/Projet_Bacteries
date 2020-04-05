@@ -143,25 +143,30 @@ protected :
     virtual void move(sf::Time dt) = 0;
 
     /**
-     * @brief clone Méthode de division commune à toutes les bactéries
-     * @return Un pointeut su la nouvelle bactérie issue de l'instance courante, dont
-     *         les paramètres ont pu muter, si les conditions de division sont remplies
-     * divise par 2 l'énergie de la bactérie d'origine et de celle clonée et
-     * inverse la direction de déplacement de la bactérie d'origine
+     * @brief clone réalise une copie polymorphique de la bacterie. Méthode virtuelle pure
+     * @return Un pointeur sur la nouvelle bactérie issue de l'instance courante
      */
     virtual Bacterium* clone() = 0;
 
+    /**
+     * @brief divide Méthode de division commune à toutes les bactéries
+     * Si les conditions de division sont remplies, créé une nouvelle bactérie clonée,
+     * divise par 2 l'énergie de la bactérie d'origine et de celle clonée,
+     * inverse la direction de déplacement de la bactérie d'origine et effectue des mutations
+     * sur la bacterie clonée
+     */
     void divide();
 
     /**
      * @brief graphisme_particulier Permet d'ajouter des détails graphiques aux bactéries selon leur sous-classe
+     * ici le corps de la méthode est vide pour que les tests puissent s'effectuer correctement
      * @param target Cible pour l'affichage
      */
     virtual void graphisme_particulier(sf::RenderTarget& target) const {}
 
     /**
-     * /!\ Définit dans la sous-classe SimpleBacterium
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
+     * ici le corps de la méthode est vide pour que les tests puissent s'effectuer correctement
      */
     virtual void tentative_basculement() {}
 
