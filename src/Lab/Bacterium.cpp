@@ -28,7 +28,7 @@ Bacterium* Bacterium::clone()
         energie /= 2;
         setDirection(-direction);
 
-        return this->copie();
+        return (*this).clone();
     }
     else
     {
@@ -177,3 +177,8 @@ MutableNumber Bacterium::getProperty(const std::string& key) const
     }
 }
 
+void Bacterium::tentative_basculement()
+{}
+
+void Bacterium::graphisme_particulier(sf::RenderTarget& target) const
+{}

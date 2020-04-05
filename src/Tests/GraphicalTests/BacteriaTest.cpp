@@ -27,19 +27,20 @@ public:
 
 	
 protected:
-    virtual Bacterium* clone() const
+    virtual Bacterium* clone()
 		{
-			/* ne fait rien pour le moment
-			(cette méthode devra être modifiée lorsque vous aurez codé
-			la division)
-			*/
+                MockBacterium div(*this);
+                div.energie /= 2;
+                div.mutate();
+
+                return new MockBacterium(div);
 			return nullptr;
 		}
 	
 
     virtual void move(sf::Time dt)
     {
-			consumeEnergy(0.1);
+            consumeEnergy(0.1);
     }
 };
 
