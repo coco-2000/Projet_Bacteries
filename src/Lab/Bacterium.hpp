@@ -152,17 +152,16 @@ protected :
     virtual Bacterium* clone();
 
     /**
-     * @brief graphisme_particulier Méthode virtuelle pure permettant d'ajouter
-     *        des détails graphiques aux bactéries selon leur sous-classe
+     * @brief graphisme_particulier Permet d'ajouter des détails graphiques aux bactéries selon leur sous-classe
      * @param target Cible pour l'affichage
      */
-    virtual void graphisme_particulier(sf::RenderTarget& target) const = 0;
+    virtual void graphisme_particulier(sf::RenderTarget& target) const;
 
     /**
      * /!\ Définit dans la sous-classe SimpleBacterium
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
      */
-    virtual void tentative_basculement() = 0;
+    virtual void tentative_basculement();
 
     /**
      * @brief mutate Méthode de mutation d'une bactérie
@@ -174,6 +173,5 @@ protected :
      *              tous ses attributs
      * @return Un pointeur sur la nouvelle bactérie copiée de l'instance courante
      */
-    virtual Bacterium* copie() const = 0;
 
 };

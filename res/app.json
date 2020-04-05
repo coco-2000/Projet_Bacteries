@@ -8,7 +8,7 @@
       },
 	"background" : "sand.png",
 	"debug background" : "sand.png",
-        "size"       : 1000
+        "size"       : 1600
     },
     "generator" : {
         "nutriment" : {
@@ -80,7 +80,7 @@
                 "initial" : 1,
                 "max" : 1,
                 "min" : 0.5,
-                "rate" : 0.6,
+                "rate" : 0,
                 "sigma" : 0.05
             },
             "b" : {
@@ -89,8 +89,8 @@
                 "initial" : 0.5,
                 "max" : 1,
                 "min" : 0,
-                "rate" : 0.95,
-                "sigma" : 0.15
+                "rate" : 0.9,
+                "sigma" : 0.5
             },
             "g" : {
                 "clamp max" : true,
@@ -98,8 +98,8 @@
                 "initial" : 0.5,
                 "max" : 1,
                 "min" : 0,
-                "rate" : 0.8,
-                "sigma" : 0.05
+                "rate" : 0.9,
+                "sigma" : 0.5
             },
             "r" : {
                 "clamp max" : true,
@@ -107,8 +107,8 @@
                 "initial" : 0.5,
                 "max" : 1,
                 "min" : 0,
-                "rate" : 0.8,
-                "sigma" : 0.1
+                "rate" : 0.9,
+                "sigma" : 0.5
             }
         },
         "energy" : {
@@ -128,7 +128,7 @@
         "speed" : {
             "initial" : 30,
             "rate" : 0.8,
-            "sigma" : 0.4
+            "sigma" : 0.8
         },
         "tumble" : {
             "algo" : "best of N",
@@ -297,7 +297,7 @@
                 "initial" : 1,
                 "max" : 1,
                 "min" : 0.5,
-                "rate" : 0.6,
+                "rate" : 0,
                 "sigma" : 0.05
             },
             "b" : {
@@ -363,12 +363,12 @@
         "antialiasing level" : 4,
         "title" : "INFOSV Simulation",
         "simulation" : {
-            "width":1000,
-            "height":1000
+            "width":1600,
+            "height":1600
          },
         "stats" : { "width" : 200 }
     },
     "world" : {
-        "size" : 1000
+        "size" : 3000
     }
 }
