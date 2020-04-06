@@ -359,3 +359,32 @@ dans la classe SimpleBacterium qui renvoie un pointeur sur une copie de l'instan
 courante (donc du même type que la bactérie qui se divise),puis elle effectue toutes
 les modifications induites par la division (energie, mutation, direction) avant de
 retourner elle aussi un pointeur sur la bactérie nouvellement créée.
+
+**************************************************
+##Q4.1
+
+TwitchingBacterium est une bacterie. ELle doit donc hériter de la classe Bacterium
+La classe Bacterium herite déja des classes Drawable et Updatable. Il n'est pas nécessaire de les rajouter.
+
+**************************************************
+##Q4.2
+
+Redéfinir la méthode getConfig héritée de la classe bacterium.
+
+**************************************************
+##Q4.3
+Toutes les méthodes virtuelles pures héritées de Bacterium devront être redéfinies pour que la classe
+TwitchingBacterium puisse être instanciable.
+
+Question : divisiion et directions
+graphisme particulier corps vide
+
+
+
+
+
+
+
+
+
+

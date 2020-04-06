@@ -33,31 +33,6 @@ public :
     bool en_vie();
 
     /**
-     * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries
-     * Il s'agit d'une méthode virtuelle pure
-     * @return la valeur associée à getAppConfig()["bacterium"]
-     */
-    virtual j::Value const& getConfig() const = 0;
-
-    /**
-     * @brief getEnergy
-     * @return l'énergie minimale nécessaire à la division
-     */
-    Quantity getEnergy() const;
-
-    /**
-     * @brief getDelay
-     * @return le temps d'attente entre deux consommations de nutriments pour la bactérie
-     */
-    sf::Time getDelay() const;
-
-    /**
-     * @brief getEnergyReleased
-     * @return l'énergie dépensée à chaque pas de déplacement
-     */
-    Quantity getEnergyReleased() const;
-
-    /**
      * @brief drawOn dessiner la bacterie
      * @param target la fenetre dans laquelle on affiche la bacterie
      */
@@ -181,4 +156,28 @@ protected :
      * @return Un pointeur sur la nouvelle bactérie copiée de l'instance courante
      */
 
+    /**
+     * @brief getEnergyReleased
+     * @return l'énergie dépensée à chaque pas de déplacement
+     */
+    Quantity getEnergyReleased() const;
+
+    /**
+     * @brief getEnergy
+     * @return l'énergie minimale nécessaire à la division
+     */
+    Quantity getEnergy() const;
+
+    /**
+     * @brief getDelay
+     * @return le temps d'attente entre deux consommations de nutriments pour la bactérie
+     */
+    sf::Time getDelay() const;
+
+    /**
+     * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries
+     * Il s'agit d'une méthode virtuelle pure
+     * @return la valeur associée à getAppConfig()["bacterium"]
+     */
+    virtual j::Value const& getConfig() const = 0;
 };

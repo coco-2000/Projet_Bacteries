@@ -12,6 +12,8 @@ public :
      */
     NutrimentB(Quantity quantity, const Vec2d& position);
 
+protected:
+
     /**
      * @brief getConfig redéfinition de la méthode virtuelle héritée de Nutriment
      * Raccourci pour accéder aux paramètres relatifs aux nutriments B

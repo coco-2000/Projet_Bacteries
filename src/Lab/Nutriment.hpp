@@ -41,12 +41,6 @@ public :
     void drawOn(sf::RenderTarget& target) const override;
 
    /**
-    * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux nutriments
-    * Il s'agit d'une méthode virtuelle pure
-    */
-    virtual j::Value const& getConfig() const = 0;
-
-   /**
     * @brief update Effectue la croissance d'un nutriment en mettant à jour sa quantité et son rayon
     * @param dt Pas de temps après lequel lequel le nutriment est mise à jour
     */
@@ -71,7 +65,7 @@ public :
      */
     bool isEmpty();
 
-private :
+protected :
     const double dist;
     Quantity quantity_;
 
@@ -80,4 +74,11 @@ private :
      * @param target Cible pour l'affichage
      */
     void DisplayQuantity(sf::RenderTarget& target) const;
+
+    /**
+     * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux nutriments
+     * Il s'agit d'une méthode virtuelle pure
+     */
+     virtual j::Value const& getConfig() const = 0;
+
 };

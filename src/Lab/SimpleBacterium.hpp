@@ -27,20 +27,6 @@ public:
                     bool abstinence);
 
     /**
-     * Redéfinition d'une méthode virtuelle pure
-     * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries simples
-     * @return La valeur associée à getAppConfig()["simple bacterium"]
-     */
-    j::Value const& getConfig() const override;
-
-    /**
-     * Redéfinition d'une méthode virtuelle pure
-     * @brief move Déplace une bactérie
-     * @param dt Pas de temps depuis le dernier déplacement de l'instance courante
-     */
-    void move(sf::Time dt) override;
-
-    /**
      * @brief getSpeedVector Permet d'accéder au vecteur de vitesse qui détermine
      *                       le déplacement de la bactérie
      * @return Le vecteur vitesse calculé en fonction de la direction et des
@@ -48,12 +34,6 @@ public:
      */
     Vec2d getSpeedVector() const;
 
-    /**
-     * Redéfinition d'une méthode virtuelle pure
-     * @brief copie Effectue la copie d'une instance avec tous ses attributs
-     * @return Un pointeur sur la nouvelle bactérie copiée de l'instance courante
-     */
-    SimpleBacterium* clone() const override;
 
 private :
     MRU equation;
@@ -91,4 +71,26 @@ private :
     void strategie2();
 
     double helperPositionScore (const Vec2d& offset);
+
+    /**
+     * Redéfinition d'une méthode virtuelle pure
+     * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries simples
+     * @return La valeur associée à getAppConfig()["simple bacterium"]
+     */
+    j::Value const& getConfig() const override;
+
+    /**
+     * Redéfinition d'une méthode virtuelle pure
+     * @brief move Déplace une bactérie
+     * @param dt Pas de temps depuis le dernier déplacement de l'instance courante
+     */
+    void move(sf::Time dt) override;
+
+    /**
+     * Redéfinition d'une méthode virtuelle pure
+     * @brief copie Effectue la copie d'une instance avec tous ses attributs
+     * @return Un pointeur sur la nouvelle bactérie copiée de l'instance courante
+     */
+    SimpleBacterium* clone() const override;
+
 };

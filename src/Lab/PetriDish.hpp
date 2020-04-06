@@ -53,12 +53,6 @@ public:
     void update(sf::Time dt) override;
 
     /**
-     * @brief getConfig Raccourci pour accéder aux paramètres associée à l'assiette de Petri
-     * @return la valeur de getAppConfig()["petri dish"]
-     */
-    j::Value const& getConfig() const;
-
-    /**
      * @brief drawOn dessiner l'assiette de petri
      * @param targetWindow la fenetre dans laquelle on affiche l'assiette de Petri
      */
@@ -169,6 +163,14 @@ private :
      *                    à un vecteur vide
      */
     void init_annexe();
+
+    /**
+     * @brief getConfig Raccourci pour accéder aux paramètres associée à l'assiette de Petri
+     * @return la valeur de getAppConfig()["petri dish"]
+     */
+    j::Value const& getConfig() const;
+
+
 };
 
 
