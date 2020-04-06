@@ -134,3 +134,9 @@ void SimpleBacterium::strategie2()
         }
     }
 }
+
+void SimpleBacterium::drawOn(sf::RenderTarget& target) const
+{
+    Bacterium::drawOn(target);
+    graphisme_particulier(target);
+}

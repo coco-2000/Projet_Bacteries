@@ -47,12 +47,6 @@ public :
     void update(sf::Time dt) override;
 
     /**
-     * @brief consumeEnergy décrémenter le niveau d'énergie
-     * @param qt la quantité pour laquelle l'énergie est décrémentée
-     */
-    void consumeEnergy(Quantity qt);
-
-    /**
      * @brief setDirection Manipulateur de direction
      * @param direction Vecteur à assigner à la direction de l'instance courante
      */
@@ -104,11 +98,6 @@ protected :
      */
     void collisionPetri(sf::Time dt);
 
-    /**
-     * @brief consumeNutriment gère la consommation des bacteries
-     * @param dt Pas de temps après lequel la simulation est mise à jour
-     */
-    void consumeNutriment(sf::Time dt);
 
     /**
      * @brief move Méthode virtuelle pure de déplacement des bactéries
@@ -133,17 +122,10 @@ protected :
     void divide();
 
     /**
-     * @brief graphisme_particulier Permet d'ajouter des détails graphiques aux bactéries selon leur sous-classe
-     * ici le corps de la méthode est vide pour que les tests puissent s'effectuer correctement
-     * @param target Cible pour l'affichage
-     */
-    virtual void graphisme_particulier(sf::RenderTarget& target) const {}
-
-    /**
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
      * ici le corps de la méthode est vide pour que les tests puissent s'effectuer correctement
      */
-    virtual void tentative_basculement() {}
+    virtual void tentative_basculement() = 0;
 
     /**
      * @brief mutate Méthode de mutation d'une bactérie
@@ -180,4 +162,18 @@ protected :
      * @return la valeur associée à getAppConfig()["bacterium"]
      */
     virtual j::Value const& getConfig() const = 0;
+
+    /**
+     * @brief consumeEnergy décrémenter le niveau d'énergie
+     * @param qt la quantité pour laquelle l'énergie est décrémentée
+     */
+    void consumeEnergy(Quantity qt);
+
+    /**
+     * @brief consumeNutriment gère la consommation des bacteries
+     * @param dt Pas de temps après lequel la simulation est mise à jour
+     */
+    void consumeNutriment(sf::Time dt);
+
+
 };

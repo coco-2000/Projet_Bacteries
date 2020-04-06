@@ -34,6 +34,7 @@ public:
      */
     Vec2d getSpeedVector() const;
 
+    void drawOn(sf::RenderTarget& target) const override;
 
 private :
     MRU equation;
@@ -41,11 +42,10 @@ private :
     sf::Time tps_basculement;
 
     /**
-     * Redéfinition d'une méthode virtuelle pure
      * @brief graphisme_particulier Permet d'ajouter des détails graphiques spécifiques aux bactéries simples
      * @param target Cible pour l'affichage
      */
-    void graphisme_particulier(sf::RenderTarget& target) const override;
+    void graphisme_particulier(sf::RenderTarget& target) const;
 
     /**
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
