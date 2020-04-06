@@ -66,7 +66,6 @@ void Bacterium::setDirection(Vec2d dir)
 void Bacterium::drawOn(sf::RenderTarget& target) const
 {
     target.draw(buildCircle(position, radius, couleur.get()));
-    graphisme_particulier(target);
     DisplayEnergy(target);
 }
 

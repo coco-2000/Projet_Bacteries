@@ -1,5 +1,6 @@
 #include "TwitchingBacterium.hpp"
 #include "Application.hpp"
+#include <SFML/Graphics.hpp>
 
 TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
     : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(), getConfig()["energy"]["max"].toDouble()),
@@ -23,3 +24,8 @@ Bacterium* TwitchingBacterium::clone() const
     return new TwitchingBacterium(*this);
 }
 
+void TwitchingBacterium::drawOn(sf::RenderTarget& target) const
+{
+    Bacterium::drawOn(target);
+    target.draw(buildCircle(grapin.getPosition(), grapin.getRadius(), sf::Color::Black);
+}
