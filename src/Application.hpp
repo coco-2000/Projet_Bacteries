@@ -1,7 +1,7 @@
 /*
  * prjsv 2016-20
  * Marco Antognini & Jamila Sam
- * Application class for STEP3
+ * STEP 4
  */
 
 #ifndef INFOSV_APPLICATION_HPP
@@ -147,15 +147,6 @@ protected:
 	void initHelpBox();
 	virtual std::string getHelpTextFile() const;
 	
-	/**
-     *  @brief Add a graph to the stats manager and update GUI
-     *
-     *  @param title  graph's title
-     *  @param series series' title
-     *  @param min    y-axis: min value expected
-     *  @param max    y-axis: max value expected
-     */
-    void addGraph(std::string const& title, std::vector<std::string> const& series, double min, double max);
     /*!
      *  @brief Called once before starting the main loop
      *
@@ -235,15 +226,6 @@ protected:
 				sf::Drawable const& helpBackground
 				);
 
-	/**
-     *  @brief Get access to the stats manager
-     *
-     *  @return the application statistic manager
-     */
-    //Stats& getStats();
-
-	//void setActiveGraph(int id);
-
     /*!
      * @brief Toggle pause
      */
@@ -303,10 +285,10 @@ private:
 //    j::Value          mJSONRead;       ///< Application configuration
     Config*          mConfig;       ///< Application configuration
 	
-	//Stats*   mStats;                 ///< Statistic manager
+//	Stats*   mStats;                 ///< Statistic manager
     sf::View mStatsView;             ///< View for the stats area
 	sf::View mControlView;             ///< View for the control area
-//    int      mCurrentGraphId;        ///< Current graph ID
+    int      mCurrentGraphId;        ///< Current graph ID
 
 
     sf::View mHelpView;         ///< View for commands help
@@ -364,7 +346,12 @@ Application& getApp();
  */
 Lab& getAppEnv();
 
-
+/*!
+ * @brief Get the bee tracker helper for the current application
+ *
+ * @return the app's bee tracker
+ */
+//AnimalTracker& getAppAnimalTracker();
 
 /*!
  * @brief Get the config of the current application
