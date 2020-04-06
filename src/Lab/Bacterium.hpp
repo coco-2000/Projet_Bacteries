@@ -146,7 +146,7 @@ protected :
      * @brief clone réalise une copie polymorphique de la bacterie. Méthode virtuelle pure
      * @return Un pointeur sur la nouvelle bactérie issue de l'instance courante
      */
-    virtual Bacterium* clone() = 0;
+    virtual Bacterium* clone() const = 0;
 
     /**
      * @brief divide Méthode de division commune à toutes les bactéries
