@@ -46,7 +46,7 @@ void SimpleBacterium::move(sf::Time dt)
 
     if((new_position - getPosition()).lengthSquared() >= 0.001)
     {
-        consumeEnergy((new_position - getPosition()).length() * getEnergyReleased());
+        consumeEnergy((new_position - getPosition()).length() * getStepEnergyReleased());
         setPosition(new_position);
     }
 

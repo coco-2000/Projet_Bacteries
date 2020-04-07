@@ -54,7 +54,7 @@ file (GLOB CACHE_SOURCES
   "${CACHE_DIR}/catch.hpp"
    "${TEST_DIR}/UnitTests/CheckUtility.hpp"
    "${TEST_DIR}/UnitTests/CatchTests.cpp"
-   #   ${SOURCES}
+   # ${SOURCES}
    ${UTILITY_SOURCES}
     )
 

@@ -142,7 +142,7 @@ protected :
      * @brief getEnergyReleased
      * @return l'énergie dépensée à chaque pas de déplacement
      */
-    Quantity getEnergyReleased() const;
+    Quantity getStepEnergyReleased() const;
 
     /**
      * @brief getEnergy

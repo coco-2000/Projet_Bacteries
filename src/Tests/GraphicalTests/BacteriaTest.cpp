@@ -42,6 +42,8 @@ protected:
     {
             consumeEnergy(0.1);
     }
+
+
 };
 
 	

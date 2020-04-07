@@ -69,6 +69,7 @@ public :
     std::ostream& affiche(std::ostream& out)  const;
 
 
+
 protected :
 
     Vec2d position;
@@ -79,8 +80,7 @@ protected :
      * @param position Coordonnées de la position du CircularBody
      * @param radius Rayon du CircularBody
      */
-    CircularBody(Vec2d position, double radius);
-
+    CircularBody( Vec2d const& position, double radius);
     /**
      * @brief CircularBody::CircularBody Constructeur de copie
      * @param other CircularBody à copier

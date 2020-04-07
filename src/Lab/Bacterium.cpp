@@ -52,7 +52,7 @@ sf::Time Bacterium::getDelay() const
     return sf::seconds(getConfig()["meal"]["delay"].toDouble());
 }
 
-Quantity Bacterium::getEnergyReleased() const
+Quantity Bacterium::getStepEnergyReleased() const
 {
     return getConfig()["energy"]["consumption factor"].toDouble();
 }

@@ -2,6 +2,8 @@
 #include "Application.hpp"
 #include <SFML/Graphics.hpp>
 
+Grip::Grip(const Vec2d& position, double radius) : CircularBody(position, radius) {}
+
 TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
     : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(), getConfig()["energy"]["max"].toDouble()),
                 position,
@@ -27,5 +29,5 @@ Bacterium* TwitchingBacterium::clone() const
 void TwitchingBacterium::drawOn(sf::RenderTarget& target) const
 {
     Bacterium::drawOn(target);
-    target.draw(buildCircle(grapin.getPosition(), grapin.getRadius(), sf::Color::Black);
+    //target.draw(buildCircle(grapin.getPosition(), grapin.getRadius(), sf::Color::Black);
 }

@@ -1,7 +1,12 @@
 #pragma once
 
 #include "Bacterium.hpp"
-#include "../Utility/Grip.hpp"
+
+class Grip : public CircularBody {
+public:
+    Grip(const Vec2d& position, double radius);
+};
+
 
 class TwitchingBacterium : public Bacterium
 {

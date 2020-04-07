@@ -4,8 +4,11 @@
 #include "Utility/Vec2d.hpp"
 
 
-CircularBody::CircularBody(Vec2d position, double radius)
-    : position(position), radius(radius) {}
+CircularBody::CircularBody( Vec2d const& position, double radius)
+    : position(position), radius(radius)
+{
+
+}
 
 CircularBody::CircularBody(const CircularBody& other)
 {
