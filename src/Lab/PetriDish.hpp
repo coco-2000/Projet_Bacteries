@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
+#include "Swarm.hpp"
 
 
 class PetriDish : public CircularBody, public Drawable, public Updatable
@@ -136,9 +137,12 @@ public:
      * @param clone Pointeur sur la bactérie à ajouter (créée par clonage en l'occurence)
      */
     void ajout_annexe(Bacterium*);
+    void addSwarm(Swarm* groupe);
+    Swarm* getSwarmWithId(std::string id) const;
 
 private :
     std::vector<Bacterium*> lesBacteries;
+    std::vector<Swarm*> lesSwarms;
     std::vector<Nutriment*> lesNutriments;
     double puissance;
     double temperature;
@@ -170,7 +174,7 @@ private :
      */
     j::Value const& getConfig() const;
 
-
+    void update_swarms(sf::Time dt);
 };
 
 

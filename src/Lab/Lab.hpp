@@ -141,6 +141,10 @@ public:
        */
      ~Lab() override;
 
+     void addSwarm(Swarm* groupe);
+
+     Swarm* getSwarmWithId(std::string id) const;
+
 private :
 
     PetriDish petri;

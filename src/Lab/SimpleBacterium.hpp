@@ -2,7 +2,7 @@
 #include "Bacterium.hpp"
 #include "../Utility/DiffEqSolver.hpp"
 
-class SimpleBacterium : public Bacterium
+class SimpleBacterium : public Bacterium, public DiffEqFunction
 {
 public:
     /**
@@ -34,23 +34,23 @@ public:
      */
     Vec2d getSpeedVector() const;
 
-    void drawOn(sf::RenderTarget& target) const override;
+
 
 private :
-    MRU equation;
+    MRU force;
     double t;
     sf::Time tps_basculement;
 
     /**
-     * @brief graphisme_particulier Permet d'ajouter des détails graphiques spécifiques aux bactéries simples
+     * @brief drawOn Permet d'ajouter des détails graphiques spécifiques aux bactéries simples
      * @param target Cible pour l'affichage
      */
-    void graphisme_particulier(sf::RenderTarget& target) const;
+    void drawOn(sf::RenderTarget& target) const override;
 
     /**
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
      */
-    void tentative_basculement() override;
+    void tentative_basculement();
 
     /**
      * @brief basculement effectue le basculement de l'instance courante
@@ -92,5 +92,8 @@ private :
      * @return Un pointeur sur la nouvelle bactérie copiée de l'instance courante
      */
     SimpleBacterium* clone() const override;
+
+    // Cas d'une force nulle qui assure un mouvement rectiligne uniforme
+    Vec2d f(Vec2d position, Vec2d speed) const;
 
 };

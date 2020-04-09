@@ -10,7 +10,6 @@
 class Bacterium : public CircularBody, public Drawable, public Updatable
 {
 public :
-
     /**
      * @brief Bacterium Constructeur
      * @param energie niveau d'énergie intiale de la bacterie
@@ -76,7 +75,7 @@ public :
 
 protected :
     MutableColor couleur;
-    double angle;
+    //double angle;
     Vec2d direction;
     Quantity energie;
     std::map<std::string, MutableNumber> param_mutables;
@@ -122,21 +121,9 @@ protected :
     void divide();
 
     /**
-     * @brief tentative_basculement Décide si la bactérie doit basculer ou non
-     * ici le corps de la méthode est vide pour que les tests puissent s'effectuer correctement
-     */
-    virtual void tentative_basculement() {}
-
-    /**
      * @brief mutate Méthode de mutation d'une bactérie
      */
-    void mutate();
-
-    /**
-     * @brief copie Méthode virtuelle pure effectuant la copie d'une instance avec
-     *              tous ses attributs
-     * @return Un pointeur sur la nouvelle bactérie copiée de l'instance courante
-     */
+    virtual void mutate();
 
     /**
      * @brief getEnergyReleased
@@ -174,6 +161,4 @@ protected :
      * @param dt Pas de temps après lequel la simulation est mise à jour
      */
     void consumeNutriment(sf::Time dt);
-
-
 };

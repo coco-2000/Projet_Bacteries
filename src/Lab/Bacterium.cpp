@@ -60,7 +60,6 @@ Quantity Bacterium::getStepEnergyReleased() const
 void Bacterium::setDirection(Vec2d dir)
 {
     direction = dir;
-    angle = direction.angle();
 }
 
 void Bacterium::drawOn(sf::RenderTarget& target) const
@@ -86,7 +85,6 @@ void Bacterium::DisplayEnergy(sf::RenderTarget& target) const
 void Bacterium::update(sf::Time dt)
 {
     move(dt);
-    tentative_basculement();
     collisionPetri(dt);
     consumeNutriment(dt);
     divide();
@@ -96,15 +94,19 @@ void Bacterium::collisionPetri(sf::Time dt)
 {
     if (getAppEnv().doesCollideWithDish(*this))
     {
-        direction = -direction;
+        //double rotation(direction.angle());
 
-        auto const angleDiff = angleDelta(direction.angle(), angle); // calcule la différence entre le nouvel
+        setDirection(-direction);
+
+       /* auto const angleDiff = angleDelta(direction.angle(), rotation); // calcule la différence entre le nouvel
                                                                           // angle de direction et l'ancien
         auto dalpha = PI * dt.asSeconds();    // calcule dα
         dalpha = std::min(dalpha, std::abs(angleDiff)); // on ne peut tourner plus que de angleDiff
 
         dalpha = std::copysign(dalpha, angleDiff); // on tourne dans la direction indiquée par angleDiff
-        angle += dalpha; // angle de rotation mis à jour
+        rotation += dalpha; // angle de rotation mis à jour*/
+
+
     }
 }
 

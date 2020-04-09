@@ -42,7 +42,7 @@ void SimpleBacterium::move(sf::Time dt)
 {
     constexpr int COEFF_T = 3;
     tps_basculement += dt;
-    const Vec2d new_position(stepDiffEq(getPosition(), getSpeedVector(), dt,equation).position);
+    const Vec2d new_position(stepDiffEq(getPosition(), getSpeedVector(), dt, force).position);
 
     if((new_position - getPosition()).lengthSquared() >= 0.001)
     {
@@ -51,6 +51,8 @@ void SimpleBacterium::move(sf::Time dt)
     }
 
     t += COEFF_T * dt.asSeconds();
+
+    tentative_basculement();
 }
 
 Vec2d SimpleBacterium::getSpeedVector() const
@@ -58,7 +60,7 @@ Vec2d SimpleBacterium::getSpeedVector() const
     return direction * getProperty("speed").get();
 }
 
-void SimpleBacterium::graphisme_particulier(sf::RenderTarget& target) const
+void SimpleBacterium::drawOn(sf::RenderTarget& target) const
 {
     constexpr int nb_point(30);
 
@@ -77,8 +79,10 @@ void SimpleBacterium::graphisme_particulier(sf::RenderTarget& target) const
      auto transform = sf::Transform(); // déclare une matrice de transformation
      // ici ensemble d'opérations comme des translations ou rotations faites sur transform:
      transform.translate(getPosition());
-     transform.rotate(angle / DEG_TO_RAD);
+     transform.rotate(direction.angle() / DEG_TO_RAD);
      target.draw(set_of_points, transform);
+
+     Bacterium::drawOn(target);
 }
 
 void SimpleBacterium::tentative_basculement()
@@ -113,13 +117,14 @@ void SimpleBacterium::basculement()
 
 void SimpleBacterium::strategie1()
 {
-    direction = Vec2d::fromRandomAngle();
+    setDirection(Vec2d::fromRandomAngle());
 }
 
 double SimpleBacterium::helperPositionScore (const Vec2d& offset)
 {
     return getAppEnv().getPositionScore(getPosition() + offset);
 }
+
 void SimpleBacterium::strategie2()
 {
     constexpr int N(20); // nb de directions aléatoires à générer
@@ -135,8 +140,7 @@ void SimpleBacterium::strategie2()
     }
 }
 
-void SimpleBacterium::drawOn(sf::RenderTarget& target) const
+Vec2d SimpleBacterium::f(Vec2d position, Vec2d speed) const
 {
-    Bacterium::drawOn(target);
-    graphisme_particulier(target);
+    return {0, 0};
 }

@@ -27,13 +27,6 @@ public:
     virtual ~DiffEqFunction() = default;
 };
 
-// Cas d'une force nulle qui assure un mouvement rectiligne uniforme
-class MRU : public DiffEqFunction
-{
-public:
-    virtual Vec2d f(Vec2d position, Vec2d speed) const;
-};
-
 enum class DiffEqAlgorithm {
     RG4, // Runge-Kutta fourth-order method
     EC   // Euler-Cromer, quite unstable

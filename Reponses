@@ -384,6 +384,48 @@ BacteriaTest toujours la
 
 
 
+**************************************************
+##Q4.6
 
+L'invocation se fait sur un Lab, on implémente donc une méthode addSwarm dans la classe Lab qui appelle une
+méthode addSwarn dans la classe PetriDish se chargeant d'ajouter la nouvelle instance dans son attribut lesSwarms.
+Pour que l'invocation puisse se faire, il faut aussi que la classe Swarm présente un constructeur pouvant initialiser
+une instance à partir de son identificateur seulement, ce que nous ajoutons
+
+**************************************************
+##Q4.7
+
+La classe DiffEqFunction présente une méthode virtuelle pure f qui correspond à la force régissant le déplacement
+de la bactérie. Nous avons donc crée une nouvelle classe SwarmMove qui hérite de la classe DiffEqFunction et
+redéfinit la fonction f selon les caractéristiques des Swarms. Puisque la bactérie a une equation qui détermine son
+mouvement, nous ajoutons un attribut force de type SwarmMove dans la classe SwarmBacterium, c'est une composition.
+
+**************************************************
+##Q4.8
+
+Nous redéfinissons la méthode clone qui ici renvoie un pointeur sur une SwarmBacterium
+Nous redéfinissons la méthode mutate qui cette fois-ci n'a pas besoin de boucler sur l'ensemble de paramètres
+mutables, elle ne fait que muter la couleur.
+
+**************************************************
+##Q4.9
+
+L'invocation se fait sur un Lab, on implémente donc une méthode getSwarmWithId dans la classe Lab qui appelle une
+méthode getSwarmWithId dans la classe PetriDish. Nous prévoyons dans la classe Swarm un accesseur getId pour son
+identificateur permettant à PetriDish::getSwarmWithId de trouver le Swarm (dans son tableau de Swarm) correspondant
+à l'identificateur souhaité et de retourner le Swarm en question (s'il n'existe pas il retourne un nullptr).
+
+**************************************************
+##Q4.10
+
+Le destructeur de Swarm n'est pas en charge des bactéries swarms puisqu'elles appartiennent à leur assiette de Petri
+qui s'occupe de la destruction de toutes les bactéries qu'elle contient. Par conséquent le destructeur de Swarm doit
+détruire le pointeur vers ces bactéries sans détruire le contenu des pointeurs.
+
+**************************************************
+##Q4.11
+
+Le destructeur de SwarmBacterium doit être redéfini de façon à ce que la méthode supprBacterium soit appelé dès qu'une
+SwarmBacterium meurt et est donc détruite.
 
 
