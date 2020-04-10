@@ -37,7 +37,6 @@ public:
 
 
 private :
-    MRU force;
     double t;
     sf::Time tps_basculement;
 
@@ -70,8 +69,6 @@ private :
      */
     void strategie2();
 
-    double helperPositionScore (const Vec2d& offset);
-
     /**
      * Redéfinition d'une méthode virtuelle pure
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries simples
@@ -94,6 +91,5 @@ private :
     SimpleBacterium* clone() const override;
 
     // Cas d'une force nulle qui assure un mouvement rectiligne uniforme
-    Vec2d f(Vec2d position, Vec2d speed) const;
-
+    Vec2d f(Vec2d position, Vec2d speed) const override;
 };

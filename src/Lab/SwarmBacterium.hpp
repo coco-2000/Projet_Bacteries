@@ -19,11 +19,8 @@ public:
 
     ~SwarmBacterium();
 
-
-
 private:
     Swarm* groupe;
-
 
     void move(sf::Time dt) override;
 
@@ -31,4 +28,7 @@ private:
 
     j::Value const& getConfig() const override;
 
+    Vec2d getSpeedVector() const;
+
+    void direction_hasard();
 };

@@ -40,9 +40,7 @@ j::Value const& SimpleBacterium::getConfig() const
 
 void SimpleBacterium::move(sf::Time dt)
 {
-    constexpr int COEFF_T = 3;
-    tps_basculement += dt;
-    const Vec2d new_position(stepDiffEq(getPosition(), getSpeedVector(), dt, force).position);
+    const Vec2d new_position(stepDiffEq(getPosition(), getSpeedVector(), dt, *this).position);
 
     if((new_position - getPosition()).lengthSquared() >= 0.001)
     {
@@ -50,8 +48,9 @@ void SimpleBacterium::move(sf::Time dt)
         setPosition(new_position);
     }
 
+    constexpr int COEFF_T = 3;
     t += COEFF_T * dt.asSeconds();
-
+    tps_basculement += dt;
     tentative_basculement();
 }
 
@@ -118,11 +117,6 @@ void SimpleBacterium::basculement()
 void SimpleBacterium::strategie1()
 {
     setDirection(Vec2d::fromRandomAngle());
-}
-
-double SimpleBacterium::helperPositionScore (const Vec2d& offset)
-{
-    return getAppEnv().getPositionScore(getPosition() + offset);
 }
 
 void SimpleBacterium::strategie2()

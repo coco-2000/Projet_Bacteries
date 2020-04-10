@@ -94,17 +94,17 @@ void Bacterium::collisionPetri(sf::Time dt)
 {
     if (getAppEnv().doesCollideWithDish(*this))
     {
-        //double rotation(direction.angle());
+        double rotation(direction.angle());
 
         setDirection(-direction);
 
-       /* auto const angleDiff = angleDelta(direction.angle(), rotation); // calcule la différence entre le nouvel
+       auto const angleDiff = angleDelta(direction.angle(), rotation); // calcule la différence entre le nouvel
                                                                           // angle de direction et l'ancien
         auto dalpha = PI * dt.asSeconds();    // calcule dα
         dalpha = std::min(dalpha, std::abs(angleDiff)); // on ne peut tourner plus que de angleDiff
 
         dalpha = std::copysign(dalpha, angleDiff); // on tourne dans la direction indiquée par angleDiff
-        rotation += dalpha; // angle de rotation mis à jour*/
+        rotation += dalpha; // angle de rotation mis à jour
 
 
     }
@@ -167,5 +167,12 @@ MutableNumber Bacterium::getProperty(const std::string& key) const
     }
 }
 
+double Bacterium::helperPositionScore (const Vec2d& offset)
+{
+    return getAppEnv().getPositionScore(getPosition() + offset);
+}
 
-
+double Bacterium::helperPositionScore()
+{
+    return getAppEnv().getPositionScore(getPosition() + direction);
+}

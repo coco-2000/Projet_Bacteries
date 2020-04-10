@@ -16,11 +16,14 @@ public:
     void supprBacterium(SwarmBacterium* bacterie);
 
     Vec2d getLeaderPosition() const;
+    SwarmBacterium* getLeader() const;
 
     std::string getId() const;
     void update(sf::Time dt);
 
     void drawOn(sf::RenderTarget& target) const;
+
+    void LeaderDirection();
 
     ~Swarm();
 private:

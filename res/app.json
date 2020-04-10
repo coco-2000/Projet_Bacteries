@@ -12,7 +12,7 @@
     },
     "generator" : {
         "nutriment" : {
-            "delay" : 1.5,
+            "delay" : 2,
             "prob" : 0.5
         }
     },
@@ -202,7 +202,7 @@
             "min" : 5
         },
         "speed" : {
-            "initial" : 30
+            "initial" : 40
         }
     },
     "swarms" : {
@@ -245,7 +245,7 @@
                     "sigma" : 0.1
                 }
             },
-            "force factor" : 25
+            "force factor" : 5
         },
         "2" : {
             "color" : {
@@ -286,7 +286,7 @@
                     "sigma" : 0.1
                 }
             },
-            "force factor" : 50
+            "force factor" : 10
         }
     },
     "twitching bacterium" : {

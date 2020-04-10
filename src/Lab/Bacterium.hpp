@@ -72,6 +72,9 @@ public :
      */
     void setScore(double score);
 
+    double helperPositionScore (const Vec2d& offset);
+    double helperPositionScore ();
+
 
 protected :
     MutableColor couleur;

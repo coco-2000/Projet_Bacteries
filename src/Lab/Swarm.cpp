@@ -109,3 +109,20 @@ Vec2d Swarm::f(Vec2d position, Vec2d speed) const
 {
     return (getConfig()[identificateur]["force factor"].toDouble()) * (getLeaderPosition() - position);
 }
+
+void Swarm::LeaderDirection()
+{
+    constexpr int nb_vecteur(20); // nb de directions aléatoires à générer
+
+    for(int i(0); i < nb_vecteur; ++i)
+    {
+        Vec2d new_dir(Vec2d::fromRandomAngle());
+
+        if(leader->helperPositionScore(new_dir) > leader->helperPositionScore())
+        {
+            leader->setDirection(new_dir);
+        }
+    }
+}
+
+
