@@ -109,7 +109,7 @@ protected :
      * @brief collisionPetri gère les collisions des bacteries
      * avec l'assiette de petri
      */
-    void collisionPetri(sf::Time dt);
+    void collisionPetri();
 
 
     /**

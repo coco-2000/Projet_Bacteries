@@ -52,6 +52,8 @@ void SimpleBacterium::move(sf::Time dt)
     constexpr int COEFF_T = 3;
     t += COEFF_T * dt.asSeconds();
     tps_basculement += dt;
+
+    rotationAngle(dt);
     tentative_basculement();
 }
 
@@ -78,7 +80,7 @@ void SimpleBacterium::drawOn(sf::RenderTarget& target) const
      auto transform = sf::Transform(); // déclare une matrice de transformation
      // ici ensemble d'opérations comme des translations ou rotations faites sur transform:
      transform.translate(getPosition());
-     transform.rotate(direction.angle() / DEG_TO_RAD);
+     transform.rotate(angle / DEG_TO_RAD);
      target.draw(set_of_points, transform);
 
      Bacterium::drawOn(target);
