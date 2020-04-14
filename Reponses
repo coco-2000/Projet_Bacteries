@@ -373,12 +373,21 @@ Redéfinir la méthode getConfig héritée de la classe bacterium.
 
 **************************************************
 ##Q4.3
+
 Toutes les méthodes virtuelles pures héritées de Bacterium devront être redéfinies pour que la classe
 TwitchingBacterium puisse être instanciable.
 
 Question : divisiion et directions
 facteurs de déperdition d'énergie
 BacteriaTest toujours la
+Bacteries décalées apres division
+
+**************************************************
+##Q4.4
+
+Redéfinition de la methode getStepEnergy de la Superclasse dans la sous classe TwitchingBacterium pour l'énergie libérée
+en se déplaçantet création de la methode getTentacleEnergy dans la sous classe TwitchingBacterium pour l'énergie libérée
+en déployant la tentacule
 
 
 

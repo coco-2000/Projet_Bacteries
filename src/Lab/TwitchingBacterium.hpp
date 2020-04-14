@@ -13,6 +13,7 @@ class TwitchingBacterium : public Bacterium
 public :
     TwitchingBacterium(const Vec2d& position);
     void drawOn(sf::RenderTarget& target) const override;
+    void moveGrip(const Vec2d& position);
 
 protected :
     Grip grapin;
@@ -20,4 +21,6 @@ protected :
     j::Value const& getConfig() const override;
     void move(sf::Time dt) override {} //à définir
     Bacterium* clone() const override;
+    Quantity getStepEnergy() const override;
+    Quantity getTentacleEnergy() const;
 };

@@ -43,11 +43,12 @@ void SimpleBacterium::move(sf::Time dt)
     constexpr int COEFF_T = 3;
     tps_basculement += dt;
     const Vec2d new_position(stepDiffEq(getPosition(), getSpeedVector(), dt,equation).position);
+    const auto deltaPos = new_position - getPosition();
 
-    if((new_position - getPosition()).lengthSquared() >= 0.001)
+    if(deltaPos.lengthSquared() >= 0.001)
     {
-        consumeEnergy((new_position - getPosition()).length() * getStepEnergyReleased());
-        setPosition(new_position);
+        consumeEnergy(deltaPos.length() * getStepEnergy());
+        CircularBody::move(deltaPos);
     }
 
     t += COEFF_T * dt.asSeconds();
@@ -60,8 +61,7 @@ Vec2d SimpleBacterium::getSpeedVector() const
 
 void SimpleBacterium::graphisme_particulier(sf::RenderTarget& target) const
 {
-    constexpr int nb_point(30);
-
+    constexpr int nb_point(30);            
     sf::VertexArray set_of_points = sf::VertexArray(sf::LinesStrip);
       // ajout de points à l'ensemble:
 
@@ -131,6 +131,7 @@ void SimpleBacterium::strategie2()
         if(helperPositionScore (new_dir) > helperPositionScore(direction))
         {
             setDirection(new_dir);
+            rotationAngle(dt);
         }
     }
 }

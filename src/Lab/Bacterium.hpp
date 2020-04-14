@@ -47,12 +47,6 @@ public :
     void update(sf::Time dt) override;
 
     /**
-     * @brief setDirection Manipulateur de direction
-     * @param direction Vecteur à assigner à la direction de l'instance courante
-     */
-    void setDirection(Vec2d direction);
-
-    /**
      * @brief addProperty Ajoute à l'ensemble des paramètres mutables numériques de la bactérie une valeur numérique mutable donnée
      * @param key Clé (=nom) du paramètre mutable à ajouter
      * @param valeur Valeur associée à la clé, sous forme de MutableNumber
@@ -139,10 +133,10 @@ protected :
      */
 
     /**
-     * @brief getEnergyReleased
+     * @brief getStepEnergy
      * @return l'énergie dépensée à chaque pas de déplacement
      */
-    Quantity getStepEnergyReleased() const;
+    virtual Quantity getStepEnergy() const;
 
     /**
      * @brief getEnergy
@@ -175,5 +169,12 @@ protected :
      */
     void consumeNutriment(sf::Time dt);
 
+    void rotationAngle(sf::Time dt);
+
+    /**
+     * @brief setDirection Manipulateur de direction
+     * @param direction Vecteur à assigner à la direction de l'instance courante
+     */
+    void setDirection(Vec2d direction);
 
 };
