@@ -43,8 +43,6 @@ void SwarmBacterium::move(sf::Time dt)
         consumeEnergy((new_position - getPosition()).length() * getStepEnergyReleased());
         setPosition(new_position);
     }
-
-    groupe->LeaderDirection();
 }
 
 void SwarmBacterium::mutate()

@@ -72,7 +72,18 @@ public :
      */
     void setScore(double score);
 
+    /**
+     * @brief helperPositionScore Calcul score de la position de l'instance + un vecteur
+     * @param offset Vecteur a ajouter à la position
+     * @return Score associé à la nouvelle position
+     */
     double helperPositionScore (const Vec2d& offset);
+
+    /**
+     * Surcharge sans paramètre
+     * @brief helperPositionScore Calcul score de la position + la direction courante de l'instance
+     * @return
+     */
     double helperPositionScore ();
 
 

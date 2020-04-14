@@ -8,7 +8,7 @@
 
 
 Swarm::Swarm(std::string identificateur, const std::vector <SwarmBacterium*>& groupe)
-    : identificateur(identificateur), groupe(groupe), couleur(getColor(identificateur))
+    : identificateur(identificateur), groupe(groupe), couleur(getColor())
 {
     setLeader();
 }
@@ -18,9 +18,9 @@ void Swarm::update(sf::Time dt)
     setLeader();
 }
 
-MutableColor Swarm::getColor(std::string id) const
+MutableColor Swarm::getColor() const
 {
-    return getAppConfig()["swarms"][id]["color"];
+    return getAppConfig()["swarms"][identificateur]["color"];
 }
 
 void Swarm::addBacterium(SwarmBacterium* bacterie)
@@ -48,11 +48,6 @@ Vec2d Swarm::getLeaderPosition() const
 
 void Swarm::drawOn(sf::RenderTarget& target) const
 {
-/*    for(auto& bacterie : groupe)
-    {
-        bacterie->drawOn(target);
-    }*/
-
     if(isDebugOn() and leader != nullptr)
     {
         //on a ici décidé que l'epaisseur de l'anneau serait 5
@@ -110,17 +105,20 @@ Vec2d Swarm::f(Vec2d position, Vec2d speed) const
     return (getConfig()[identificateur]["force factor"].toDouble()) * (getLeaderPosition() - position);
 }
 
-void Swarm::LeaderDirection()
+void Swarm::updateLeaderDirection()
 {
-    constexpr int nb_vecteur(20); // nb de directions aléatoires à générer
-
-    for(int i(0); i < nb_vecteur; ++i)
+    if(leader != nullptr)
     {
-        Vec2d new_dir(Vec2d::fromRandomAngle());
+        constexpr int nb_vecteur(20); // nb de directions aléatoires à générer
 
-        if(leader->helperPositionScore(new_dir) > leader->helperPositionScore())
+        for(int i(0); i < nb_vecteur; ++i)
         {
-            leader->setDirection(new_dir);
+            Vec2d new_dir(Vec2d::fromRandomAngle());
+
+            if(leader->helperPositionScore(new_dir) > leader->helperPositionScore())
+            {
+                leader->setDirection(new_dir);
+            }
         }
     }
 }

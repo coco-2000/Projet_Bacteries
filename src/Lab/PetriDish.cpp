@@ -121,9 +121,10 @@ void PetriDish::update_nutriments (sf::Time dt)
 
 void PetriDish::update_swarms(sf::Time dt)
 {
-    for(auto swarms : lesSwarms)
+    for(auto& swarms : lesSwarms)
     {
         swarms->update(dt);
+        swarms->updateLeaderDirection();
     }
 }
 

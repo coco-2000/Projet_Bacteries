@@ -141,12 +141,20 @@ public:
        */
      ~Lab() override;
 
+     /**
+      * @brief addSwarm Ajoute un groupe Swarm à la boîte de Petri
+      * @param groupe Swarm à ajouter
+      */
      void addSwarm(Swarm* groupe);
 
+     /**
+      * @brief getSwarmWithId Accesseur pour le Swarm associé à un identificateur donné
+      * @param id Identificateur du Swarm à retourner
+      * @return Swarm dont l'identifiacteur est id
+      */
      Swarm* getSwarmWithId(std::string id) const;
 
 private :
-
     PetriDish petri;
     NutrimentGenerator generateur_nutriment;
 

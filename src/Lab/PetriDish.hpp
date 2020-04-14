@@ -89,6 +89,12 @@ public:
      */
     void init_temperature();
 
+    /**
+     * @brief getNutrimentColliding Vérifie si un corps circulaire est en contact avec un des
+     *        nutriments de la boite de Petri et retourne le nutriment si c'est le cas
+     * @param body Corps circulaire dont on vérifie la collision avec les nutriments
+     * @return Le nutriment avec lequel le corps circulaire est en collision s'il existe (nullptr sinon)
+     */
     Nutriment* getNutrimentColliding(CircularBody const& body) const;
 
     /**
@@ -137,7 +143,18 @@ public:
      * @param clone Pointeur sur la bactérie à ajouter (créée par clonage en l'occurence)
      */
     void ajout_annexe(Bacterium*);
+
+    /**
+     * @brief addSwarm Ajoute un groupe Swarm à la boîte de Petri
+     * @param groupe Swarm à ajouter
+     */
     void addSwarm(Swarm* groupe);
+
+    /**
+     * @brief getSwarmWithId Accesseur pour le Swarm de la boite de Petri associé à un identificateur donné
+     * @param id Identificateur du Swarm à retourner
+     * @return Swarm dont l'identifiacteur est id
+     */
     Swarm* getSwarmWithId(std::string id) const;
 
 private :
@@ -174,6 +191,10 @@ private :
      */
     j::Value const& getConfig() const;
 
+    /**
+     * @brief update_swarms Mise à jour de vecteur de Swarm de l'assiette de Petri
+     * @param dt Pas de temps après lequel lequel la simulation est mise à jour
+     */
     void update_swarms(sf::Time dt);
 };
 

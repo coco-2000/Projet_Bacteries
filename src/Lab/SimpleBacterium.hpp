@@ -34,14 +34,13 @@ public:
      */
     Vec2d getSpeedVector() const;
 
-
-
 private :
     double t;
     sf::Time tps_basculement;
 
     /**
-     * @brief drawOn Permet d'ajouter des détails graphiques spécifiques aux bactéries simples
+     * @brief drawOn Permet d'ajouter des détails graphiques spécifique
+     * aux bactéries simples
      * @param target Cible pour l'affichage
      */
     void drawOn(sf::RenderTarget& target) const override;
@@ -90,6 +89,12 @@ private :
      */
     SimpleBacterium* clone() const override;
 
-    // Cas d'une force nulle qui assure un mouvement rectiligne uniforme
+    /**
+     * @brief f Calcul le vecteur force déterminant le déplacement de la bactérie
+     * Ici la force est nulle ce qui assure un mouvement rectiligne uniforme
+     * @param position Position de l'instance courante /inutilisé
+     * @param speed Vitesse de l'instance coiurante /inutilisé
+     * @return Le vecteur force appliqué à la bactérie simple, le vecteur nul
+     */
     Vec2d f(Vec2d position, Vec2d speed) const override;
 };
