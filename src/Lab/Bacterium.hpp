@@ -80,6 +80,12 @@ public :
      */
     double helperPositionScore ();
 
+    /**
+     * @brief setDirection Manipulateur de direction
+     * @param direction Vecteur à assigner à la direction de l'instance courante
+     */
+    void setDirection(const Vec2d& dir);
+
 
 protected :
     MutableColor couleur;
@@ -172,10 +178,6 @@ protected :
 
     void rotationAngle(sf::Time dt);
 
-    /**
-     * @brief setDirection Manipulateur de direction
-     * @param direction Vecteur à assigner à la direction de l'instance courante
-     */
-    void setDirection(const Vec2d& dir);
+};
 
 

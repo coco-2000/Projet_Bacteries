@@ -40,7 +40,7 @@ void SwarmBacterium::move(sf::Time dt)
 
     if((new_position - getPosition()).lengthSquared() >= 0.001)
     {
-        consumeEnergy((new_position - getPosition()).length() * getStepEnergyReleased());
+        consumeEnergy((new_position - getPosition()).length() * getStepEnergy());
         setPosition(new_position);
     }
 }
