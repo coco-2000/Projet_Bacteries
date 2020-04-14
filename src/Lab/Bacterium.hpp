@@ -10,7 +10,6 @@
 class Bacterium : public CircularBody, public Drawable, public Updatable
 {
 public :
-
     /**
      * @brief Bacterium Constructeur
      * @param energie niveau d'énergie intiale de la bacterie
@@ -67,6 +66,20 @@ public :
      */
     void setScore(double score);
 
+    /**
+     * @brief helperPositionScore Calcul score de la position de l'instance + un vecteur
+     * @param offset Vecteur a ajouter à la position
+     * @return Score associé à la nouvelle position
+     */
+    double helperPositionScore (const Vec2d& offset);
+
+    /**
+     * Surcharge sans paramètre
+     * @brief helperPositionScore Calcul score de la position + la direction courante de l'instance
+     * @return
+     */
+    double helperPositionScore ();
+
 
 protected :
     MutableColor couleur;
@@ -118,13 +131,7 @@ protected :
     /**
      * @brief mutate Méthode de mutation d'une bactérie
      */
-    void mutate();
-
-    /**
-     * @brief copie Méthode virtuelle pure effectuant la copie d'une instance avec
-     *              tous ses attributs
-     * @return Un pointeur sur la nouvelle bactérie copiée de l'instance courante
-     */
+    virtual void mutate();
 
     /**
      * @brief getStepEnergy
@@ -169,6 +176,6 @@ protected :
      * @brief setDirection Manipulateur de direction
      * @param direction Vecteur à assigner à la direction de l'instance courante
      */
-    void setDirection(Vec2d direction);
+    void setDirection(const Vec2d& dir);
 
-};
+

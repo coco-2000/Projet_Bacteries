@@ -10,7 +10,9 @@ Bacterium::Bacterium(Quantity energie, Vec2d position, Vec2d direction,
 
     : CircularBody(position, radius),  couleur(couleur), energie(energie),
       param_mutables(param_mutables), abstinence(abstinence)
-{}
+{
+    angle = direction.angle();
+}
 
 
 void Bacterium::divide()
@@ -57,7 +59,7 @@ Quantity Bacterium::getStepEnergy() const
     return getConfig()["energy"]["consumption factor"].toDouble();
 }
 
-void Bacterium::setDirection(const Vec2d dir)
+void Bacterium::setDirection(const Vec2d& dir)
 {
     direction = dir;
 }
@@ -86,6 +88,7 @@ void Bacterium::update(sf::Time dt)
 {
     move(dt);
     collisionPetri(dt);
+    rotationAngle(dt);
     consumeNutriment(dt);
     divide();
 }
@@ -94,7 +97,7 @@ void Bacterium::collisionPetri(sf::Time dt)
 {
     if (getAppEnv().doesCollideWithDish(*this))
     {
-        direction = -direction;
+        setDirection(-direction);
     }
 }
 
@@ -155,6 +158,7 @@ MutableNumber Bacterium::getProperty(const std::string& key) const
     }
 }
 
+
 void Bacterium::rotationAngle(sf::Time dt)
 {
     auto const angleDiff = angleDelta(direction.angle(), angle); // calcule la différence entre le nouvel
@@ -166,4 +170,12 @@ void Bacterium::rotationAngle(sf::Time dt)
     angle += dalpha; // angle de rotation mis à jour
 }
 
+double Bacterium::helperPositionScore (const Vec2d& offset)
+{
+    return getAppEnv().getPositionScore(getPosition() + offset);
+}
 
+double Bacterium::helperPositionScore()
+{
+    return getAppEnv().getPositionScore(getPosition() + direction);
+}

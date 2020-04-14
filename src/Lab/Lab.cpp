@@ -1,6 +1,7 @@
 #include "Lab.hpp"
 #include "CircularBody.hpp"
 #include "Application.hpp"
+#include "Swarm.hpp"
 
 Lab::Lab()
     : petri(getApp().getCentre(), ratio_rayon*getApp().getLabSize().x)
@@ -14,7 +15,7 @@ bool Lab::contains(const CircularBody& corps) const
 bool Lab::doesCollideWithDish(CircularBody const& body) const
 {
     /*
-     * Comme l'assiete de petri constitue la limite de l'éspace dans lequel se deplacent les
+     * Comme l'assiete de petri constitue la limite de l'espace dans lequel se deplacent les
      * CircularBody, le fait de ne plus etre contenu dans une PetriDish équivaut à en sortir
      */
 
@@ -106,4 +107,14 @@ void Lab::init_puissance()
 void Lab::ajout_annexe(Bacterium* clone)
 {
     petri.ajout_annexe(clone);
+}
+
+void Lab::addSwarm(Swarm* groupe)
+{
+    petri.addSwarm(groupe);
+}
+
+Swarm* Lab::getSwarmWithId(std::string id) const
+{
+    return petri.getSwarmWithId(id);
 }

@@ -51,6 +51,13 @@ void PetriDish::reset()
     }
     lesNutriments.clear();
 
+    for(auto& swarm : lesSwarms)
+    {
+        delete swarm;
+        swarm = nullptr;
+    }
+    lesSwarms.clear();
+
     init_temperature();
 }
 
@@ -64,6 +71,7 @@ void PetriDish::update(sf::Time dt)
 {
     update_nutriments(dt);
     update_bacteries(dt);
+    update_swarms(dt);
 }
 
 void PetriDish::update_bacteries (sf::Time dt)
@@ -87,9 +95,8 @@ void PetriDish::update_bacteries (sf::Time dt)
         init_annexe();
     }
 
-    lesBacteries.erase(std::remove(lesBacteries.begin(), lesBacteries.end(), nullptr), lesBacteries.end());
-
-
+    lesBacteries.erase(std::remove(lesBacteries.begin(), lesBacteries.end(), nullptr),
+                       lesBacteries.end());
 }
 
 void PetriDish::update_nutriments (sf::Time dt)
@@ -112,20 +119,33 @@ void PetriDish::update_nutriments (sf::Time dt)
     lesNutriments.erase(std::remove(lesNutriments.begin(), lesNutriments.end(), nullptr), lesNutriments.end());
 }
 
+void PetriDish::update_swarms(sf::Time dt)
+{
+    for(auto& swarms : lesSwarms)
+    {
+        swarms->update(dt);
+        swarms->updateLeaderDirection();
+    }
+}
+
 void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
 {
     //on a ici décidé que l'epaisseur de l'anneau serait 5
     const auto border = buildAnnulus(position, radius, sf::Color::Black, 5);
     targetWindow.draw(border);
 
-    for(auto nutriment : lesNutriments)
+    for(const auto& nutriment : lesNutriments)
     {
         nutriment->drawOn(targetWindow);
     }
 
-    for(auto bacterie : lesBacteries)
+    for(const auto& bacterie : lesBacteries)
     {
         bacterie->drawOn(targetWindow);
+    }
+    for(const auto& swarm : lesSwarms)
+    {
+        swarm->drawOn(targetWindow);
     }
 }
 
@@ -210,3 +230,21 @@ PetriDish::~PetriDish()
 {
     reset();
 }
+
+void PetriDish::addSwarm(Swarm* groupe)
+{
+    lesSwarms.push_back(groupe);
+}
+
+Swarm* PetriDish::getSwarmWithId(std::string id) const
+{
+    for(auto& swarm : lesSwarms)
+    {
+        if(swarm->getId() == id)
+        {
+            return swarm;
+        }
+    }
+    return nullptr;
+}
+

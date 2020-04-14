@@ -80,5 +80,4 @@ protected :
      * Il s'agit d'une méthode virtuelle pure
      */
      virtual j::Value const& getConfig() const = 0;
-
 };

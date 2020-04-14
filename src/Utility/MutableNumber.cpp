@@ -30,7 +30,7 @@ void MutableNumber::set(double value)
     {
         valeur = value;
     }
-    else if(hasMin_)
+    else if(hasMin_ and value < Min_)
     {
         valeur = Min_;
     }

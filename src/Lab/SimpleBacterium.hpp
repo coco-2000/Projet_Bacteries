@@ -2,7 +2,7 @@
 #include "Bacterium.hpp"
 #include "../Utility/DiffEqSolver.hpp"
 
-class SimpleBacterium : public Bacterium
+class SimpleBacterium : public Bacterium, public DiffEqFunction
 {
 public:
     /**
@@ -34,18 +34,16 @@ public:
      */
     Vec2d getSpeedVector() const;
 
-    void drawOn(sf::RenderTarget& target) const override;
-
 private :
-    MRU equation;
     double t;
     sf::Time tps_basculement;
 
     /**
-     * @brief graphisme_particulier Permet d'ajouter des détails graphiques spécifiques aux bactéries simples
+     * @brief drawOn Permet d'ajouter des détails graphiques spécifique
+     * aux bactéries simples
      * @param target Cible pour l'affichage
      */
-    void graphisme_particulier(sf::RenderTarget& target) const;
+    void drawOn(sf::RenderTarget& target) const override;
 
     /**
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
@@ -70,8 +68,6 @@ private :
      */
     void strategie2();
 
-    double helperPositionScore (const Vec2d& offset);
-
     /**
      * Redéfinition d'une méthode virtuelle pure
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries simples
@@ -93,4 +89,12 @@ private :
      */
     SimpleBacterium* clone() const override;
 
+    /**
+     * @brief f Calcul le vecteur force déterminant le déplacement de la bactérie
+     * Ici la force est nulle ce qui assure un mouvement rectiligne uniforme
+     * @param position Position de l'instance courante /inutilisé
+     * @param speed Vitesse de l'instance coiurante /inutilisé
+     * @return Le vecteur force appliqué à la bactérie simple, le vecteur nul
+     */
+    Vec2d f(Vec2d position, Vec2d speed) const override;
 };
