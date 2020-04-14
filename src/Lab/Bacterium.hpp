@@ -116,12 +116,6 @@ protected :
     void divide();
 
     /**
-     * @brief tentative_basculement Décide si la bactérie doit basculer ou non
-     * ici le corps de la méthode est vide pour que les tests puissent s'effectuer correctement
-     */
-    virtual void tentative_basculement() {}
-
-    /**
      * @brief mutate Méthode de mutation d'une bactérie
      */
     void mutate();

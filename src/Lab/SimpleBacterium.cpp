@@ -131,7 +131,6 @@ void SimpleBacterium::strategie2()
         if(helperPositionScore (new_dir) > helperPositionScore(direction))
         {
             setDirection(new_dir);
-            rotationAngle(dt);
         }
     }
 }

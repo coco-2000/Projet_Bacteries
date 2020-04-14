@@ -85,7 +85,6 @@ void Bacterium::DisplayEnergy(sf::RenderTarget& target) const
 void Bacterium::update(sf::Time dt)
 {
     move(dt);
-    tentative_basculement();
     collisionPetri(dt);
     consumeNutriment(dt);
     divide();
@@ -96,7 +95,6 @@ void Bacterium::collisionPetri(sf::Time dt)
     if (getAppEnv().doesCollideWithDish(*this))
     {
         direction = -direction;
-        rotationAngle(dt);
     }
 }
 

@@ -50,7 +50,7 @@ private :
     /**
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
      */
-    void tentative_basculement() override;
+    void tentative_basculement();
 
     /**
      * @brief basculement effectue le basculement de l'instance courante
