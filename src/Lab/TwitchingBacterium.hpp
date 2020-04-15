@@ -22,9 +22,12 @@ protected :
     Bacterium* clone() const override;
     Quantity getStepEnergy() const override;
     Quantity getTentacleEnergy() const;
-    void tentacleInit();
-    void preparation_deploiement();
-    Nutriment* tentacule_deploiement(sf::Time dt);
-    void deplacement(sf::Time dt, Nutriment* nutriment_ptr);
+    void tentacle_init();
+    void Wait_to_deploy_state();
+    void deploy_state(sf::Time dt, Nutriment* nutriment_ptr);
+    void attract_state(sf::Time dt, Nutriment* nutriment_ptr);
+    void retract_state(sf::Time dt);
+    void eat_state(Nutriment* nutriment_ptr);
+    void grapinToward (Vec2d dir, sf::Time dt);
 
 };

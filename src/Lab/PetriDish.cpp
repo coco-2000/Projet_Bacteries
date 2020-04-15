@@ -94,9 +94,9 @@ void PetriDish::update_bacteries (sf::Time dt)
         append(annexe, lesBacteries);
         init_annexe();
     }
-
     lesBacteries.erase(std::remove(lesBacteries.begin(), lesBacteries.end(), nullptr),
                        lesBacteries.end());
+
 }
 
 void PetriDish::update_nutriments (sf::Time dt)
