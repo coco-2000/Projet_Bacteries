@@ -8,7 +8,7 @@ Bacterium::Bacterium(Quantity energie, Vec2d position, Vec2d direction,
                      std::map<std::string, MutableNumber> param_mutables,
                      bool abstinence)
 
-    : CircularBody(position, radius),  couleur(couleur), energie(energie),
+    : CircularBody(position, radius), couleur(couleur), direction(direction), energie(energie),
       param_mutables(param_mutables), abstinence(abstinence)
 {
     angle = direction.angle();
@@ -22,7 +22,7 @@ void Bacterium::divide()
         energie /= 2;
         Bacterium* copie(clone());
         copie->mutate();
-        copie->CircularBody::move({50,-50}); //pour que l'on puisse tout de suite voir s'il y a eu division
+        //copie->CircularBody::move({50,-50}); //pour que l'on puisse tout de suite voir s'il y a eu division
         getAppEnv().ajout_annexe(copie);
         setDirection(-direction);
     }

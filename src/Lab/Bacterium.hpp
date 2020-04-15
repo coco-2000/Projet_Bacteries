@@ -86,7 +86,6 @@ public :
      */
     void setDirection(const Vec2d& dir);
 
-
 protected :
     MutableColor couleur;
     double angle;
