@@ -25,12 +25,7 @@ j::Value const& TwitchingBacterium::getConfig() const
 Bacterium* TwitchingBacterium::clone() const
 {
     TwitchingBacterium* twitching = new TwitchingBacterium(*this);
-
-    //pour que l'on puisse tout de suite voir s'il y a eu division
-    twitching->CircularBody::move({10,-10});
-
-    //Pour avoir le grapin à nouveau à la même position que la bacterie
-    twitching->moveGrip(twitching->getPosition()-twitching->grapin.getPosition());
+    twitching->tentacle_init();
 
     return twitching;
 }
@@ -81,7 +76,6 @@ void TwitchingBacterium::Wait_to_deploy_state()
     for(int i(0); i < N; ++i)
     {
         const Vec2d new_dir (Vec2d::fromRandomAngle());
-
         if(helperPositionScore (new_dir) > helperPositionScore(direction))
             direction = new_dir;
     }
@@ -95,7 +89,7 @@ void TwitchingBacterium::deploy_state(sf::Time dt, Nutriment* nutriment_ptr)
 
     if(nutriment_ptr != nullptr)
         etat = ATTRACT;
-    else if ( (grapin.getPosition()-position).length() >= getProperty("tentacle length").get() or getAppEnv().doesCollideWithDish(grapin) )
+    else if ( (grapin.getPosition() - position).length() >= getProperty("tentacle length").get() or getAppEnv().doesCollideWithDish(grapin) )
         etat = RETRACT;
 }
 
@@ -142,7 +136,11 @@ void TwitchingBacterium::eat_state(Nutriment *nutriment_ptr)
         etat = IDLE;
 }
 
-
+void TwitchingBacterium::shift_clone(Vec2d v)
+{
+    Bacterium::shift_clone(v);
+    moveGrip(v);
+}
 
 
 

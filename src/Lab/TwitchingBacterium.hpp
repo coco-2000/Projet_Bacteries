@@ -29,5 +29,6 @@ protected :
     void retract_state(sf::Time dt);
     void eat_state(Nutriment* nutriment_ptr);
     void grapinToward (Vec2d dir, sf::Time dt);
+    void shift_clone(Vec2d v) override;
 
 };

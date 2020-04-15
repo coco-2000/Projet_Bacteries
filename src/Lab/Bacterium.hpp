@@ -178,6 +178,8 @@ protected :
 
     void rotationAngle(sf::Time dt);
 
+    virtual void shift_clone(Vec2d v);
+
 };
 
 
