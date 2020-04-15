@@ -39,6 +39,8 @@ void Swarm::supprBacterium(SwarmBacterium* bacterie)
             element = nullptr;
         }
     }
+    groupe.erase(std::remove(groupe.begin(), groupe.end(), nullptr),
+                       groupe.end());
     setLeader();
 }
 
@@ -71,6 +73,7 @@ Swarm::~Swarm()
     {
         element = nullptr;
     }
+    leader = nullptr;
 }
 
 void Swarm::setLeader()
