@@ -22,10 +22,14 @@ void Bacterium::divide()
         energie /= 2;
         Bacterium* copie(clone());
         copie->mutate();
-        //copie->CircularBody::move({50,-50}); //pour que l'on puisse tout de suite voir s'il y a eu division
+        //copie->shift_clone({10,-10}); //pour que l'on puisse tout de suite voir s'il y a eu division
         getAppEnv().ajout_annexe(copie);
         setDirection(-direction);
     }
+}
+void Bacterium::shift_clone(Vec2d v)
+{
+    CircularBody::move(v);
 }
 
 void Bacterium::mutate()
@@ -87,13 +91,13 @@ void Bacterium::DisplayEnergy(sf::RenderTarget& target) const
 void Bacterium::update(sf::Time dt)
 {
     move(dt);
-    collisionPetri(dt);
-    rotationAngle(dt);
+    collisionPetri();
+    //rotationAngle(dt);
     consumeNutriment(dt);
     divide();
 }
 
-void Bacterium::collisionPetri(sf::Time dt)
+void Bacterium::collisionPetri()
 {
     if (getAppEnv().doesCollideWithDish(*this))
     {

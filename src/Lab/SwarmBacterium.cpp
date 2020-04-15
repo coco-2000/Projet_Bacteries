@@ -33,7 +33,7 @@ j::Value const& SwarmBacterium::getConfig() const
 
 void SwarmBacterium::move(sf::Time dt)
 {
-    DiffEqResult deplacement(stepDiffEq(getPosition(), getSpeedVector(), dt, *groupe));
+    const DiffEqResult deplacement(stepDiffEq(getPosition(), getSpeedVector(), dt, *groupe));
 
     const Vec2d new_position(deplacement.position);
     setDirection(deplacement.speed / deplacement.speed.length());

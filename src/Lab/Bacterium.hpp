@@ -108,7 +108,7 @@ protected :
      * @brief collisionPetri gère les collisions des bacteries
      * avec l'assiette de petri
      */
-    void collisionPetri(sf::Time dt);
+    void collisionPetri();
 
 
     /**
@@ -176,6 +176,8 @@ protected :
     void consumeNutriment(sf::Time dt);
 
     void rotationAngle(sf::Time dt);
+
+    virtual void shift_clone(Vec2d v);
 
 };
 

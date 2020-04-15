@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include "../Utility/Utility.hpp"
 
-Grip::Grip(const Vec2d& position, double radius) : CircularBody(position, radius) {}
 
 TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
     : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(), getConfig()["energy"]["max"].toDouble()),
@@ -13,7 +12,8 @@ TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
                 getConfig()["color"],
                 {{"tentacle speed", MutableNumber::positive(getConfig()["tentacle"]["speed"])},
                 {"tentacle length", MutableNumber::positive(getConfig()["tentacle"]["length"])}}),
-      grapin(position, radius/4)
+      grapin(position, radius/4),
+      etat(IDLE)
 
 {}
 
@@ -25,9 +25,7 @@ j::Value const& TwitchingBacterium::getConfig() const
 Bacterium* TwitchingBacterium::clone() const
 {
     TwitchingBacterium* twitching = new TwitchingBacterium(*this);
-
-    //Pour avoir le grapin à nouveau à la même position que la bacterie
-    twitching->moveGrip(getPosition()-twitching->grapin.getPosition());
+    twitching->tentacle_init();
 
     return twitching;
 }
@@ -51,14 +49,98 @@ Quantity TwitchingBacterium::getTentacleEnergy() const
     return getConfig()["energy"]["consumption factor"]["tentacle"].toDouble();
 }
 
-void TwitchingBacterium::moveGrip(const Vec2d &position)
+void TwitchingBacterium::moveGrip(const Vec2d& delta)
 {
-    grapin.move(position);
+    grapin.move(delta);
 }
 
+void TwitchingBacterium::move(sf::Time dt)
+{
+    Nutriment* nutriment_ptr = getAppEnv().getNutrimentColliding(grapin);
 
+    switch(etat)
+    {
+        case IDLE : etat = WAIT_TO_DEPLOY; break;
+        case WAIT_TO_DEPLOY : Wait_to_deploy_state(); break;
+        case DEPLOY : deploy_state(dt, nutriment_ptr); break;
+        case ATTRACT : attract_state(dt, nutriment_ptr); break;
+        case RETRACT : retract_state (dt); break;
+        case EAT : eat_state(nutriment_ptr); break;
+    }
+}
 
+void TwitchingBacterium::Wait_to_deploy_state()
+{
+    constexpr int N(20); // nb de directions aléatoires à générer
 
+    for(int i(0); i < N; ++i)
+    {
+        const Vec2d new_dir (Vec2d::fromRandomAngle());
+        if(helperPositionScore (new_dir) > helperPositionScore(direction))
+            direction = new_dir;
+    }
+
+    etat = DEPLOY;
+}
+
+void TwitchingBacterium::deploy_state(sf::Time dt, Nutriment* nutriment_ptr)
+{
+    grapinToward(direction, dt);
+
+    if(nutriment_ptr != nullptr)
+        etat = ATTRACT;
+    else if ( (grapin.getPosition() - position).length() >= getProperty("tentacle length").get() or getAppEnv().doesCollideWithDish(grapin) )
+        etat = RETRACT;
+}
+
+void TwitchingBacterium::attract_state(sf::Time dt, Nutriment* nutriment_ptr)
+{
+
+     const double dist_tentacule = getProperty("tentacle speed").get()*dt.asSeconds();
+     const Vec2d deltaPos((grapin.getPosition()-position)*dist_tentacule*getConfig()["speed factor"].toDouble());
+
+     CircularBody::move(deltaPos);
+     consumeEnergy(deltaPos.length() * getStepEnergy());
+
+     if (nutriment_ptr == nullptr)
+         etat = RETRACT;
+
+     else if (*nutriment_ptr & *this)
+         etat = EAT;
+}
+
+void TwitchingBacterium::tentacle_init()
+{
+    moveGrip(position - grapin.getPosition());
+    etat = IDLE;
+}
+
+void TwitchingBacterium::retract_state(sf::Time dt)
+{
+    (*this > grapin) ? tentacle_init() : grapinToward((position-grapin.getPosition()).normalised(), dt);
+}
+
+void TwitchingBacterium::grapinToward (Vec2d dir, sf::Time dt)
+{
+    direction = dir;
+    const double dist_tentacule = getProperty("tentacle speed").get()*dt.asSeconds();
+    moveGrip(dir*dist_tentacule);
+    consumeEnergy(getTentacleEnergy()*dist_tentacule);
+}
+
+void TwitchingBacterium::eat_state(Nutriment *nutriment_ptr)
+{
+    if (nutriment_ptr == nullptr)
+        etat = IDLE;
+    else if (!(*nutriment_ptr & *this))
+        etat = IDLE;
+}
+
+void TwitchingBacterium::shift_clone(Vec2d v)
+{
+    Bacterium::shift_clone(v);
+    moveGrip(v);
+}
 
 
 
