@@ -35,7 +35,7 @@ void Swarm::supprBacterium(SwarmBacterium* bacterie)
     {
         if (element == bacterie)
         {
-            //delete element;
+            delete element;
             element = nullptr;
         }
     }

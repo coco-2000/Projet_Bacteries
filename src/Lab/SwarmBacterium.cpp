@@ -10,7 +10,7 @@ SwarmBacterium::SwarmBacterium(const Vec2d& position, Swarm* groupe)
                 Vec2d::fromRandomAngle(),
                 uniform(getConfig()["radius"]["min"].toDouble(),
                         getConfig()["radius"]["max"].toDouble()),
-                getConfig()["color"]), groupe(groupe)
+                (*groupe).getColor()), groupe(groupe)
 {
     groupe->addBacterium(this);
 }
