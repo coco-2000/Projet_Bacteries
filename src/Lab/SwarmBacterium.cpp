@@ -52,7 +52,7 @@ void SwarmBacterium::mutate()
 
 SwarmBacterium::~SwarmBacterium()
 {
-    groupe = nullptr;
+    groupe->supprBacterium(this);
 }
 
 void SwarmBacterium::drawOn(sf::RenderTarget &target) const

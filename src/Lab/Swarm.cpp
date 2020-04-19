@@ -33,9 +33,9 @@ void Swarm::supprBacterium(SwarmBacterium* bacterie)
 {
     for(auto& element : groupe)
     {
-        if (element == bacterie)
+        if(element == bacterie)
         {
-            delete element;
+            //delete element;
             element = nullptr;
         }
     }
@@ -71,8 +71,10 @@ Swarm::~Swarm()
 {
     for(auto& element : groupe)
     {
+        delete element;
         element = nullptr;
     }
+    groupe.clear();
     leader = nullptr;
 }
 
@@ -106,7 +108,7 @@ j::Value Swarm::getConfig() const
 
 Vec2d Swarm::f(Vec2d position, Vec2d speed) const
 {
-    return (getConfig()[identificateur]["force factor"].toDouble()) * (getLeaderPosition() - position);
+        return (getConfig()[identificateur]["force factor"].toDouble()) * (getLeaderPosition() - position);
 }
 
 void Swarm::updateLeaderDirection()
