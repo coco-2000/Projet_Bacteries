@@ -170,7 +170,7 @@ protected :
 
     void rotationAngle(sf::Time dt);
 
-    virtual void shift_clone(Vec2d v);
+    virtual void shift_clone(const Vec2d& v);
 
 };
 
