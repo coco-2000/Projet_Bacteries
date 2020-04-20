@@ -48,19 +48,6 @@ Vec2d Swarm::getLeaderPosition() const
      return leader->getPosition();
 }
 
-void Swarm::drawOn(sf::RenderTarget& target) const
-{
-    if(isDebugOn() and leader != nullptr)
-    {
-        //on a ici décidé que l'epaisseur de l'anneau serait 5
-        const auto anneau = buildAnnulus(getLeaderPosition(),
-                                         leader->getRadius(),
-                                         sf::Color::Red,
-                                         5);
-        target.draw(anneau);
-    }
-}
-
 std::string Swarm::getId() const
 {
     return identificateur;
@@ -109,22 +96,9 @@ Vec2d Swarm::f(Vec2d position, Vec2d speed) const
         return (getConfig()[identificateur]["force factor"].toDouble()) * (getLeaderPosition() - position);
 }
 
-void Swarm::updateLeaderDirection()
+bool Swarm::SuisJeLeader(const SwarmBacterium* bacterie)
 {
-    if(leader != nullptr)
-    {
-        constexpr int nb_vecteur(20); // nb de directions aléatoires à générer
-
-        for(int i(0); i < nb_vecteur; ++i)
-        {
-            Vec2d new_dir(Vec2d::fromRandomAngle());
-
-            if(leader->helperPositionScore(new_dir) > leader->helperPositionScore())
-            {
-                leader->setDirection(new_dir);
-            }
-        }
-    }
+    return bacterie == leader;
 }
 
 

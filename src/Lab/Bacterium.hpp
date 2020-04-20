@@ -74,13 +74,6 @@ public :
     double helperPositionScore (const Vec2d& offset);
 
     /**
-     * Surcharge sans paramètre
-     * @brief helperPositionScore Calcul score de la position + la direction courante de l'instance
-     * @return
-     */
-    double helperPositionScore ();
-
-    /**
      * @brief setDirection Manipulateur de direction
      * @param direction Vecteur à assigner à la direction de l'instance courante
      */

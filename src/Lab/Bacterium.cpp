@@ -178,8 +178,3 @@ double Bacterium::helperPositionScore (const Vec2d& offset)
 {
     return getAppEnv().getPositionScore(getPosition() + offset);
 }
-
-double Bacterium::helperPositionScore()
-{
-    return getAppEnv().getPositionScore(getPosition() + direction);
-}
