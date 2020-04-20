@@ -71,7 +71,7 @@ Swarm::~Swarm()
 {
     for(auto& element : groupe)
     {
-        delete element;
+        //delete element;
         element = nullptr;
     }
     groupe.clear();
