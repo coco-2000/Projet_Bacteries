@@ -377,11 +377,6 @@ Redéfinir la méthode getConfig héritée de la classe bacterium.
 Toutes les méthodes virtuelles pures héritées de Bacterium devront être redéfinies pour que la classe
 TwitchingBacterium puisse être instanciable.
 
-Question : divisiion et directions
-facteurs de déperdition d'énergie
-BacteriaTest toujours la
-Bacteries décalées apres division
-
 **************************************************
 ##Q4.4
 

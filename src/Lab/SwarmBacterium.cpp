@@ -34,30 +34,33 @@ j::Value const& SwarmBacterium::getConfig() const
 
 void SwarmBacterium::move(sf::Time dt)
 {
-        const DiffEqResult deplacement(stepDiffEq(getPosition(), getSpeedVector(), dt, *groupe));
+    const DiffEqResult deplacement(stepDiffEq(position, getSpeedVector(), dt, *groupe));
 
-        const Vec2d new_position(deplacement.position);
-        setDirection(deplacement.speed / deplacement.speed.length());
+    const Vec2d new_position(deplacement.position);
+    direction = deplacement.speed / deplacement.speed.length();
 
-        if((new_position - getPosition()).lengthSquared() >= 0.001)
+    const auto deltaPos = new_position - position;
+
+    if(deltaPos.lengthSquared() >= 0.001)
+    {
+        consumeEnergy(deltaPos.length() * getStepEnergy());
+        position = new_position;
+    }
+
+    if(groupe->SuisJeLeader(this))
+    {
+        constexpr int nb_vecteur(20); // nb de directions aléatoires à générer
+
+        for(int i(0); i < nb_vecteur; ++i)
         {
-            consumeEnergy((new_position - getPosition()).length() * getStepEnergy());
-            setPosition(new_position);
-        }
-        if(groupe->SuisJeLeader(this))
-        {
-            constexpr int nb_vecteur(20); // nb de directions aléatoires à générer
+            Vec2d new_dir(Vec2d::fromRandomAngle());
 
-            for(int i(0); i < nb_vecteur; ++i)
+            if(helperPositionScore(new_dir) > helperPositionScore(direction))
             {
-                Vec2d new_dir(Vec2d::fromRandomAngle());
-
-                if(helperPositionScore(new_dir) > helperPositionScore(direction))
-                {
-                    setDirection(new_dir);
-                }
+                setDirection(new_dir);
             }
         }
+    }
 }
 
 void SwarmBacterium::mutate()
