@@ -35,13 +35,12 @@ void Swarm::supprBacterium(SwarmBacterium* bacterie)
     {
         if(element == bacterie)
         {
-            //delete element;
             element = nullptr;
         }
     }
     groupe.erase(std::remove(groupe.begin(), groupe.end(), nullptr),
                        groupe.end());
-    setLeader();
+    //setLeader();
 }
 
 Vec2d Swarm::getLeaderPosition() const
@@ -71,10 +70,9 @@ Swarm::~Swarm()
 {
     for(auto& element : groupe)
     {
-        delete element;
         element = nullptr;
     }
-    groupe.clear();
+
     leader = nullptr;
 }
 

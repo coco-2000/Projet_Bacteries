@@ -40,8 +40,8 @@ j::Value const& SimpleBacterium::getConfig() const
 
 void SimpleBacterium::move(sf::Time dt)
 {
-    const Vec2d new_position(stepDiffEq(getPosition(), getSpeedVector(), dt, *this).position);
-    const auto deltaPos = new_position - getPosition();
+    const Vec2d new_position(stepDiffEq(position, getSpeedVector(), dt, *this).position);
+    const auto deltaPos = new_position - position;
 
     if(deltaPos.lengthSquared() >= 0.001)
     {
