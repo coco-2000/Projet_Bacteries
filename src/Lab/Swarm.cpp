@@ -78,13 +78,13 @@ Swarm::~Swarm()
 
 void Swarm::setLeader()
 {
-    if(groupe.size() == 0)
+    if(groupe.empty())
     {
         leader = nullptr;
     }
     else if(groupe.size() == 1)
     {
-        leader = groupe[0];
+        leader = groupe.front();
     }
     else
     {
