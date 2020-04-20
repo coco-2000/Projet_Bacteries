@@ -52,15 +52,12 @@ public:
     void update(sf::Time dt);
 
     /**
-     * @brief drawOn Dessine l'anneau autour du leader du groupe
-     * @param target Fenetre dans laquelle le dessin se fait
-     */
-    void drawOn(sf::RenderTarget& target) const;
-
-    /**
      * @brief updateLeaderDirection Met à jour la direction du leader
      */
     void updateLeaderDirection();
+
+    bool SuisJeLeader(const SwarmBacterium* bacterie);
+
     /**
      * @brief Destucteur de Swarm
      * Détruit les pointeurs vers les bactéries sans détruire les bactéries en elles-mêmes

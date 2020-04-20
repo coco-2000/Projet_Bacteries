@@ -1,7 +1,8 @@
 #include "SwarmBacterium.hpp"
 #include "Application.hpp"
 #include "Swarm.hpp"
-#include "../Utility/DiffEqSolver.hpp"
+#include "../Utility/Utility.hpp"
+#include <SFML/Graphics.hpp>
 
 SwarmBacterium::SwarmBacterium(const Vec2d& position, Swarm* groupe)
     : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(),
@@ -33,16 +34,30 @@ j::Value const& SwarmBacterium::getConfig() const
 
 void SwarmBacterium::move(sf::Time dt)
 {
-    const DiffEqResult deplacement(stepDiffEq(getPosition(), getSpeedVector(), dt, *groupe));
+        const DiffEqResult deplacement(stepDiffEq(getPosition(), getSpeedVector(), dt, *groupe));
 
-    const Vec2d new_position(deplacement.position);
-    setDirection(deplacement.speed / deplacement.speed.length());
+        const Vec2d new_position(deplacement.position);
+        setDirection(deplacement.speed / deplacement.speed.length());
 
-    if((new_position - getPosition()).lengthSquared() >= 0.001)
-    {
-        consumeEnergy((new_position - getPosition()).length() * getStepEnergy());
-        setPosition(new_position);
-    }
+        if((new_position - getPosition()).lengthSquared() >= 0.001)
+        {
+            consumeEnergy((new_position - getPosition()).length() * getStepEnergy());
+            setPosition(new_position);
+        }
+        if(groupe->SuisJeLeader(this))
+        {
+            constexpr int nb_vecteur(20); // nb de directions aléatoires à générer
+
+            for(int i(0); i < nb_vecteur; ++i)
+            {
+                Vec2d new_dir(Vec2d::fromRandomAngle());
+
+                if(helperPositionScore(new_dir) > helperPositionScore(direction))
+                {
+                    setDirection(new_dir);
+                }
+            }
+        }
 }
 
 void SwarmBacterium::mutate()
@@ -58,11 +73,19 @@ SwarmBacterium::~SwarmBacterium()
 void SwarmBacterium::drawOn(sf::RenderTarget &target) const
 {
     Bacterium::drawOn(target);
+
+    if(isDebugOn() and groupe->SuisJeLeader(this))
+    {
+        //on a ici décidé que l'epaisseur de l'anneau serait 5
+        const auto anneau = buildAnnulus(getPosition(),
+                                         getRadius(),
+                                         sf::Color::Red,
+                                         5);
+        target.draw(anneau);
+    }
 }
 
 Vec2d SwarmBacterium::getSpeedVector() const
 {
     return direction * getConfig()["speed"]["initial"].toDouble();
 }
-
-

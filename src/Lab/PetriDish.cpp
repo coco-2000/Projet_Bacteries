@@ -124,7 +124,6 @@ void PetriDish::update_swarms(sf::Time dt)
     for(auto& swarms : lesSwarms)
     {
         swarms->update(dt);
-        swarms->updateLeaderDirection();
     }
 }
 
@@ -142,10 +141,6 @@ void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
     for(const auto& bacterie : lesBacteries)
     {
         bacterie->drawOn(targetWindow);
-    }
-    for(const auto& swarm : lesSwarms)
-    {
-        swarm->drawOn(targetWindow);
     }
 }
 

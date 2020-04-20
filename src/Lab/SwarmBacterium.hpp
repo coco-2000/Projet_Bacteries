@@ -29,7 +29,7 @@ public:
     void mutate() override;
 
     /**
-     * @brief drawOn Dessine une SwarmBacterium
+     * @brief drawOn Dessine une SwarmBacterium et l'anneau si l'instance est leader du groupe
      * @param target Fenetre dans laquelle le dessin se fait
      */
     void drawOn(sf::RenderTarget &target) const override;
