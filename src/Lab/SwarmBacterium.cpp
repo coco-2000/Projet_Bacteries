@@ -11,15 +11,15 @@ SwarmBacterium::SwarmBacterium(const Vec2d& position, Swarm* groupe)
                 Vec2d::fromRandomAngle(),
                 uniform(getConfig()["radius"]["min"].toDouble(),
                         getConfig()["radius"]["max"].toDouble()),
-                (*groupe).getColor()), groupe(groupe)
+                (*groupe).getColor()), group(groupe)
 {
     groupe->addBacterium(this);
 }
 
 SwarmBacterium::SwarmBacterium(SwarmBacterium const& autre)
-    : Bacterium(autre), groupe(autre.groupe)
+    : Bacterium(autre), group(autre.group)
 {
-    groupe->addBacterium(this);
+    group->addBacterium(this);
 }
 
 SwarmBacterium* SwarmBacterium::clone() const
@@ -34,7 +34,7 @@ j::Value const& SwarmBacterium::getConfig() const
 
 void SwarmBacterium::move(sf::Time dt)
 {
-    const DiffEqResult deplacement(stepDiffEq(position, getSpeedVector(), dt, *groupe));
+    const DiffEqResult deplacement(stepDiffEq(position, getSpeedVector(), dt, *group));
 
     const Vec2d new_position(deplacement.position);
     direction = deplacement.speed.normalised();
@@ -47,7 +47,7 @@ void SwarmBacterium::move(sf::Time dt)
         position = new_position;
     }
 
-    if(groupe->IsLeader(this))
+    if(group->IsLeader(this))
     {
         moveLeader();
     }
@@ -77,7 +77,7 @@ void SwarmBacterium::drawOn(sf::RenderTarget &target) const
 {
     Bacterium::drawOn(target);
 
-    if(isDebugOn() and groupe->IsLeader(this))
+    if(isDebugOn() and group->IsLeader(this))
     {
         //on a ici décidé que l'epaisseur de l'anneau serait 5
         const auto anneau = buildAnnulus(getPosition(),
@@ -95,5 +95,5 @@ Vec2d SwarmBacterium::getSpeedVector() const
 
 SwarmBacterium::~SwarmBacterium()
 {
-    groupe->supprBacterium(this);
+    group->supprBacterium(this);
 }
