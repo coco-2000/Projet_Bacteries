@@ -56,7 +56,7 @@ void TwitchingBacterium::moveGrip(const Vec2d& delta)
 
 void TwitchingBacterium::move(sf::Time dt)
 {
-    Nutriment* nutriment_ptr = getAppEnv().getNutrimentColliding(grip);
+    const Nutriment* nutriment_ptr = getAppEnv().getNutrimentColliding(grip);
 
     switch(state)
     {

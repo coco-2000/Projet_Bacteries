@@ -98,12 +98,6 @@ public:
     Nutriment* getNutrimentColliding(CircularBody const& body) const;
 
     /**
-     * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
-     * avec les bactéries et les nutriments qu'elle contient
-     */
-    ~PetriDish() override;
-
-    /**
      * @brief getPositionScore Calcule le score associée à une position donnée dans
      *                         l'assiette de Petri
      * @param position Coordonnées de la position dont il faut calculer le score
@@ -131,18 +125,18 @@ public:
     double getGradientExponent() const;
 
     /**
-     * @brief init_puissance Initialise l'attribut puissance de l'assiette de
+     * @brief initGradient Initialise l'attribut puissance de l'assiette de
      *        Petri qui est associée au paramètre "Gradient exponent" en fonction du
      *        fichier de configuration
      */
-    void init_puissance();
+    void initGradient();
 
     /**
-     * @brief ajout_annexe Ajoute un pointeur sur une bactérie le vecteur annexe
+     * @brief addAnnex Ajoute un pointeur sur une bactérie le vecteur annexe
      *                     de l'assiette de Petri
      * @param clone Pointeur sur la bactérie à ajouter (créée par clonage en l'occurence)
      */
-    void ajout_annexe(Bacterium*);
+    void addAnnex(Bacterium*);
 
     /**
      * @brief addSwarm Ajoute un groupe Swarm à la boîte de Petri
@@ -156,6 +150,13 @@ public:
      * @return Swarm dont l'identifiacteur est id
      */
     Swarm* getSwarmWithId(std::string id) const;
+
+    /**
+     * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
+     * avec les bactéries et les nutriments qu'elle contient
+     */
+    ~PetriDish() override;
+
 
 private :
     std::vector<Bacterium*> lesBacteries;

@@ -9,7 +9,7 @@ PetriDish::PetriDish(Vec2d position, double radius)
     : CircularBody (position, radius)
 {
     init_temperature();
-    init_puissance();
+    initGradient();
     init_annexe();
 }
 
@@ -203,7 +203,7 @@ double PetriDish::getGradientExponent() const
     return puissance;
 }
 
-void PetriDish::init_puissance()
+void PetriDish::initGradient()
 {
     puissance = (getConfig()["gradient"]["exponent"]["max"].toDouble()
                + getConfig()["gradient"]["exponent"]["min"].toDouble())
@@ -215,14 +215,9 @@ void PetriDish::init_annexe()
     annexe.clear();
 }
 
-void PetriDish::ajout_annexe(Bacterium* clone)
+void PetriDish::addAnnex(Bacterium* clone)
 {
     annexe.push_back(clone);
-}
-
-PetriDish::~PetriDish()
-{
-    reset();
 }
 
 void PetriDish::addSwarm(Swarm* groupe)
@@ -242,3 +237,7 @@ Swarm* PetriDish::getSwarmWithId(std::string id) const
     return nullptr;
 }
 
+PetriDish::~PetriDish()
+{
+    reset();
+}

@@ -65,10 +65,7 @@
 
 - *Constance* : Création et implémentation de la classe Bacterium (Partie 3.3)
                 relecture générale du code des parties précedentes, apport de petites modifications
-- *Emma* : Création et implémentation de la classe SimpleBacterium (Partie 3.4), modification fonctions rotation de l'angle
-           relecture générale du code des parties précedentes, correction consommation de nutriment
-           et test collision avec le bord de l'assiette (Partie 3.3), modification de la fonctions PetriDish::update_bacterium
-           pour éviter SegmentationFault
+- *Emma* : Création et implémentation de la classe SimpleBacterium (Partie 3.4)
 - *ensemble* : correction bugs (dessin de la flagelle, test de collision des bactéries,
                division des bacteries) (Partie 3.3 et 3.4), ajout des override, const, etc
 
@@ -87,6 +84,10 @@
 
 - Problèmes : Avant la modification de l'énoncé, bug généré par la classe Grip codée dans Utility,
               SimpleBacterium et Swarm hérite de DiffEqFuntion (pas de composition)
+
+- La partie 3 a été modifié après son archivage :
+    - changements sur la methode move de SimpleBacterium, supression de setDirection de SimpleBacterium, ajout de rotationAngle dans Bacterium
+    - changement relation d'héritage SimpleBacterium : hérite désormais de DiffEqFuntion
 
 *************************************************
 ##Semaine 6 - Partie 4

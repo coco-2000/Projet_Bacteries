@@ -15,7 +15,7 @@ public:
      * @param position Position de la nouvelle instance à créer
      * @param groupe Groupe de Swarm auquel la nouvelle instance appartient
      */
-    SwarmBacterium(const Vec2d& position, Swarm* groupe);
+    SwarmBacterium(const Vec2d& position, Swarm* group);
 
     /**
      * @brief SwarmBacterium Constructeur de copie
@@ -41,7 +41,7 @@ public:
     ~SwarmBacterium() override;
 
 private:
-    Swarm* groupe;
+    Swarm* group;
 
     /**
      * @brief move Déplace une bactérie

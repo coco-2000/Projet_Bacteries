@@ -96,12 +96,12 @@ double Lab::getGradientExponent()
 
 void Lab::initGradient()
 {
-    return petri.init_puissance();
+    return petri.initGradient();
 }
 
 void Lab::add_annexe(Bacterium* clone)
 {
-    petri.ajout_annexe(clone);
+    petri.addAnnex(clone);
 }
 
 void Lab::addSwarm(Swarm* groupe)
