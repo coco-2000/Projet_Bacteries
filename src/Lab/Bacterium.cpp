@@ -22,9 +22,9 @@ void Bacterium::divide()
         energie /= 2;
         Bacterium* copie(clone());
         copie->mutate();
-        //copie->shift_clone({10,-10}); //pour que l'on puisse tout de suite voir s'il y a eu division
+        copie->shift_clone({10,-10}); //pour que l'on puisse tout de suite voir s'il y a eu division
         getAppEnv().ajout_annexe(copie);
-        setDirection(-direction);
+        direction = -direction;
     }
 }
 void Bacterium::shift_clone(const Vec2d& v)
@@ -43,7 +43,7 @@ void Bacterium::mutate()
 }
 
 
-bool Bacterium::en_vie()
+bool Bacterium::alive() const
 {
     return !(energie<=0);
 }
@@ -61,11 +61,6 @@ sf::Time Bacterium::getDelay() const
 Quantity Bacterium::getStepEnergy() const
 {
     return getConfig()["energy"]["consumption factor"].toDouble();
-}
-
-void Bacterium::setDirection(const Vec2d& dir)
-{
-    direction = dir;
 }
 
 void Bacterium::drawOn(sf::RenderTarget& target) const
@@ -101,7 +96,7 @@ void Bacterium::collisionPetri()
 {
     if (getAppEnv().doesCollideWithDish(*this))
     {
-        setDirection(-direction);
+        direction = -direction;
     }
 }
 

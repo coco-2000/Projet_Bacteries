@@ -118,7 +118,7 @@ void SimpleBacterium::basculement()
 
 void SimpleBacterium::strategie1()
 {
-    setDirection(Vec2d::fromRandomAngle());
+    direction = Vec2d::fromRandomAngle();
 }
 
 void SimpleBacterium::strategie2()
@@ -131,7 +131,7 @@ void SimpleBacterium::strategie2()
 
         if(helperPositionScore (new_dir) > helperPositionScore(direction))
         {
-            setDirection(new_dir);
+            direction = new_dir;
         }
     }
 }

@@ -384,9 +384,10 @@ Redéfinition de la methode getStepEnergy de la Superclasse dans la sous classe 
 en se déplaçantet création de la methode getTentacleEnergy dans la sous classe TwitchingBacterium pour l'énergie libérée
 en déployant la tentacule
 
+##Q4.5
 
-
-
+Utilisation d'un type énuméré pour répertorier les différents états cités plus haut.
+Ceci permet donc l'usage d'un switch qui selon l'état de la bacterie appelle la methode correspondante
 
 **************************************************
 ##Q4.6

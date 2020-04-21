@@ -57,7 +57,7 @@ void SwarmBacterium::move(sf::Time dt)
 
             if(helperPositionScore(new_dir) > helperPositionScore(direction))
             {
-                setDirection(new_dir);
+                direction = new_dir;
             }
         }
     }
