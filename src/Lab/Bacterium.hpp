@@ -26,7 +26,7 @@ public :
               bool abstinence = 0);
 
     /**
-     * @brief en_vie savoir si la bacterie a suffisamment d'energie pour etre en vie
+     * @brief alive savoir si la bacterie a suffisamment d'energie pour etre en vie
      * @return vrai si l'energie est suffisante
      */
     bool alive() const;

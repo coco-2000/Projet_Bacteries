@@ -16,12 +16,6 @@ public :
     Nutriment(Quantity quantity, const Vec2d& position);
 
     /**
-     * @brief Nutriment::TestPrelevement Ajuste la quantité prélever en fonction de celle disponible
-     * @param prelevement Quantité voulant être prélever
-     */
-    void TestPrelevement(Quantity& prelevement);
-
-    /**
      * @brief Nutriment::setQuantity Manipulateur de quantité, actualise égalment le rayon du nutriment
      * @param quantity Nouvelle quantité à assigner à quantité (+ rayon)
      */
@@ -50,13 +44,13 @@ public :
      * @param temperature Température courante
      * @return true si les conditions sont respectées false sinon
      */
-    bool ConditionTemperature(double temperature);
+    bool ConditionTemperature(double temperature) const;
 
     /**
      * @brief isEmpty permet de savoir s'il n'y a plus de nutriment dans la souche
      * @return vrai s'il n'y a plus de nutriment
      */
-    bool isEmpty();
+    bool isEmpty() const;
 
     /**
      * @brief Nutriment::takeQuantity Prélève une quantité donnée de nutriments de l'instance courante
@@ -64,6 +58,7 @@ public :
      * @return Quantité de nutriments qui a pu être prélevée
      */
     Quantity takeQuantity(Quantity prelevement);
+
 
 protected :
     const double dist;
@@ -80,4 +75,11 @@ protected :
      * Il s'agit d'une méthode virtuelle pure
      */
      virtual j::Value const& getConfig() const = 0;
+
+    /**
+     * @brief Nutriment::TestPrelevement Ajuste la quantité prélever en fonction de celle disponible
+     * @param prelevement Quantité voulant être prélever
+     */
+    void TestPrelevement(Quantity& prelevement) const;
+
 };

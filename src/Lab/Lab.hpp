@@ -123,7 +123,7 @@ public:
 
      /**
       * @brief addAnnex Ajoute un pointeur sur une bactérie le vecteur annexe
-      *                     de l'assiette de Petri
+      *                 de l'assiette de Petri
       * @param clone Pointeur sur la bactérie à ajouter (créée par clonage en l'occurence)
       */
      void addAnnex(Bacterium* clone);

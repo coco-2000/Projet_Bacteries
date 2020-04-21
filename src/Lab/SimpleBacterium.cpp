@@ -99,29 +99,29 @@ void SimpleBacterium::tentative_basculement()
 
      if(bernoulli(proba_basculement) == 1)
      {
-         basculement();
+         switchDirection();
          tps_basculement = sf::Time::Zero;
      }
 }
 
-void SimpleBacterium::basculement()
+void SimpleBacterium::switchDirection()
 {
     if(getConfig()["tumble"]["algo"] == "single random vector")
     {
-        strategie1();
+        strategy1();
     }
     else if(getConfig()["tumble"]["algo"] == "best of N")
     {
-        strategie2();
+        strategy2();
     }
 }
 
-void SimpleBacterium::strategie1()
+void SimpleBacterium::strategy1()
 {
     direction = Vec2d::fromRandomAngle();
 }
 
-void SimpleBacterium::strategie2()
+void SimpleBacterium::strategy2()
 {
     constexpr int N(20); // nb de directions aléatoires à générer
 

@@ -7,7 +7,7 @@
 
 Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
     : CircularBody(position, quantity),
-      dist(0.95/2*getApp().getLabSize().x - distance(getApp().getCentre(),position)),
+      dist((0.95/2)*getApp().getLabSize().x - distance(getApp().getCentre(),position)),
       quantity_(quantity)
 {};
 
@@ -18,7 +18,7 @@ Quantity Nutriment::takeQuantity(Quantity prelevement)
         return prelevement;
 }
 
-void Nutriment:: TestPrelevement(Quantity& prelevement)
+void Nutriment:: TestPrelevement(Quantity& prelevement) const
 {
     if(prelevement > quantity_) {prelevement -= quantity_;}
 }
@@ -66,13 +66,13 @@ void Nutriment::update(sf::Time dt)
     }
 }
 
-bool Nutriment::ConditionTemperature(double temperature)
+bool Nutriment::ConditionTemperature(double temperature) const
 {
     return (getConfig()["growth"]["min temperature"].toDouble() <= temperature) and
             (getConfig()["growth"]["max temperature"].toDouble() >= temperature);
 }
 
-bool Nutriment::isEmpty()
+bool Nutriment::isEmpty() const
 {
     return(quantity_ <= 0);
 }

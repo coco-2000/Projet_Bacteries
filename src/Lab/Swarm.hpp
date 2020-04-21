@@ -13,7 +13,7 @@ public:
      * @param identificateur
      * @param groupe
      */
-    Swarm(std::string identificateur, const std::vector <SwarmBacterium*>& groupe = {});
+    Swarm(std::string id, const std::vector <SwarmBacterium*>& group = {});
 
     /**
      * @brief getColor Cherche la couleur du Swarm dans le fichier de configuration
@@ -49,7 +49,7 @@ public:
      * @brief update Met à jour le leader du groupe
      * @param dt Pas de temps après lequel la simulation est mise à jour
      */
-    void update(sf::Time dt);
+    void update(sf::Time dt) override;
 
     /**
      * @brief updateLeaderDirection Met à jour la direction du leader
@@ -61,18 +61,19 @@ public:
      * @param bacterie Instance dont on vérifie la condition
      * @return true si la bactérie est leader, false sinon
      */
-    bool IsLeader(const SwarmBacterium* bacterie);
+    bool IsLeader(const SwarmBacterium* bacterie) const;
 
     /**
      * @brief Destucteur de Swarm
      * Détruit les pointeurs vers les bactéries sans détruire les bactéries en elles-mêmes
      */
-    ~Swarm();
+    ~Swarm() override;
+
 private:
-    std::string identificateur;
-    std::vector <SwarmBacterium*> groupe;
+    std::string id;
+    std::vector <SwarmBacterium*> group;
     SwarmBacterium* leader;
-    MutableColor couleur;
+    MutableColor color;
 
     /**
      * @brief setLeader Met à jour le leader du groupe

@@ -22,7 +22,6 @@ namespace // anonymous
    outside their file of definition
 */
 Application* currentApp = nullptr; ///< Current application
-
 std::string applicationDirectory(int argc, char const** argv)
 {
     assert(argc >= 1);
