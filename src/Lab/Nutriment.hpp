@@ -59,6 +59,7 @@ public :
      */
     Quantity takeQuantity(Quantity prelevement);
 
+
 protected :
     const double dist;
     Quantity quantity_;
@@ -80,4 +81,5 @@ protected :
      * @param prelevement Quantité voulant être prélever
      */
     void TestPrelevement(Quantity& prelevement) const;
+
 };

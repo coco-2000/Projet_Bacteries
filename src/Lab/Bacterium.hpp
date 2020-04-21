@@ -20,9 +20,9 @@ public :
      * @param param_mutables ensemble de paramètres numériques mutables
      * @param abstinence si la bacterie consomme des nutriments ou non
      */
-    Bacterium(Quantity energie, Vec2d position, Vec2d direction,
+    Bacterium(Quantity energie, const Vec2d& position, const Vec2d& direction,
               double radius, const MutableColor& couleur,
-              std::map<std::string, MutableNumber>param_mutables = {},
+              const std::map<std::string, MutableNumber>& param_mutables = {},
               bool abstinence = 0);
 
     /**
@@ -170,7 +170,7 @@ protected :
      * @param offset Vecteur a ajouter à la position
      * @return Score associé à la nouvelle position
      */
-    double helperPositionScore (const Vec2d& offset);
+    double helperPositionScore(const Vec2d& offset) const;
 
 };
 

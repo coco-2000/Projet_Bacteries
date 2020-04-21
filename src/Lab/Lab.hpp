@@ -11,7 +11,7 @@ class Lab : public Drawable, public Updatable
 public:
     /**
       * @brief Lab constructeur permet de positionner l'assiette de Petri au centre
-      * de la fenêtre graphique associée au Lab et avec un diamètre occupant les 45%
+      * de la fenêtre graphique associée au Lab et avec un diamètre occupant les 95%
       * de la largeur de cette fenêtre.
       */
      Lab();
