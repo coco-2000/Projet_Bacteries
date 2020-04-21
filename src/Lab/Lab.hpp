@@ -38,32 +38,24 @@ public:
      void reset();
 
      /**
-      * @brief contains Verifie si un CIrcularBody est à l'interueur de son assiette de Petri
-      * @return true si le CircularBody est à l'interieur false sinon
-      */
-     bool contains(const CircularBody&) const;
-
-     /**
-      * @brief increaseTemperature permet d'augmenter la température
-      * des éléments du lab
+      * @brief increaseTemperature Augmenter la température de la boite de Petri du Lab
       */
      void increaseTemperature();
 
      /**
-      * @brief decreaseTemperature permet de diminuer la température
-      * des éléments du lab
+      * @brief decreaseTemperature Diminue la température de la boite de Petri du Lab
       */
      void decreaseTemperature();
 
      /**
-      * @brief init_temperature permet de réinitialiser la température
-      * des éléments du lab à la valeur du fichier de configuration
+      * @brief initTemp Réinitialise la température de la boite de Petri du Lab d'après
+      *                         la valeur du fichier de configuration
       */
-     void init_temperature();
+     void initTemp();
 
      /**
-      * @brief addNutriment permet de ajouter un nutriment au lab
-      * @param nutriment : celui qui est ajouté au lab
+      * @brief addNutriment Ajoute un nutriment à la boite de Petri du Lab
+      * @param Nutriment qui est ajouté à la boite de Petri du Lab
       */
      void addNutriment(Nutriment* nutriment);
 
@@ -123,18 +115,18 @@ public:
      double getGradientExponent();
 
      /**
-      * @brief init_puissance Initialise l'attribut puissance de l'assiette de
+      * @brief initGradient Initialise l'attribut puissance de l'assiette de
       *        Petri qui est associée au paramètre "Gradient exponent" en fonction du
       *        fichier de configuration
       */
-     void init_power();
+     void initGradient();
 
      /**
-      * @brief ajout_annexe Ajoute un pointeur sur une bactérie le vecteur annexe
+      * @brief addAnnex Ajoute un pointeur sur une bactérie le vecteur annexe
       *                     de l'assiette de Petri
       * @param clone Pointeur sur la bactérie à ajouter (créée par clonage en l'occurence)
       */
-     void add_annexe(Bacterium* clone);
+     void addAnnex(Bacterium* clone);
 
      /**
       * @brief addSwarm Ajoute un groupe Swarm à la boîte de Petri
@@ -147,7 +139,7 @@ public:
       * @param id Identificateur du Swarm à retourner
       * @return Swarm dont l'identifiacteur est id
       */
-     Swarm* getSwarmWithId(std::string id) const;
+     Swarm* getSwarmWithId(const std::string& id) const;
 
      /** @brief Destructeur
        */
@@ -157,4 +149,9 @@ private :
     PetriDish petri;
     NutrimentGenerator generateur_nutriment;
 
+    /**
+     * @brief contains Vérifie si un CircularBody est à l'intérieur de son assiette de Petri
+     * @return true si le CircularBody est à l'interieur false sinon
+     */
+    bool contains(const CircularBody& corps) const;
 };

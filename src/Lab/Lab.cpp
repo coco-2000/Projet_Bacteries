@@ -69,7 +69,7 @@ double Lab::getTemperature() const
     return petri.getTemperature();
 }
 
-void Lab::init_temperature()
+void Lab::initTemp()
 {
     petri.init_temperature();
 }
@@ -94,12 +94,12 @@ double Lab::getGradientExponent()
     return petri.getGradientExponent();
 }
 
-void Lab::init_power()
+void Lab::initGradient()
 {
     return petri.init_puissance();
 }
 
-void Lab::add_annexe(Bacterium* clone)
+void Lab::addAnnex(Bacterium* clone)
 {
     petri.ajout_annexe(clone);
 }
@@ -109,7 +109,7 @@ void Lab::addSwarm(Swarm* groupe)
     petri.addSwarm(groupe);
 }
 
-Swarm* Lab::getSwarmWithId(std::string id) const
+Swarm* Lab::getSwarmWithId(const std::string& id) const
 {
     return petri.getSwarmWithId(id);
 }
