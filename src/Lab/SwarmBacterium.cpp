@@ -37,7 +37,7 @@ void SwarmBacterium::move(sf::Time dt)
     const DiffEqResult deplacement(stepDiffEq(position, getSpeedVector(), dt, *groupe));
 
     const Vec2d new_position(deplacement.position);
-    direction = deplacement.speed / deplacement.speed.length();
+    direction = deplacement.speed.normalised();
 
     const auto deltaPos = new_position - position;
 

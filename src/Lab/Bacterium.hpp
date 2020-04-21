@@ -16,7 +16,7 @@ public :
      * @param position Coordonnées de la position intiale de la bacterie
      * @param direction Direction du déplacement initiale de la bacterie
      * @param radius Rayon initiale de la bactérie
-     * @param couleur couleur initiale de la bacterie
+     * @param couleur Couleur initiale de la bacterie
      * @param param_mutables ensemble de paramètres numériques mutables
      * @param abstinence si la bacterie consomme des nutriments ou non
      */
@@ -90,7 +90,6 @@ protected :
     sf::Time compteur;
     double ancien_score;
 
-
     /**
      * @brief DisplayEnergy Affiche la quantité d'énergie de la bacterie (si mode debugging activé)
      * @param target Cible pour l'affichage
@@ -102,7 +101,6 @@ protected :
      * avec l'assiette de petri
      */
     void collisionPetri();
-
 
     /**
      * @brief move Méthode virtuelle pure de déplacement des bactéries

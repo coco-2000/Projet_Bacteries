@@ -127,8 +127,8 @@
         },
         "speed" : {
             "initial" : 30,
-            "rate" : 0.8,
-            "sigma" : 0.8
+            "rate" : 1,
+            "sigma" : 20
         },
         "tumble" : {
             "algo" : "best of N",
@@ -202,7 +202,7 @@
             "min" : 5
         },
         "speed" : {
-            "initial" : 40
+            "initial" : 20
         }
     },
     "swarms" : {

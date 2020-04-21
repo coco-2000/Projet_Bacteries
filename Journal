@@ -29,9 +29,11 @@
 
 - *Constance* : Création et implémentation des classes PetriDish et Lab (Partie 2.1)
 - *Emma* : Création et implémentation de la classe Nutriment (Partie 2.2)
-- *ensemble* : Croissance des nutriment (partie 2.2)
+- *ensemble* : Croissance des nutriments (Partie 2.2),
+               touche C et R (Partie 2.1),
                modification sur la partie 1,
                correction des erreurs constatées lors des tests
+
 
 - Problèmes : - Introduction de nouveaux raccourcis dans le fichier Config ? Non à éviter
               - Comment traiter la condition portant sur le debordement de l'assiette lors de la
@@ -54,8 +56,8 @@
 - *Emma* : Création et implémentation des classes MutableNumber et MutableColor (Partie 3.2)
 - *ensemble* : Modification de la partie 2, gestion des problèmes, modification des méthodes associées à la touche C
 
-- Problèmes : - Coder destructeur explicite ou pas ? Non pour CircularBody (géré par SousClasses),
-                NutrimentGenerator, Nutriment (géré par PetriDish), Oui pour Lab (appel de reset)
+- Problèmes : Coder destructeur explicite ou pas ? Non pour CircularBody (géré par SousClasses),
+              NutrimentGenerator, Nutriment (géré par PetriDish), Oui pour Lab (appel de reset)
 
 
 *************************************************
@@ -63,21 +65,35 @@
 
 - *Constance* : Création et implémentation de la classe Bacterium (Partie 3.3)
                 relecture générale du code des parties précedentes, apport de petites modifications
-- *Emma* : Création et implémentation de la classe SimpleBacterium (Partie 3.4)
-- *ensemble* : correction bugs (dessin de la flagelle, déplacement de la bacterie,
-               et crash du programme lors de la construction des paramètres mutables) (Partie 3.4)
-               implémentation division des bacteries (Partie 3.4)
+- *Emma* : Création et implémentation de la classe SimpleBacterium (Partie 3.4), modification fonctions rotation de l'angle
+           relecture générale du code des parties précedentes, correction consommation de nutriment
+           et test collision avec le bord de l'assiette (Partie 3.3), modification de la fonctions PetriDish::update_bacterium
+           pour éviter SegmentationFault
+- *ensemble* : correction bugs (dessin de la flagelle, test de collision des bactéries,
+               division des bacteries) (Partie 3.3 et 3.4), ajout des override, const, etc
+
+- Problèmes : Utilisation de la fonction de move de CircularBody dans les fonctions move des bactéries ? Oui,
+              Bactérie qui ne se déplace pas (inversion de la direction à chaque pas)
+
 
 *************************************************
-## Semaine 5 - Partie 4
+##Semaine 5 - Partie 4
 
 - *Constance* : Création et implémentation de la classe TwitchingBacterium (Partie 4.1)
                 changements sur la methode move de SimpleBacterium, supression de setDirection de SimpleBacterium
                 et ajout de rotationAngle dans Bacterium (Partie 3.4)
-- *Emma* : Création et implémentation de la classe SwarmBacterium (Partie 4.2)
-           changement relation d'héritage SimpleBacterium (Partie 3.4)
-- *ensemble* : relecture générale du code, apport de petites modifications
+- *Emma* : Création et implémentation de la classe Swarm et SwarmBacterium (Partie 4.2)
+           changement relation d'héritage SimpleBacterium (Partie 3.4),
 
-- Problèmes : Avant la modification de l'énoncé, bug généré par la classe Grip codée dans Utility.
+- Problèmes : Avant la modification de l'énoncé, bug généré par la classe Grip codée dans Utility,
+              SimpleBacterium et Swarm hérite de DiffEqFuntion (pas de composition)
+
+*************************************************
+##Semaine 6 - Partie 4
+
+- *ensemble* : relecture générale du code, apport de petites modifications avant le rendu
+
+- Problèmes : Pourquoi est-ce que appuyer sur la touche R pour mettre la simulation à zéro
+              ne réinitialise pas la puissance (gradient exponent)
 
 Point où nous en sommes : Partie 4 terminée

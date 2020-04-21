@@ -53,7 +53,7 @@ void SimpleBacterium::move(sf::Time dt)
     t += COEFF_T * dt.asSeconds();
     tps_basculement += dt;
 
-    rotationAngle(dt);
+    //rotationAngle(dt);
     tentative_basculement();
 }
 

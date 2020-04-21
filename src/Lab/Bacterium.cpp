@@ -42,7 +42,6 @@ void Bacterium::mutate()
     }
 }
 
-
 bool Bacterium::en_vie()
 {
     return !(energie<=0);
@@ -92,7 +91,7 @@ void Bacterium::update(sf::Time dt)
 {
     move(dt);
     collisionPetri();
-    //rotationAngle(dt);
+    rotationAngle(dt);
     consumeNutriment(dt);
     divide();
 }
@@ -161,7 +160,6 @@ MutableNumber Bacterium::getProperty(const std::string& key) const
         return param_mutables.find(key)->second;
     }
 }
-
 
 void Bacterium::rotationAngle(sf::Time dt)
 {
