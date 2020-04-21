@@ -94,7 +94,7 @@ double Lab::getGradientExponent()
     return petri.getGradientExponent();
 }
 
-void Lab::init_power()
+void Lab::initGradient()
 {
     return petri.init_puissance();
 }

@@ -38,7 +38,7 @@ public:
     * @brief Destructeur
     * Détruit le pointeur vers le groupe auquel la bactérie appartient (sans détruire le Swarm lui-même)
     */
-    ~SwarmBacterium();
+    ~SwarmBacterium() override;
 
 private:
     Swarm* groupe;

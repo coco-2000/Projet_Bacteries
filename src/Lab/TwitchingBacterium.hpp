@@ -107,7 +107,7 @@ protected :
      * @param dir direction dans laquelle le grapin se déplace
      * @param dt Pas de temps apres lequel la simulation est mise à jour
      */
-    void grapinToward (const Vec2d& dir, sf::Time dt);
+    void gripToward (const Vec2d& dir, sf::Time dt);
 
     /**
      * @brief shift_clone décale la bactérie clonée pour la différencier de la bactérie d'origine

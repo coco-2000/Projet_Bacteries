@@ -123,14 +123,14 @@ public:
      double getGradientExponent();
 
      /**
-      * @brief init_puissance Initialise l'attribut puissance de l'assiette de
+      * @brief init_power Initialise l'attribut puissance de l'assiette de
       *        Petri qui est associée au paramètre "Gradient exponent" en fonction du
       *        fichier de configuration
       */
-     void init_power();
+     void initGradient();
 
      /**
-      * @brief ajout_annexe Ajoute un pointeur sur une bactérie le vecteur annexe
+      * @brief add_annexe Ajoute un pointeur sur une bactérie le vecteur annexe
       *                     de l'assiette de Petri
       * @param clone Pointeur sur la bactérie à ajouter (créée par clonage en l'occurence)
       */

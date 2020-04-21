@@ -73,11 +73,6 @@ void SwarmBacterium::mutate()
     couleur.mutate();
 }
 
-SwarmBacterium::~SwarmBacterium()
-{
-    groupe->supprBacterium(this);
-}
-
 void SwarmBacterium::drawOn(sf::RenderTarget &target) const
 {
     Bacterium::drawOn(target);
@@ -96,4 +91,9 @@ void SwarmBacterium::drawOn(sf::RenderTarget &target) const
 Vec2d SwarmBacterium::getSpeedVector() const
 {
     return direction * getConfig()["speed"]["initial"].toDouble();
+}
+
+SwarmBacterium::~SwarmBacterium()
+{
+    groupe->supprBacterium(this);
 }

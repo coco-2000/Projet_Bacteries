@@ -51,22 +51,22 @@ private :
     void tentative_basculement();
 
     /**
-     * @brief basculement effectue le basculement de l'instance courante
+     * @brief switchDirection effectue le basculement de l'instance courante
      */
-    void basculement();
+    void switchDirection();
 
     /**
-     * @brief strategie1 Première façon d'effectuer le basculement : choisir au hasard une direction
+     * @brief strategy1 Première façon d'effectuer le basculement : choisir au hasard une direction
      * associer à l'étiquette "single random vector" dans le fichier de configuration
      */
-    void strategie1();
+    void strategy1();
 
     /**
-     * @brief strategie2 Deuxième façon d'effectuer le basculement :
+     * @brief strategy2 Deuxième façon d'effectuer le basculement :
      * Générer N direction et retenir celle qui a le meilleur score
      * associer à l'helperétiquette "best of N" dans le fichier de configuration
      */
-    void strategie2();
+    void strategy2();
 
     /**
      * Redéfinition d'une méthode virtuelle pure

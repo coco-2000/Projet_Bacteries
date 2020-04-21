@@ -87,7 +87,7 @@ void TwitchingBacterium::Wait_to_deploy_state()
 
 void TwitchingBacterium::deploy_state(sf::Time dt, const Nutriment* nutriment_ptr)
 {
-    grapinToward(direction, dt);
+    gripToward(direction, dt);
 
     if(nutriment_ptr != nullptr)
         state = ATTRACT;
@@ -119,10 +119,10 @@ void TwitchingBacterium::tentacle_init()
 
 void TwitchingBacterium::retract_state(sf::Time dt)
 {
-    (*this > grip) ? tentacle_init() : grapinToward((position-grip.getPosition()).normalised(), dt);
+    (*this > grip) ? tentacle_init() : gripToward((position-grip.getPosition()).normalised(), dt);
 }
 
-void TwitchingBacterium::grapinToward (const Vec2d& dir, sf::Time dt)
+void TwitchingBacterium::gripToward (const Vec2d& dir, sf::Time dt)
 {
     direction = dir;
     const double dist_tentacule = getProperty("tentacle speed").get()*dt.asSeconds();
