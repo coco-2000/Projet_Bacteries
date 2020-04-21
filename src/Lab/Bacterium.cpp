@@ -23,7 +23,7 @@ void Bacterium::divide()
         Bacterium* copie(clone());
         copie->mutate();
         copie->shift_clone({10,-10}); //pour que l'on puisse tout de suite voir s'il y a eu division
-        getAppEnv().ajout_annexe(copie);
+        getAppEnv().add_annexe(copie);
         direction = -direction;
     }
 }

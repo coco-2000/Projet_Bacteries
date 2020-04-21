@@ -16,13 +16,6 @@ public :
     Nutriment(Quantity quantity, const Vec2d& position);
 
     /**
-     * @brief Nutriment::takeQuantity Prélève une quantité donnée de nutriments de l'instance courante
-     * @param prelevement Quantité de nutriments à prélever
-     * @return Quantité de nutriments qui a pu être prélevée
-     */
-    Quantity takeQuantity(Quantity prelevement);
-
-    /**
      * @brief Nutriment::TestPrelevement Ajuste la quantité prélever en fonction de celle disponible
      * @param prelevement Quantité voulant être prélever
      */
@@ -80,4 +73,11 @@ protected :
      * Il s'agit d'une méthode virtuelle pure
      */
      virtual j::Value const& getConfig() const = 0;
+
+    /**
+     * @brief Nutriment::takeQuantity Prélève une quantité donnée de nutriments de l'instance courante
+     * @param prelevement Quantité de nutriments à prélever
+     * @return Quantité de nutriments qui a pu être prélevée
+     */
+    Quantity takeQuantity(Quantity prelevement);
 };

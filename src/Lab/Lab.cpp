@@ -4,7 +4,7 @@
 #include "Swarm.hpp"
 
 Lab::Lab()
-    : petri(getApp().getCentre(), ratio_rayon*getApp().getLabSize().x)
+    : petri(getApp().getCentre(), (0.95/2)*getApp().getLabSize().x)
 {}
 
 bool Lab::contains(const CircularBody& corps) const
@@ -44,7 +44,7 @@ void Lab::reset()
     generateur_nutriment.reset();
 }
 
-void Lab::addNutriment(Nutriment* nutriment)
+void Lab::addNutriment(Nutriment *nutriment)
 {
     petri.addNutriment(nutriment);
 }
@@ -74,11 +74,6 @@ void Lab::init_temperature()
     petri.init_temperature();
 }
 
-Lab::~Lab()
-{
-    reset();
-}
-
 double Lab::getPositionScore(const Vec2d& position) const
 {
     return petri.getPositionScore(position);
@@ -99,12 +94,12 @@ double Lab::getGradientExponent()
     return petri.getGradientExponent();
 }
 
-void Lab::init_puissance()
+void Lab::init_power()
 {
     return petri.init_puissance();
 }
 
-void Lab::ajout_annexe(Bacterium* clone)
+void Lab::add_annexe(Bacterium* clone)
 {
     petri.ajout_annexe(clone);
 }
@@ -117,4 +112,9 @@ void Lab::addSwarm(Swarm* groupe)
 Swarm* Lab::getSwarmWithId(std::string id) const
 {
     return petri.getSwarmWithId(id);
+}
+
+Lab::~Lab()
+{
+    reset();
 }
