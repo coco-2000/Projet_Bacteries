@@ -47,7 +47,7 @@ public:
 
     /**
      * @brief update Met à jour le leader du groupe
-     * @param dt Pas de temps après lequel lequel la simulation est mise à jour
+     * @param dt Pas de temps après lequel la simulation est mise à jour
      */
     void update(sf::Time dt);
 

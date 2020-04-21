@@ -49,8 +49,8 @@ void MutableNumber::mutate()
 }
 
 MutableNumber MutableNumber::probability(double initialValue,
-                          double mutationProbability,
-                          double sigma)
+                                         double mutationProbability,
+                                         double sigma)
 {
     return MutableNumber (initialValue,
                           mutationProbability,

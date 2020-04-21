@@ -66,7 +66,6 @@ double PetriDish::getTemperature() const
     return temperature;
 }
 
-
 void PetriDish::update(sf::Time dt)
 {
     update_nutriments(dt);
