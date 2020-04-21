@@ -5,14 +5,13 @@
 #include "Interface/Updatable.hpp"
 #include "NutrimentGenerator.hpp"
 
-constexpr double ratio_rayon(0.95/2);
 
 class Lab : public Drawable, public Updatable
 {
 public:
     /**
       * @brief Lab constructeur permet de positionner l'assiette de Petri au centre
-      * de la fenêtre graphique associée au Lab et avec un diamètre occupant les 45%
+      * de la fenêtre graphique associée au Lab et avec un diamètre occupant les 95%
       * de la largeur de cette fenêtre.
       */
      Lab();
@@ -128,18 +127,14 @@ public:
       *        Petri qui est associée au paramètre "Gradient exponent" en fonction du
       *        fichier de configuration
       */
-     void init_puissance();
+     void init_power();
 
      /**
       * @brief ajout_annexe Ajoute un pointeur sur une bactérie le vecteur annexe
       *                     de l'assiette de Petri
       * @param clone Pointeur sur la bactérie à ajouter (créée par clonage en l'occurence)
       */
-     void ajout_annexe(Bacterium* clone);
-
-     /** @brief Destructeur
-       */
-     ~Lab() override;
+     void add_annexe(Bacterium* clone);
 
      /**
       * @brief addSwarm Ajoute un groupe Swarm à la boîte de Petri
@@ -153,6 +148,10 @@ public:
       * @return Swarm dont l'identifiacteur est id
       */
      Swarm* getSwarmWithId(std::string id) const;
+
+     /** @brief Destructeur
+       */
+     ~Lab() override;
 
 private :
     PetriDish petri;

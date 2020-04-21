@@ -46,32 +46,11 @@ public :
     void update(sf::Time dt) override;
 
     /**
-     * @brief addProperty Ajoute à l'ensemble des paramètres mutables numériques de la bactérie une valeur numérique mutable donnée
-     * @param key Clé (=nom) du paramètre mutable à ajouter
-     * @param valeur Valeur associée à la clé, sous forme de MutableNumber
-     */
-    void addProperty(const std::string& key, const MutableNumber& valeur);
-
-    /**
-     * @brief getProperty Accesseur d'un paramètre mutable
-     * @param key Clé (=nom) du paramètre mutable à renvoyer
-     * @return La valeur, sous forme de MutableNumber, du paramètre associé à la clé
-     */
-    MutableNumber getProperty(const std::string& key) const;
-
-    /**
      * @brief setScore Manipulateur du score
      * @param score Score à assigner à l'attribut ancien_score
      *              (score avant mise à jour) de l'instance courante
      */
     void setScore(double score);
-
-    /**
-     * @brief helperPositionScore Calcul score de la position de l'instance + un vecteur
-     * @param offset Vecteur a ajouter à la position
-     * @return Score associé à la nouvelle position
-     */
-    double helperPositionScore (const Vec2d& offset) const;
 
 protected :
     MutableColor couleur;
@@ -171,6 +150,27 @@ protected :
      * @param v vecteur avec lequel la bactérie est décalée
      */
     virtual void shift_clone(const Vec2d& v);
+
+    /**
+     * @brief addProperty Ajoute à l'ensemble des paramètres mutables numériques de la bactérie une valeur numérique mutable donnée
+     * @param key Clé (=nom) du paramètre mutable à ajouter
+     * @param valeur Valeur associée à la clé, sous forme de MutableNumber
+     */
+    void addProperty(const std::string& key, const MutableNumber& valeur);
+
+    /**
+     * @brief getProperty Accesseur d'un paramètre mutable
+     * @param key Clé (=nom) du paramètre mutable à renvoyer
+     * @return La valeur, sous forme de MutableNumber, du paramètre associé à la clé
+     */
+    MutableNumber getProperty(const std::string& key) const;
+
+    /**
+     * @brief helperPositionScore Calcul score de la position de l'instance + un vecteur
+     * @param offset Vecteur a ajouter à la position
+     * @return Score associé à la nouvelle position
+     */
+    double helperPositionScore(const Vec2d& offset) const;
 
 };
 
