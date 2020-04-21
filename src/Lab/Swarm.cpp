@@ -40,7 +40,7 @@ void Swarm::supprBacterium(SwarmBacterium* bacterie)
     }
     groupe.erase(std::remove(groupe.begin(), groupe.end(), nullptr),
                        groupe.end());
-    //setLeader();
+    setLeader();
 }
 
 Vec2d Swarm::getLeaderPosition() const
@@ -96,7 +96,7 @@ Vec2d Swarm::f(Vec2d position, Vec2d speed) const
         return (getConfig()[identificateur]["force factor"].toDouble()) * (getLeaderPosition() - position);
 }
 
-bool Swarm::SuisJeLeader(const SwarmBacterium* bacterie)
+bool Swarm::IsLeader(const SwarmBacterium* bacterie)
 {
     return bacterie == leader;
 }

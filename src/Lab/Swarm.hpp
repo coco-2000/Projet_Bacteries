@@ -56,7 +56,12 @@ public:
      */
     void updateLeaderDirection();
 
-    bool SuisJeLeader(const SwarmBacterium* bacterie);
+    /**
+     * @brief IsLeader Vérifie si une bactérie est leader du groupe
+     * @param bacterie Instance dont on vérifie la condition
+     * @return true si la bactérie est leader, false sinon
+     */
+    bool IsLeader(const SwarmBacterium* bacterie);
 
     /**
      * @brief Destucteur de Swarm
