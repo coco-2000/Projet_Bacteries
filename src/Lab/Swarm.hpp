@@ -87,7 +87,7 @@ private:
      * @param speed Vitesse de la bactérie sur laquelle s'applique la force calculée /inutilisé
      * @return Le vecteur force appliqué sur la bactérie swarm
      */
-    Vec2d f(Vec2d position, Vec2d speed) const;
+    Vec2d f(Vec2d position, Vec2d speed) const override;
 
     /**
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux Swarms
