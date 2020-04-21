@@ -483,7 +483,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
         case sf::Keyboard::C:
 			delete mConfig;
             mConfig = new Config(mAppDirectory + mCfgFile); // reconstruct
-            getEnv().init_temperature();
+            getEnv().initTemp();
             getEnv().initGradient();
             break;
 
