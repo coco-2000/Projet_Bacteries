@@ -47,18 +47,23 @@ void SwarmBacterium::move(sf::Time dt)
         position = new_position;
     }
 
-    if(groupe->SuisJeLeader(this))
+    if(groupe->IsLeader(this))
     {
-        constexpr int nb_vecteur(20); // nb de directions aléatoires à générer
+        moveLeader();
+    }
+}
 
-        for(int i(0); i < nb_vecteur; ++i)
+void SwarmBacterium::moveLeader()
+{
+    constexpr int nb_vecteur(20); // nb de directions aléatoires à générer
+
+    for(int i(0); i < nb_vecteur; ++i)
+    {
+        Vec2d new_dir(Vec2d::fromRandomAngle());
+
+        if(helperPositionScore(new_dir) > helperPositionScore(direction))
         {
-            Vec2d new_dir(Vec2d::fromRandomAngle());
-
-            if(helperPositionScore(new_dir) > helperPositionScore(direction))
-            {
-                setDirection(new_dir);
-            }
+            setDirection(new_dir);
         }
     }
 }
@@ -77,7 +82,7 @@ void SwarmBacterium::drawOn(sf::RenderTarget &target) const
 {
     Bacterium::drawOn(target);
 
-    if(isDebugOn() and groupe->SuisJeLeader(this))
+    if(isDebugOn() and groupe->IsLeader(this))
     {
         //on a ici décidé que l'epaisseur de l'anneau serait 5
         const auto anneau = buildAnnulus(getPosition(),

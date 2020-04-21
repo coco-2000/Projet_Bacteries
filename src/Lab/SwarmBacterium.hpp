@@ -66,4 +66,9 @@ private:
      * @return La vitesse courante de l'instance
      */
     Vec2d getSpeedVector() const;
+
+    /**
+     * @brief moveLeader Déplace la bactérie leader du groupe
+     */
+    void moveLeader();
 };
