@@ -29,7 +29,7 @@ public :
      * @brief en_vie savoir si la bacterie a suffisamment d'energie pour etre en vie
      * @return vrai si l'energie est suffisante
      */
-    bool en_vie();
+    bool alive() const;
 
     /**
      * @brief drawOn dessiner la bacterie
@@ -72,12 +72,6 @@ public :
      * @return Score associé à la nouvelle position
      */
     double helperPositionScore (const Vec2d& offset);
-
-    /**
-     * @brief setDirection Manipulateur de direction
-     * @param direction Vecteur à assigner à la direction de l'instance courante
-     */
-    void setDirection(const Vec2d& dir);
 
 protected :
     MutableColor couleur;
@@ -150,7 +144,7 @@ protected :
     /**
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries
      * Il s'agit d'une méthode virtuelle pure
-     * @return la valeur associée à getAppConfig()["bacterium"]
+     * @return la valeur associée à getAppConfig()["bacterium"] du fichier json
      */
     virtual j::Value const& getConfig() const = 0;
 
@@ -166,8 +160,16 @@ protected :
      */
     void consumeNutriment(sf::Time dt);
 
+    /**
+     * @brief rotationAngle mise à jour de l'angle de rotation
+     * @param dt Pas de temps après lequel la simulation est mise à jour
+     */
     void rotationAngle(sf::Time dt);
 
+    /**
+     * @brief shift_clone décale la bactérie clonée pour la différencier de la bactérie d'origine
+     * @param v vecteur avec lequel la bactérie est décalée
+     */
     virtual void shift_clone(const Vec2d& v);
 
 };

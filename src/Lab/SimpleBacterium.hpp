@@ -84,7 +84,7 @@ private :
 
     /**
      * Redéfinition d'une méthode virtuelle pure
-     * @brief copie Effectue la copie d'une instance avec tous ses attributs
+     * @brief clone Effectue la copie d'une instance avec tous ses attributs
      * @return Un pointeur sur la nouvelle bactérie copiée de l'instance courante
      */
     SimpleBacterium* clone() const override;

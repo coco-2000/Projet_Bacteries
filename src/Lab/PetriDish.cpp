@@ -77,7 +77,7 @@ void PetriDish::update_bacteries (sf::Time dt)
 {
     for(auto& bacterie : lesBacteries)
     {
-        if(bacterie->en_vie())
+        if(bacterie->alive())
         {
             bacterie->setScore(getPositionScore(bacterie->getPosition()));
             bacterie->update(dt);
