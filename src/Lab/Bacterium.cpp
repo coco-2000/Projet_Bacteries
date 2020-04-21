@@ -3,9 +3,9 @@
 #include "Application.hpp"
 #include "CircularBody.hpp"
 
-Bacterium::Bacterium(Quantity energie, Vec2d position, Vec2d direction,
+Bacterium::Bacterium(Quantity energie, const Vec2d& position, const Vec2d& direction,
                      double radius, const MutableColor& couleur,
-                     std::map<std::string, MutableNumber> param_mutables,
+                     const std::map<std::string, MutableNumber>& param_mutables,
                      bool abstinence)
 
     : CircularBody(position, radius), couleur(couleur), direction(direction), energie(energie),
@@ -167,7 +167,7 @@ void Bacterium::rotationAngle(sf::Time dt)
     angle += dalpha; // angle de rotation mis à jour
 }
 
-double Bacterium::helperPositionScore (const Vec2d& offset)
+double Bacterium::helperPositionScore (const Vec2d& offset) const
 {
     return getAppEnv().getPositionScore(getPosition() + offset);
 }
