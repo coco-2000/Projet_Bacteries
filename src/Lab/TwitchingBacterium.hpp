@@ -24,11 +24,11 @@ protected :
     Quantity getTentacleEnergy() const;
     void tentacle_init();
     void Wait_to_deploy_state();
-    void deploy_state(sf::Time dt, Nutriment* nutriment_ptr);
-    void attract_state(sf::Time dt, Nutriment* nutriment_ptr);
+    void deploy_state(sf::Time dt, const Nutriment* nutriment_ptr);
+    void attract_state(sf::Time dt, const Nutriment* nutriment_ptr);
     void retract_state(sf::Time dt);
-    void eat_state(Nutriment* nutriment_ptr);
-    void grapinToward (Vec2d dir, sf::Time dt);
-    void shift_clone(Vec2d v) override;
+    void eat_state(const Nutriment* nutriment_ptr);
+    void grapinToward (const Vec2d& dir, sf::Time dt);
+    void shift_clone(const Vec2d& v) override;
 
 };

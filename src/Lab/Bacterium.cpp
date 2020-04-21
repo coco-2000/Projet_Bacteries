@@ -27,7 +27,7 @@ void Bacterium::divide()
         setDirection(-direction);
     }
 }
-void Bacterium::shift_clone(Vec2d v)
+void Bacterium::shift_clone(const Vec2d& v)
 {
     CircularBody::move(v);
 }
