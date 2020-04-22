@@ -59,7 +59,6 @@ public :
      */
     Quantity takeQuantity(Quantity prelevement);
 
-
 protected :
     const double dist;
     Quantity quantity_;

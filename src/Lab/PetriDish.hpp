@@ -23,7 +23,7 @@ public:
     PetriDish(Vec2d position, double radius);
 
     /**
-     * @brief PetriDish pour empecher la copie
+     * @brief PetriDish Empêche la copie
      */
     PetriDish(PetriDish const&) = delete;
 
