@@ -67,9 +67,8 @@
                 relecture générale du code des parties précedentes, apport de petites modifications (pour une meilleure lisibilité du code)
 - *Emma* : Création et implémentation de la classe SimpleBacterium (Partie 3.4)
 - *ensemble* : correction bugs (dessin de la flagelle, test de collision des bactéries, crash du programme lors de
-               la construction des paramètres mutables),
+               la construction des paramètres mutables) et implémentation division des bacteries (Partie 3.4)
                ajout des override, const, etc
-               implémentation division des bacteries (Partie 3.4)
 
 - Problèmes : Bactérie qui ne se déplace pas (inversion de la direction à chaque pas)
 
