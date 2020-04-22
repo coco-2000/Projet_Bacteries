@@ -6,14 +6,15 @@
 #include <cmath>
 
 NutrimentGenerator::NutrimentGenerator()
-    : compteur(sf::Time::Zero) //appeler la methode reset() ?
-{}
+{
+    reset();
+}
 
 void NutrimentGenerator::update(sf::Time dt)
 {
     if(compteur >= (sf::seconds(getAppConfig()["generator"]["nutriment"]["delay"].toDouble())))
     {
-        compteur = sf::Time::Zero;
+        reset();
         const Vec2d position(normal(getApp().getLabSize().x/2, pow(getApp().getLabSize().x/4,2)),
                              normal(getApp().getLabSize().y/2, pow(getApp().getLabSize().y/4,2)));
 
