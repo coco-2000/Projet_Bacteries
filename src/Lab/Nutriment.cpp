@@ -20,7 +20,7 @@ Quantity Nutriment::takeQuantity(Quantity prelevement)
 
 void Nutriment:: TestPrelevement(Quantity& prelevement) const
 {
-    if(prelevement > quantity_) {prelevement -= quantity_;}
+    if(prelevement >= quantity_) {prelevement = quantity_;}
 }
 
 void Nutriment::setQuantity(Quantity quantity)
@@ -74,5 +74,5 @@ bool Nutriment::ConditionTemperature(double temperature) const
 
 bool Nutriment::isEmpty() const
 {
-    return(quantity_ <= 0);
+    return (quantity_ <= 0);
 }

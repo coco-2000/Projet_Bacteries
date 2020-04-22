@@ -10,7 +10,7 @@ PetriDish::PetriDish(Vec2d position, double radius)
 {
     init_temperature();
     initGradient();
-    init_annexe();
+    initAnnex();
 }
 
 
@@ -91,7 +91,7 @@ void PetriDish::update_bacteries (sf::Time dt)
     if(!annexe.empty())
     {
         append(annexe, lesBacteries);
-        init_annexe();
+        initAnnex();
     }
     lesBacteries.erase(std::remove(lesBacteries.begin(), lesBacteries.end(), nullptr),
                        lesBacteries.end());
@@ -102,7 +102,7 @@ void PetriDish::update_nutriments (sf::Time dt)
 {
     for(auto& nutriment : lesNutriments)
     {
-        if (!nutriment->isEmpty())
+        if (!(nutriment->isEmpty()))
         {
             if(nutriment->ConditionTemperature(temperature))
             {
@@ -210,7 +210,7 @@ void PetriDish::initGradient()
               / 2;
 }
 
-void PetriDish::init_annexe()
+void PetriDish::initAnnex()
 {
     annexe.clear();
 }

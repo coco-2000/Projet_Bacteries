@@ -23,7 +23,7 @@ public:
     PetriDish(Vec2d position, double radius);
 
     /**
-     * @brief PetriDish pour empecher la copie
+     * @brief PetriDish Empêche la copie
      */
     PetriDish(PetriDish const&) = delete;
 
@@ -181,10 +181,10 @@ private :
     void update_nutriments (sf::Time dt);
 
     /**
-     * @brief init_annexe Initialise le vecteur annexe de l'assiette de Petri
+     * @brief initAnnex Initialise le vecteur annexe de l'assiette de Petri
      *                    à un vecteur vide
      */
-    void init_annexe();
+    void initAnnex();
 
     /**
      * @brief getConfig Raccourci pour accéder aux paramètres associée à l'assiette de Petri
