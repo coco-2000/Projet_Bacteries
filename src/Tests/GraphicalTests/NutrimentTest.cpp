@@ -55,7 +55,9 @@ void NutrimentTest::onEvent(sf::Event event, sf::RenderWindow&)
         // to test takeQuantity
         case sf::Keyboard::T:
             if (lastCreated != nullptr) {
-                lastCreated->takeQuantity(15);
+                if(!lastCreated->takeQuantity(15))
+                    lastCreated = nullptr;
+
             }
             break;
         }
