@@ -115,9 +115,10 @@ drawOn de la classe Nutriment qui elle se charge de dessiner un nutriment.
 
 Les nutriments ne croissent que si la température leur convient, la méthode
 Nutriment::update qui les fait évoluer doit donc être appelé que si les conditions
-portant sur la température sont respectées. Il suffit donc de tester la température
-dans la méthode PetriDish::update et d'appeller la méthode Nutriment::update que si
-la température convient.
+portant sur la température sont respectées.
+Création de la méthode ConditionTempérature dans Nutriment qui prend la température du
+PetriDish en paramètre et qui permet ainsi de tester si la température convient pour une croissance
+du nutriment et dans ce cas appelle la méthode Nutriment::update
 
 *************************************************
 ##Q2.11
@@ -301,8 +302,8 @@ Bacterium. Cependant, comme l'angle de direction est lié à la direction, il fa
 l'initialiser dans le corps du constructeur en convertissant le vecteur direction
 en angle.
 La mise à jour de l'angle se fait uniquement lorsque la direction change, autrement
-dit lorsque la bactérie rebondit sur une paroi. C'est donc la fonction
-Bacterium::CollisionPetri qui doit mettre à jour l'angle (en même temps que la direction)
+dit lorsque la bactérie rebondit sur une paroi. C'est donc la méthode
+Bacterium::update qui doit mettre à jour l'angle
 
 **************************************************
 ##Q3.19
@@ -367,13 +368,13 @@ La classe Bacterium herite déja des classes Drawable et Updatable. Il n'est pas
 **************************************************
 ##Q4.2
 
-Redéfinir la méthode getConfig héritée de la classe bacterium.
+Pour accéder aux paramètres caractérisant ce type de bactéries, nous avons redéfini la méthode getConfig héritée de la classe bacterium.
 
 **************************************************
 ##Q4.3
 
 Toutes les méthodes virtuelles pures héritées de Bacterium devront être redéfinies pour que la classe
-TwitchingBacterium puisse être instanciable.
+TwitchingBacterium puisse être instanciable. Il s'agit des méthodes move, clone et getConfig (redéfinie à la Q4.2)
 
 **************************************************
 ##Q4.4

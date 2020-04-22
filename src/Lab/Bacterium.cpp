@@ -24,7 +24,7 @@ void Bacterium::divide()
         copie->mutate();
         copie->shift_clone({10,-10}); //pour que l'on puisse tout de suite voir s'il y a eu division
         getAppEnv().addAnnex(copie);
-        direction = -direction;
+        direction = Vec2d::fromAngle(M_PI/2);
     }
 }
 void Bacterium::shift_clone(const Vec2d& v)

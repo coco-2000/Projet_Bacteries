@@ -66,14 +66,12 @@
 - *Constance* : Création et implémentation de la classe Bacterium (Partie 3.3)
                 relecture générale du code des parties précedentes, apport de petites modifications (pour une meilleure lisibilité du code)
 - *Emma* : Création et implémentation de la classe SimpleBacterium (Partie 3.4)
-- *ensemble* : correction bugs (dessin de la flagelle, test de collision des bactéries,
-               division des bacteries, crash du programme lors de la construction des paramètres mutables) (Partie 3.4),
+- *ensemble* : correction bugs (dessin de la flagelle, test de collision des bactéries, crash du programme lors de
+               la construction des paramètres mutables) (Partie 3.4),
                ajout des override, const, etc
                implémentation division des bacteries (Partie 3.4)
 
-- Problèmes : Utilisation de la fonction de move de CircularBody dans les fonctions move des bactéries ? Oui,
-              Bactérie qui ne se déplace pas (inversion de la direction à chaque pas)
-
+- Problèmes : Bactérie qui ne se déplace pas (inversion de la direction à chaque pas)
 
 *************************************************
 ##Semaine 5 - Partie 4
@@ -84,7 +82,8 @@
 - *Emma* : Création et implémentation de la classe Swarm et SwarmBacterium (Partie 4.2)
            changement relation d'héritage SimpleBacterium (Partie 3.4),
 
-- Problèmes : Avant la modification de l'énoncé, bug généré par la classe Grip codée dans Utility,
+- Problèmes : Utilisation de la fonction de move de CircularBody dans les fonctions move des bactéries ? Oui
+              Avant la modification de l'énoncé, bug généré par la classe Grip codée dans Utility,
               SimpleBacterium et Swarm hérite de DiffEqFuntion (pas de composition)
 
 - La partie 3 a été modifié après son archivage :
