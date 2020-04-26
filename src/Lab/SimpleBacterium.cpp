@@ -5,6 +5,8 @@
 #include "../Utility/DiffEqSolver.hpp"
 #include <SFML/Graphics.hpp>
 #include "../Utility/Constants.hpp"
+#include "NutrimentA.hpp"
+#include "NutrimentB.hpp"
 
 
 SimpleBacterium::SimpleBacterium(const Vec2d& position)
@@ -139,3 +141,14 @@ Vec2d SimpleBacterium::f(Vec2d position, Vec2d speed) const
 {
     return {0, 0};
 }
+
+Quantity SimpleBacterium::eatableQuantity(NutrimentA& nutriment)
+{
+    return nutriment.eatenBy(*this);
+}
+
+Quantity SimpleBacterium::eatableQuantity(NutrimentB& nutriment)
+{
+    return nutriment.eatenBy(*this);
+}
+

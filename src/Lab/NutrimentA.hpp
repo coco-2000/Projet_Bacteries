@@ -12,6 +12,11 @@ public :
      */
     NutrimentA(Quantity quantity, const Vec2d& position);
 
+    Quantity eatenBy(Bacterium& bacterie) override;
+    Quantity eatenBy(SimpleBacterium& bacterie) override;
+    Quantity eatenBy(SwarmBacterium& bacterie) override;
+    Quantity eatenBy(TwitchingBacterium& bacterie) override;
+
 protected:
     /**
      * @brief getConfig redéfinition de la méthode virtuelle héritée de Nutriment

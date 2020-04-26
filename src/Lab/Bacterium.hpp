@@ -7,6 +7,10 @@
 #include "Utility/Types.hpp"
 #include <string>
 
+class Nutriment;
+class NutrimentA;
+class NutrimentB;
+
 class Bacterium : public CircularBody, public Drawable, public Updatable
 {
 public :
@@ -51,6 +55,14 @@ public :
      *              (score avant mise à jour) de l'instance courante
      */
     void setScore(double score);
+
+    /**
+     * @brief getMaxEatableQuantity
+     * @return
+     */
+    Quantity getMaxEatableQuantity() const;
+    virtual Quantity eatableQuantity(NutrimentA& nutriment) = 0;
+    virtual Quantity eatableQuantity(NutrimentB& nutriment) = 0;
 
 protected :
     MutableColor couleur;
@@ -171,6 +183,8 @@ protected :
      * @return Score associé à la nouvelle position
      */
     double helperPositionScore(const Vec2d& offset) const;
+
+    void eat(Nutriment& nutriment);
 
 };
 

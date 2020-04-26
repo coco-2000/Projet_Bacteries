@@ -4,6 +4,16 @@
 #include <SFML/Graphics.hpp>
 #include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
+/*
+#include "SimpleBacterium.hpp"
+#include "SwarmBacterium.hpp"
+#include "TwitchingBacterium.hpp"
+*/
+
+class Bacterium;
+class SimpleBacterium;
+class SwarmBacterium;
+class TwitchingBacterium;
 
 class Nutriment : public CircularBody, public Drawable, public Updatable
 {
@@ -59,6 +69,11 @@ public :
      */
     Quantity takeQuantity(Quantity prelevement);
 
+    virtual Quantity eatenBy(Bacterium& bacterie) = 0;
+    virtual Quantity eatenBy(SimpleBacterium& bacterie) = 0;
+    virtual Quantity eatenBy(SwarmBacterium& bacterie) = 0;
+    virtual Quantity eatenBy(TwitchingBacterium& bacterie) = 0;
+
 protected :
     const double dist;
     Quantity quantity_;
@@ -79,6 +94,6 @@ protected :
      * @brief Nutriment::TestPrelevement Ajuste la quantité prélever en fonction de celle disponible
      * @param prelevement Quantité voulant être prélever
      */
-    void TestPrelevement(Quantity& prelevement) const;
+    Quantity TestPrelevement(Quantity& prelevement) const;
 
 };

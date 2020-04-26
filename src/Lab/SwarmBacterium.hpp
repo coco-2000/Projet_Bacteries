@@ -34,6 +34,9 @@ public:
      */
     void drawOn(sf::RenderTarget &target) const override;
 
+    Quantity eatableQuantity(NutrimentA& nutriment) override;
+    Quantity eatableQuantity(NutrimentB& nutriment) override;
+
     /**
     * @brief Destructeur
     * Détruit le pointeur vers le groupe auquel la bactérie appartient (sans détruire le Swarm lui-même)

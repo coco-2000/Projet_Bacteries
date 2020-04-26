@@ -34,6 +34,9 @@ public:
      */
     Vec2d getSpeedVector() const;
 
+    Quantity eatableQuantity(NutrimentA& nutriment) override;
+    Quantity eatableQuantity(NutrimentB& nutriment) override;
+
 private :
     double t;
     sf::Time tps_basculement;

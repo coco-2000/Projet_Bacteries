@@ -2,7 +2,7 @@
 
 #include "Bacterium.hpp"
 #include "Grip.hpp"
-#include "Nutriment.hpp"
+//#include "Nutriment.hpp"
 
 enum Etat {IDLE, WAIT_TO_DEPLOY, DEPLOY, ATTRACT, RETRACT, EAT};
 
@@ -26,6 +26,9 @@ public :
      * @param delta vecteur avec lequel le grapin est déplacé
      */
     void moveGrip(const Vec2d& delta);
+
+    Quantity eatableQuantity(NutrimentA& nutriment) override;
+    Quantity eatableQuantity(NutrimentB& nutriment) override;
 
 protected :
     Grip grip;
