@@ -1,7 +1,6 @@
 /*
  * prjsv 2016-20
  * Marco Antognini & Jamila Sam
- * STEP 4
  */
 
 #ifndef INFOSV_APPLICATION_HPP
@@ -20,7 +19,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
-//#include <Stats/Stats.hpp>
+#include <Stats/Stats.hpp> 
 /*!
  * @class Application
  *
@@ -134,7 +133,7 @@ public:
      */
     Vec2d getCursorPositionInView() const;
 	
-	enum Control { TEMPERATURE, GRADIENT, STATS, NB_CONTROLS=3	};
+	enum Control { STATS, TEMPERATURE, GRADIENT, NB_CONTROLS=3	};
 protected:
 	/**
      *  @brief controls the display of statitics
@@ -147,6 +146,15 @@ protected:
 	void initHelpBox();
 	virtual std::string getHelpTextFile() const;
 	
+	/**
+     *  @brief Add a graph to the stats manager and update GUI
+     *
+     *  @param title  graph's title
+     *  @param series series' title
+     *  @param min    y-axis: min value expected
+     *  @param max    y-axis: max value expected
+     */
+    void addGraph(std::string const& title, std::vector<std::string> const& series, double min, double max);
     /*!
      *  @brief Called once before starting the main loop
      *
@@ -226,6 +234,15 @@ protected:
 				sf::Drawable const& helpBackground
 				);
 
+	/**
+     *  @brief Get access to the stats manager
+     *
+     *  @return the application statistic manager
+     */
+    Stats& getStats(); 
+
+	void setActiveGraph(int id);
+
     /*!
      * @brief Toggle pause
      */
@@ -284,8 +301,7 @@ private:
     std::string const mCfgFile;      ///< Relative path to the CFG
 //    j::Value          mJSONRead;       ///< Application configuration
     Config*          mConfig;       ///< Application configuration
-	
-//	Stats*   mStats;                 ///< Statistic manager
+	Stats*   mStats;                 ///< Statistic manager
     sf::View mStatsView;             ///< View for the stats area
 	sf::View mControlView;             ///< View for the control area
     int      mCurrentGraphId;        ///< Current graph ID

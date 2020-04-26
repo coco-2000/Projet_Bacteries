@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Bacteria_Simulator_SSV_2020_STEP4)
+project(Bacteria_Simulator_SSV_2020_STEP5)
 
 # set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_STANDARD 14)
@@ -54,7 +54,7 @@ file (GLOB CACHE_SOURCES
   "${CACHE_DIR}/catch.hpp"
    "${TEST_DIR}/UnitTests/CheckUtility.hpp"
    "${TEST_DIR}/UnitTests/CatchTests.cpp"
-   ${SOURCES}
+   #   ${SOURCES}
    ${UTILITY_SOURCES}
     )
 
@@ -76,6 +76,10 @@ find_package(SFML 2.5 QUIET COMPONENTS graphics window system)
     if(SFML_FOUND)
       message(STATUS "Found SFML ${SFML_VERSION_MAJOR}.${SFML_VERSION_MINOR}.${SFML_VERSION_PATCH}")
       
+      #main application:
+      #add_executable (application  ${TEST_DIR}/GraphicalTests/FinalApplication.cpp ${SOURCES_GFX})
+      #target_link_libraries(application sfml-graphics sfml-window sfml-system)
+	
       #Units tests:
       add_executable (mutableTest  ${TEST_DIR}/UnitTests/MutablePropertyTest.cpp ${CB_SOURCES} ${CACHE_SOURCES})
       target_link_libraries(mutableTest sfml-graphics sfml-window sfml-system)
@@ -92,13 +96,12 @@ find_package(SFML 2.5 QUIET COMPONENTS graphics window system)
       #target_link_libraries(bacteria Test sfml-graphics sfml-window sfml-system)
       add_executable (nutrimentTest  ${TEST_DIR}/GraphicalTests/NutrimentTest.cpp ${SOURCES_GFX})
       target_link_libraries(nutrimentTest sfml-graphics sfml-window sfml-system)
-
       add_executable (gripTest  ${TEST_DIR}/GraphicalTests/GripTest.cpp ${SOURCES_GFX})
       target_link_libraries(gripTest sfml-graphics sfml-window sfml-system)
       add_executable (swarmTest  ${TEST_DIR}/GraphicalTests/SwarmBacteriaTest.cpp ${SOURCES_GFX})
       target_link_libraries(swarmTest sfml-graphics sfml-window sfml-system)
       add_executable (twitchingTest  ${TEST_DIR}/GraphicalTests/TwitchingBacteriaTest.cpp ${SOURCES_GFX})
-      target_link_libraries(twitchingTest sfml-graphics sfml-window sfml-system)
+     target_link_libraries(twitchingTest sfml-graphics sfml-window sfml-system) 
     else()
         set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
         find_package(SFML 2 COMPONENTS graphics window system)
@@ -110,6 +113,10 @@ find_package(SFML 2.5 QUIET COMPONENTS graphics window system)
 
             include_directories(${SFML_INCLUDE_DIR})
 	    
+	    #main application:
+#            add_executable(application ${TEST_DIR}/GraphicalTests/FinalApplication.cpp ${SOURCES_GFX})
+#            target_link_libraries(application ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+
 	    #Units tests:
 	    add_executable (mutableTest ${TEST_DIR}/UnitTests/MutablePropertyTest.cpp ${CB_SOURCES} ${CACHE_SOURCES})
             target_link_libraries(mutableTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
@@ -126,12 +133,12 @@ find_package(SFML 2.5 QUIET COMPONENTS graphics window system)
             #target_link_libraries(bacteriaTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 	    add_executable(nutrimentTest ${TEST_DIR}/GraphicalTests/NutrimentTest.cpp ${SOURCES_GFX})
             target_link_libraries(nutrimentTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-#	    add_executable(gripTest ${TEST_DIR}/GraphicalTests/GripTest.cpp ${SOURCES_GFX})
-#            target_link_libraries(gripTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-            add_executable(swarmTest ${TEST_DIR}/GraphicalTests/SwarmBacteriaTest.cpp ${SOURCES_GFX})
-            target_link_libraries(swarmTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-#	    add_executable(twitchingTest ${TEST_DIR}/GraphicalTests/TwitchingBacteriaTest.cpp ${SOURCES_GFX})
-#            target_link_libraries(twitchingTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+	    add_executable(gripTest ${TEST_DIR}/GraphicalTests/GripTest.cpp ${SOURCES_GFX})
+            target_link_libraries(gripTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+	    add_executable(swarmTest ${TEST_DIR}/GraphicalTests/SwarmBacteriaTest.cpp ${SOURCES_GFX})
+            target_link_libraries(swarmTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})	    
+	    add_executable(twitchingTest ${TEST_DIR}/GraphicalTests/TwitchingBacteriaTest.cpp ${SOURCES_GFX})
+            target_link_libraries(twitchingTest ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
         else()
             message(STATUS "SFML NOT FOUND ! ")
         endif() ## SFML 2
