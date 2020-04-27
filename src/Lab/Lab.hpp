@@ -141,6 +141,8 @@ public:
       */
      Swarm* getSwarmWithId(const std::string& id) const;
 
+     void resetControls();
+
      /** @brief Destructeur
        */
      ~Lab() override;

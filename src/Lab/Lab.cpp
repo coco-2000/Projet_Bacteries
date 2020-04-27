@@ -118,3 +118,9 @@ Lab::~Lab()
 {
     reset();
 }
+
+void Lab::resetControls()
+{
+    initTemp();
+    initGradient();
+}

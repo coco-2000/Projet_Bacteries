@@ -57,7 +57,7 @@ public :
     void setScore(double score);
 
     /**
-     * @brief getMaxEatableQuantity
+     * @brief getMaxEatableQuantity Calcul de la quantité maximale pouvant être  retournée par takeQuantity lorsqu'on essaie de prélever la quantité maximale pour la bactérie
      * @return
      */
     Quantity getMaxEatableQuantity() const;

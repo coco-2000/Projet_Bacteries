@@ -450,10 +450,10 @@ alors on ne peut savoir à quelle sous-classe il appartient (nutriment A ou B)
 **************************************************
 ##Q5.2
 
-Pour la même raison qui fait que les tests de type ne sont pas souhaitables. Il se peut que la relation d'héritage
-entre la classe Bacterium et ses Sous-classe empêche de connaitre le type exacte d'un objet car si celui-ci est
-considéré comme une bactérie (Superclasse) au moment où l'on appelle la méthode eatenBy alors on ne pourra pas
-savoir à quelle sous-classe l'objet appartient et se sera la surcharge prenant une Bacterium en paramètre qui sera appelée
+Pour la même raison qui fait que les tests de type ne sont pas souhaitables. La relation d'héritage entre la classe Bacterium
+et ses Sous-classe empêche de connaitre le type exacte d'un objet car si celui-ci est considéré comme une bactérie (Superclasse)
+au moment où l'on appelle la méthode eatenBy alors on ne pourra pas savoir à quelle sous-classe l'objet appartient et se sera
+la surcharge prenant une Bacterium en paramètre qui sera appelée.
 
 
 

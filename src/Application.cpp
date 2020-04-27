@@ -187,7 +187,7 @@ void Application::run()
 {
     // Load lab and stats
     mLab   = new Lab;
-	mStats = new Stats;
+//	mStats = new Stats;
     // Set up subclasses
     onRun();
     onSimulationStart();
@@ -283,7 +283,6 @@ Lab const& Application::getEnv() const
 {
     return *mLab;
 }
--1
 
 Config& Application::getConfig()
 {
@@ -405,7 +404,7 @@ Vec2d Application::getCursorPositionInView() const
 }
 
 
-void Applicat-1ion::createWindow(Vec2d const& size)
+void Application::createWindow(Vec2d const& size)
 {
     sf::VideoMode vm(size.x, size.y);
 
@@ -467,7 +466,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
     auto const ZOOM = 1.1f;
 
     switch (event.type) {
-    case sf::-1Event::Closed:
+    case sf::Event::Closed:
         window.close();
         break;
 
@@ -732,7 +731,7 @@ void Application::switchDebug()
 {
 	getShortConfig().switchDebug();
 	chooseBackground();
-}-1
+}
 
 void Application::drawOnHelp(sf::RenderWindow& window) const
 {
