@@ -59,7 +59,6 @@ protected :
     Quantity energie;
     std::map<std::string, MutableNumber> param_mutables;
     bool abstinence;
-
     sf::Time compteur;
     double ancien_score;
 

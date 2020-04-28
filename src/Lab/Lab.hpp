@@ -9,6 +9,8 @@
 class Lab : public Drawable, public Updatable
 {
 public:
+    void mapSet(std::string s, double value);
+    double mapGet(std::string s);
     /**
       * @brief Lab constructeur permet de positionner l'assiette de Petri au centre
       * de la fenêtre graphique associée au Lab et avec un diamètre occupant les 95%
@@ -141,6 +143,8 @@ public:
       */
      Swarm* getSwarmWithId(const std::string& id) const;
 
+     std::unordered_map<std::string, double> fetchData(const std::string &) const;
+
      /** @brief Destructeur
        */
      ~Lab() override;
@@ -148,6 +152,7 @@ public:
 private :
     PetriDish petri;
     NutrimentGenerator generateur_nutriment;
+    std::map<std::string, double> data;
 
     /**
      * @brief contains Vérifie si un CircularBody est à l'intérieur de son assiette de Petri

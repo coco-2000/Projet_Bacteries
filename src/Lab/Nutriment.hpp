@@ -33,12 +33,6 @@ public :
     */
     void update(sf::Time dt) override;
 
-   /**
-    * @brief getTemperature Accesseur de température
-    * @return la température courante de l'assiette de Petri
-    */
-    double getTemperature() const;
-
     /**
      * @brief ConditionTemperature Vérifie les conditions portant sur la température pour la croissance des nutriments
      * @param temperature Température courante

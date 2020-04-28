@@ -7,6 +7,21 @@ Lab::Lab()
     : petri(getApp().getCentre(), (0.95/2)*getApp().getLabSize().x)
 {}
 
+double Lab::mapGet(std::string s)
+{
+    if(s.find("tentacules"))
+        return data[s]/data["twitching"];
+    else if(s.find("speed"))
+        return data[s]/data["bacterium"];
+
+    return data[s];
+}
+
+void Lab::mapSet(std::string s, double value)
+{
+    data[s] = value;
+}
+
 bool Lab::contains(const CircularBody& corps) const
 {
     return (petri > corps);

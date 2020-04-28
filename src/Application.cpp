@@ -187,7 +187,7 @@ void Application::run()
 {
     // Load lab and stats
     mLab   = new Lab;
-	mStats = new Stats;
+    mStats = new Stats;
     // Set up subclasses
     onRun();
     onSimulationStart();
@@ -283,7 +283,7 @@ Lab const& Application::getEnv() const
 {
     return *mLab;
 }
--1
+
 
 Config& Application::getConfig()
 {
@@ -405,7 +405,7 @@ Vec2d Application::getCursorPositionInView() const
 }
 
 
-void Applicat-1ion::createWindow(Vec2d const& size)
+void Application::createWindow(Vec2d const& size)
 {
     sf::VideoMode vm(size.x, size.y);
 
@@ -467,7 +467,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
     auto const ZOOM = 1.1f;
 
     switch (event.type) {
-    case sf::-1Event::Closed:
+    case sf::Event::Closed:
         window.close();
         break;
 
@@ -487,7 +487,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
         case sf::Keyboard::C:
 			delete mConfig;
             mConfig = new Config(mAppDirectory + mCfgFile); // reconstruct
-			getEnv().resetControls();
+            //getEnv().resetControls();
             break;
 
         // Toggle pause for simulation
@@ -502,7 +502,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
 				mIsResetting = true;
 				getEnv().reset();
 // A DECOMMENTER:
-//				getStats().reset();
+                getStats().reset();
 				onSimulationStart();
 				createViews();
 				mSimulationBackground= mLabBackground;
@@ -540,7 +540,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
 						break;
 					case STATS:
 						// A DECOMMENTER
-//						mStats->previous(); 
+                        mStats->previous();
 						break;
 					default:
 						break;
@@ -556,7 +556,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
 						break;
 					case STATS:
 // A DECOMMENTER
-//						mStats->next();
+                        mStats->next();
 						break;
 					default:
 						break;
@@ -668,7 +668,7 @@ void Application::render(sf::Drawable const& simulationBackground,
 	if (isStatsOn)
 	{
 // A DECOMENTER
-		//getStats().drawOn(mRenderWindow);
+        getStats().drawOn(mRenderWindow);
 	}
 	
 	
@@ -732,7 +732,7 @@ void Application::switchDebug()
 {
 	getShortConfig().switchDebug();
 	chooseBackground();
-}-1
+}
 
 void Application::drawOnHelp(sf::RenderWindow& window) const
 {
@@ -827,7 +827,7 @@ void Application::drawOneControl(sf::RenderWindow& target
 		case STATS :
 			text = "Current stat : ";
 			// A DECOMMENTER
-			//text += (isStatsOn ? mStats->getCurrentTitle() : "disabled");
+            text += (isStatsOn ? mStats->getCurrentTitle() : "disabled");
 			break;
 		default:
 			/* nothing to do */
@@ -850,7 +850,7 @@ void Application::addGraph(std::string const& title, std::vector<std::string> co
     if (series.size() > 0){
 		++mCurrentGraphId;
 		// A DECOMMENTER
-//    getStats().addGraph(mCurrentGraphId, title, series, min, max, getStatsSize() );
+    getStats().addGraph(mCurrentGraphId, title, series, min, max, getStatsSize() );
 	}
 }
 
@@ -863,5 +863,5 @@ Stats& Application::getStats()
 void Application::setActiveGraph(int id)
 {
 	// A DECOMMENTER
-	//getStats().setActive(id);
+    getStats().setActive(id);
 }
