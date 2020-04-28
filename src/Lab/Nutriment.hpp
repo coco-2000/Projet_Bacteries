@@ -69,9 +69,34 @@ public :
      */
     Quantity takeQuantity(Quantity prelevement);
 
+    /**
+     * Methode virtuelle pure
+     * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie
+     * (appelle la méthode eatableQuantity de la sous classe à laquelle appartient la bactérie = polymorphisme)
+     * @param bacterie dont on calcule la quantité de nutriment qu'elle consomme
+     * @return la quantité de nutriment consommée
+     */
     virtual Quantity eatenBy(Bacterium& bacterie) = 0;
+
+    /**
+     * Methode virtuelle pure
+     * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie simple
+     * @return la quantité de nutriment consommée
+     */
     virtual Quantity eatenBy(SimpleBacterium& bacterie) = 0;
+
+    /**
+     * Methode virtuelle pure
+     * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à comportement de groupe
+     * @return la quantité de nutriment consommée
+     */
     virtual Quantity eatenBy(SwarmBacterium& bacterie) = 0;
+
+    /**
+     * Methode virtuelle pure
+     * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à tentacule
+     * @return la quantité de nutriment consommée
+     */
     virtual Quantity eatenBy(TwitchingBacterium& bacterie) = 0;
 
 protected :
@@ -95,5 +120,4 @@ protected :
      * @param prelevement Quantité voulant être prélever
      */
     Quantity TestPrelevement(Quantity& prelevement) const;
-
 };
