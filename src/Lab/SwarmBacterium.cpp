@@ -68,6 +68,7 @@ void SwarmBacterium::moveLeader()
             direction = new_dir;
         }
     }
+    //position += getSpeedVector();
 }
 
 void SwarmBacterium::mutate()
