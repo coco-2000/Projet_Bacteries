@@ -188,6 +188,7 @@ void Application::run()
     // Load lab and stats
     mLab   = new Lab;
     mStats = new Stats;
+
     // Set up subclasses
     onRun();
     onSimulationStart();
@@ -247,7 +248,7 @@ void Application::run()
                 elapsedTime -= dt;
 				getEnv().update(dt);
 				// A DECOMMENTER
-//				getStats().update(dt);
+                getStats().update(dt);
                 onUpdate(dt);
 				--nbCycles;
 

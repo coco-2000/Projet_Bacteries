@@ -144,5 +144,8 @@ void TwitchingBacterium::shift_clone(const Vec2d& v)
     moveGrip(v);
 }
 
-
+double TwitchingBacterium::getTwitchCounter()
+{
+    return twitchBcounter;
+}
 

@@ -4,9 +4,11 @@
 #include <SFML/Graphics.hpp>
 #include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
+#include "Recorder.hpp"
 
-class Nutriment : public CircularBody, public Drawable, public Updatable
+class Nutriment : public CircularBody, public Recorder, public Drawable, public Updatable
 {
+
 public :
     /**
      * @brief Nutriment::Nutriment Constructeur
@@ -53,6 +55,10 @@ public :
      */
     Quantity takeQuantity(Quantity prelevement);
 
+    virtual ~Nutriment() override;
+
+    Quantity getQuantity() const;
+
 protected :
     const double dist;
     Quantity quantity_;
@@ -74,5 +80,7 @@ protected :
      * @param prelevement Quantité voulant être prélever
      */
     void TestPrelevement(Quantity& prelevement) const;
+
+    virtual std::vector<Property>getRecordProperty() const override;
 
 };

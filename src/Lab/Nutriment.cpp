@@ -24,7 +24,8 @@ void Nutriment:: TestPrelevement(Quantity& prelevement) const
 }
 
 void Nutriment::setQuantity(Quantity quantity)
-{
+{//pour réinitialiser la map data de lab avec la nouvelle quantité
+    commitProperty({{s::NUTRIMENT_QUANTITY, quantity - quantity_, INC, ""}}, true);
     quantity >= 0 ? quantity_ = quantity : quantity_ = 0.0;
     setRadius(quantity_);
 }
@@ -76,3 +77,15 @@ bool Nutriment::isEmpty() const
 {
     return (quantity_ <= 0);
 }
+
+
+Nutriment::~Nutriment()
+{
+
+}
+
+Quantity Nutriment::getQuantity() const
+{
+    return quantity_;
+}
+

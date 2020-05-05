@@ -34,6 +34,8 @@ public:
      */
     void drawOn(sf::RenderTarget &target) const override;
 
+    static double getSwarmCounter();
+
     /**
     * @brief Destructeur
     * Détruit le pointeur vers le groupe auquel la bactérie appartient (sans détruire le Swarm lui-même)
@@ -42,6 +44,7 @@ public:
 
 private:
     Swarm* group;
+    static double swarmBcounter;
 
     /**
      * @brief move Déplace une bactérie
@@ -71,4 +74,6 @@ private:
      * @brief moveLeader Déplace la bactérie leader du groupe
      */
     void moveLeader();
+
+    virtual std::vector<Property>getRecordProperty() const override;
 };

@@ -122,8 +122,6 @@ void Bacterium::consumeEnergy(Quantity qt)
     energie -= qt;
 }
 
-
-
 void Bacterium::setScore(double score)
 {
     if(score > 0)
@@ -171,3 +169,22 @@ double Bacterium::helperPositionScore (const Vec2d& offset) const
 {
     return getAppEnv().getPositionScore(getPosition() + offset);
 }
+
+
+
+Bacterium::~Bacterium()
+{
+
+}
+
+std::map<std::string, MutableNumber> Bacterium::getParam_mutables() const
+{
+    return param_mutables;
+}
+
+
+
+
+
+
+

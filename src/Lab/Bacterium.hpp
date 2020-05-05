@@ -3,11 +3,12 @@
 #include "../Interface/Drawable.hpp"
 #include "../Interface/Updatable.hpp"
 #include "../Utility/MutableColor.hpp"
+#include "Recorder.hpp"
 #include <SFML/Graphics.hpp>
 #include "Utility/Types.hpp"
 #include <string>
 
-class Bacterium : public CircularBody, public Drawable, public Updatable
+class Bacterium : public CircularBody, public Recorder, public Drawable, public Updatable
 {
 public :
     /**
@@ -51,6 +52,11 @@ public :
      *              (score avant mise à jour) de l'instance courante
      */
     void setScore(double score);
+
+    virtual ~Bacterium() override;
+
+    std::map<std::string, MutableNumber> getParam_mutables() const;
+
 
 protected :
     MutableColor couleur;
@@ -170,6 +176,8 @@ protected :
      * @return Score associé à la nouvelle position
      */
     double helperPositionScore(const Vec2d& offset) const;
+
+    virtual std::vector<Property>getRecordProperty() const override;
 
 };
 

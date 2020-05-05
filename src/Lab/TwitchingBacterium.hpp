@@ -27,9 +27,12 @@ public :
      */
     void moveGrip(const Vec2d& delta);
 
+    static double getTwitchCounter();
+
 protected :
     Grip grip;
     Etat state;
+    static double twitchBcounter;
 
     /**
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bactéries à tentacule
@@ -114,5 +117,7 @@ protected :
      * @param v vecteur avec lequel la bactérie est décalée
      */
     void shift_clone(const Vec2d& v) override;
+
+    virtual std::vector<Property>getRecordProperty() const override;
 
 };

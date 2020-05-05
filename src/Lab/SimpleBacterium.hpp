@@ -34,9 +34,12 @@ public:
      */
     Vec2d getSpeedVector() const;
 
+    static double getSimpleCounter();
+
 private :
     double t;
     sf::Time tps_basculement;
+    static double simpleBcounter;
 
     /**
      * @brief drawOn Permet d'ajouter des détails graphiques spécifique
@@ -97,4 +100,6 @@ private :
      * @return Le vecteur force appliqué à la bactérie simple, le vecteur nul
      */
     Vec2d f(Vec2d position, Vec2d speed) const override;
+
+   virtual ~SimpleBacterium() override;
 };

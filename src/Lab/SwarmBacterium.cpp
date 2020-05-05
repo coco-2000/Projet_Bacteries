@@ -93,7 +93,18 @@ Vec2d SwarmBacterium::getSpeedVector() const
     return direction * getConfig()["speed"]["initial"].toDouble();
 }
 
+double SwarmBacterium::getSwarmCounter()
+{
+    return swarmBcounter;
+}
+
 SwarmBacterium::~SwarmBacterium()
 {
     group->supprBacterium(this);
 }
+
+
+
+
+
+

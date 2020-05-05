@@ -1,5 +1,6 @@
 #pragma once
 #include "PetriDish.hpp"
+#include "StatMap.hpp"
 #include <SFML/Graphics.hpp>
 #include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
@@ -9,8 +10,7 @@
 class Lab : public Drawable, public Updatable
 {
 public:
-    void mapSet(std::string s, double value);
-    double mapGet(std::string s);
+
     /**
       * @brief Lab constructeur permet de positionner l'assiette de Petri au centre
       * de la fenêtre graphique associée au Lab et avec un diamètre occupant les 95%
@@ -144,15 +144,26 @@ public:
      Swarm* getSwarmWithId(const std::string& id) const;
 
      std::unordered_map<std::string, double> fetchData(const std::string &) const;
+     void mapSet(std::string key, double value, const std::string &associateClass = {});
+     std::pair<double, std::vector<std::string>> mapGet(std::string s) const;
 
+     //StatMap getStatMap();
      /** @brief Destructeur
        */
      ~Lab() override;
 
+     template<typename T>
+     struct property {
+         const std::string& name;
+         std::function<bool(T)> selector;
+         std::function<double(int, double)> finisher;
+         std::function<double(T, double, std::string)> accumulator;
+
+     };
 private :
     PetriDish petri;
     NutrimentGenerator generateur_nutriment;
-    std::map<std::string, double> data;
+
 
     /**
      * @brief contains Vérifie si un CircularBody est à l'intérieur de son assiette de Petri
