@@ -143,7 +143,7 @@ std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphN
     static const auto sumN       = [](Nutriment& n, double d, std::string s) -> double{return (n.getQuantity() + d);};
 
     static const auto with       = [](std::string s) -> std::function<bool (Bacterium&)>
-    { [&](Bacterium& b){ auto m = b.getParam_mutables();
+    {return [&](Bacterium& b){ auto m = b.getParam_mutables();
                         return (m.find(s) != m.end());};};
     static const auto all        = [](Nutriment& b) -> bool{return true;};
 
@@ -175,7 +175,7 @@ std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphN
             result[serie.name] = serie.counter();
         }
     }
-    else if (graphName.find("bacteria"))
+    else if (graphName.find("bacteria") != std::string::npos)
     {
         for(const auto& serie : namesB.at(graphName))
         {
@@ -183,7 +183,7 @@ std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphN
         }
     }
 
-    else if (graphName.find("nutriment"))
+    else if (graphName.find("nutriment") != std::string::npos)
     {
         for(const auto& serie : namesN.at(graphName) )
         {
@@ -193,8 +193,6 @@ std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphN
 
     return result;
 }
-
-
 
 
 Lab::~Lab()
