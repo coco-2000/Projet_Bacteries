@@ -1,8 +1,8 @@
 #include "PetriDish.hpp"
 #include "../Utility/Utility.hpp"
 #include "CircularBody.hpp"
-#include "Application.hpp"
 #include <vector>
+#include "Application.hpp"
 
 
 PetriDish::PetriDish(Vec2d position, double radius)
@@ -72,6 +72,7 @@ void PetriDish::update(sf::Time dt)
     update_bacteries(dt);
     update_swarms(dt);
 }
+
 
 void PetriDish::update_bacteries (sf::Time dt)
 {
@@ -241,3 +242,14 @@ PetriDish::~PetriDish()
 {
     reset();
 }
+
+std::vector<Bacterium *> PetriDish::getLesBacteries() const
+{
+    return lesBacteries;
+}
+
+std::vector<Nutriment *> PetriDish::getLesNutriments() const
+{
+    return lesNutriments;
+}
+

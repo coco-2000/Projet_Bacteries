@@ -56,6 +56,9 @@ public :
      */
     void setScore(double score);
 
+
+    std::map<std::string, MutableNumber> getParam_mutables() const; //je crois qu'il faut le supprimer
+
     /**
      * @brief getMaxEatableQuantity
      * @return la quantité maximale pouvant être prélevé par la bactérie sur le source de nutriment
@@ -84,6 +87,7 @@ public :
      */
     virtual Quantity eatableQuantity(NutrimentB& nutriment) = 0;
 
+
 protected :
     MutableColor couleur;
     double angle;
@@ -91,7 +95,6 @@ protected :
     Quantity energie;
     std::map<std::string, MutableNumber> param_mutables;
     bool abstinence;
-
     sf::Time compteur;
     double ancien_score;
 

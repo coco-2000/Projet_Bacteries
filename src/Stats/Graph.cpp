@@ -18,6 +18,7 @@ std::vector<sf::Color> const& COLORS = { sf::Color::Red, sf::Color::Green, sf::C
 
 } // anonymous
 
+
 Graph::Graph(std::vector<std::string> const& titles, Vec2d const& size, double min, double max)
 : mSize(size)
 , mYMin(std::min(max, min))

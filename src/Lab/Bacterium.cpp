@@ -123,8 +123,6 @@ void Bacterium::consumeEnergy(Quantity qt)
     energie -= qt;
 }
 
-
-
 void Bacterium::setScore(double score)
 {
     if(score > 0)
@@ -171,6 +169,12 @@ void Bacterium::rotationAngle(sf::Time dt)
 double Bacterium::helperPositionScore (const Vec2d& offset) const
 {
     return getAppEnv().getPositionScore(getPosition() + offset);
+}
+
+
+std::map<std::string, MutableNumber> Bacterium::getParam_mutables() const
+{
+    return param_mutables;
 }
 
 Quantity Bacterium::getMaxEatableQuantity() const

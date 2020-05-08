@@ -27,6 +27,10 @@ public :
      */
     void moveGrip(const Vec2d& delta);
 
+    static double getTwitchCounter();
+
+    virtual ~TwitchingBacterium() override;
+
     /**
      * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
      *                        retire cette quantité au nutriment
@@ -48,6 +52,7 @@ public :
 protected :
     Grip grip;
     Etat state;
+    static double twitchCounter;
 
     /**
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bactéries à tentacule

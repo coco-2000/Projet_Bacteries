@@ -1,6 +1,7 @@
 #include "SimpleBacterium.hpp"
 #include "../Random/Random.hpp"
 #include "../Utility/Vec2d.hpp"
+
 #include "Application.hpp"
 #include "../Utility/DiffEqSolver.hpp"
 #include <SFML/Graphics.hpp>
@@ -16,11 +17,13 @@ SimpleBacterium::SimpleBacterium(const Vec2d& position)
                 uniform(getConfig()["radius"]["min"].toDouble(), getConfig()["radius"]["max"].toDouble()),
                 getConfig()["color"],
                 {{"speed", MutableNumber::positive(getConfig()["speed"])},
-                 {"tumble better", MutableNumber::positive(getConfig()["tumble"]["better"])},
-                 {"tumble worse", MutableNumber::positive(getConfig()["tumble"]["worse"])}}),
+                 {"tumble better prob", MutableNumber::positive(getConfig()["tumble"]["better"])},
+                 {"tumble worse prob", MutableNumber::positive(getConfig()["tumble"]["worse"])}}),
        t(uniform(0.0, M_PI))
 
-{}
+{
+    ++simpleCounter;
+}
 
 SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d direction,
                 double radius, const MutableColor& couleur,
@@ -89,11 +92,11 @@ void SimpleBacterium::drawOn(sf::RenderTarget& target) const
 
 void SimpleBacterium::tentative_basculement()
 {
-    double lambda(getProperty("tumble worse").get());
+    double lambda(getProperty("tumble worse prob").get());
 
     if(getAppEnv().getPositionScore(getPosition()) >= ancien_score)
     {
-        lambda = getProperty("tumble better").get();
+        lambda = getProperty("tumble better prob").get();
     }
 
     const double proba_basculement = 1 - exp(- tps_basculement.asSeconds() / lambda);
@@ -140,6 +143,16 @@ void SimpleBacterium::strategy2()
 Vec2d SimpleBacterium::f(Vec2d position, Vec2d speed) const
 {
     return {0, 0};
+}
+
+double SimpleBacterium::getSimpleCounter()
+{
+    return simpleCounter;
+}
+
+SimpleBacterium::~SimpleBacterium()
+{
+    --simpleCounter;
 }
 
 Quantity SimpleBacterium::eatableQuantity(NutrimentA& nutriment)

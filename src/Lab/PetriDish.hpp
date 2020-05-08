@@ -142,7 +142,7 @@ public:
      * @brief addSwarm Ajoute un groupe Swarm à la boîte de Petri
      * @param groupe Swarm à ajouter
      */
-    void addSwarm(Swarm* groupe);
+    void addSwarm(Swarm *groupe);
 
     /**
      * @brief getSwarmWithId Accesseur pour le Swarm de la boite de Petri associé à un identificateur donné
@@ -157,6 +157,9 @@ public:
      */
     ~PetriDish() override;
 
+    std::vector<Bacterium *> getLesBacteries() const;
+
+    std::vector<Nutriment *> getLesNutriments() const;
 
 private :
     std::vector<Bacterium*> lesBacteries;
@@ -197,6 +200,7 @@ private :
      * @param dt Pas de temps après lequel lequel la simulation est mise à jour
      */
     void update_swarms(sf::Time dt);
+
 };
 
 

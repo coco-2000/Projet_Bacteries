@@ -16,6 +16,7 @@ SwarmBacterium::SwarmBacterium(const Vec2d& position, Swarm* groupe)
                 (*groupe).getColor()), group(groupe)
 {
     groupe->addBacterium(this);
+    ++swarmCounter;
 }
 
 SwarmBacterium::SwarmBacterium(SwarmBacterium const& autre)
@@ -95,10 +96,17 @@ Vec2d SwarmBacterium::getSpeedVector() const
     return direction * getConfig()["speed"]["initial"].toDouble();
 }
 
+double SwarmBacterium::getSwarmCounter()
+{
+    return swarmCounter;
+}
+
 SwarmBacterium::~SwarmBacterium()
 {
+    --swarmCounter;
     group->supprBacterium(this);
 }
+
 
 Quantity SwarmBacterium::eatableQuantity(NutrimentA& nutriment)
 {

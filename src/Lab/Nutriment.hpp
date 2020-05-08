@@ -15,8 +15,10 @@ class SimpleBacterium;
 class SwarmBacterium;
 class TwitchingBacterium;
 
+
 class Nutriment : public CircularBody, public Drawable, public Updatable
 {
+
 public :
     /**
      * @brief Nutriment::Nutriment Constructeur
@@ -43,12 +45,6 @@ public :
     */
     void update(sf::Time dt) override;
 
-   /**
-    * @brief getTemperature Accesseur de température
-    * @return la température courante de l'assiette de Petri
-    */
-    double getTemperature() const;
-
     /**
      * @brief ConditionTemperature Vérifie les conditions portant sur la température pour la croissance des nutriments
      * @param temperature Température courante
@@ -68,6 +64,13 @@ public :
      * @return Quantité de nutriments qui a pu être prélevée
      */
     Quantity takeQuantity(Quantity prelevement);
+
+
+    virtual ~Nutriment() override;
+
+    Quantity getQuantity() const;
+
+    static double getNutCounter();
 
     /**
      * Methode virtuelle pure
@@ -102,6 +105,7 @@ public :
 protected :
     const double dist;
     Quantity quantity_;
+    static double nutrimentCounter;
 
     /**
      * @brief DisplayQuantity Affiche de la quantité du nutriment (si mode debugging activé)
@@ -119,5 +123,7 @@ protected :
      * @brief Nutriment::TestPrelevement Ajuste la quantité prélever en fonction de celle disponible
      * @param prelevement Quantité voulant être prélever
      */
+
     Quantity TestPrelevement(Quantity& prelevement) const;
+
 };

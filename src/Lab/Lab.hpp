@@ -1,6 +1,10 @@
 #pragma once
-#include "PetriDish.hpp"
+
+#include <functional>
 #include <SFML/Graphics.hpp>
+
+#include "PetriDish.hpp"
+#include "Swarm.hpp"
 #include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
 #include "NutrimentGenerator.hpp"
@@ -9,6 +13,7 @@
 class Lab : public Drawable, public Updatable
 {
 public:
+
     /**
       * @brief Lab constructeur permet de positionner l'assiette de Petri au centre
       * de la fenêtre graphique associée au Lab et avec un diamètre occupant les 95%
@@ -141,6 +146,9 @@ public:
       */
      Swarm* getSwarmWithId(const std::string& id) const;
 
+
+     std::unordered_map<std::string, double> fetchData(const std::string &) const;
+
      /**
       * @brief resetControls reinitialise les paramètres de la simulation en fonction des valeurs du fichier de configuration
       */
@@ -150,9 +158,38 @@ public:
        */
      ~Lab() override;
 
+     template<typename T>
+     struct property {
+         const std::string& name;
+         std::function<bool(T)> selector;
+         std::function<double(int, double)> finisher;
+         std::function<double(T, double, std::string)> accumulator;
+
+     };
+
+
+     template<typename T>
+     double static getProperty(const property<T&> &p, const std::vector<T*> &container)
+     {
+         double value(0.0);
+         int sum(0);
+
+         for (const auto& a : container) {
+             if(p.selector(*a))
+             {
+                 sum     += 1;
+                 value   = p.accumulator(*a, value, p.name);
+             }
+         }
+
+         return p.finisher(sum, value);
+     }
+
 private :
+
     PetriDish petri;
     NutrimentGenerator generateur_nutriment;
+
 
     /**
      * @brief contains Vérifie si un CircularBody est à l'intérieur de son assiette de Petri

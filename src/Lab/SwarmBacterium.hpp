@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Bacterium.hpp"
 #include <SFML/Graphics.hpp>
 #include "../Utility/DiffEqSolver.hpp"
@@ -34,6 +35,8 @@ public:
      */
     void drawOn(sf::RenderTarget &target) const override;
 
+    static double getSwarmCounter();
+
     /**
      * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
      *                        retire cette quantité au nutriment
@@ -60,6 +63,7 @@ public:
 
 private:
     Swarm* group;
+    static double swarmCounter;
 
     /**
      * @brief move Déplace une bactérie
@@ -89,4 +93,5 @@ private:
      * @brief moveLeader Déplace la bactérie leader du groupe
      */
     void moveLeader();
+
 };
