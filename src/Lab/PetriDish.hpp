@@ -2,16 +2,14 @@
 #include "Bacterium.hpp"
 #include "Nutriment.hpp"
 #include "CircularBody.hpp"
-#include "Lab.hpp"
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
-#include "Recorder.hpp"
 #include "Swarm.hpp"
 
 
-class PetriDish : public CircularBody, public Recorder, public Drawable, public Updatable
+class PetriDish : public CircularBody, public Drawable, public Updatable
 {
 public:
 
@@ -144,7 +142,7 @@ public:
      * @brief addSwarm Ajoute un groupe Swarm à la boîte de Petri
      * @param groupe Swarm à ajouter
      */
-    void addSwarm(Swarm* groupe);
+    void addSwarm(Swarm *groupe);
 
     /**
      * @brief getSwarmWithId Accesseur pour le Swarm de la boite de Petri associé à un identificateur donné
@@ -159,8 +157,6 @@ public:
      */
     ~PetriDish() override;
 
-    template<typename T>
-    double getProperty(const Lab::property<T> &p, const std::vector<T *> &container);
     std::vector<Bacterium *> getLesBacteries() const;
 
     std::vector<Nutriment *> getLesNutriments() const;
@@ -205,7 +201,6 @@ private :
      */
     void update_swarms(sf::Time dt);
 
-    virtual std::vector<Property>getRecordProperty() const override;
 };
 
 

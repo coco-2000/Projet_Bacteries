@@ -1,7 +1,10 @@
 #pragma once
-#include "PetriDish.hpp"
-#include "StatMap.hpp"
+
+#include <functional>
 #include <SFML/Graphics.hpp>
+
+#include "PetriDish.hpp"
+#include "Swarm.hpp"
 #include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
 #include "NutrimentGenerator.hpp"
@@ -144,10 +147,7 @@ public:
      Swarm* getSwarmWithId(const std::string& id) const;
 
      std::unordered_map<std::string, double> fetchData(const std::string &) const;
-     void mapSet(std::string key, double value, const std::string &associateClass = {});
-     std::pair<double, std::vector<std::string>> mapGet(std::string s) const;
 
-     //StatMap getStatMap();
      /** @brief Destructeur
        */
      ~Lab() override;
@@ -160,7 +160,27 @@ public:
          std::function<double(T, double, std::string)> accumulator;
 
      };
+
+
+     template<typename T>
+     double static getProperty(const property<T&> &p, const std::vector<T*> &container)
+     {
+         double value(0.0);
+         int sum(0);
+
+         for (const auto& a : container) {
+             if(p.selector(*a))
+             {
+                 sum     += 1;
+                 value   = p.accumulator(*a, value, p.name);
+             }
+         }
+
+         return p.finisher(sum, value);
+     }
+
 private :
+
     PetriDish petri;
     NutrimentGenerator generateur_nutriment;
 

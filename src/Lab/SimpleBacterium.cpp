@@ -1,6 +1,7 @@
 #include "SimpleBacterium.hpp"
 #include "../Random/Random.hpp"
 #include "../Utility/Vec2d.hpp"
+
 #include "Application.hpp"
 #include "../Utility/DiffEqSolver.hpp"
 #include <SFML/Graphics.hpp>
@@ -19,7 +20,7 @@ SimpleBacterium::SimpleBacterium(const Vec2d& position)
        t(uniform(0.0, M_PI))
 
 {
-    ++simpleBcounter;
+    ++simpleCounter;
 }
 
 SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d direction,
@@ -144,12 +145,12 @@ Vec2d SimpleBacterium::f(Vec2d position, Vec2d speed) const
 
 double SimpleBacterium::getSimpleCounter()
 {
-    return simpleBcounter;
+    return simpleCounter;
 }
 
 SimpleBacterium::~SimpleBacterium()
 {
-    --simpleBcounter;
+    --simpleCounter;
 }
 
 

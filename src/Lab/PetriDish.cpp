@@ -1,8 +1,8 @@
 #include "PetriDish.hpp"
 #include "../Utility/Utility.hpp"
 #include "CircularBody.hpp"
-#include "Application.hpp"
 #include <vector>
+#include "Application.hpp"
 
 
 PetriDish::PetriDish(Vec2d position, double radius)
@@ -71,28 +71,8 @@ void PetriDish::update(sf::Time dt)
     update_nutriments(dt);
     update_bacteries(dt);
     update_swarms(dt);
-
-    //pour réinitialiser les statistiques de PetriDish dans la map data de Lab
-    commitProperty(getRecordProperty(), true);
 }
 
-template<typename T>
-double PetriDish::getProperty(const Lab::property<T>& p,
-                              const std::vector<T*>& container)
-{
-    double value(0.0);
-    int sum(0);
-
-    for (const auto& a : container) {
-        if(p.selector(*a))
-        {
-            sum     += 1;
-            value   = p.accumulator(*a, value, p.name);
-        }
-    }
-
-    return p.finisher(sum, value);
-}
 
 void PetriDish::update_bacteries (sf::Time dt)
 {
@@ -258,11 +238,6 @@ Swarm* PetriDish::getSwarmWithId(std::string id) const
     return nullptr;
 }
 
-std::vector<Recorder::Property> PetriDish::getRecordProperty() const
-{
-    return{{s::DISH_TEMPERATURE, temperature, SET, ""}};
-}
-
 PetriDish::~PetriDish()
 {
     reset();
@@ -278,12 +253,3 @@ std::vector<Nutriment *> PetriDish::getLesNutriments() const
     return lesNutriments;
 }
 
-std::vector<Nutriment *> PetriDish::getLesNutriments() const
-{
-    return lesNutriments;
-}
-
-void PetriDish::setLesNutriments(const std::vector<Nutriment *> &value)
-{
-    lesNutriments = value;
-}

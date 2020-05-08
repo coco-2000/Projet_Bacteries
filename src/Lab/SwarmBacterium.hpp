@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Bacterium.hpp"
 #include <SFML/Graphics.hpp>
 #include "../Utility/DiffEqSolver.hpp"
@@ -44,7 +45,7 @@ public:
 
 private:
     Swarm* group;
-    static double swarmBcounter;
+    static double swarmCounter;
 
     /**
      * @brief move Déplace une bactérie
@@ -75,5 +76,4 @@ private:
      */
     void moveLeader();
 
-    virtual std::vector<Property>getRecordProperty() const override;
 };

@@ -1,4 +1,5 @@
 #include "TwitchingBacterium.hpp"
+
 #include "Application.hpp"
 #include <SFML/Graphics.hpp>
 #include "../Utility/Utility.hpp"
@@ -15,7 +16,9 @@ TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
       grip(position, radius/4),
       state(IDLE)
 
-{}
+{
+    ++twitchCounter;
+}
 
 j::Value const& TwitchingBacterium::getConfig() const
 {
@@ -146,6 +149,10 @@ void TwitchingBacterium::shift_clone(const Vec2d& v)
 
 double TwitchingBacterium::getTwitchCounter()
 {
-    return twitchBcounter;
+    return twitchCounter;
 }
 
+TwitchingBacterium::~TwitchingBacterium()
+{
+    -- twitchCounter;
+}

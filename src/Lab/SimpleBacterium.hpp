@@ -39,7 +39,7 @@ public:
 private :
     double t;
     sf::Time tps_basculement;
-    static double simpleBcounter;
+    static double simpleCounter;
 
     /**
      * @brief drawOn Permet d'ajouter des détails graphiques spécifique

@@ -4,9 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
-#include "Recorder.hpp"
 
-class Nutriment : public CircularBody, public Recorder, public Drawable, public Updatable
+
+class Nutriment : public CircularBody, public Drawable, public Updatable
 {
 
 public :
@@ -59,9 +59,12 @@ public :
 
     Quantity getQuantity() const;
 
+    static double getNutCounter();
+
 protected :
     const double dist;
     Quantity quantity_;
+    static double nutrimentCounter;
 
     /**
      * @brief DisplayQuantity Affiche de la quantité du nutriment (si mode debugging activé)
@@ -80,7 +83,4 @@ protected :
      * @param prelevement Quantité voulant être prélever
      */
     void TestPrelevement(Quantity& prelevement) const;
-
-    virtual std::vector<Property>getRecordProperty() const override;
-
 };

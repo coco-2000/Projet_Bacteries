@@ -9,7 +9,9 @@ Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
     : CircularBody(position, quantity),
       dist((0.95/2)*getApp().getLabSize().x - distance(getApp().getCentre(),position)),
       quantity_(quantity)
-{};
+{
+    ++ nutrimentCounter;
+};
 
 Quantity Nutriment::takeQuantity(Quantity prelevement)
 {
@@ -24,8 +26,7 @@ void Nutriment:: TestPrelevement(Quantity& prelevement) const
 }
 
 void Nutriment::setQuantity(Quantity quantity)
-{//pour réinitialiser la map data de lab avec la nouvelle quantité
-    commitProperty({{s::NUTRIMENT_QUANTITY, quantity - quantity_, INC, ""}}, true);
+{
     quantity >= 0 ? quantity_ = quantity : quantity_ = 0.0;
     setRadius(quantity_);
 }
@@ -78,10 +79,14 @@ bool Nutriment::isEmpty() const
     return (quantity_ <= 0);
 }
 
+double Nutriment::getNutCounter()
+{
+    return nutrimentCounter;
+}
 
 Nutriment::~Nutriment()
 {
-
+    --nutrimentCounter;
 }
 
 Quantity Nutriment::getQuantity() const

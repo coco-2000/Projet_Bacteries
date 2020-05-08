@@ -23,6 +23,5 @@ private:
     void initCounter();
     int currentId;
     std::map<int, Graph_labelled> graphSet;
-    //std::map<std::string, std::unique_ptr<Graph>> graph_labelled_set;
     sf::Time counter;
 };

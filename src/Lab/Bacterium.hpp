@@ -3,12 +3,11 @@
 #include "../Interface/Drawable.hpp"
 #include "../Interface/Updatable.hpp"
 #include "../Utility/MutableColor.hpp"
-#include "Recorder.hpp"
 #include <SFML/Graphics.hpp>
 #include "Utility/Types.hpp"
 #include <string>
 
-class Bacterium : public CircularBody, public Recorder, public Drawable, public Updatable
+class Bacterium : public CircularBody, public Drawable, public Updatable
 {
 public :
     /**
@@ -177,7 +176,6 @@ protected :
      */
     double helperPositionScore(const Vec2d& offset) const;
 
-    virtual std::vector<Property>getRecordProperty() const override;
 
 };
 
