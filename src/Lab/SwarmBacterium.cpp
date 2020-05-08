@@ -3,6 +3,8 @@
 #include "Swarm.hpp"
 #include "../Utility/Utility.hpp"
 #include <SFML/Graphics.hpp>
+#include "NutrimentA.hpp"
+#include "NutrimentB.hpp"
 
 SwarmBacterium::SwarmBacterium(const Vec2d& position, Swarm* groupe)
     : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(),
@@ -106,7 +108,12 @@ SwarmBacterium::~SwarmBacterium()
 }
 
 
+Quantity SwarmBacterium::eatableQuantity(NutrimentA& nutriment)
+{
+    return nutriment.eatenBy(*this);
+}
 
-
-
-
+Quantity SwarmBacterium::eatableQuantity(NutrimentB& nutriment)
+{
+    return nutriment.eatenBy(*this);
+}

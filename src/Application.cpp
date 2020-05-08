@@ -284,7 +284,6 @@ Lab const& Application::getEnv() const
     return *mLab;
 }
 
-
 Config& Application::getConfig()
 {
     return *mConfig;

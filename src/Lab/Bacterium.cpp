@@ -2,6 +2,9 @@
 #include "../Utility/Utility.hpp"
 #include "Application.hpp"
 #include "CircularBody.hpp"
+#include "Nutriment.hpp"
+#include "NutrimentA.hpp"
+#include "NutrimentB.hpp"
 
 Bacterium::Bacterium(Quantity energie, const Vec2d& position, const Vec2d& direction,
                      double radius, const MutableColor& couleur,
@@ -106,9 +109,7 @@ void Bacterium::consumeNutriment(sf::Time dt)
     if(nutriment_ptr != nullptr and compteur >= getDelay() and !abstinence)
     {
         compteur = sf::Time::Zero;
-        const double quantite_consommee = getConfig()["meal"]["max"].toDouble();
-        energie += quantite_consommee;
-        nutriment_ptr->takeQuantity(quantite_consommee);
+        eat(*nutriment_ptr);
         nutriment_ptr = nullptr;
     }
     else
@@ -171,20 +172,18 @@ double Bacterium::helperPositionScore (const Vec2d& offset) const
 }
 
 
-
-Bacterium::~Bacterium()
-{
-
-}
-
 std::map<std::string, MutableNumber> Bacterium::getParam_mutables() const
 {
     return param_mutables;
 }
 
+Quantity Bacterium::getMaxEatableQuantity() const
+{
+    return getConfig()["meal"]["max"].toDouble();
+}
 
-
-
-
-
-
+void Bacterium::eat(Nutriment& nutriment)
+{
+  Quantity eaten(nutriment.eatenBy(*this));
+  energie += eaten;
+}

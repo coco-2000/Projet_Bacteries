@@ -434,3 +434,29 @@ Le destructeur de SwarmBacterium doit être redéfini de façon à ce que la mé
 SwarmBacterium meurt et est donc détruite.
 
 
+
+
+
+
+
+
+**************************************************
+##Q5.1
+
+Les nutriments A et B appartiennent à la classe des nutriments. Avec cette relation d'heritage le type exacte d'un
+objet peut être inconnu car si l'objet est considéré comme un nutriment (Superclasse) à cette endroit du programme,
+alors on ne peut savoir à quelle sous-classe il appartient (nutriment A ou B)
+
+**************************************************
+##Q5.2
+
+Pour la même raison qui fait que les tests de type ne sont pas souhaitables. La relation d'héritage entre la classe Bacterium
+et ses Sous-classe empêche de connaitre le type exacte d'un objet car si celui-ci est considéré comme une bactérie (Superclasse)
+au moment où l'on appelle la méthode eatenBy alors on ne pourra pas savoir à quelle sous-classe l'objet appartient et se sera
+la surcharge prenant une Bacterium en paramètre qui sera appelée.
+
+
+
+
+
+

@@ -112,7 +112,8 @@ find_package(SFML 2.5 QUIET COMPONENTS graphics window system)
             message(STATUS "SFML_DEPENDENCIES: ${SFML_DEPENDENCIES}")
 
             include_directories(${SFML_INCLUDE_DIR})
-	    
+
+            #main application:
             #main application:
             add_executable(application ${TEST_DIR}/GraphicalTests/FinalApplication.cpp ${SOURCES_GFX})
             target_link_libraries(application ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})

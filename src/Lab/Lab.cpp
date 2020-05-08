@@ -202,6 +202,7 @@ Lab::~Lab()
     reset();
 }
 
+
 /**namespace stat {
 
     namespace accumulator {
@@ -216,4 +217,11 @@ Lab::~Lab()
 
     }
 }**/
+
+
+void Lab::resetControls()
+{
+    initTemp();
+    initGradient();
+}
 

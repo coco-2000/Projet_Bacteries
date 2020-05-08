@@ -20,9 +20,10 @@ Quantity Nutriment::takeQuantity(Quantity prelevement)
         return prelevement;
 }
 
-void Nutriment:: TestPrelevement(Quantity& prelevement) const
+Quantity Nutriment:: TestPrelevement(Quantity& prelevement) const
 {
     if(prelevement >= quantity_) {prelevement = quantity_;}
+    return prelevement;
 }
 
 void Nutriment::setQuantity(Quantity quantity)

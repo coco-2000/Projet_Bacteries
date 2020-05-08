@@ -4,6 +4,16 @@
 #include <SFML/Graphics.hpp>
 #include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
+/*
+#include "SimpleBacterium.hpp"
+#include "SwarmBacterium.hpp"
+#include "TwitchingBacterium.hpp"
+*/
+
+class Bacterium;
+class SimpleBacterium;
+class SwarmBacterium;
+class TwitchingBacterium;
 
 
 class Nutriment : public CircularBody, public Drawable, public Updatable
@@ -55,11 +65,42 @@ public :
      */
     Quantity takeQuantity(Quantity prelevement);
 
+
     virtual ~Nutriment() override;
 
     Quantity getQuantity() const;
 
     static double getNutCounter();
+
+    /**
+     * Methode virtuelle pure
+     * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie
+     * (appelle la méthode eatableQuantity de la sous classe à laquelle appartient la bactérie = polymorphisme)
+     * @param bacterie dont on calcule la quantité de nutriment qu'elle consomme
+     * @return la quantité de nutriment consommée
+     */
+    virtual Quantity eatenBy(Bacterium& bacterie) = 0;
+
+    /**
+     * Methode virtuelle pure
+     * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie simple
+     * @return la quantité de nutriment consommée
+     */
+    virtual Quantity eatenBy(SimpleBacterium& bacterie) = 0;
+
+    /**
+     * Methode virtuelle pure
+     * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à comportement de groupe
+     * @return la quantité de nutriment consommée
+     */
+    virtual Quantity eatenBy(SwarmBacterium& bacterie) = 0;
+
+    /**
+     * Methode virtuelle pure
+     * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à tentacule
+     * @return la quantité de nutriment consommée
+     */
+    virtual Quantity eatenBy(TwitchingBacterium& bacterie) = 0;
 
 protected :
     const double dist;
@@ -82,5 +123,7 @@ protected :
      * @brief Nutriment::TestPrelevement Ajuste la quantité prélever en fonction de celle disponible
      * @param prelevement Quantité voulant être prélever
      */
-    void TestPrelevement(Quantity& prelevement) const;
+
+    Quantity TestPrelevement(Quantity& prelevement) const;
+
 };

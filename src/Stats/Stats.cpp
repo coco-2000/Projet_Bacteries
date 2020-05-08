@@ -76,3 +76,4 @@ void Stats::update(sf::Time dt)
         counter += dt;
     }
 }
+

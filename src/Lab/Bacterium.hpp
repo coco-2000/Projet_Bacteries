@@ -7,6 +7,10 @@
 #include "Utility/Types.hpp"
 #include <string>
 
+class Nutriment;
+class NutrimentA;
+class NutrimentB;
+
 class Bacterium : public CircularBody, public Drawable, public Updatable
 {
 public :
@@ -52,9 +56,36 @@ public :
      */
     void setScore(double score);
 
-    virtual ~Bacterium() override;
 
-    std::map<std::string, MutableNumber> getParam_mutables() const;
+    std::map<std::string, MutableNumber> getParam_mutables() const; //je crois qu'il faut le supprimer
+
+    /**
+     * @brief getMaxEatableQuantity
+     * @return la quantité maximale pouvant être prélevé par la bactérie sur le source de nutriment
+     */
+    Quantity getMaxEatableQuantity() const;
+
+    /**
+     * Méthode virtuelle pure
+     * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
+     *                        retire cette quantité au nutriment
+     * (appelle la méthode eatenBy du nutrimentA qui prend pour argument une bactérie dont le type
+     * correspond à celui de l'instance courante de bactérie)
+     * @param nutriment de type A qui est consommé par la bactérie
+     * @return La quantité de nutriment consommé
+     */
+    virtual Quantity eatableQuantity(NutrimentA& nutriment) = 0;
+
+    /**
+     * Méthode virtuelle pure
+     * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
+     *                        retire cette quantité au nutriment
+     * (appelle la méthode eatenBy du nutrimentB qui prend pour argument une bactérie dont le type
+     * correspond à celui de l'instance courante de bactérie)
+     * @param nutriment de type B qui est consommé par la bactérie
+     * @return La quantité de nutriment consommé
+     */
+    virtual Quantity eatableQuantity(NutrimentB& nutriment) = 0;
 
 
 protected :
@@ -176,7 +207,12 @@ protected :
      */
     double helperPositionScore(const Vec2d& offset) const;
 
-
+    /**
+     * @brief eat Gère la consommation de nutriment par la bactérie (en fonction de du type de nutriment et de bactérie) :
+     *            calcul quantité consommée par bactérie et la retire de la source de nutriment
+     * @param nutriment qui est consommé par l'instance
+     */
+    void eat(Nutriment& nutriment);
 };
 
 

@@ -2,7 +2,7 @@
 
 #include "Bacterium.hpp"
 #include "Grip.hpp"
-#include "Nutriment.hpp"
+//#include "Nutriment.hpp"
 
 enum Etat {IDLE, WAIT_TO_DEPLOY, DEPLOY, ATTRACT, RETRACT, EAT};
 
@@ -30,6 +30,24 @@ public :
     static double getTwitchCounter();
 
     virtual ~TwitchingBacterium() override;
+
+    /**
+     * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
+     *                        retire cette quantité au nutriment
+     * (appelle la méthode eatenBy du nutrimentA qui prend pour argument une bactérie à tentacule)
+     * @param nutriment de type A qui est consommé par la bactérie
+     * @return La quantité de nutriment consommé
+     */
+    Quantity eatableQuantity(NutrimentA& nutriment) override;
+
+    /**
+     * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
+     *                        retire cette quantité au nutriment
+     * (appelle la méthode eatenBy du nutrimentB qui prend pour argument une bactérie à tentacule)
+     * @param nutriment de type B qui est consommé par la bactérie
+     * @return La quantité de nutriment consommé
+     */
+    Quantity eatableQuantity(NutrimentB& nutriment) override;
 
 protected :
     Grip grip;

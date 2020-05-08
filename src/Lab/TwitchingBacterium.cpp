@@ -3,6 +3,8 @@
 #include "Application.hpp"
 #include <SFML/Graphics.hpp>
 #include "../Utility/Utility.hpp"
+#include "NutrimentA.hpp"
+#include "NutrimentB.hpp"
 
 
 TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
@@ -135,9 +137,7 @@ void TwitchingBacterium::gripToward (const Vec2d& dir, sf::Time dt)
 
 void TwitchingBacterium::eat_state(const Nutriment *nutriment_ptr)
 {
-    if (nutriment_ptr == nullptr)
-        state = IDLE;
-    else if (!(*nutriment_ptr & *this))
+    if ((nutriment_ptr == nullptr) or (!(*nutriment_ptr & *this)))
         state = IDLE;
 }
 
@@ -155,4 +155,14 @@ double TwitchingBacterium::getTwitchCounter()
 TwitchingBacterium::~TwitchingBacterium()
 {
     -- twitchCounter;
+}
+
+Quantity TwitchingBacterium::eatableQuantity(NutrimentA& nutriment)
+{
+    return nutriment.eatenBy(*this);
+}
+
+Quantity TwitchingBacterium::eatableQuantity(NutrimentB& nutriment)
+{
+    return nutriment.eatenBy(*this);
 }

@@ -146,7 +146,13 @@ public:
       */
      Swarm* getSwarmWithId(const std::string& id) const;
 
+
      std::unordered_map<std::string, double> fetchData(const std::string &) const;
+
+     /**
+      * @brief resetControls reinitialise les paramètres de la simulation en fonction des valeurs du fichier de configuration
+      */
+     void resetControls();
 
      /** @brief Destructeur
        */

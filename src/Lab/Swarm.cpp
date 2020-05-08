@@ -20,7 +20,7 @@ void Swarm::update(sf::Time dt)
 
 MutableColor Swarm::getColor() const
 {
-    return getAppConfig()["swarms"][id]["color"];
+    return getConfig()[id]["color"];
 }
 
 void Swarm::addBacterium(SwarmBacterium* bacterie)
