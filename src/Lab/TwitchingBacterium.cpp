@@ -6,6 +6,7 @@
 #include "NutrimentA.hpp"
 #include "NutrimentB.hpp"
 
+double TwitchingBacterium::twitchCounter(0);
 
 TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
     : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(), getConfig()["energy"]["max"].toDouble()),

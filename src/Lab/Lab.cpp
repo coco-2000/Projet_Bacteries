@@ -136,7 +136,7 @@ struct counting_property{
 std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphName) const
 {
 
-   /** static const auto mean       = [](int i, double d) -> double{return d/i;};
+    static const auto mean       = [](int i, double d) -> double{return d/i;};
     static const auto sumVal     = [](int i, double d) -> double{return d;};
 
     static const auto sumB       = [](Bacterium& b, double d, std::string s) -> double{return (b.getParam_mutables().at(s).get() + d);};
@@ -189,8 +189,8 @@ std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphN
         {
             result[serie.name] = getProperty(serie,petri.getLesNutriments());
         }
-    }**/
-    std::unordered_map<std::string, double> result;
+    }
+
     return result;
 }
 

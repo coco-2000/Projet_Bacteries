@@ -9,6 +9,7 @@
 #include "NutrimentA.hpp"
 #include "NutrimentB.hpp"
 
+double SimpleBacterium::simpleCounter(0);
 
 SimpleBacterium::SimpleBacterium(const Vec2d& position)
     : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(), getConfig()["energy"]["max"].toDouble()),

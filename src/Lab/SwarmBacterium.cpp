@@ -6,6 +6,8 @@
 #include "NutrimentA.hpp"
 #include "NutrimentB.hpp"
 
+double SwarmBacterium::swarmCounter(0);
+
 SwarmBacterium::SwarmBacterium(const Vec2d& position, Swarm* groupe)
     : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(),
                         getConfig()["energy"]["max"].toDouble()),
