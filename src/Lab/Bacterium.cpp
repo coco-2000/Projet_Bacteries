@@ -47,7 +47,7 @@ void Bacterium::mutate()
 
 bool Bacterium::alive() const
 {
-    return !(energie<=0);
+    return energie > 0;
 }
 
 Quantity Bacterium::getEnergy() const

@@ -167,6 +167,11 @@ public:
 
      };
 
+     struct counting_property{
+         const std::string name;
+         std::function<double()> counter;
+     };
+
 
      template<typename T>
      double static getProperty(const property<T&> &p, const std::vector<T*> &container)

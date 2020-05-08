@@ -119,36 +119,23 @@ Swarm* Lab::getSwarmWithId(const std::string& id) const
 }
 
 
-template<typename T>
-struct property {
-    const std::string name;
-    std::function<bool(T)> selector;
-    std::function<double(int, double)> finisher;
-    std::function<double(T, double, std::string)> accumulator;
-
-};
-
-struct counting_property{
-    const std::string name;
-    std::function<double()> counter;
-};
-
 std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphName) const
 {
 
     static const auto mean       = [](int i, double d) -> double{return d/i;};
     static const auto sumVal     = [](int i, double d) -> double{return d;};
 
-    static const auto sumB       = [](Bacterium& b, double d, std::string s) -> double{return (b.getParam_mutables().at(s).get() + d);};
-    static const auto sumN       = [](Nutriment& n, double d, std::string s) -> double{return (n.getQuantity() + d);};
+    static const auto sumB       = [](const Bacterium& b, double d, const std::string& s) -> double{return (b.getParam_mutables().at(s).get() + d);};
+    static const auto sumN       = [](const Nutriment& n, double d, const std::string& s) -> double{return (n.getQuantity() + d);};
 
-    static const auto with       = [](std::string s) -> std::function<bool (Bacterium&)>
-    {return [&](Bacterium& b){ auto m = b.getParam_mutables();
+    static const auto with       = [](const std::string& s) -> std::function<bool (const Bacterium&)>
+    { return [&](const Bacterium& b){ auto m = b.getParam_mutables();
                         return (m.find(s) != m.end());};};
-    static const auto all        = [](Nutriment& b) -> bool{return true;};
 
-    static const auto meanPropertyB = [](std::string name) ->property<Bacterium&>{return {name, with(name), mean, sumB};};
-    static const auto sumPropertyN  = [](std::string name) ->property<Nutriment&>{return {name, all, sumVal, sumN};};
+    static const auto all        = [](const Nutriment& b) -> bool{return true;};
+
+    static const auto meanPropertyB = [](const std::string& name) ->property<Bacterium&>{return {name, with(name), mean, sumB};};
+    static const auto sumPropertyN  = [](const std::string& name) ->property<Nutriment&>{return {name, all, sumVal, sumN};};
 
     static const std::unordered_map<std::string, std::vector<property<Bacterium&>>> namesB = {
     {s::SIMPLE_BACTERIA, { meanPropertyB(s::WORSE), meanPropertyB(s::BETTER)}},
@@ -199,23 +186,6 @@ Lab::~Lab()
 {
     reset();
 }
-
-
-/**namespace stat {
-
-    namespace accumulator {
-
-    }
-
-    namespace finisher {
-
-    }
-
-    namespace selector {
-
-    }
-}**/
-
 
 void Lab::resetControls()
 {
