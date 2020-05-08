@@ -4,6 +4,7 @@
 #include "Config.hpp"
 #include "../Utility/Vec2d.hpp"
 
+double Nutriment::nutrimentCounter(0);
 
 Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
     : CircularBody(position, quantity),
