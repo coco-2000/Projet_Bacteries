@@ -139,16 +139,17 @@ std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphN
     static const auto mean       = [](int i, double d) -> double{return d/i;};
     static const auto sumVal     = [](int i, double d) -> double{return d;};
 
-    static const auto sumB       = [](Bacterium& b, double d, std::string s) -> double{return (b.getParam_mutables().at(s).get() + d);};
-    static const auto sumN       = [](Nutriment& n, double d, std::string s) -> double{return (n.getQuantity() + d);};
+    static const auto sumB       = [](Bacterium& b, double d, const std::string& s) -> double{return (b.getParam_mutables().at(s).get() + d);};
+    static const auto sumN       = [](Nutriment& n, double d, const std::string& s) -> double{return (n.getQuantity() + d);};
 
     static const auto with       = [](std::string s) -> std::function<bool (Bacterium&)>
-    { [&](Bacterium& b){ auto m = b.getParam_mutables();
+    { return [&](Bacterium& b){ auto m = b.getParam_mutables();
                         return (m.find(s) != m.end());};};
+
     static const auto all        = [](Nutriment& b) -> bool{return true;};
 
-    static const auto meanPropertyB = [](std::string name) ->property<Bacterium&>{return {name, with(name), mean, sumB};};
-    static const auto sumPropertyN  = [](std::string name) ->property<Nutriment&>{return {name, all, sumVal, sumN};};
+    static const auto meanPropertyB = [](const std::string& name) ->property<Bacterium&>{return {name, with(name), mean, sumB};};
+    static const auto sumPropertyN  = [](const std::string& name) ->property<Nutriment&>{return {name, all, sumVal, sumN};};
 
     static const std::unordered_map<std::string, std::vector<property<Bacterium&>>> namesB = {
     {s::SIMPLE_BACTERIA, { meanPropertyB(s::WORSE), meanPropertyB(s::BETTER)}},
@@ -175,7 +176,7 @@ std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphN
             result[serie.name] = serie.counter();
         }
     }
-    else if (graphName.find("bacteria"))
+    else if (graphName.find("bacteria") != std::string::npos)
     {
         for(const auto& serie : namesB.at(graphName))
         {
@@ -183,7 +184,7 @@ std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphN
         }
     }
 
-    else if (graphName.find("nutriment"))
+    else if (graphName.find("nutriment") != std::string::npos)
     {
         for(const auto& serie : namesN.at(graphName) )
         {
