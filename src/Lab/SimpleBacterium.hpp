@@ -11,6 +11,8 @@ public:
      */
     SimpleBacterium(const Vec2d& position);
 
+    SimpleBacterium(const SimpleBacterium& other);
+
     /**
      * @brief SimpleBacterium Constructeur
      * @param energie Niveau d'énergie intial de la bacterie

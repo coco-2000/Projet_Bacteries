@@ -15,6 +15,8 @@ public :
      */
     TwitchingBacterium(const Vec2d& position);
 
+    TwitchingBacterium(const TwitchingBacterium& other);
+
     /**
      * @brief drawOn dessiner la bactérie avec son grapin
      * @param target Cible pour l'affichage

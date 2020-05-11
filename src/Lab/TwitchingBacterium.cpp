@@ -23,6 +23,12 @@ TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
     ++twitchCounter;
 }
 
+TwitchingBacterium::TwitchingBacterium(const TwitchingBacterium& other)
+    : Bacterium(other), grip(position, radius/4), state(IDLE)
+{
+    ++twitchCounter;
+}
+
 j::Value const& TwitchingBacterium::getConfig() const
 {
     return getAppConfig()["twitching bacterium"];

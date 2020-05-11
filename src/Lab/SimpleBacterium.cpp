@@ -34,6 +34,12 @@ SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d directi
                 param_mutables, abstinence)
 {}
 
+SimpleBacterium::SimpleBacterium(const SimpleBacterium& other)
+    : Bacterium (other), t(uniform(0.0, M_PI))
+{
+    ++simpleCounter;
+}
+
 SimpleBacterium* SimpleBacterium::clone() const
 {
     return new SimpleBacterium(*this);
