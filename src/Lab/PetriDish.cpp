@@ -76,6 +76,9 @@ void PetriDish::update(sf::Time dt)
 
 void PetriDish::update_bacteries (sf::Time dt)
 {
+    append(annexe, lesBacteries);
+    initAnnex();
+
     for(auto& bacterie : lesBacteries)
     {
         if(bacterie->alive())
@@ -89,11 +92,7 @@ void PetriDish::update_bacteries (sf::Time dt)
             bacterie = nullptr;
         }
     }
-    if(!annexe.empty())
-    {
-        append(annexe, lesBacteries);
-        initAnnex();
-    }
+
     lesBacteries.erase(std::remove(lesBacteries.begin(), lesBacteries.end(), nullptr),
                        lesBacteries.end());
 
