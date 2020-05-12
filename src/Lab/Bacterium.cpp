@@ -186,4 +186,5 @@ void Bacterium::eat(Nutriment& nutriment)
 {
   Quantity eaten(nutriment.eatenBy(*this));
   energie += eaten;
+
 }

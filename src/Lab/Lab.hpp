@@ -9,6 +9,7 @@
 #include "Interface/Updatable.hpp"
 #include "NutrimentGenerator.hpp"
 
+typedef std::function<std::unordered_map<std::string, double>()> Result;
 
 class Lab : public Drawable, public Updatable
 {
@@ -158,42 +159,12 @@ public:
        */
      ~Lab() override;
 
-     template<typename T>
-     struct property {
-         const std::string& name;
-         std::function<bool(T)> selector;
-         std::function<double(int, double)> finisher;
-         std::function<double(T, double, std::string)> accumulator;
-
-     };
-
-     struct counting_property{
-         const std::string name;
-         std::function<double()> counter;
-     };
-
-
-     template<typename T>
-     double static getProperty(const property<T&> &p, const std::vector<T*> &container)
-     {
-         double value(0.0);
-         int sum(0);
-
-         for (const auto& a : container) {
-             if(p.selector(*a))
-             {
-                 sum     += 1;
-                 value   = p.accumulator(*a, value, p.name);
-             }
-         }
-
-         return p.finisher(sum, value);
-     }
 
 private :
 
     PetriDish petri;
     NutrimentGenerator generateur_nutriment;
+    std::unordered_map<std::string, Result> namesGraph;
 
 
     /**
