@@ -102,7 +102,6 @@ void Bacterium::collisionPetri()
     }
 }
 
-
 void Bacterium::consumeNutriment(sf::Time dt)
 {
     Nutriment* nutriment_ptr = getAppEnv().getNutrimentColliding(*this);

@@ -57,8 +57,11 @@ public :
      */
     void setScore(double score);
 
-
-    std::map<std::string, MutableNumber> getParam_mutables() const; //je crois qu'il faut le supprimer
+    /**
+     * @brief getParam_mutables
+     * @return l'ensemble des paramètres mutables de la bactérie
+     */
+    std::map<std::string, MutableNumber> getParam_mutables() const;
 
     /**
      * @brief getMaxEatableQuantity
