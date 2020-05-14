@@ -85,6 +85,8 @@ public:
       */
      bool doesCollideWithDish(CircularBody const& body) const;
 
+     bool doesCollideWithObstacle(CircularBody const& body);
+
      /**
       * @brief getNutrimentColliding obtenir le nutriment en collision avec le body
       * @param body le corps qui peut rentrer en collision avec le nutriment
