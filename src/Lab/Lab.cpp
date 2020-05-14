@@ -14,9 +14,9 @@ Lab::Lab()
 {
     namesGraph = {
         {s::GENERAL,                [&]() { return petri.getPropertyGeneral();}              },
-        {s::SIMPLE_BACTERIA,        [&]() { return petri.getPropertySimpleBacterium();}      },
-        {s::TWITCHING_BACTERIA,     [&]() { return petri.getPropertyTwitchingBacterium();}   },
-        {s::BACTERIA,               [&]() { return petri.getPropertyBacterium();}            },
+        {s::SIMPLE_BACTERIA,        [&]() { return petri.getPropertySimpleBacteria();}      },
+        {s::TWITCHING_BACTERIA,     [&]() { return petri.getPropertyTwitchingBacteria();}   },
+        {s::BACTERIA,               [&]() { return petri.getPropertyBacteria();}            },
         {s::NUTRIMENT_QUANTITY,     [&]() { return petri.getPropertyNutrimentQuantity();}    }};
 }
 

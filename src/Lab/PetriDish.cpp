@@ -244,7 +244,7 @@ Swarm* PetriDish::getSwarmWithId(std::string id) const
     return nullptr;
 }
 
-double PetriDish::getMeanBacterium(const std::string &s) const
+double PetriDish::getMeanBacteria(const std::string &s) const
 {
     double value(0.0);
     int sum(0);
@@ -253,11 +253,11 @@ double PetriDish::getMeanBacterium(const std::string &s) const
         auto p_mutable = bacterie->getParam_mutables();
         if(p_mutable.find(s) != p_mutable.end())
         {
-            sum     += 1;
+            ++ sum;
             value   += bacterie->getParam_mutables().at(s).get();
         }
     }
-    return sum != 0 ? value/sum : -1; //vérifier si la syntaxe est juste
+    return sum != 0 ? value/sum : -1;
 }
 
 double PetriDish::getTotalNutriment() const
@@ -288,22 +288,22 @@ GraphData PetriDish::getPropertyNutrimentQuantity() const
     return {{s::NUTRIMENT_QUANTITY, getTotalNutriment()}};
 }
 
-GraphData PetriDish::getPropertySimpleBacterium() const
+GraphData PetriDish::getPropertySimpleBacteria() const
 {
-    return {{s::BETTER, getMeanBacterium(s::BETTER)},
-            {s::WORSE, getMeanBacterium(s::WORSE)}};
+    return {{s::BETTER, getMeanBacteria(s::BETTER)},
+            {s::WORSE, getMeanBacteria(s::WORSE)}};
 }
 
-GraphData PetriDish::getPropertyTwitchingBacterium() const
+GraphData PetriDish::getPropertyTwitchingBacteria() const
 {
     return {
-        {s::TENTACLE_LENGTH, getMeanBacterium(s::TENTACLE_LENGTH)},
-        {s::TENTACLE_SPEED, getMeanBacterium(s::TENTACLE_SPEED)}};
+        {s::TENTACLE_LENGTH, getMeanBacteria(s::TENTACLE_LENGTH)},
+        {s::TENTACLE_SPEED, getMeanBacteria(s::TENTACLE_SPEED)}};
 }
 
-GraphData PetriDish::getPropertyBacterium() const
+GraphData PetriDish::getPropertyBacteria() const
 {
-    return {{s::SPEED, getMeanBacterium(s::SPEED)}};
+    return {{s::SPEED, getMeanBacteria(s::SPEED)}};
 }
 
 PetriDish::~PetriDish()

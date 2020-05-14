@@ -14,12 +14,12 @@ std::string Stats::getCurrentTitle() const
 
 void Stats::next()
 {
-    currentId = (1 + currentId)%graphSet.size();
+    setActive((1 + currentId)%graphSet.size());
 }
 
 void Stats::previous()
 {
-    currentId = (currentId-1)%graphSet.size();
+    setActive((currentId-1)%graphSet.size());
 }
 
 void Stats::reset()
@@ -37,7 +37,7 @@ void Stats::addGraph(int id, const std::string& title, const std::vector<std::st
    {
        graphSet[id].first.reset(new Graph(titles, size, min, max));
        graphSet[id].second = title;
-       currentId = id;
+       setActive(id);
    }
    else
    {
