@@ -31,7 +31,6 @@ void Swarm::addBacterium(SwarmBacterium* bacterie)
     {
         setLeader();
     }
-
 }
 
 void Swarm::supprBacterium(SwarmBacterium* bacterie)
@@ -47,9 +46,9 @@ void Swarm::supprBacterium(SwarmBacterium* bacterie)
     group.erase(std::remove(group.begin(), group.end(), nullptr),
                        group.end());
 
-    if(leader == bacterie)
+    if(bacterie == leader)
     {
-    setLeader();
+        setLeader();
     }
 }
 
@@ -75,14 +74,17 @@ void Swarm::setLeader()
     }
     else
     {
+        SwarmBacterium* temp(group.front());
         for(auto& bacterie : group)
         {
-            if (getAppEnv().getPositionScore((*bacterie).getPosition())
-                > getAppEnv().getPositionScore(getLeaderPosition()))
+            if (getAppEnv().getPositionScore(bacterie->getPosition())
+                > getAppEnv().getPositionScore(temp->getPosition()))
             {
-                leader = bacterie;
+                temp = bacterie;
             }
         }
+        leader = temp;
+        temp = nullptr;
     }
 }
 
@@ -107,6 +109,5 @@ Swarm::~Swarm()
     {
         element = nullptr;
     }
-
     leader = nullptr;
 }

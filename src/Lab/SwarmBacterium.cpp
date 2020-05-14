@@ -19,14 +19,12 @@ SwarmBacterium::SwarmBacterium(const Vec2d& position, Swarm* groupe)
 {
     groupe->addBacterium(this);
     ++swarmCounter;
-    std::cout << "Je suis crée"<< std::endl;
 }
 
 SwarmBacterium::SwarmBacterium(SwarmBacterium const& autre)
     : Bacterium(autre), group(autre.group)
 {
     group->addBacterium(this);
-    std::cout << "je suis clonée" << std::endl;
 }
 
 SwarmBacterium* SwarmBacterium::clone() const
@@ -51,7 +49,7 @@ void SwarmBacterium::move(sf::Time dt)
     if(deltaPos.lengthSquared() >= 0.001)
     {
         consumeEnergy(deltaPos.length() * getStepEnergy());
-        position = new_position;
+        CircularBody::move(deltaPos);
     }
 
     if(group->IsLeader(this))
@@ -109,7 +107,6 @@ SwarmBacterium::~SwarmBacterium()
 {
     --swarmCounter;
     group->supprBacterium(this);
-    std::cout << "Je suis morte" << std::endl;
 }
 
 

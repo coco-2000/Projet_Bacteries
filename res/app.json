@@ -13,7 +13,7 @@
     "generator" : {
         "nutriment" : {
             "delay" : 1,
-            "prob" : 0.1
+            "prob" : 0.8
         }
     },
     "map" : "map.json",

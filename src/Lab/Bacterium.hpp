@@ -87,7 +87,6 @@ public :
      */
     virtual Quantity eatableQuantity(NutrimentB& nutriment) = 0;
 
-
 protected :
     MutableColor couleur;
     double angle;
