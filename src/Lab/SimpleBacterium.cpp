@@ -26,13 +26,12 @@ SimpleBacterium::SimpleBacterium(const Vec2d& position)
     ++simpleCounter;
 }
 
-SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d direction,
-                double radius, const MutableColor& couleur,
-                std::map<std::string, MutableNumber> param_mutables,
-                bool abstinence)
+/*SimpleBacterium::SimpleBacterium(Quantity energie, const Vec2d& position, const Vec2d& direction,
+                                 double radius, const MutableColor& couleur,
+                                 std::map<std::string, MutableNumber> param_mutables, bool abstinence)
     : Bacterium(energie, position, direction, radius, couleur,
                 param_mutables, abstinence)
-{}
+{}*/
 
 SimpleBacterium* SimpleBacterium::clone() const
 {
