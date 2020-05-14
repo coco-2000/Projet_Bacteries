@@ -25,6 +25,11 @@ bool PetriDish::addBacterium(Bacterium* bacterie)
     {
         lesBacteries.push_back(bacterie);
     }
+    else
+    {
+        delete bacterie;
+        bacterie = nullptr;
+    }
 
     return contained;
 }
@@ -36,6 +41,11 @@ bool PetriDish::addNutriment(Nutriment* nutriment)
     if (contained)
     {
         lesNutriments.push_back(nutriment);
+    }
+    else
+    {
+        delete nutriment;
+        nutriment = nullptr;
     }
 
     return contained;
@@ -279,7 +289,7 @@ GraphData PetriDish::getPropertyGeneral() const
         {s::TWITCHING_BACTERIA, TwitchingBacterium::getTwitchCounter()},
         {s::SWARM_BACTERIA, SwarmBacterium::getSwarmCounter()},
         {s::NUTRIMENT_SOURCES, lesNutriments.size()},
-        {s::DISH_TEMPERATURE, temperature}
+        {s::DISH_TEMPERATURE, getTemperature()}
         };
 }
 
