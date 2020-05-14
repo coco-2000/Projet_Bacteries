@@ -25,6 +25,7 @@ SwarmBacterium::SwarmBacterium(SwarmBacterium const& autre)
     : Bacterium(autre), group(autre.group)
 {
     group->addBacterium(this);
+    ++ swarmCounter;
 }
 
 SwarmBacterium* SwarmBacterium::clone() const

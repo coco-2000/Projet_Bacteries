@@ -65,12 +65,7 @@ public :
      */
     Quantity takeQuantity(Quantity prelevement);
 
-
-    virtual ~Nutriment() override;
-
     Quantity getQuantity() const;
-
-    static double getNutCounter();
 
     /**
      * Methode virtuelle pure
@@ -105,7 +100,6 @@ public :
 protected :
     const double dist;
     Quantity quantity_;
-    static double nutrimentCounter;
 
     /**
      * @brief DisplayQuantity Affiche de la quantité du nutriment (si mode debugging activé)

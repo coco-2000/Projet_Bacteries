@@ -7,12 +7,21 @@ class SimpleBacterium : public Bacterium, public DiffEqFunction
 public:
     /**
      * @brief SimpleBacterium Constructeur
+     * Incrémente le compteur d'instances
      * @param position Coordonnées de la position de l'instance à créer
      */
     SimpleBacterium(const Vec2d& position);
 
     /**
+     * @brief SimpleBacterium constructeur de copie
+     * Incrémente le compteur d'instances
+     * @param other SimpleBacterium à copier
+     */
+    SimpleBacterium(const SimpleBacterium& other);
+
+    /**
      * @brief SimpleBacterium Constructeur
+     * Incrémente le compteur d'instances
      * @param energie Niveau d'énergie intial de la bacterie
      * @param position Coordonnées de la position intiale de la bacterie
      * @param direction Direction du déplacement initiale de la bacterie
@@ -34,8 +43,6 @@ public:
      */
     Vec2d getSpeedVector() const;
 
-    static double getSimpleCounter();
-
     /**
      * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
      *                        retire cette quantité au nutriment
@@ -54,9 +61,18 @@ public:
      */
     Quantity eatableQuantity(NutrimentB& nutriment) override;
 
-protected :
+    /**
+     * @brief ~SimpleBacterium Destructeur
+     * Décrémente le compteur d'instances
+     */
+    virtual ~SimpleBacterium() override;
 
-    ~SimpleBacterium() override;
+    /**
+     * @brief getSimpleCounter compte le nombre total d'instances de SimpleBacterium présentes
+     * dans l'assiette de Pétri
+     * @return le nombre total d'instances
+     */
+    static double getSimpleCounter();
 
 private :
     double t;

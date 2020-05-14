@@ -29,6 +29,7 @@ public :
               const std::map<std::string, MutableNumber>& param_mutables = {},
               bool abstinence = 0);
 
+
     /**
      * @brief alive savoir si la bacterie a suffisamment d'energie pour etre en vie
      * @return vrai si l'energie est suffisante
@@ -56,8 +57,11 @@ public :
      */
     void setScore(double score);
 
-
-    std::map<std::string, MutableNumber> getParam_mutables() const; //je crois qu'il faut le supprimer
+    /**
+     * @brief getParam_mutables
+     * @return l'ensemble des paramètres mutables de la bactérie
+     */
+    std::map<std::string, MutableNumber> getParam_mutables() const;
 
     /**
      * @brief getMaxEatableQuantity

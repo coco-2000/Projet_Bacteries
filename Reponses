@@ -433,19 +433,12 @@ détruire le pointeur vers ces bactéries sans détruire le contenu des pointeur
 Le destructeur de SwarmBacterium doit être redéfini de façon à ce que la méthode supprBacterium soit appelé dès qu'une
 SwarmBacterium meurt et est donc détruite.
 
-
-
-
-
-
-
-
 **************************************************
 ##Q5.1
 
 Les nutriments A et B appartiennent à la classe des nutriments. Avec cette relation d'heritage le type exacte d'un
 objet peut être inconnu car si l'objet est considéré comme un nutriment (Superclasse) à cette endroit du programme,
-alors on ne peut savoir à quelle sous-classe il appartient (nutriment A ou B)
+alors on ne peut pas savoir à quelle sous-classe il appartient (nutriment A ou B)
 
 **************************************************
 ##Q5.2
@@ -455,8 +448,20 @@ et ses Sous-classe empêche de connaitre le type exacte d'un objet car si celui-
 au moment où l'on appelle la méthode eatenBy alors on ne pourra pas savoir à quelle sous-classe l'objet appartient et se sera
 la surcharge prenant une Bacterium en paramètre qui sera appelée.
 
+**************************************************
+##Q5.3
 
+Pour associer un graphe avec son titre, le tout associé à un identifiant, il nous a semblé plus judicieux de créer une map de paires.
+Chaque paire est constituée d'un graphe et de son titre. La clé correspond à l'identifiant affilié.
 
+**************************************************
+##Q5.4
+
+Pour compter le nombre d'instances de chacune des sous classes de Bacterium présentes dans l'assiette de Pétri, nous
+avons créé dans TwitchingBacterium, SimpleBacterium et SwarmBacterium un compteur statique ainsi
+qu'une methode statique permettant d'accéder à la valeur du compteur.
+Pour mettre à jour les séries des graphes, nous avons décidé de créer une map dans Lab qui, pour chaque
+titre de graphe, associe une méthode de la pétri en charge des caluls sépcifiques du graphe.
 
 
 
