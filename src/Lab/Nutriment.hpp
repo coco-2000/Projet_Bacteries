@@ -123,7 +123,6 @@ protected :
      * @brief Nutriment::TestPrelevement Ajuste la quantité prélever en fonction de celle disponible
      * @param prelevement Quantité voulant être prélever
      */
-
     Quantity TestPrelevement(Quantity& prelevement) const;
 
 };

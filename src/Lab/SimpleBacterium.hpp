@@ -122,6 +122,4 @@ private :
      * @return Le vecteur force appliqué à la bactérie simple, le vecteur nul
      */
     Vec2d f(Vec2d position, Vec2d speed) const override;
-
-
 };
