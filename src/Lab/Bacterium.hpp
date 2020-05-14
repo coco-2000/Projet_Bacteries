@@ -111,8 +111,6 @@ protected :
      */
     void collisionPetri();
 
-    void collisionObstacle();
-
     /**
      * @brief move Méthode virtuelle pure de déplacement des bactéries
      *        (à redéfinir dans les sous-classes)

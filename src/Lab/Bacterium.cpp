@@ -102,13 +102,6 @@ void Bacterium::collisionPetri()
     }
 }
 
-void Bacterium::collisionObstacle()
-{
-    if (getAppEnv().doesCollideWithObstacle(*this))
-    {
-        direction = -direction;
-    }
-}
 
 void Bacterium::consumeNutriment(sf::Time dt)
 {
