@@ -4,15 +4,13 @@
 #include "Config.hpp"
 #include "../Utility/Vec2d.hpp"
 
-double Nutriment::nutrimentCounter(0);
+#include<algorithm>
 
 Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
     : CircularBody(position, quantity),
       dist((0.95/2)*getApp().getLabSize().x - distance(getApp().getCentre(),position)),
       quantity_(quantity)
-{
-    ++ nutrimentCounter;
-};
+{};
 
 Quantity Nutriment::takeQuantity(Quantity prelevement)
 {
@@ -29,7 +27,8 @@ Quantity Nutriment:: TestPrelevement(Quantity& prelevement) const
 
 void Nutriment::setQuantity(Quantity quantity)
 {
-    quantity >= 0 ? quantity_ = quantity : quantity_ = 0.0;
+    quantity_ = std::max(quantity,0.0);
+    //quantity >= 0 ? quantity_ = quantity : quantity_ = 0.0;
     setRadius(quantity_);
 }
 
@@ -79,16 +78,6 @@ bool Nutriment::ConditionTemperature(double temperature) const
 bool Nutriment::isEmpty() const
 {
     return (quantity_ <= 0);
-}
-
-double Nutriment::getNutCounter()
-{
-    return nutrimentCounter;
-}
-
-Nutriment::~Nutriment()
-{
-    --nutrimentCounter;
 }
 
 Quantity Nutriment::getQuantity() const

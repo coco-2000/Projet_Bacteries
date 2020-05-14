@@ -65,11 +65,11 @@ void Stats::update(sf::Time dt)
 {
     if(counter>= sf::seconds(getAppConfig()["stats"]["refresh rate"].toDouble()))
     {
-        initCounter();
         for(auto& graph : graphSet)
         {
             graph.second.first->updateData(counter,getAppEnv().fetchData(graph.second.second));
         }
+        initCounter();
     }
     else
     {

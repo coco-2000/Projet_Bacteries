@@ -7,9 +7,18 @@
 #include "SwarmBacterium.hpp"
 #include "Lab.hpp"
 
+typedef std::function<std::unordered_map<std::string, double>()> Result;
+
 Lab::Lab()
     : petri(getApp().getCentre(), (0.95/2)*getApp().getLabSize().x)
-{}
+{
+    namesGraph = {
+        {s::GENERAL,                [&]() { return petri.getPropertyGeneral();}              },
+        {s::SIMPLE_BACTERIA,        [&]() { return petri.getPropertySimpleBacterium();}      },
+        {s::TWITCHING_BACTERIA,     [&]() { return petri.getPropertyTwitchingBacterium();}   },
+        {s::BACTERIA,               [&]() { return petri.getPropertyBacterium();}            },
+        {s::NUTRIMENT_QUANTITY,     [&]() { return petri.getPropertyNutrimentQuantity();}    }};
+}
 
 bool Lab::contains(const CircularBody& corps) const
 {
@@ -118,69 +127,10 @@ Swarm* Lab::getSwarmWithId(const std::string& id) const
     return petri.getSwarmWithId(id);
 }
 
-
 std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphName) const
 {
-
-    static const auto mean       = [](int i, double d) -> double{return d/i;};
-    static const auto sumVal     = [](int i, double d) -> double{return d;};
-
-    static const auto sumB       = [](const Bacterium& b, double d, const std::string& s) -> double{return (b.getParam_mutables().at(s).get() + d);};
-    static const auto sumN       = [](const Nutriment& n, double d, const std::string& s) -> double{return (n.getQuantity() + d);};
-
-    static const auto with       = [](const std::string& s) -> std::function<bool (const Bacterium&)>
-    { return [&](const Bacterium& b){ auto m = b.getParam_mutables();
-                        return (m.find(s) != m.end());};};
-
-    static const auto all        = [](const Nutriment& b) -> bool{return true;};
-
-    static const auto meanPropertyB = [](const std::string& name) ->property<Bacterium&>{return {name, with(name), mean, sumB};};
-    static const auto sumPropertyN  = [](const std::string& name) ->property<Nutriment&>{return {name, all, sumVal, sumN};};
-
-    static const std::unordered_map<std::string, std::vector<property<Bacterium&>>> namesB = {
-    {s::SIMPLE_BACTERIA, { meanPropertyB(s::WORSE), meanPropertyB(s::BETTER)}},
-    {s::TWITCHING_BACTERIA, { meanPropertyB(s::TENTACLE_LENGTH), meanPropertyB(s::TENTACLE_SPEED)}},
-    {s::BACTERIA, {meanPropertyB(s::SPEED)}}};
-
-    static const std::unordered_map<std::string, std::vector<property<Nutriment&>>> namesN = {
-    {s::NUTRIMENT_QUANTITY, {sumPropertyN(s::NUTRIMENT_QUANTITY)}}};
-
-    static const std::map<std::string, std::vector<counting_property>> nameG = {
-        {s::GENERAL, { {s::SIMPLE_BACTERIA,     SimpleBacterium::getSimpleCounter},
-                       {s::TWITCHING_BACTERIA,  TwitchingBacterium::getTwitchCounter},
-                       {s::SWARM_BACTERIA,      SwarmBacterium::getSwarmCounter},
-                       {s::NUTRIMENT_SOURCES,   Nutriment::getNutCounter},
-                       {s::DISH_TEMPERATURE,    [&]()-> double{return getTemperature();}} }
-        }};
-
-    std::unordered_map<std::string, double> result;
-
-    if (graphName == s::GENERAL)
-    {
-        for (const auto& serie : nameG.at(graphName))
-        {
-            result[serie.name] = serie.counter();
-        }
-    }
-    else if (graphName.find("bacteria") != std::string::npos)
-    {
-        for(const auto& serie : namesB.at(graphName))
-        {
-           result[serie.name] = getProperty(serie, petri.getLesBacteries());
-        }
-    }
-
-    else if (graphName.find("nutriment") != std::string::npos)
-    {
-        for(const auto& serie : namesN.at(graphName) )
-        {
-            result[serie.name] = getProperty(serie,petri.getLesNutriments());
-        }
-    }
-
-    return result;
+    return namesGraph.at(graphName)();
 }
-
 
 Lab::~Lab()
 {

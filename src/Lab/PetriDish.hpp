@@ -8,6 +8,7 @@
 #include "Interface/Updatable.hpp"
 #include "Swarm.hpp"
 
+typedef std::unordered_map<std::string, double> GraphData;
 
 class PetriDish : public CircularBody, public Drawable, public Updatable
 {
@@ -37,7 +38,7 @@ public:
      * @param bacterie ajoutée à l'assiette
      * @return vrai si la bacterie a pu être placé dans l'assiette
      */
-    bool addBacterium(Bacterium* bacterie);
+   bool addBacterium(Bacterium* bacterie);
 
     /**
      * @brief PetriDish::addNutriment place nutriments dans l'assiette
@@ -157,9 +158,16 @@ public:
      */
     ~PetriDish() override;
 
-    std::vector<Bacterium *> getLesBacteries() const;
 
-    std::vector<Nutriment *> getLesNutriments() const;
+    GraphData getPropertySimpleBacterium() const;
+
+    GraphData getPropertyTwitchingBacterium() const;
+
+    GraphData getPropertyBacterium() const;
+
+    GraphData getPropertyNutrimentQuantity() const;
+
+    GraphData getPropertyGeneral() const;
 
 private :
     std::vector<Bacterium*> lesBacteries;
@@ -168,6 +176,10 @@ private :
     double puissance;
     double temperature;
     std::vector<Bacterium*> annexe;
+
+    double getMeanBacterium(const std::string& s) const;
+
+    double getTotalNutriment() const;
 
     /**
      * @brief update_bacteries assure le déplacement, les collisions et la consommation
