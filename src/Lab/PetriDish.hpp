@@ -158,15 +158,39 @@ public:
      */
     ~PetriDish() override;
 
+    /**
+     * @brief getPropertySimpleBacterium calcule les nouvelles valeurs associées
+     * à chacune des series du graphe SimpleBacteria
+     * @return l'ensemble des nouvelles valeurs calculées
+     */
+    GraphData getPropertySimpleBacteria() const;
 
-    GraphData getPropertySimpleBacterium() const;
+    /**
+     * @brief getPropertyTwitchingBacteria calcule les nouvelles valeurs associées
+     * à chacune des series du graphe TwitchingBacteria
+     * @return l'ensemble des nouvelles valeurs calculées
+     */
+    GraphData getPropertyTwitchingBacteria() const;
 
-    GraphData getPropertyTwitchingBacterium() const;
+    /**
+     * @brief getPropertyBacteria calcule les nouvelles valeurs associées
+     * à chacune des series du graphe Bacteria
+     * @return l'ensemble des nouvelles valeurs calculées
+     */
+    GraphData getPropertyBacteria() const;
 
-    GraphData getPropertyBacterium() const;
-
+    /**
+     * @brief getPropertyNutrimentQuantity calcule les nouvelles valeurs
+     * associées à chacune des series du graphe NutrimentQuantity
+     * @return l'ensemble des nouvelles valeurs calculées
+     */
     GraphData getPropertyNutrimentQuantity() const;
 
+    /**
+     * @brief getPropertyGeneral calcule les nouvelles valeurs
+     * associées à chacune des series du graphe Général
+     * @return l'ensemble des nouvelles valeurs calculées
+     */
     GraphData getPropertyGeneral() const;
 
 private :
@@ -177,8 +201,19 @@ private :
     double temperature;
     std::vector<Bacterium*> annexe;
 
-    double getMeanBacterium(const std::string& s) const;
+    /**
+     * @brief getMeanBacteria calcule la moyenne des valeurs d'un paramètre mutable
+     * sur toutes les bactéries possédant ce paramètre mutable
+     * @param s le nom du paramètre mutable
+     * @return la moyenne
+     */
+    double getMeanBacteria(const std::string& s) const;
 
+    /**
+     * @brief getTotalNutriment calcule la somme de toutes les quantités de nutriments
+     * présents dans l'assiette de Petri
+     * @return la somme totale
+     */
     double getTotalNutriment() const;
 
     /**

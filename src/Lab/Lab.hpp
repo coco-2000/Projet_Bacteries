@@ -147,8 +147,12 @@ public:
       */
      Swarm* getSwarmWithId(const std::string& id) const;
 
-
-     std::unordered_map<std::string, double> fetchData(const std::string &) const;
+     /**
+      * @brief fetchData permet de calculer la nouvelle donnée à insérer dans chaque série d'un graphe
+      * @param titre : le titre du graphe pour lequel les calculs sont effectués
+      * @return l'ensemble des nouvelles valeurs calculées correpondant à chacune des séries du graphe
+      */
+     std::unordered_map<std::string, double> fetchData(const std::string & titre) const;
 
      /**
       * @brief resetControls reinitialise les paramètres de la simulation en fonction des valeurs du fichier de configuration

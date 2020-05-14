@@ -13,6 +13,7 @@ public:
 
     /**
      * @brief SwarmBacterium Constructeur
+     * Incrémente le compteur d'instances
      * @param position Position de la nouvelle instance à créer
      * @param groupe Groupe de Swarm auquel la nouvelle instance appartient
      */
@@ -20,6 +21,7 @@ public:
 
     /**
      * @brief SwarmBacterium Constructeur de copie
+     * Incrémente le compteur d'instances
      * @param autre Instance à copier
      */
     SwarmBacterium(SwarmBacterium const& autre);
@@ -34,8 +36,6 @@ public:
      * @param target Fenetre dans laquelle le dessin se fait
      */
     void drawOn(sf::RenderTarget &target) const override;
-
-    static double getSwarmCounter();
 
     /**
      * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
@@ -58,8 +58,16 @@ public:
     /**
     * @brief Destructeur
     * Détruit le pointeur vers le groupe auquel la bactérie appartient (sans détruire le Swarm lui-même)
+    * Décrémente le compteur d'instances
     */
     ~SwarmBacterium() override;
+
+    /**
+     * @brief getSwarmCounter compte le nombre total d'instances de SwarmBacterium présentes dans
+     * l'assiette de Pétri
+     * @return le nombre total d'instances
+     */
+    static double getSwarmCounter();
 
 private:
     Swarm* group;

@@ -11,10 +11,16 @@ class TwitchingBacterium : public Bacterium
 public :
     /**
      * @brief TwitchingBacterium Constructeur
+     * Incrémente le compteur d'instances
      * @param position Coordonnées de la position de l'instance à créer
      */
     TwitchingBacterium(const Vec2d& position);
 
+    /**
+     * @brief TwitchingBacterium Constructeur de copie
+     * Incrémente le compteur d'instances
+     * @param other TwitchingBacterium à copier
+     */
     TwitchingBacterium(const TwitchingBacterium& other);
 
     /**
@@ -28,10 +34,6 @@ public :
      * @param delta vecteur avec lequel le grapin est déplacé
      */
     void moveGrip(const Vec2d& delta);
-
-    static double getTwitchCounter();
-
-    virtual ~TwitchingBacterium() override;
 
     /**
      * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
@@ -50,6 +52,21 @@ public :
      * @return La quantité de nutriment consommé
      */
     Quantity eatableQuantity(NutrimentB& nutriment) override;
+
+    /**
+     * @brief ~TwitchingBacterium Destructeur
+     * Décrémente le compteur d'instances
+     */
+    virtual ~TwitchingBacterium() override;
+
+    /**
+     * @brief getTwitchCounter compte le nombre total de Twitching Bacterium présentes dans l'assiette
+     * de Pétri
+     * @return le nombre total d'instances
+     */
+    static double getTwitchCounter();
+
+
 
 protected :
     Grip grip;
