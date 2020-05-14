@@ -30,10 +30,10 @@ public:
      * @param param_mutables Ensemble de paramètres numériques mutables
      * @param abstinence Si la bacterie consomme des nutriments ou non
      */
-    SimpleBacterium(Quantity energie, Vec2d position, Vec2d direction,
+    /*SimpleBacterium(Quantity energie, const Vec2d& position, const Vec2d& direction,
                     double radius, const MutableColor& couleur,
                     std::map<std::string, MutableNumber> param_mutables,
-                    bool abstinence);
+                    bool abstinence);*/
 
     /**
      * @brief getSpeedVector Permet d'accéder au vecteur de vitesse qui détermine
@@ -138,5 +138,4 @@ private :
      * @return Le vecteur force appliqué à la bactérie simple, le vecteur nul
      */
     Vec2d f(Vec2d position, Vec2d speed) const override;
-
 };

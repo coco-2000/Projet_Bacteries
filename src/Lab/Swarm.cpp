@@ -26,7 +26,11 @@ MutableColor Swarm::getColor() const
 void Swarm::addBacterium(SwarmBacterium* bacterie)
 {
     group.push_back(bacterie);
-    setLeader();
+
+    if(leader == nullptr)
+    {
+        setLeader();
+    }
 }
 
 void Swarm::supprBacterium(SwarmBacterium* bacterie)
@@ -36,11 +40,16 @@ void Swarm::supprBacterium(SwarmBacterium* bacterie)
         if(element == bacterie)
         {
             element = nullptr;
+            break;
         }
     }
     group.erase(std::remove(group.begin(), group.end(), nullptr),
                        group.end());
-    setLeader();
+
+    if(bacterie == leader)
+    {
+        setLeader();
+    }
 }
 
 Vec2d Swarm::getLeaderPosition() const
@@ -65,14 +74,17 @@ void Swarm::setLeader()
     }
     else
     {
+        SwarmBacterium* temp(group.front());
         for(auto& bacterie : group)
         {
-            if (getAppEnv().getPositionScore((*bacterie).getPosition())
-                > getAppEnv().getPositionScore(getLeaderPosition()))
+            if (getAppEnv().getPositionScore(bacterie->getPosition())
+                > getAppEnv().getPositionScore(temp->getPosition()))
             {
-                leader = bacterie;
+                temp = bacterie;
             }
         }
+        leader = temp;
+        temp = nullptr;
     }
 }
 
@@ -97,6 +109,5 @@ Swarm::~Swarm()
     {
         element = nullptr;
     }
-
     leader = nullptr;
 }

@@ -50,7 +50,7 @@ void SwarmBacterium::move(sf::Time dt)
     if(deltaPos.lengthSquared() >= 0.001)
     {
         consumeEnergy(deltaPos.length() * getStepEnergy());
-        position = new_position;
+        CircularBody::move(deltaPos);
     }
 
     if(group->IsLeader(this))

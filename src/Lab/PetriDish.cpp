@@ -85,13 +85,16 @@ double PetriDish::getTemperature() const
 void PetriDish::update(sf::Time dt)
 {
     update_nutriments(dt);
-    update_bacteries(dt);
     update_swarms(dt);
+    update_bacteries(dt);
 }
 
 
 void PetriDish::update_bacteries (sf::Time dt)
 {
+    append(annexe, lesBacteries);
+    initAnnex();
+
     for(auto& bacterie : lesBacteries)
     {
         if(bacterie->alive())
@@ -105,14 +108,9 @@ void PetriDish::update_bacteries (sf::Time dt)
             bacterie = nullptr;
         }
     }
-    if(!annexe.empty())
-    {
-        append(annexe, lesBacteries);
-        initAnnex();
-    }
+
     lesBacteries.erase(std::remove(lesBacteries.begin(), lesBacteries.end(), nullptr),
                        lesBacteries.end());
-
 }
 
 void PetriDish::update_nutriments (sf::Time dt)
@@ -197,7 +195,7 @@ double PetriDish::getPositionScore(const Vec2d& position) const
 {
     double somme(0);
 
-    for(auto& nutriment : lesNutriments)
+    for(auto nutriment : lesNutriments)
     {
         somme += nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), puissance);
     }
@@ -281,6 +279,7 @@ double PetriDish::getTotalNutriment() const
 
     return value;
 }
+
 
 GraphData PetriDish::getPropertyGeneral() const
 {

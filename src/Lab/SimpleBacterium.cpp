@@ -26,16 +26,6 @@ SimpleBacterium::SimpleBacterium(const Vec2d& position)
     ++simpleCounter;
 }
 
-SimpleBacterium::SimpleBacterium(Quantity energie, Vec2d position, Vec2d direction,
-                double radius, const MutableColor& couleur,
-                std::map<std::string, MutableNumber> param_mutables,
-                bool abstinence)
-    : Bacterium(energie, position, direction, radius, couleur,
-                param_mutables, abstinence)
-{
-    ++simpleCounter;
-}
-
 SimpleBacterium::SimpleBacterium(const SimpleBacterium& other)
     : Bacterium (other), t(uniform(0.0, M_PI))
 {

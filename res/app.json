@@ -359,12 +359,90 @@
             }
         }
     },
+    "poison bacterium" : {
+        "color" : {
+            "a" : {
+                "clamp max" : true,
+                "clamp min" : true,
+                "initial" : 1,
+                "max" : 1,
+                "min" : 0.5,
+                "rate" : 0.2,
+                "sigma" : 0.05
+            },
+            "b" : {
+                "clamp max" : true,
+                "clamp min" : true,
+                "initial" : 0,
+                "max" : 1,
+                "min" : 0,
+                "rate" : 0.3,
+                "sigma" : 0.5
+            },
+            "g" : {
+                "clamp max" : true,
+                "clamp min" : true,
+                "initial" : 0,
+                "max" : 1,
+                "min" : 0,
+                "rate" : 0.3,
+                "sigma" : 0.5
+            },
+            "r" : {
+                "clamp max" : true,
+                "clamp min" : true,
+                "initial" : 0,
+                "max" : 1,
+                "min" : 0,
+                "rate" : 0.3,
+                "sigma" : 0.5
+            }
+        },
+        "energy" : {
+            "consumption factor" : 0.4,
+            "division" : 120,
+            "max" : 100,
+            "min" : 50
+        },
+        "meal" : {
+            "delay" : 0.5,
+            "max" : 10
+        },
+        "radius" : {
+            "max" : 20,
+            "min" : 5
+        },
+        "speed" : {
+            "initial" : 30,
+            "rate" : 1,
+            "sigma" : 0.8
+        },
+        "tumble" : {
+            "algo" : "best of N",
+            "better" : {
+                "initial" : 5,
+                "rate" : 0.8,
+                "sigma" : 1
+            },
+            "worse" : {
+                "initial" : 0.5,
+                "rate" : 0.8,
+                "sigma" : 0.1
+            }
+        },
+        "poison" : {
+            "quantity" : {
+                "max" : 10,
+                "min" : 5
+            }
+        }
+    },
     "window" : {
         "antialiasing level" : 4,
         "title" : "INFOSV Simulation",
         "simulation" : {
-            "width":800,
-            "height":800
+            "width":1400,
+            "height":1400
          },
         "stats" : { "width" : 200 }
     },
