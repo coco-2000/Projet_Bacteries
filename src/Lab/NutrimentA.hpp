@@ -38,7 +38,7 @@ public :
      */
     Quantity eatenBy(TwitchingBacterium& bacterie) override;
 
-protected:
+    private :
     /**
      * @brief getConfig redéfinition de la méthode virtuelle héritée de Nutriment
      * Raccourci pour accéder aux paramètres relatifs aux nutriments A

@@ -65,6 +65,10 @@ public :
      */
     Quantity takeQuantity(Quantity prelevement);
 
+    /**
+     * @brief getQuantity
+     * @return la quantité de nutriment contenue dans la source
+     */
     Quantity getQuantity() const;
 
     /**
@@ -98,6 +102,16 @@ public :
     virtual Quantity eatenBy(TwitchingBacterium& bacterie) = 0;
 
 protected :
+
+    /**
+     * @brief Nutriment::TestPrelevement Ajuste la quantité prélever en fonction de celle disponible
+     * @param prelevement Quantité voulant être prélever
+     */
+    Quantity testPrelevement(Quantity& prelevement) const;
+
+
+private :
+
     const double dist;
     Quantity quantity_;
 
@@ -105,18 +119,13 @@ protected :
      * @brief DisplayQuantity Affiche de la quantité du nutriment (si mode debugging activé)
      * @param target Cible pour l'affichage
      */
-    void DisplayQuantity(sf::RenderTarget& target) const;
+    void displayQuantity(sf::RenderTarget& target) const;
+
 
     /**
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux nutriments
      * Il s'agit d'une méthode virtuelle pure
      */
      virtual j::Value const& getConfig() const = 0;
-
-    /**
-     * @brief Nutriment::TestPrelevement Ajuste la quantité prélever en fonction de celle disponible
-     * @param prelevement Quantité voulant être prélever
-     */
-    Quantity TestPrelevement(Quantity& prelevement) const;
 
 };

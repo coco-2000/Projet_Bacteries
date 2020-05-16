@@ -14,12 +14,12 @@ Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
 
 Quantity Nutriment::takeQuantity(Quantity prelevement)
 {
-        TestPrelevement(prelevement);
+        testPrelevement(prelevement);
         setQuantity(quantity_ - prelevement);
         return prelevement;
 }
 
-Quantity Nutriment:: TestPrelevement(Quantity& prelevement) const
+Quantity Nutriment:: testPrelevement(Quantity& prelevement) const
 {
     if(prelevement >= quantity_) {prelevement = quantity_;}
     return prelevement;
@@ -42,10 +42,10 @@ void Nutriment::drawOn(sf::RenderTarget& target) const
     nutrimentSprite.setScale(2 * getRadius() / getAppTexture(texture).getSize().x,
                              2 * getRadius() / getAppTexture(texture).getSize().y);
     target.draw(nutrimentSprite);
-    DisplayQuantity(target);
+    displayQuantity(target);
 }
 
-void Nutriment::DisplayQuantity(sf::RenderTarget& target) const
+void Nutriment::displayQuantity(sf::RenderTarget& target) const
 {
     constexpr unsigned int TAILLE_FONTE(15); // taille de fonte
 
