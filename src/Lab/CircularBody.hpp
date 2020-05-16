@@ -72,9 +72,6 @@ public :
 
 protected :
 
-    Vec2d position;
-    double radius;
-
     /**
      * @brief CircularBody::CircularBody Constructeur
      * @param position Coordonnées de la position du CircularBody
@@ -99,11 +96,17 @@ protected :
      */
     void setRadius      (double rayon);
 
+private :
+
+    Vec2d position;
+    double radius;
+
     /**
      * @brief CircularBody::copie Effectue la copie des attributs d'un autre corps dans l'instance courante
      * @param body instance à copier
      */
     void copie           (const CircularBody& body);
+
 };
 
 /**

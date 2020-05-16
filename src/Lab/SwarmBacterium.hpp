@@ -29,7 +29,7 @@ public:
     /**
      * @brief mutate Méthode de mutation (de la couleur)
      */
-    void mutate() override;
+    //void mutate() override;
 
     /**
      * @brief drawOn Dessine une SwarmBacterium et l'anneau si l'instance est leader du groupe

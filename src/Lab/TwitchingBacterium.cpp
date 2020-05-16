@@ -16,7 +16,7 @@ TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
                 getConfig()["color"],
                 {{"tentacle speed", MutableNumber::positive(getConfig()["tentacle"]["speed"])},
                 {"tentacle length", MutableNumber::positive(getConfig()["tentacle"]["length"])}}),
-      grip(position, radius/4),
+      grip(position, getRadius()/4),
       state(IDLE)
 
 {
@@ -24,7 +24,7 @@ TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
 }
 
 TwitchingBacterium::TwitchingBacterium(const TwitchingBacterium& other)
-    : Bacterium(other), grip(position, radius/4), state(IDLE)
+    : Bacterium(other), grip(getPosition(), getRadius()/4), state(IDLE)
 {
     ++twitchCounter;
 }
@@ -45,9 +45,9 @@ Bacterium* TwitchingBacterium::clone() const
 void TwitchingBacterium::drawOn(sf::RenderTarget& target) const
 {
     Bacterium::drawOn(target);
-    const auto line = buildLine(position, grip.getPosition(), couleur.get(), 1);
+    const auto line = buildLine(getPosition(), grip.getPosition(), getColor(), 1);
     target.draw(line);
-    const auto circle = buildCircle(grip.getPosition(), grip.getRadius(), couleur.get());
+    const auto circle = buildCircle(grip.getPosition(), grip.getRadius(), getColor());
     target.draw(circle);
 }
 
@@ -90,8 +90,8 @@ void TwitchingBacterium::Wait_to_deploy_state()
     for(int i(0); i < N; ++i)
     {
         const Vec2d new_dir (Vec2d::fromRandomAngle());
-        if(helperPositionScore (new_dir) > helperPositionScore(direction))
-            direction = new_dir;
+        if(helperPositionScore (new_dir) > helperPositionScore(getDirection()))
+            setDirection(new_dir);
     }
 
     state = DEPLOY;
@@ -99,11 +99,11 @@ void TwitchingBacterium::Wait_to_deploy_state()
 
 void TwitchingBacterium::deploy_state(sf::Time dt, const Nutriment* nutriment_ptr)
 {
-    gripToward(direction, dt);
+    gripToward(getDirection(), dt);
 
     if(nutriment_ptr != nullptr)
         state = ATTRACT;
-    else if ( (grip.getPosition() - position).length() >= getProperty("tentacle length").get()
+    else if ( (grip.getPosition() - getPosition()).length() >= getProperty("tentacle length").get()
               or getAppEnv().doesCollideWithDish(grip))
         state = RETRACT;
 }
@@ -112,7 +112,7 @@ void TwitchingBacterium::attract_state(sf::Time dt, const Nutriment *nutriment_p
 {
 
      const double dist_tentacule = getProperty("tentacle speed").get()*dt.asSeconds();
-     const Vec2d deltaPos((grip.getPosition()-position)*dist_tentacule*getConfig()["speed factor"].toDouble());
+     const Vec2d deltaPos((grip.getPosition()-getPosition())*dist_tentacule*getConfig()["speed factor"].toDouble());
 
      CircularBody::move(deltaPos);
      consumeEnergy(deltaPos.length() * getStepEnergy());
@@ -126,18 +126,18 @@ void TwitchingBacterium::attract_state(sf::Time dt, const Nutriment *nutriment_p
 
 void TwitchingBacterium::tentacle_init()
 {
-    moveGrip(position - grip.getPosition());
+    moveGrip(getPosition() - grip.getPosition());
     state = IDLE;
 }
 
 void TwitchingBacterium::retract_state(sf::Time dt)
 {
-    (*this > grip) ? tentacle_init() : gripToward((position-grip.getPosition()).normalised(), dt);
+    (*this > grip) ? tentacle_init() : gripToward((getPosition()-grip.getPosition()).normalised(), dt);
 }
 
 void TwitchingBacterium::gripToward (const Vec2d& dir, sf::Time dt)
 {
-    direction = dir;
+    setDirection(dir);
     const double dist_tentacule = getProperty("tentacle speed").get()*dt.asSeconds();
     moveGrip(dir*dist_tentacule);
     consumeEnergy(getTentacleEnergy()*dist_tentacule);
@@ -160,11 +160,6 @@ double TwitchingBacterium::getTwitchCounter()
     return twitchCounter;
 }
 
-TwitchingBacterium::~TwitchingBacterium()
-{
-    -- twitchCounter;
-}
-
 Quantity TwitchingBacterium::eatableQuantity(NutrimentA& nutriment)
 {
     return nutriment.eatenBy(*this);
@@ -173,4 +168,9 @@ Quantity TwitchingBacterium::eatableQuantity(NutrimentA& nutriment)
 Quantity TwitchingBacterium::eatableQuantity(NutrimentB& nutriment)
 {
     return nutriment.eatenBy(*this);
+}
+
+TwitchingBacterium::~TwitchingBacterium()
+{
+    -- twitchCounter;
 }

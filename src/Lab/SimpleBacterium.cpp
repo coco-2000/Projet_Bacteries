@@ -44,8 +44,8 @@ j::Value const& SimpleBacterium::getConfig() const
 
 void SimpleBacterium::move(sf::Time dt)
 {
-    const Vec2d new_position(stepDiffEq(position, getSpeedVector(), dt, *this).position);
-    const auto deltaPos = new_position - position;
+    const Vec2d new_position(stepDiffEq(getPosition(), getSpeedVector(), dt, *this).position);
+    const auto deltaPos = new_position - getPosition();
 
     if(deltaPos.lengthSquared() >= 0.001)
     {
@@ -62,7 +62,7 @@ void SimpleBacterium::move(sf::Time dt)
 
 Vec2d SimpleBacterium::getSpeedVector() const
 {
-    return direction * getProperty("speed").get();
+    return getDirection() * getProperty("speed").get();
 }
 
 void SimpleBacterium::drawOn(sf::RenderTarget& target) const
@@ -71,19 +71,19 @@ void SimpleBacterium::drawOn(sf::RenderTarget& target) const
     sf::VertexArray set_of_points = sf::VertexArray(sf::LinesStrip);
       // ajout de points à l'ensemble:
 
-    set_of_points.append({{0,0}, couleur.get()});
+    set_of_points.append({{0,0}, getColor()});
 
     for(int i(1); i < nb_point; ++i)
     {
         set_of_points.append({{static_cast<float>(-i * (getRadius() / 10.0)),
                                static_cast<float>(getRadius() * sin(t) * sin(2 * i / 10.0))},
-                               couleur.get()});
+                               getColor()});
     }
 
      auto transform = sf::Transform(); // déclare une matrice de transformation
      // ici ensemble d'opérations comme des translations ou rotations faites sur transform:
      transform.translate(getPosition());
-     transform.rotate(angle / DEG_TO_RAD);
+     transform.rotate(getAngle() / DEG_TO_RAD);
      target.draw(set_of_points, transform);
 
      Bacterium::drawOn(target);
@@ -93,7 +93,7 @@ void SimpleBacterium::tentative_basculement()
 {
     double lambda(getProperty("tumble worse prob").get());
 
-    if(getAppEnv().getPositionScore(getPosition()) >= ancien_score)
+    if(getAppEnv().getPositionScore(getPosition()) >= getOldScore())
     {
         lambda = getProperty("tumble better prob").get();
     }
@@ -121,7 +121,7 @@ void SimpleBacterium::switchDirection()
 
 void SimpleBacterium::strategy1()
 {
-    direction = Vec2d::fromRandomAngle();
+    setDirection(Vec2d::fromRandomAngle());
 }
 
 void SimpleBacterium::strategy2()
@@ -132,9 +132,9 @@ void SimpleBacterium::strategy2()
     {
         const Vec2d new_dir (Vec2d::fromRandomAngle());
 
-        if(helperPositionScore (new_dir) > helperPositionScore(direction))
+        if(helperPositionScore (new_dir) > helperPositionScore(getDirection()))
         {
-            direction = new_dir;
+            setDirection(new_dir);
         }
     }
 }
@@ -149,11 +149,6 @@ double SimpleBacterium::getSimpleCounter()
     return simpleCounter;
 }
 
-SimpleBacterium::~SimpleBacterium()
-{
-    --simpleCounter;
-}
-
 Quantity SimpleBacterium::eatableQuantity(NutrimentA& nutriment)
 {
     return nutriment.eatenBy(*this);
@@ -164,3 +159,7 @@ Quantity SimpleBacterium::eatableQuantity(NutrimentB& nutriment)
     return nutriment.eatenBy(*this);
 }
 
+SimpleBacterium::~SimpleBacterium()
+{
+    --simpleCounter;
+}

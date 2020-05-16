@@ -144,7 +144,7 @@ void PetriDish::update_swarms(sf::Time dt)
 void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
 {
     //on a ici décidé que l'epaisseur de l'anneau serait 5
-    const auto border = buildAnnulus(position, radius, sf::Color::Black, 5);
+    const auto border = buildAnnulus(getPosition(), getRadius(), sf::Color::Black, 5);
     targetWindow.draw(border);
 
     for(const auto& nutriment : lesNutriments)

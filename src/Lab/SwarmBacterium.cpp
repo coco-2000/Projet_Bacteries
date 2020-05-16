@@ -40,12 +40,12 @@ j::Value const& SwarmBacterium::getConfig() const
 
 void SwarmBacterium::move(sf::Time dt)
 {
-    const DiffEqResult deplacement(stepDiffEq(position, getSpeedVector(), dt, *group));
+    const DiffEqResult deplacement(stepDiffEq(getPosition(), getSpeedVector(), dt, *group));
 
     const Vec2d new_position(deplacement.position);
-    direction = deplacement.speed.normalised();
+    setDirection(deplacement.speed.normalised());
 
-    const auto deltaPos = new_position - position;
+    const auto deltaPos = new_position - getPosition();
 
     if(deltaPos.lengthSquared() >= 0.001)
     {
@@ -67,17 +67,17 @@ void SwarmBacterium::moveLeader()
     {
         Vec2d new_dir(Vec2d::fromRandomAngle());
 
-        if(helperPositionScore(new_dir) > helperPositionScore(direction))
+        if(helperPositionScore(new_dir) > helperPositionScore(getDirection()))
         {
-            direction = new_dir;
+            setDirection(new_dir);
         }
     }
 }
 
-void SwarmBacterium::mutate()
+/*void SwarmBacterium::mutate()
 {
-    couleur.mutate();
-}
+    color.mutate();
+}*/
 
 void SwarmBacterium::drawOn(sf::RenderTarget &target) const
 {
@@ -96,20 +96,13 @@ void SwarmBacterium::drawOn(sf::RenderTarget &target) const
 
 Vec2d SwarmBacterium::getSpeedVector() const
 {
-    return direction * getConfig()["speed"]["initial"].toDouble();
+    return getDirection() * getConfig()["speed"]["initial"].toDouble();
 }
 
 double SwarmBacterium::getSwarmCounter()
 {
     return swarmCounter;
 }
-
-SwarmBacterium::~SwarmBacterium()
-{
-    --swarmCounter;
-    group->supprBacterium(this);
-}
-
 
 Quantity SwarmBacterium::eatableQuantity(NutrimentA& nutriment)
 {
@@ -119,4 +112,10 @@ Quantity SwarmBacterium::eatableQuantity(NutrimentA& nutriment)
 Quantity SwarmBacterium::eatableQuantity(NutrimentB& nutriment)
 {
     return nutriment.eatenBy(*this);
+}
+
+SwarmBacterium::~SwarmBacterium()
+{
+    --swarmCounter;
+    group->supprBacterium(this);
 }

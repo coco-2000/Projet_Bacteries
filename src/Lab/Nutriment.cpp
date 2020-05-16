@@ -37,10 +37,10 @@ void Nutriment::drawOn(sf::RenderTarget& target) const
     constexpr unsigned int TAILLE_OBJ_GRAPHIQUE(6); //taille de l'objet graphique
 
     const auto texture = getConfig()["texture"].toString();
-    auto nutrimentSprite = buildSprite(position, TAILLE_OBJ_GRAPHIQUE, getAppTexture(texture));
+    auto nutrimentSprite = buildSprite(getPosition(), TAILLE_OBJ_GRAPHIQUE, getAppTexture(texture));
     // adapte la taille du Sprite au rayon du nutriment:
-    nutrimentSprite.setScale(2 * radius / getAppTexture(texture).getSize().x,
-                             2 * radius / getAppTexture(texture).getSize().y);
+    nutrimentSprite.setScale(2 * getRadius() / getAppTexture(texture).getSize().x,
+                             2 * getRadius() / getAppTexture(texture).getSize().y);
     target.draw(nutrimentSprite);
     DisplayQuantity(target);
 }

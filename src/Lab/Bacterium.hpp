@@ -24,11 +24,17 @@ public :
      * @param param_mutables ensemble de paramètres numériques mutables
      * @param abstinence si la bacterie consomme des nutriments ou non
      */
-    Bacterium(Quantity energie, const Vec2d& position, const Vec2d& direction,
-              double radius, const MutableColor& couleur,
-              const std::map<std::string, MutableNumber>& param_mutables = {},
+    Bacterium(Quantity energy, const Vec2d& position, const Vec2d& direction,
+              double radius, const MutableColor& color,
+              const std::map<std::string, MutableNumber>& paramMutables = {},
               bool abstinence = 0);
 
+    /**
+     * @brief operator = empecher l'usage de l'opérateur d'affectation car il n'est pas utilisé
+     * et afin d'éviter d'avoir à le redéfinir dans les sous classes de bactérium lorsque le
+     * constructeur de copie est redéfini pour incrémenter les compteurs par exemple
+     */
+    Bacterium& operator=(Bacterium const&) = delete;
 
     /**
      * @brief alive savoir si la bacterie a suffisamment d'energie pour etre en vie
@@ -92,48 +98,44 @@ public :
     virtual Quantity eatableQuantity(NutrimentB& nutriment) = 0;
 
 protected :
-    MutableColor couleur;
-    double angle;
-    Vec2d direction;
-    Quantity energie;
-    std::map<std::string, MutableNumber> param_mutables;
-    bool abstinence;
-    sf::Time compteur;
-    double ancien_score;
+    /**
+     * @brief getAngle
+     * @return l'angle de direction de la bactérie
+     */
+    double getAngle() const;
 
     /**
-     * @brief DisplayEnergy Affiche la quantité d'énergie de la bacterie (si mode debugging activé)
-     * @param target Cible pour l'affichage
+     * @brief getColor
+     * @return la couleur de la bactérie
      */
-    void DisplayEnergy(sf::RenderTarget& target) const;
+    sf::Color getColor() const;
 
     /**
-     * @brief collisionPetri gère les collisions des bacteries
-     * avec l'assiette de petri
+     * @brief getDirection
+     * @return la direction de la bactérie
      */
-    void collisionPetri();
+    Vec2d getDirection() const;
+
+    /**
+     * @brief getOldScore
+     * @return le score de la bactérie lors du pas de simulation
+     * précédent
+     */
+    double getOldScore() const;
+
+    /**
+     * @brief setDirection modifie la direction de la bactérie
+     * @param new_dir nouvelle direction que la bactérie doit prendre
+     */
+    void setDirection(const Vec2d& new_dir);
 
     /**
      * @brief move Méthode virtuelle pure de déplacement des bactéries
-     *        (à redéfinir dans les sous-classes)
-     * @param dt Pas de temps depuis le dernier déplacement de l'instance courante
+     * (à redéfinir dans les sous-classes)
+     * @param dt Pas de temps depuis le dernier déplacement de
+     * l'instance courante
      */
     virtual void move(sf::Time dt) = 0;
-
-    /**
-     * @brief clone réalise une copie polymorphique de la bacterie. Méthode virtuelle pure
-     * @return Un pointeur sur la nouvelle bactérie issue de l'instance courante
-     */
-    virtual Bacterium* clone() const = 0;
-
-    /**
-     * @brief divide Méthode de division commune à toutes les bactéries
-     * Si les conditions de division sont remplies, créé une nouvelle bactérie clonée,
-     * divise par 2 l'énergie de la bactérie d'origine et de celle clonée,
-     * inverse la direction de déplacement de la bactérie d'origine et effectue des mutations
-     * sur la bacterie clonée
-     */
-    void divide();
 
     /**
      * @brief mutate Méthode de mutation d'une bactérie
@@ -147,41 +149,10 @@ protected :
     virtual Quantity getStepEnergy() const;
 
     /**
-     * @brief getEnergy
-     * @return l'énergie minimale nécessaire à la division
-     */
-    Quantity getEnergy() const;
-
-    /**
-     * @brief getDelay
-     * @return le temps d'attente entre deux consommations de nutriments pour la bactérie
-     */
-    sf::Time getDelay() const;
-
-    /**
-     * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries
-     * Il s'agit d'une méthode virtuelle pure
-     * @return la valeur associée à getAppConfig()["bacterium"] du fichier json
-     */
-    virtual j::Value const& getConfig() const = 0;
-
-    /**
      * @brief consumeEnergy décrémenter le niveau d'énergie
      * @param qt la quantité pour laquelle l'énergie est décrémentée
      */
     void consumeEnergy(Quantity qt);
-
-    /**
-     * @brief consumeNutriment gère la consommation des bacteries
-     * @param dt Pas de temps après lequel la simulation est mise à jour
-     */
-    void consumeNutriment(sf::Time dt);
-
-    /**
-     * @brief rotationAngle mise à jour de l'angle de rotation
-     * @param dt Pas de temps après lequel la simulation est mise à jour
-     */
-    void rotationAngle(sf::Time dt);
 
     /**
      * @brief shift_clone décale la bactérie clonée pour la différencier de la bactérie d'origine
@@ -210,12 +181,81 @@ protected :
      */
     double helperPositionScore(const Vec2d& offset) const;
 
+private :
+    MutableColor color;
+    double angle;
+    Vec2d direction;
+    Quantity energy;
+    std::map<std::string, MutableNumber> paramMutables;
+    bool abstinence;
+    sf::Time counter;
+    double oldScore;
+
+    /**
+     * @brief DisplayEnergy Affiche la quantité d'énergie de la bacterie (si mode debugging activé)
+     * @param target Cible pour l'affichage
+     */
+    void displayEnergy(sf::RenderTarget& target) const;
+
+    /**
+     * @brief collisionPetri gère les collisions des bacteries
+     * avec l'assiette de petri
+     */
+    void collisionPetri();
+
+    /**
+     * @brief divide Méthode de division commune à toutes les bactéries
+     * Si les conditions de division sont remplies, créé une nouvelle bactérie clonée,
+     * divise par 2 l'énergie de la bactérie d'origine et de celle clonée,
+     * inverse la direction de déplacement de la bactérie d'origine et effectue des mutations
+     * sur la bacterie clonée
+     */
+    void divide();
+
+    /**
+     * @brief clone réalise une copie polymorphique de la bacterie. Méthode virtuelle pure
+     * @return Un pointeur sur la nouvelle bactérie issue de l'instance courante
+     */
+    virtual Bacterium* clone() const = 0;
+
+    /**
+     * @brief getEnergy
+     * @return l'énergie minimale nécessaire à la division
+     */
+    Quantity getEnergy() const;
+
+    /**
+     * @brief getDelay
+     * @return le temps d'attente entre deux consommations de nutriments pour la bactérie
+     */
+    sf::Time getDelay() const;
+
+    /**
+     * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries
+     * Il s'agit d'une méthode virtuelle pure
+     * @return la valeur associée à getAppConfig()["bacterium"] du fichier json
+     */
+    virtual j::Value const& getConfig() const = 0;
+
+    /**
+     * @brief consumeNutriment gère la consommation des bacteries
+     * @param dt Pas de temps après lequel la simulation est mise à jour
+     */
+    void consumeNutriment(sf::Time dt);
+
+    /**
+     * @brief rotationAngle mise à jour de l'angle de rotation
+     * @param dt Pas de temps après lequel la simulation est mise à jour
+     */
+    void rotationAngle(sf::Time dt);
+
     /**
      * @brief eat Gère la consommation de nutriment par la bactérie (en fonction de du type de nutriment et de bactérie) :
      *            calcul quantité consommée par bactérie et la retire de la source de nutriment
      * @param nutriment qui est consommé par l'instance
      */
     void eat(Nutriment& nutriment);
+
 };
 
 

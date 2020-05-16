@@ -129,7 +129,7 @@ Swarm* Lab::getSwarmWithId(const std::string& id) const
 
 std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphName) const
 {
-    return namesGraph.at(graphName)();
+    return namesGraph.at(graphName)(); //at jettera une exception si graphName n'est pas dans la map
 }
 
 Lab::~Lab()

@@ -11,8 +11,8 @@ Bacterium::Bacterium(Quantity energie, const Vec2d& position, const Vec2d& direc
                      const std::map<std::string, MutableNumber>& param_mutables,
                      bool abstinence)
 
-    : CircularBody(position, radius), couleur(couleur), direction(direction), energie(energie),
-      param_mutables(param_mutables), abstinence(abstinence)
+    : CircularBody(position, radius), color(couleur), direction(direction), energy(energie),
+      paramMutables(param_mutables), abstinence(abstinence)
 {
     angle = direction.angle();
 }
@@ -20,9 +20,9 @@ Bacterium::Bacterium(Quantity energie, const Vec2d& position, const Vec2d& direc
 
 void Bacterium::divide()
 {
-    if(energie >= getEnergy())
+    if(energy >= getEnergy())
     {
-        energie /= 2;
+        energy /= 2;
         Bacterium* copie(clone());
         copie->mutate();
         copie->shift_clone({10,-10}); //pour que l'on puisse tout de suite voir s'il y a eu division
@@ -37,9 +37,9 @@ void Bacterium::shift_clone(const Vec2d& v)
 
 void Bacterium::mutate()
 {
-    couleur.mutate();
+    color.mutate();
 
-    for(auto& param : param_mutables)
+    for(auto& param : paramMutables)
     {
         param.second.mutate();
     }
@@ -47,7 +47,7 @@ void Bacterium::mutate()
 
 bool Bacterium::alive() const
 {
-    return energie > 0;
+    return energy > 0;
 }
 
 Quantity Bacterium::getEnergy() const
@@ -67,17 +67,17 @@ Quantity Bacterium::getStepEnergy() const
 
 void Bacterium::drawOn(sf::RenderTarget& target) const
 {
-    target.draw(buildCircle(position, radius, couleur.get()));
-    DisplayEnergy(target);
+    target.draw(buildCircle(getPosition(), getRadius(), color.get()));
+    displayEnergy(target);
 }
 
-void Bacterium::DisplayEnergy(sf::RenderTarget& target) const
+void Bacterium::displayEnergy(sf::RenderTarget& target) const
 {
     constexpr unsigned int TAILLE_FONTE(15); // taille de fonte
 
     if(isDebugOn())
     {
-        target.draw(buildText(std::to_string(static_cast<int>(energie)),
+        target.draw(buildText(std::to_string(static_cast<int>(energy)),
                               decalage({10,10}),
                               getAppFont(),
                               TAILLE_FONTE,
@@ -106,52 +106,52 @@ void Bacterium::consumeNutriment(sf::Time dt)
 {
     Nutriment* nutriment_ptr = getAppEnv().getNutrimentColliding(*this);
 
-    if(nutriment_ptr != nullptr and compteur >= getDelay() and !abstinence)
+    if(nutriment_ptr != nullptr and counter >= getDelay() and !abstinence)
     {
-        compteur = sf::Time::Zero;
+        counter = sf::Time::Zero;
         eat(*nutriment_ptr);
         nutriment_ptr = nullptr;
     }
     else
     {
-      compteur += dt;
+      counter += dt;
     }
 }
 
 void Bacterium::consumeEnergy(Quantity qt)
 {
-    energie -= qt;
+    energy -= qt;
 }
 
 void Bacterium::setScore(double score)
 {
     if(score > 0)
     {
-        ancien_score = score;
+        oldScore = score;
     }
 }
 
 void Bacterium::addProperty(const std::string& key, const MutableNumber& valeur)
 {
-    if(param_mutables.find(key) != param_mutables.end())
+    if(paramMutables.find(key) != paramMutables.end())
     {
         throw std::invalid_argument("ajout d'une propriété associée à une clé déjà existante");
     }
     else
     {
-        param_mutables.at(key) = valeur;
+        paramMutables.at(key) = valeur;
     }
 }
 
 MutableNumber Bacterium::getProperty(const std::string& key) const
 {
-    if(param_mutables.find(key) == param_mutables.end())
+    if(paramMutables.find(key) == paramMutables.end())
     {
         throw std::out_of_range("recherche de la valeur d'une clé invalide ");
     }
     else
     {
-        return param_mutables.find(key)->second;
+        return paramMutables.find(key)->second;
     }
 }
 
@@ -174,7 +174,32 @@ double Bacterium::helperPositionScore (const Vec2d& offset) const
 
 std::map<std::string, MutableNumber> Bacterium::getParam_mutables() const
 {
-    return param_mutables;
+    return paramMutables;
+}
+
+double Bacterium::getAngle() const
+{
+    return angle;
+}
+
+sf::Color Bacterium::getColor() const
+{
+    return color.get();
+}
+
+Vec2d Bacterium::getDirection() const
+{
+    return direction;
+}
+
+void Bacterium::setDirection(const Vec2d& new_dir)
+{
+    direction = new_dir;
+}
+
+double Bacterium::getOldScore() const
+{
+    return oldScore;
 }
 
 Quantity Bacterium::getMaxEatableQuantity() const
@@ -185,6 +210,6 @@ Quantity Bacterium::getMaxEatableQuantity() const
 void Bacterium::eat(Nutriment& nutriment)
 {
   Quantity eaten(nutriment.eatenBy(*this));
-  energie += eaten;
+  energy += eaten;
 
 }

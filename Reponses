@@ -437,7 +437,7 @@ SwarmBacterium meurt et est donc détruite.
 ##Q5.1
 
 Les nutriments A et B appartiennent à la classe des nutriments. Avec cette relation d'heritage le type exacte d'un
-objet peut être inconnu car si l'objet est considéré comme un nutriment (Superclasse) à cette endroit du programme,
+objet peut être inconnu car si l'objet est considéré comme un nutriment (Superclasse) à cet endroit du programme,
 alors on ne peut pas savoir à quelle sous-classe il appartient (nutriment A ou B)
 
 **************************************************
