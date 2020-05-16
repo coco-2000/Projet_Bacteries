@@ -69,7 +69,7 @@ void Nutriment::update(sf::Time dt)
     }
 }
 
-bool Nutriment::ConditionTemperature(double temperature) const
+bool Nutriment::conditionTemperature(double temperature) const
 {
     return (getConfig()["growth"]["min temperature"].toDouble() <= temperature) and
             (getConfig()["growth"]["max temperature"].toDouble() >= temperature);

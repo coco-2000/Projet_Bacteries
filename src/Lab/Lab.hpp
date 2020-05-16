@@ -86,8 +86,6 @@ public:
       */
      bool doesCollideWithDish(CircularBody const& body) const;
 
-     bool doesCollideWithObstacle(CircularBody const& body);
-
      /**
       * @brief getNutrimentColliding obtenir le nutriment en collision avec le body
       * @param body le corps qui peut rentrer en collision avec le nutriment
@@ -169,7 +167,7 @@ public:
 private :
 
     PetriDish petri;
-    NutrimentGenerator generateur_nutriment;
+    NutrimentGenerator nutrimentGenerator;
     std::unordered_map<std::string, Result> namesGraph;
 
 

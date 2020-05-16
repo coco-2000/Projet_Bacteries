@@ -158,7 +158,7 @@ protected :
      * @brief shift_clone décale la bactérie clonée pour la différencier de la bactérie d'origine
      * @param v vecteur avec lequel la bactérie est décalée
      */
-    virtual void shift_clone(const Vec2d& v);
+    virtual void shiftClone(const Vec2d& v);
 
     /**
      * @brief addProperty Ajoute à l'ensemble des paramètres mutables numériques de la bactérie une valeur numérique mutable donnée

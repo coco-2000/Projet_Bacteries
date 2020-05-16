@@ -7,7 +7,7 @@
 #include "SwarmBacterium.hpp"
 
 
-Swarm::Swarm(std::string identificateur, const std::vector <SwarmBacterium*>& groupe)
+Swarm::Swarm(const std::string& identificateur, const std::vector <SwarmBacterium*>& groupe)
     : id(identificateur), group(groupe), color(getColor())
 {
     setLeader();

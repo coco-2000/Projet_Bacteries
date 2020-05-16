@@ -12,7 +12,7 @@ typedef std::unordered_map<std::string, double> GraphData;
 PetriDish::PetriDish(Vec2d position, double radius)
     : CircularBody (position, radius)
 {
-    init_temperature();
+    initTemperature();
     initGradient();
     initAnnex();
 }
@@ -74,7 +74,7 @@ void PetriDish::reset()
     }
     lesSwarms.clear();
 
-    init_temperature();
+    initTemperature();
 }
 
 double PetriDish::getTemperature() const
@@ -84,15 +84,15 @@ double PetriDish::getTemperature() const
 
 void PetriDish::update(sf::Time dt)
 {
-    update_nutriments(dt);
-    update_swarms(dt);
-    update_bacteries(dt);
+    updateNutriments(dt);
+    updateSwarms(dt);
+    updateBacteries(dt);
 }
 
 
-void PetriDish::update_bacteries (sf::Time dt)
+void PetriDish::updateBacteries (sf::Time dt)
 {
-    append(annexe, lesBacteries);
+    append(annex, lesBacteries);
     initAnnex();
 
     for(auto& bacterie : lesBacteries)
@@ -113,13 +113,13 @@ void PetriDish::update_bacteries (sf::Time dt)
                        lesBacteries.end());
 }
 
-void PetriDish::update_nutriments (sf::Time dt)
+void PetriDish::updateNutriments (sf::Time dt)
 {
     for(auto& nutriment : lesNutriments)
     {
         if (!(nutriment->isEmpty()))
         {
-            if(nutriment->ConditionTemperature(temperature))
+            if(nutriment->conditionTemperature(temperature))
             {
                 nutriment->update(dt);
             }
@@ -133,7 +133,7 @@ void PetriDish::update_nutriments (sf::Time dt)
     lesNutriments.erase(std::remove(lesNutriments.begin(), lesNutriments.end(), nullptr), lesNutriments.end());
 }
 
-void PetriDish::update_swarms(sf::Time dt)
+void PetriDish::updateSwarms(sf::Time dt)
 {
     for(auto& swarms : lesSwarms)
     {
@@ -173,14 +173,14 @@ void PetriDish::decreaseTemperature()
     temperature -= getConfig()["temperature"]["delta"].toDouble();
 }
 
-void PetriDish::init_temperature()
+void PetriDish::initTemperature()
 {
     temperature = getConfig()["temperature"]["default"].toDouble();
 }
 
 Nutriment* PetriDish::getNutrimentColliding(CircularBody const& body) const
 {
-    for (auto nutriment : lesNutriments)
+    for (const auto& nutriment : lesNutriments)
     {
         if (*nutriment & body)
         {
@@ -195,9 +195,9 @@ double PetriDish::getPositionScore(const Vec2d& position) const
 {
     double somme(0);
 
-    for(auto nutriment : lesNutriments)
+    for(const auto& nutriment : lesNutriments)
     {
-        somme += nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), puissance);
+        somme += nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power);
     }
 
     return somme;
@@ -205,34 +205,34 @@ double PetriDish::getPositionScore(const Vec2d& position) const
 
 void PetriDish::increaseGradientExponent()
 {
-    puissance += getConfig()["gradient"]["exponent"]["delta"].toDouble();
+    power += getConfig()["gradient"]["exponent"]["delta"].toDouble();
 }
 
 void PetriDish::decreaseGradientExponent()
 {
-    puissance -= getConfig()["gradient"]["exponent"]["delta"].toDouble();
+    power -= getConfig()["gradient"]["exponent"]["delta"].toDouble();
 }
 
 double PetriDish::getGradientExponent() const
 {
-    return puissance;
+    return power;
 }
 
 void PetriDish::initGradient()
 {
-    puissance = (getConfig()["gradient"]["exponent"]["max"].toDouble()
+    power = (getConfig()["gradient"]["exponent"]["max"].toDouble()
                + getConfig()["gradient"]["exponent"]["min"].toDouble())
               / 2;
 }
 
 void PetriDish::initAnnex()
 {
-    annexe.clear();
+    annex.clear();
 }
 
 void PetriDish::addAnnex(Bacterium* clone)
 {
-    annexe.push_back(clone);
+    annex.push_back(clone);
 }
 
 void PetriDish::addSwarm(Swarm* groupe)
@@ -242,7 +242,7 @@ void PetriDish::addSwarm(Swarm* groupe)
 
 Swarm* PetriDish::getSwarmWithId(std::string id) const
 {
-    for(auto& swarm : lesSwarms)
+    for(const auto& swarm : lesSwarms)
     {
         if(swarm->getId() == id)
         {

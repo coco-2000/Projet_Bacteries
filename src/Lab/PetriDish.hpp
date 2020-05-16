@@ -88,7 +88,7 @@ public:
     /**
      * @brief init_temperature Initialise la température de l'assiette de Petri à sa valeur par défaut
      */
-    void init_temperature();
+    void initTemperature();
 
     /**
      * @brief getNutrimentColliding Vérifie si un corps circulaire est en contact avec un des
@@ -153,12 +153,6 @@ public:
     Swarm* getSwarmWithId(std::string id) const;
 
     /**
-     * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
-     * avec les bactéries et les nutriments qu'elle contient
-     */
-    ~PetriDish() override;
-
-    /**
      * @brief getPropertySimpleBacterium calcule les nouvelles valeurs associées
      * à chacune des series du graphe SimpleBacteria
      * @return l'ensemble des nouvelles valeurs calculées
@@ -193,13 +187,19 @@ public:
      */
     GraphData getPropertyGeneral() const;
 
+    /**
+     * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
+     * avec les bactéries et les nutriments qu'elle contient
+     */
+    ~PetriDish() override;
+
 private :
     std::vector<Bacterium*> lesBacteries;
     std::vector<Swarm*> lesSwarms;
     std::vector<Nutriment*> lesNutriments;
-    double puissance;
+    double power;
     double temperature;
-    std::vector<Bacterium*> annexe;
+    std::vector<Bacterium*> annex;
 
     /**
      * @brief getMeanBacteria calcule la moyenne des valeurs d'un paramètre mutable
@@ -221,14 +221,14 @@ private :
      * des nutriments pour toutes les bacteries de l'assiette de petri
      * @param dt
      */
-    void update_bacteries (sf::Time dt);
+    void updateBacteries (sf::Time dt);
 
     /**
      * @brief update_nutriments Effectue la croissance de tous les nutriments de l'assiette de Petri
      * en mettant à jour leur quantité et leur rayon
      * @param dt Pas de temps après lequel lequel la simulation est mise à jour
      */
-    void update_nutriments (sf::Time dt);
+    void updateNutriments (sf::Time dt);
 
     /**
      * @brief initAnnex Initialise le vecteur annexe de l'assiette de Petri
@@ -246,7 +246,7 @@ private :
      * @brief update_swarms Mise à jour de vecteur de Swarm de l'assiette de Petri
      * @param dt Pas de temps après lequel lequel la simulation est mise à jour
      */
-    void update_swarms(sf::Time dt);
+    void updateSwarms(sf::Time dt);
 
 };
 

@@ -56,8 +56,8 @@ void SimpleBacterium::move(sf::Time dt)
     constexpr int COEFF_T = 3;
     t += COEFF_T * dt.asSeconds();
 
-    tps_basculement += dt;
-    tentative_basculement();
+    timeSwitching += dt;
+    trySwitch();
 }
 
 Vec2d SimpleBacterium::getSpeedVector() const
@@ -89,7 +89,7 @@ void SimpleBacterium::drawOn(sf::RenderTarget& target) const
      Bacterium::drawOn(target);
 }
 
-void SimpleBacterium::tentative_basculement()
+void SimpleBacterium::trySwitch()
 {
     double lambda(getProperty("tumble worse prob").get());
 
@@ -98,12 +98,12 @@ void SimpleBacterium::tentative_basculement()
         lambda = getProperty("tumble better prob").get();
     }
 
-    const double proba_basculement = 1 - exp(- tps_basculement.asSeconds() / lambda);
+    const double proba_basculement = lambda != 0 ? 1 - exp(- timeSwitching.asSeconds() / lambda) : 1;
 
      if(bernoulli(proba_basculement) == 1)
      {
          switchDirection();
-         tps_basculement = sf::Time::Zero;
+         timeSwitching = sf::Time::Zero;
      }
 }
 

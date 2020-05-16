@@ -20,22 +20,6 @@ public:
     SimpleBacterium(const SimpleBacterium& other);
 
     /**
-     * @brief SimpleBacterium Constructeur
-     * Incrémente le compteur d'instances
-     * @param energie Niveau d'énergie intial de la bacterie
-     * @param position Coordonnées de la position intiale de la bacterie
-     * @param direction Direction du déplacement initiale de la bacterie
-     * @param radius Rayon initial de la bactérie
-     * @param couleur Couleur initiale de la bacterie
-     * @param param_mutables Ensemble de paramètres numériques mutables
-     * @param abstinence Si la bacterie consomme des nutriments ou non
-     */
-    /*SimpleBacterium(Quantity energie, const Vec2d& position, const Vec2d& direction,
-                    double radius, const MutableColor& couleur,
-                    std::map<std::string, MutableNumber> param_mutables,
-                    bool abstinence);*/
-
-    /**
      * @brief getSpeedVector Permet d'accéder au vecteur de vitesse qui détermine
      *                       le déplacement de la bactérie
      * @return Le vecteur vitesse calculé en fonction de la direction et des
@@ -76,7 +60,7 @@ public:
 
 private :
     double t;
-    sf::Time tps_basculement;
+    sf::Time timeSwitching;
     static double simpleCounter;
 
     /**
@@ -89,7 +73,7 @@ private :
     /**
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
      */
-    void tentative_basculement();
+    void trySwitch();
 
     /**
      * @brief switchDirection effectue le basculement de l'instance courante

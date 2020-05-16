@@ -107,13 +107,13 @@ protected :
     /**
      * @brief tentacle_init rétracte le tentacule et retour de la bactérie à l'état initial
      */
-    void tentacle_init();
+    void tentacleInit();
 
     /**
      * @brief Wait_to_deploy_state etat dans lequel le tentacule de la bactérie se prépare au déploiement.
      * Choix de la direction
      */
-    void Wait_to_deploy_state();
+    void waitToDeployState();
 
     /**
      * @brief deploy_state etat dans lequel le tentacule se déploie.
@@ -121,27 +121,27 @@ protected :
      * @param dt Pas de temps apres lequel la simulation est mise à jour
      * @param nutriment_ptr la source de nutriment que le tentacule pourrait rencontrer
      */
-    void deploy_state(sf::Time dt, const Nutriment* nutriment_ptr);
+    void deployState(sf::Time dt, const Nutriment* nutriment_ptr);
 
     /**
      * @brief attract_state Etat dans lequel le tentacule attire la bacterie vers la nourriture
      * @param dt Pas de temps apres lequel la simulation est mise à jour
      * @param nutriment_ptr source de nutriment vers laquelle la bacterie se déplace
      */
-    void attract_state(sf::Time dt, const Nutriment* nutriment_ptr);
+    void attractState(sf::Time dt, const Nutriment* nutriment_ptr);
 
     /**
      * @brief retract_state État dans lequel la bactérie rétracte le tentacule
      * @param dt Pas de temps apres lequel la simulation est mise à jour
      */
-    void retract_state(sf::Time dt);
+    void retractState(sf::Time dt);
 
     /**
      * @brief eat_state état durant lequel la bactérie est entrain de consommer des nutriments
      * Gère le changement d'état si la bactérie ne peut plus consommer de nutriment
      * @param nutriment_ptr la source de nutriment que la bactérie est entrain de consommer
      */
-    void eat_state(const Nutriment* nutriment_ptr);
+    void eatState(const Nutriment* nutriment_ptr);
 
     /**
      * @brief grapinToward gère le déplacement du grapin selon sa vitesse ainsi que la consommation
@@ -155,6 +155,6 @@ protected :
      * @brief shift_clone décale la bactérie clonée pour la différencier de la bactérie d'origine
      * @param v vecteur avec lequel la bactérie est décalée
      */
-    void shift_clone(const Vec2d& v) override;
+    void shiftClone(const Vec2d& v) override;
 
 };

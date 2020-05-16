@@ -50,7 +50,7 @@ public :
      * @param temperature Température courante
      * @return true si les conditions sont respectées false sinon
      */
-    bool ConditionTemperature(double temperature) const;
+    bool conditionTemperature(double temperature) const;
 
     /**
      * @brief isEmpty permet de savoir s'il n'y a plus de nutriment dans la souche

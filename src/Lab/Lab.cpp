@@ -43,7 +43,7 @@ Nutriment* Lab::getNutrimentColliding(CircularBody const& body) const
 void Lab::update(sf::Time dt)
 {
     petri.update(dt);
-    generateur_nutriment.update(dt);
+    nutrimentGenerator.update(dt);
 }
 
 void Lab::drawOn(sf::RenderTarget& targetWindow) const
@@ -54,7 +54,7 @@ void Lab::drawOn(sf::RenderTarget& targetWindow) const
 void Lab::reset()
 {
     petri.reset();
-    generateur_nutriment.reset();
+    nutrimentGenerator.reset();
 }
 
 void Lab::addNutriment(Nutriment *nutriment)
@@ -84,7 +84,7 @@ double Lab::getTemperature() const
 
 void Lab::initTemp()
 {
-    petri.init_temperature();
+    petri.initTemperature();
 }
 
 double Lab::getPositionScore(const Vec2d& position) const

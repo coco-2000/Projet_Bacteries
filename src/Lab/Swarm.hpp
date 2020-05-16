@@ -13,7 +13,7 @@ public:
      * @param identificateur
      * @param groupe
      */
-    Swarm(std::string id, const std::vector <SwarmBacterium*>& group = {});
+    Swarm(const std::string& id, const std::vector <SwarmBacterium*>& group = {});
 
     /**
      * @brief getColor Cherche la couleur du Swarm dans le fichier de configuration

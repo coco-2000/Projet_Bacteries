@@ -37,7 +37,7 @@ j::Value const& TwitchingBacterium::getConfig() const
 Bacterium* TwitchingBacterium::clone() const
 {
     TwitchingBacterium* twitching = new TwitchingBacterium(*this);
-    twitching->tentacle_init();
+    twitching->tentacleInit();
 
     return twitching;
 }
@@ -73,17 +73,17 @@ void TwitchingBacterium::move(sf::Time dt)
     switch(state)
     {
         case IDLE : state = WAIT_TO_DEPLOY; break;
-        case WAIT_TO_DEPLOY : Wait_to_deploy_state(); break;
-        case DEPLOY : deploy_state(dt, nutriment_ptr); break;
-        case ATTRACT : attract_state(dt, nutriment_ptr); break;
-        case RETRACT : retract_state (dt); break;
-        case EAT : eat_state(nutriment_ptr); break;
+        case WAIT_TO_DEPLOY : waitToDeployState(); break;
+        case DEPLOY : deployState(dt, nutriment_ptr); break;
+        case ATTRACT : attractState(dt, nutriment_ptr); break;
+        case RETRACT : retractState (dt); break;
+        case EAT : eatState(nutriment_ptr); break;
     }
 
     nutriment_ptr = nullptr;
 }
 
-void TwitchingBacterium::Wait_to_deploy_state()
+void TwitchingBacterium::waitToDeployState()
 {
     constexpr int N(20); // nb de directions aléatoires à générer
 
@@ -97,7 +97,7 @@ void TwitchingBacterium::Wait_to_deploy_state()
     state = DEPLOY;
 }
 
-void TwitchingBacterium::deploy_state(sf::Time dt, const Nutriment* nutriment_ptr)
+void TwitchingBacterium::deployState(sf::Time dt, const Nutriment* nutriment_ptr)
 {
     gripToward(getDirection(), dt);
 
@@ -108,7 +108,7 @@ void TwitchingBacterium::deploy_state(sf::Time dt, const Nutriment* nutriment_pt
         state = RETRACT;
 }
 
-void TwitchingBacterium::attract_state(sf::Time dt, const Nutriment *nutriment_ptr)
+void TwitchingBacterium::attractState(sf::Time dt, const Nutriment *nutriment_ptr)
 {
 
      const double dist_tentacule = getProperty("tentacle speed").get()*dt.asSeconds();
@@ -124,15 +124,15 @@ void TwitchingBacterium::attract_state(sf::Time dt, const Nutriment *nutriment_p
          state = EAT;
 }
 
-void TwitchingBacterium::tentacle_init()
+void TwitchingBacterium::tentacleInit()
 {
     moveGrip(getPosition() - grip.getPosition());
     state = IDLE;
 }
 
-void TwitchingBacterium::retract_state(sf::Time dt)
+void TwitchingBacterium::retractState(sf::Time dt)
 {
-    (*this > grip) ? tentacle_init() : gripToward((getPosition()-grip.getPosition()).normalised(), dt);
+    (*this > grip) ? tentacleInit() : gripToward((getPosition()-grip.getPosition()).normalised(), dt);
 }
 
 void TwitchingBacterium::gripToward (const Vec2d& dir, sf::Time dt)
@@ -143,15 +143,15 @@ void TwitchingBacterium::gripToward (const Vec2d& dir, sf::Time dt)
     consumeEnergy(getTentacleEnergy()*dist_tentacule);
 }
 
-void TwitchingBacterium::eat_state(const Nutriment *nutriment_ptr)
+void TwitchingBacterium::eatState(const Nutriment *nutriment_ptr)
 {
     if ((nutriment_ptr == nullptr) or (!(*nutriment_ptr & *this)))
         state = IDLE;
 }
 
-void TwitchingBacterium::shift_clone(const Vec2d& v)
+void TwitchingBacterium::shiftClone(const Vec2d& v)
 {
-    Bacterium::shift_clone(v);
+    Bacterium::shiftClone(v);
     moveGrip(v);
 }
 
