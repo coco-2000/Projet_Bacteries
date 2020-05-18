@@ -97,7 +97,7 @@ public :
 
 private :
 
-    const double dist;
+    const double distPetri;
     Quantity quantity_;
 
     /**

@@ -2,8 +2,8 @@
 #include "Bacterium.hpp"
 #include "Nutriment.hpp"
 #include "CircularBody.hpp"
+#include "Obstacle.hpp"
 #include <vector>
-#include <SFML/Graphics.hpp>
 #include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
 #include "Swarm.hpp"
@@ -22,6 +22,8 @@ public:
      * @param radius
      */
     PetriDish(Vec2d position, double radius);
+
+    double minimumDistToObstacle(const Vec2d& position) const;
 
     /**
      * @brief PetriDish Empêche la copie
@@ -46,6 +48,9 @@ public:
      * @return vrai si le nutriment a pu être placé dans l'assiette
      */
     bool addNutriment(Nutriment* nutriment);
+
+    bool addObstacle(Obstacle* obstacle);
+    void deleteUnderObstacle();
 
     /**
      * @brief update Effectue la croissance des nutriments de l'assiette de Petri en mettant à jour leur quantité et leur rayon
@@ -187,6 +192,8 @@ public:
      */
     GraphData getPropertyGeneral() const;
 
+    bool doesCollideWithObstacle(CircularBody const& body) const;
+
     /**
      * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
      * avec les bactéries et les nutriments qu'elle contient
@@ -197,6 +204,7 @@ private :
     std::vector<Bacterium*> lesBacteries;
     std::vector<Swarm*> lesSwarms;
     std::vector<Nutriment*> lesNutriments;
+    std::vector<Obstacle*> lesObstacles;
     double power;
     double temperature;
     std::vector<Bacterium*> annex;

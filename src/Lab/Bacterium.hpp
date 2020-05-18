@@ -64,10 +64,10 @@ public :
     void setScore(double score);
 
     /**
-     * @brief getParam_mutables
+     * @brief getParamMutables
      * @return l'ensemble des paramètres mutables de la bactérie
      */
-    std::map<std::string, MutableNumber> getParam_mutables() const;
+    std::map<std::string, MutableNumber> getparamMutables() const;
 
     /**
      * @brief getMaxEatableQuantity
@@ -192,16 +192,16 @@ private :
     double oldScore;
 
     /**
-     * @brief DisplayEnergy Affiche la quantité d'énergie de la bacterie (si mode debugging activé)
+     * @brief displayEnergy Affiche la quantité d'énergie de la bacterie (si mode debugging activé)
      * @param target Cible pour l'affichage
      */
     void displayEnergy(sf::RenderTarget& target) const;
 
     /**
-     * @brief collisionPetri gère les collisions des bacteries
+     * @brief collision gère les collisions des bacteries
      * avec l'assiette de petri
      */
-    void collisionPetri();
+    void collision();
 
     /**
      * @brief divide Méthode de division commune à toutes les bactéries

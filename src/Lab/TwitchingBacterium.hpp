@@ -117,7 +117,8 @@ protected :
 
     /**
      * @brief deploy_state etat dans lequel le tentacule se déploie.
-     * Changement d'état de la bactérie si le tentacule rencontre une source de nutriment
+     * Changement d'état de la bactérie si le tentacule rencontre une source de nutriment,
+     * si il rencontre un obstacle, le bord de la pétri ou si la tentacule à atteint sa taille maximale
      * @param dt Pas de temps apres lequel la simulation est mise à jour
      * @param nutriment_ptr la source de nutriment que le tentacule pourrait rencontrer
      */

@@ -88,17 +88,17 @@ void Bacterium::displayEnergy(sf::RenderTarget& target) const
 void Bacterium::update(sf::Time dt)
 {
     move(dt);
-    collisionPetri();
+    collision();
     rotationAngle(dt);
     consumeNutriment(dt);
     divide();
 }
 
-void Bacterium::collisionPetri()
+void Bacterium::collision()
 {
-    if (getAppEnv().doesCollideWithDish(*this))
+    if (getAppEnv().doesCollide(*this))
     {
-        direction = -direction;
+        setDirection(Vec2d::fromAngle(getAngle() + M_PI/2)*2);
     }
 }
 
@@ -172,7 +172,7 @@ double Bacterium::helperPositionScore (const Vec2d& offset) const
 }
 
 
-std::map<std::string, MutableNumber> Bacterium::getParam_mutables() const
+std::map<std::string, MutableNumber> Bacterium::getparamMutables() const
 {
     return paramMutables;
 }

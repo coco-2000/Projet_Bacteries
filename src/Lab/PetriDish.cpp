@@ -6,7 +6,7 @@
 #include "CircularBody.hpp"
 #include <vector>
 #include "Application.hpp"
-
+#include <algorithm>
 typedef std::unordered_map<std::string, double> GraphData;
 
 PetriDish::PetriDish(Vec2d position, double radius)
@@ -17,11 +17,22 @@ PetriDish::PetriDish(Vec2d position, double radius)
     initAnnex();
 }
 
+double PetriDish::minimumDistToObstacle(const Vec2d &position) const
+{
+    Obstacle* nearestObstacle = (*std::min_element(lesObstacles.begin(), lesObstacles.end(),
+                                  [position](Obstacle* o,Obstacle* p)
+                                  {
+                                       return distance(position, p->getPosition()) > distance(position, o->getPosition());
+                                  }
+                             ));
+    return distance(position, nearestObstacle->getPosition()) - nearestObstacle->getRadius();
+}
+
 
 bool PetriDish::addBacterium(Bacterium* bacterie)
 {
-    bool contained = contains(*bacterie);
-    if (contained)
+    bool addable = contains(*bacterie) and !doesCollideWithObstacle(*bacterie);
+    if (addable)
     {
         lesBacteries.push_back(bacterie);
     }
@@ -31,14 +42,14 @@ bool PetriDish::addBacterium(Bacterium* bacterie)
         bacterie = nullptr;
     }
 
-    return contained;
+    return addable;
 }
 
 
 bool PetriDish::addNutriment(Nutriment* nutriment)
 {
-    bool contained = contains(*nutriment);
-    if (contained)
+    bool addable = contains(*nutriment) and !doesCollideWithObstacle(*nutriment);
+    if (addable)
     {
         lesNutriments.push_back(nutriment);
     }
@@ -48,7 +59,47 @@ bool PetriDish::addNutriment(Nutriment* nutriment)
         nutriment = nullptr;
     }
 
-    return contained;
+    return addable;
+}
+
+bool PetriDish::addObstacle(Obstacle *obstacle)
+{
+    bool addable = contains(*obstacle) and !doesCollideWithObstacle(*obstacle);
+    if (addable)
+    {
+        lesObstacles.push_back(obstacle);
+        deleteUnderObstacle();
+    }
+    else
+    {
+        delete obstacle;
+        obstacle = nullptr;
+    }
+
+    return addable;
+}
+
+void PetriDish::deleteUnderObstacle()
+{
+    for (auto& bacterie : lesBacteries)
+    {
+        if(doesCollideWithObstacle(*bacterie))
+        {
+            delete bacterie;
+            bacterie = nullptr;
+        }
+    }
+    lesBacteries.erase(std::remove(lesBacteries.begin(), lesBacteries.end(), nullptr),
+                       lesBacteries.end());
+    for (auto& nutriment : lesNutriments)
+    {
+        if(doesCollideWithObstacle(*nutriment))
+        {
+            delete nutriment;
+            nutriment = nullptr;
+        }
+    }
+    lesNutriments.erase(std::remove(lesNutriments.begin(), lesNutriments.end(), nullptr), lesNutriments.end());
 }
 
 void PetriDish::reset()
@@ -73,6 +124,12 @@ void PetriDish::reset()
         swarm = nullptr;
     }
     lesSwarms.clear();
+
+    for(auto& obstacle : lesObstacles)
+    {
+        delete obstacle;
+        obstacle = nullptr;
+    }
 
     initTemperature();
 }
@@ -155,6 +212,11 @@ void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
     for(const auto& bacterie : lesBacteries)
     {
         bacterie->drawOn(targetWindow);
+    }
+
+    for(const auto& obstacle : lesObstacles)
+    {
+        obstacle->drawOn(targetWindow);
     }
 }
 
@@ -252,17 +314,29 @@ Swarm* PetriDish::getSwarmWithId(std::string id) const
     return nullptr;
 }
 
+bool PetriDish::doesCollideWithObstacle(const CircularBody &body) const
+{
+    for (auto obstacle : lesObstacles)
+    {
+        if(*obstacle & body)
+        {
+            return true;
+        }
+    }
+   return false;
+}
+
 double PetriDish::getMeanBacteria(const std::string &s) const
 {
     double value(0.0);
     int sum(0);
 
     for (const auto& bacterie : lesBacteries) {
-        auto p_mutable = bacterie->getParam_mutables();
+        auto p_mutable = bacterie->getparamMutables();
         if(p_mutable.find(s) != p_mutable.end())
         {
             ++ sum;
-            value   += bacterie->getParam_mutables().at(s).get();
+            value   += bacterie->getparamMutables().at(s).get();
         }
     }
     return sum != 0 ? value/sum : -1;

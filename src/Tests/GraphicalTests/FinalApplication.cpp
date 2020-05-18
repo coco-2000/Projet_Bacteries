@@ -7,6 +7,7 @@
 #include <Lab/SimpleBacterium.hpp>
 #include <Lab/Swarm.hpp>
 #include <Lab/SwarmBacterium.hpp>
+#include <Lab/Obstacle.hpp>
 #include <Lab/TwitchingBacterium.hpp>
 #include "FinalApplication.hpp"
 
@@ -63,6 +64,10 @@ void FinalApplication::onEvent(sf::Event event, sf::RenderWindow&)
             assert(swarm != nullptr);
             getEnv().addBacterium(new SwarmBacterium(getCursorPositionInView(), swarm));
         } break;
+
+        case sf::Keyboard::O:
+            getEnv().addObstacle(new Obstacle(getCursorPositionInView(), 50));
+            break;
         }
     }
 }

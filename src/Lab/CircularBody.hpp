@@ -68,8 +68,6 @@ public :
      */
     std::ostream& affiche(std::ostream& out)  const;
 
-
-
 protected :
 
     /**

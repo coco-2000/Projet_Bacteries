@@ -1,6 +1,5 @@
 #pragma once
 
-#include <functional>
 #include <SFML/Graphics.hpp>
 
 #include "PetriDish.hpp"
@@ -71,6 +70,8 @@ public:
       */
      void addBacterium(Bacterium* bacterie);
 
+     void addObstacle(Obstacle* obstacle);
+
      /**
       * @brief getTemperature obtenir la temperature de l'assiette de petri
       * du lab
@@ -85,6 +86,9 @@ public:
       * @return vrai s'il est en collision
       */
      bool doesCollideWithDish(CircularBody const& body) const;
+
+     bool doesCollide(CircularBody const& body) const;
+     double minimumDistToObstacle(const Vec2d& position) const;
 
      /**
       * @brief getNutrimentColliding obtenir le nutriment en collision avec le body

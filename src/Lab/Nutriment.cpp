@@ -8,7 +8,7 @@
 
 Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
     : CircularBody(position, quantity),
-      dist((0.95/2)*getApp().getLabSize().x - distance(getApp().getCentre(),position)),
+      distPetri((0.95/2)*getApp().getLabSize().x - distance(getApp().getCentre(),position)),
       quantity_(quantity)
 {};
 
@@ -56,10 +56,17 @@ void Nutriment::displayQuantity(sf::RenderTarget& target) const
 void Nutriment::update(sf::Time dt)
 {
     const double growth =  getConfig()["growth"]["speed"].toDouble()* static_cast<double>(dt.asSeconds());
-    if (quantity_ <= 2 * getConfig()["quantity"]["max"].toDouble() and quantity_ + growth <= dist)
+    if (quantity_ <= 2 * getConfig()["quantity"]["max"].toDouble() and quantity_ + growth <= distPetri
+            and quantity_ + growth <= getAppEnv().minimumDistToObstacle(getPosition()))
     {
         setQuantity(quantity_ + growth);
+        std::cout <<getAppEnv().minimumDistToObstacle(getPosition()) << std::endl;
     }
+    else if (!(quantity_ + growth <= getAppEnv().minimumDistToObstacle(getPosition())))
+        {
+            std::cout <<"cogne obstacle" <<std::endl;
+        }
+
 }
 
 bool Nutriment::conditionTemperature(double temperature) const

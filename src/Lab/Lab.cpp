@@ -35,6 +35,16 @@ bool Lab::doesCollideWithDish(CircularBody const& body) const
     return !contains(body);
 }
 
+bool Lab::doesCollide(CircularBody const& body) const
+{
+    return doesCollideWithDish(body) or petri.doesCollideWithObstacle(body);
+}
+
+double Lab::minimumDistToObstacle(const Vec2d &position) const
+{
+    return petri.minimumDistToObstacle(position);
+}
+
 Nutriment* Lab::getNutrimentColliding(CircularBody const& body) const
 {
     return petri.getNutrimentColliding(body);
@@ -65,6 +75,11 @@ void Lab::addNutriment(Nutriment *nutriment)
 void Lab::addBacterium(Bacterium* bacterie)
 {
     petri.addBacterium(bacterie);
+}
+
+void Lab::addObstacle(Obstacle *obstacle)
+{
+    petri.addObstacle(obstacle);
 }
 
 void Lab::increaseTemperature()
