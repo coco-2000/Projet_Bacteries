@@ -20,17 +20,18 @@ Quantity NutrimentB::eatenBy(Bacterium& bacterie)
 
 Quantity NutrimentB::eatenBy(SimpleBacterium& bacterie)
 {
-    return takeQuantity(bacterie.getMaxEatableQuantity() / getConfig()["resistance factor"].toDouble());
+    Quantity prelevement(bacterie.getMaxEatableQuantity() / getConfig()["resistance factor"].toDouble());
+    return takeQuantity(prelevement);
 }
 
 Quantity NutrimentB::eatenBy(SwarmBacterium& bacterie)
 {
     Quantity prelevement(bacterie.getMaxEatableQuantity());
-    return -getConfig()["poison factor"].toDouble() * testPrelevement(prelevement);
+    return -getConfig()["poison factor"].toDouble() * takeQuantity(prelevement);
 }
 
 Quantity NutrimentB::eatenBy(TwitchingBacterium& bacterie)
 {
     Quantity prelevement(bacterie.getMaxEatableQuantity());
-    return takeQuantity(getConfig()["nutritive factor"].toDouble() * testPrelevement(prelevement));
+    return getConfig()["nutritive factor"].toDouble() * takeQuantity(prelevement);
 }

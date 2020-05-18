@@ -28,12 +28,6 @@ public :
     Nutriment(Quantity quantity, const Vec2d& position);
 
     /**
-     * @brief Nutriment::setQuantity Manipulateur de quantité, actualise égalment le rayon du nutriment
-     * @param quantity Nouvelle quantité à assigner à quantité (+ rayon)
-     */
-    void setQuantity(Quantity quantity);
-
-    /**
      * @brief drawOn Dessine un nutriment
      * @param target
      */
@@ -46,7 +40,7 @@ public :
     void update(sf::Time dt) override;
 
     /**
-     * @brief ConditionTemperature Vérifie les conditions portant sur la température pour la croissance des nutriments
+     * @brief conditionTemperature Vérifie les conditions portant sur la température pour la croissance des nutriments
      * @param temperature Température courante
      * @return true si les conditions sont respectées false sinon
      */
@@ -101,22 +95,13 @@ public :
      */
     virtual Quantity eatenBy(TwitchingBacterium& bacterie) = 0;
 
-protected :
-
-    /**
-     * @brief Nutriment::TestPrelevement Ajuste la quantité prélever en fonction de celle disponible
-     * @param prelevement Quantité voulant être prélever
-     */
-    Quantity testPrelevement(Quantity& prelevement) const;
-
-
 private :
 
     const double dist;
     Quantity quantity_;
 
     /**
-     * @brief DisplayQuantity Affiche de la quantité du nutriment (si mode debugging activé)
+     * @brief displayQuantity Affiche de la quantité du nutriment (si mode debugging activé)
      * @param target Cible pour l'affichage
      */
     void displayQuantity(sf::RenderTarget& target) const;
@@ -127,5 +112,11 @@ private :
      * Il s'agit d'une méthode virtuelle pure
      */
      virtual j::Value const& getConfig() const = 0;
+
+    /**
+     * @brief Nutriment::setQuantity Manipulateur de quantité, actualise égalment le rayon du nutriment
+     * @param quantity Nouvelle quantité à assigner à quantité (+ rayon)
+     */
+    void setQuantity(Quantity quantity);
 
 };

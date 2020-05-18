@@ -13,6 +13,7 @@ Debut du projet : 09/03/2020
 - Pensez à utiliser des variables temporaires pour stocker les résultats de long calculs.
 - Pensez à utiliser des méthodes vous donnant les informations (constantes) provenant des fichiers JSON.
 - Améliorez les commentaires de `Lab/TwitchingBacterium.hpp` pour les méthodes gérant la transition d'états.
+- setter/getter dans les classes /setQuantity
 
 Rendu de : Groupe 1
 

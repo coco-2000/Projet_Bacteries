@@ -14,21 +14,14 @@ Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
 
 Quantity Nutriment::takeQuantity(Quantity prelevement)
 {
-        testPrelevement(prelevement);
+        prelevement = std::min(quantity_, prelevement);
         setQuantity(quantity_ - prelevement);
         return prelevement;
-}
-
-Quantity Nutriment:: testPrelevement(Quantity& prelevement) const
-{
-    if(prelevement >= quantity_) {prelevement = quantity_;}
-    return prelevement;
 }
 
 void Nutriment::setQuantity(Quantity quantity)
 {
     quantity_ = std::max(quantity,0.0);
-    //quantity >= 0 ? quantity_ = quantity : quantity_ = 0.0;
     setRadius(quantity_);
 }
 
