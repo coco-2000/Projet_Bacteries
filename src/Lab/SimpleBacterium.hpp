@@ -58,12 +58,12 @@ public:
      * dans l'assiette de Pétri
      * @return le nombre total d'instances
      */
-    static double getSimpleCounter();
+    static unsigned int getSimpleCounter();
 
 private :
     double t;
     sf::Time timeSwitching;
-    static double simpleCounter;
+    static unsigned int simpleCounter;
 
     /**
      * @brief drawOn Permet d'ajouter des détails graphiques spécifique
@@ -81,19 +81,6 @@ private :
      * @brief switchDirection effectue le basculement de l'instance courante
      */
     void switchDirection();
-
-    /**
-     * @brief strategy1 Première façon d'effectuer le basculement : choisir au hasard une direction
-     * associer à l'étiquette "single random vector" dans le fichier de configuration
-     */
-    void strategy1();
-
-    /**
-     * @brief strategy2 Deuxième façon d'effectuer le basculement :
-     * Générer N direction et retenir celle qui a le meilleur score
-     * associer à l'helperétiquette "best of N" dans le fichier de configuration
-     */
-    void strategy2();
 
     /**
      * Redéfinition d'une méthode virtuelle pure

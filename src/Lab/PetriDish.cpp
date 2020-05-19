@@ -7,6 +7,8 @@
 #include <vector>
 #include "Application.hpp"
 #include <algorithm>
+#include <cmath>
+#include<limits>
 typedef std::unordered_map<std::string, double> GraphData;
 
 PetriDish::PetriDish(Vec2d position, double radius)
@@ -19,6 +21,8 @@ PetriDish::PetriDish(Vec2d position, double radius)
 
 double PetriDish::minimumDistToObstacle(const Vec2d &position) const
 {
+    if(lesObstacles.empty())
+        return std::numeric_limits<double>::max();
     Obstacle* nearestObstacle = (*std::min_element(lesObstacles.begin(), lesObstacles.end(),
                                   [position](Obstacle* o,Obstacle* p)
                                   {
@@ -64,7 +68,7 @@ bool PetriDish::addNutriment(Nutriment* nutriment)
 
 bool PetriDish::addObstacle(Obstacle *obstacle)
 {
-    bool addable = contains(*obstacle) and !doesCollideWithObstacle(*obstacle);
+    bool addable = contains(*obstacle);
     if (addable)
     {
         lesObstacles.push_back(obstacle);
@@ -259,7 +263,12 @@ double PetriDish::getPositionScore(const Vec2d& position) const
 
     for(const auto& nutriment : lesNutriments)
     {
-        somme += nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power);
+         somme += nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power);
+    }
+
+    for(const auto&  obstacle : lesObstacles)
+    {
+         somme -= obstacle->getRadius()/ pow(distance(position, obstacle->getPosition()), power*2);
     }
 
     return somme;

@@ -60,13 +60,7 @@ void Nutriment::update(sf::Time dt)
             and quantity_ + growth <= getAppEnv().minimumDistToObstacle(getPosition()))
     {
         setQuantity(quantity_ + growth);
-        std::cout <<getAppEnv().minimumDistToObstacle(getPosition()) << std::endl;
     }
-    else if (!(quantity_ + growth <= getAppEnv().minimumDistToObstacle(getPosition())))
-        {
-            std::cout <<"cogne obstacle" <<std::endl;
-        }
-
 }
 
 bool Nutriment::conditionTemperature(double temperature) const

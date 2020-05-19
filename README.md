@@ -5,7 +5,7 @@ auteur : Emma Boehly Constance de Trogoff
 
 Debut du projet : 09/03/2020
 
-.at pour les maps jette une exception si la clé n'existe pas contraire à []
+.at pour les maps jette une exception si la clé n'existe pas contrairement à []
 - faut il controler la valeur dans Stats::setActive ?
 - opérateur d'affectation supprimé dans bactérium ok ?
 - SwarmBacterium mutate

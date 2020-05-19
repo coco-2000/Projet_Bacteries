@@ -6,7 +6,7 @@
 #include "NutrimentA.hpp"
 #include "NutrimentB.hpp"
 
-double SwarmBacterium::swarmCounter(0);
+unsigned int SwarmBacterium::swarmCounter(0);
 
 SwarmBacterium::SwarmBacterium(const Vec2d& position, Swarm* groupe)
     : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(),
@@ -99,7 +99,7 @@ Vec2d SwarmBacterium::getSpeedVector() const
     return getDirection() * getConfig()["speed"]["initial"].toDouble();
 }
 
-double SwarmBacterium::getSwarmCounter()
+unsigned int SwarmBacterium::getSwarmCounter()
 {
     return swarmCounter;
 }

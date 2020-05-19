@@ -7,8 +7,6 @@
 #include "SwarmBacterium.hpp"
 #include "Lab.hpp"
 
-typedef std::function<std::unordered_map<std::string, double>()> Result;
-
 Lab::Lab()
     : petri(getApp().getCentre(), (0.95/2)*getApp().getLabSize().x)
 {

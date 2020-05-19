@@ -67,11 +67,11 @@ public:
      * l'assiette de Pétri
      * @return le nombre total d'instances
      */
-    static double getSwarmCounter();
+    static unsigned int getSwarmCounter();
 
 private:
     Swarm* group;
-    static double swarmCounter;
+    static unsigned int swarmCounter;
 
     /**
      * @brief move Déplace une bactérie

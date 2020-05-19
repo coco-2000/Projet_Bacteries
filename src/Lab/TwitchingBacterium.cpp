@@ -6,7 +6,7 @@
 #include "NutrimentA.hpp"
 #include "NutrimentB.hpp"
 
-double TwitchingBacterium::twitchCounter(0);
+unsigned int TwitchingBacterium::twitchCounter(0);
 
 TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
     : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(), getConfig()["energy"]["max"].toDouble()),
@@ -155,7 +155,7 @@ void TwitchingBacterium::shiftClone(const Vec2d& v)
     moveGrip(v);
 }
 
-double TwitchingBacterium::getTwitchCounter()
+unsigned int TwitchingBacterium::getTwitchCounter()
 {
     return twitchCounter;
 }

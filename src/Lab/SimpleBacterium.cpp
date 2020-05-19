@@ -9,7 +9,7 @@
 #include "NutrimentA.hpp"
 #include "NutrimentB.hpp"
 
-double SimpleBacterium::simpleCounter(0);
+unsigned int SimpleBacterium::simpleCounter(0);
 
 SimpleBacterium::SimpleBacterium(const Vec2d& position)
     : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(), getConfig()["energy"]["max"].toDouble()),
@@ -93,7 +93,12 @@ void SimpleBacterium::trySwitch()
 {
     double lambda(getProperty("tumble worse prob").get());
 
-    if(getAppEnv().getPositionScore(getPosition()) >= getOldScore())
+    if(isLost())
+    {
+        lambda = 1000;
+    }
+
+    else if(getAppEnv().getPositionScore(getPosition()) >= getOldScore())
     {
         lambda = getProperty("tumble better prob").get();
     }
@@ -109,7 +114,7 @@ void SimpleBacterium::trySwitch()
 
 void SimpleBacterium::switchDirection()
 {
-    if(getConfig()["tumble"]["algo"] == "single random vector")
+    if((getConfig()["tumble"]["algo"] == "single random vector") or isLost())
     {
         strategy1();
     }
@@ -119,32 +124,13 @@ void SimpleBacterium::switchDirection()
     }
 }
 
-void SimpleBacterium::strategy1()
-{
-    setDirection(Vec2d::fromRandomAngle());
-}
-
-void SimpleBacterium::strategy2()
-{
-    constexpr int N(20); // nb de directions aléatoires à générer
-
-    for(int i(0); i < N; ++i)
-    {
-        const Vec2d new_dir (Vec2d::fromRandomAngle());
-
-        if(helperPositionScore (new_dir) > helperPositionScore(getDirection()))
-        {
-            setDirection(new_dir);
-        }
-    }
-}
 
 Vec2d SimpleBacterium::f(Vec2d position, Vec2d speed) const
 {
     return {0, 0};
 }
 
-double SimpleBacterium::getSimpleCounter()
+unsigned int SimpleBacterium::getSimpleCounter()
 {
     return simpleCounter;
 }
