@@ -4,10 +4,10 @@
       "time":{
          "factor":1,
          "max dt":0.05,
-	  "fixed step" : 0.01
+          "fixed step" : 0.01
       },
-	"background" : "sand.png",
-	"debug background" : "sand.png",
+        "background" : "sand.png",
+        "debug background" : "sand.png",
         "size"       : 1600
     },
     "generator" : {
@@ -18,7 +18,7 @@
     },
     "map" : "map.json",
     "nutriments" : {
-	"growth" : {
+        "growth" : {
             "speed" : 5,
             "max temperature" : 60,
             "min temperature" : 30
@@ -52,8 +52,22 @@
                 "max" : 50,
                 "min" : 40
             },
-            "resistance factor" : 100,
+            "resistance factor" : 10,
             "texture" : "foodB.png"
+        },
+        "poison" : {
+            "growth" : {
+                "speed" : 0,
+                "min temperature" : 10,
+                "max temperature" : 60
+            },
+            "toxic factor" : 10,
+            "resistance factor" : 5,
+            "quantity" : {
+                "min" : 2,
+                "max" : 10
+            }
+
         }
     },
     "petri dish" : {
@@ -61,16 +75,16 @@
             "exponent" : {
                 "min" : 0,
                 "max" : 1.5,
-		"delta" : 0.1
-	    }
+                "delta" : 0.1
+            }
         },
-	
+
         "temperature" : {
-	    "min" : -10.0,
-	    "max" : 100.0,
-	    "default" : 25,
-	    "delta": 0.5
-	}
+            "min" : -10.0,
+            "max" : 100.0,
+            "default" : 25,
+            "delta": 0.5
+        }
     },
     "simple bacterium" : {
         "color" : {
@@ -331,9 +345,9 @@
         "energy" : {
             "consumption factor" : {
                 "move" : 0.4,
-                "tentacle" : 0.1
+                "tentacle" : 0.3
             },
-            "division" : 120,
+            "division" : 140,
             "max" : 100,
             "min" : 50
         },
@@ -373,7 +387,7 @@
             "b" : {
                 "clamp max" : true,
                 "clamp min" : true,
-                "initial" : 0,
+                "initial" : 1,
                 "max" : 1,
                 "min" : 0,
                 "rate" : 0.3,
@@ -382,7 +396,7 @@
             "g" : {
                 "clamp max" : true,
                 "clamp min" : true,
-                "initial" : 0,
+                "initial" : 1,
                 "max" : 1,
                 "min" : 0,
                 "rate" : 0.3,
@@ -391,7 +405,7 @@
             "r" : {
                 "clamp max" : true,
                 "clamp min" : true,
-                "initial" : 0,
+                "initial" : 1,
                 "max" : 1,
                 "min" : 0,
                 "rate" : 0.3,
@@ -399,7 +413,7 @@
             }
         },
         "energy" : {
-            "consumption factor" : 0.4,
+            "consumption factor" : 0.2,
             "division" : 120,
             "max" : 100,
             "min" : 50
@@ -430,19 +444,14 @@
                 "sigma" : 0.1
             }
         },
-        "poison" : {
-            "quantity" : {
-                "max" : 10,
-                "min" : 5
-            }
-        }
+        "poison delay" : 5
     },
     "window" : {
         "antialiasing level" : 4,
         "title" : "INFOSV Simulation",
         "simulation" : {
-            "width":800,
-            "height":800
+            "width":1400,
+            "height":1400
          },
         "stats" : { "width" : 200 }
     },
