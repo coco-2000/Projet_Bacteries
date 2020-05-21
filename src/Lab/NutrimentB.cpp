@@ -3,6 +3,7 @@
 #include "SimpleBacterium.hpp"
 #include "SwarmBacterium.hpp"
 #include "TwitchingBacterium.hpp"
+#include "PoisonBacterium.hpp"
 
 NutrimentB::NutrimentB(Quantity quantity, const Vec2d& position)
     : Nutriment(quantity, position)
@@ -34,4 +35,34 @@ Quantity NutrimentB::eatenBy(TwitchingBacterium& bacterie)
 {
     Quantity prelevement(bacterie.getMaxEatableQuantity());
     return getConfig()["nutritive factor"].toDouble() * takeQuantity(prelevement);
+}
+
+Quantity NutrimentB::eatenBy(PoisonBacterium& bacterie)
+{
+    return takeQuantity(bacterie.getMaxEatableQuantity() / getShortConfig().nutrimentB_resistance_factor);
+}
+
+double NutrimentB::getPositionScore(const Bacterium& bacterie) const
+{
+    return bacterie.getPositionScore(*this);
+}
+
+double NutrimentB::getPositionScore(const SimpleBacterium& bacterie) const
+{
+    return 1 / getShortConfig().nutrimentB_resistance_factor;
+}
+
+double NutrimentB::getPositionScore(const SwarmBacterium& bacterie) const
+{
+    return - 1;
+}
+
+double NutrimentB::getPositionScore(const TwitchingBacterium& bacterie) const
+{
+    return getShortConfig().nutrimentB_nutritive_factor;
+}
+
+double NutrimentB::getPositionScore(const PoisonBacterium& bacterie) const
+{
+    return 1 / getShortConfig().nutrimentB_resistance_factor;
 }

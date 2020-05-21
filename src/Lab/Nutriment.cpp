@@ -3,7 +3,6 @@
 #include "Utility/Utility.hpp"
 #include "Config.hpp"
 #include "../Utility/Vec2d.hpp"
-
 #include<algorithm>
 
 Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
@@ -55,13 +54,24 @@ void Nutriment::displayQuantity(sf::RenderTarget& target) const
 
 void Nutriment::update(sf::Time dt)
 {
-    const double growth =  getConfig()["growth"]["speed"].toDouble()* static_cast<double>(dt.asSeconds());
-    if (quantity_ <= 2 * getConfig()["quantity"]["max"].toDouble() and quantity_ + growth <= distPetri
+    const double growth =  getGrowthSpeed()* static_cast<double>(dt.asSeconds());
+    if (quantity_ <= 2 * getMaxQuantity() and quantity_ + growth <= distPetri
             and quantity_ + growth <= getAppEnv().minimumDistToObstacle(getPosition()))
     {
         setQuantity(quantity_ + growth);
     }
 }
+
+double Nutriment::getGrowthSpeed() const
+{
+    return getConfig()["growth"]["speed"].toDouble();
+}
+
+double Nutriment::getMaxQuantity() const
+{
+    return getConfig()["quantity"]["max"].toDouble();
+}
+
 
 bool Nutriment::conditionTemperature(double temperature) const
 {

@@ -51,6 +51,14 @@ public :
      */
     Quantity eatableQuantity(NutrimentB& nutriment) override;
 
+    Quantity eatableQuantity(Poison& poison) override;
+
+    double getPositionScore(const NutrimentA& nutriment) const override;
+
+    double getPositionScore(const NutrimentB& nutriment) const override;
+
+    double getPositionScore(const Poison& poison) const override;
+
     /**
      * @brief ~TwitchingBacterium Destructeur
      * Décrémente le compteur d'instances

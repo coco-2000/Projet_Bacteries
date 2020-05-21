@@ -1,11 +1,6 @@
 #include "Lab.hpp"
 #include "CircularBody.hpp"
 #include "Application.hpp"
-#include "Swarm.hpp"
-#include "SimpleBacterium.hpp"
-#include "TwitchingBacterium.hpp"
-#include "SwarmBacterium.hpp"
-#include "Lab.hpp"
 
 Lab::Lab()
     : petri(getApp().getCentre(), (0.95/2)*getApp().getLabSize().x)
@@ -100,9 +95,9 @@ void Lab::initTemp()
     petri.initTemperature();
 }
 
-double Lab::getPositionScore(const Vec2d& position) const
+double Lab::getPositionScore(const Vec2d& position, const Bacterium& bacterie) const
 {
-    return petri.getPositionScore(position);
+    return petri.getPositionScore(position, bacterie);
 }
 
 void Lab::increaseGradientExponent()

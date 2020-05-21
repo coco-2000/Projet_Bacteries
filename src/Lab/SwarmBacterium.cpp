@@ -5,16 +5,14 @@
 #include <SFML/Graphics.hpp>
 #include "NutrimentA.hpp"
 #include "NutrimentB.hpp"
+#include "Poison.hpp"
 
 unsigned int SwarmBacterium::swarmCounter(0);
 
 SwarmBacterium::SwarmBacterium(const Vec2d& position, Swarm* groupe)
-    : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(),
-                        getConfig()["energy"]["max"].toDouble()),
-                position,
-                Vec2d::fromRandomAngle(),
-                uniform(getConfig()["radius"]["min"].toDouble(),
-                        getConfig()["radius"]["max"].toDouble()),
+    : Bacterium(position, Vec2d::fromRandomAngle(),
+                uniform(getShortConfig().swarmbact_min_radius, getShortConfig().swarmbact_max_radius),
+                uniform(getShortConfig().swarmbact_min_energy, getShortConfig().swarmbact_max_energy),
                 (*groupe).getColor()), group(groupe)
 {
     groupe->addBacterium(this);
@@ -61,9 +59,18 @@ void SwarmBacterium::move(sf::Time dt)
 
 void SwarmBacterium::moveLeader()
 {
-    strategy2();
-}
+    constexpr int nb_vecteur(20); // nb de directions aléatoires à générer
 
+    for(int i(0); i < nb_vecteur; ++i)
+    {
+        Vec2d new_dir(Vec2d::fromRandomAngle());
+
+        if(helperPositionScore(new_dir, *this) > helperPositionScore(getDirection(), *this))
+        {
+            setDirection(new_dir);
+        }
+    }
+}
 
 void SwarmBacterium::drawOn(sf::RenderTarget &target) const
 {
@@ -82,7 +89,7 @@ void SwarmBacterium::drawOn(sf::RenderTarget &target) const
 
 Vec2d SwarmBacterium::getSpeedVector() const
 {
-    return getDirection() * getConfig()["speed"]["initial"].toDouble();
+    return getDirection() * getShortConfig().swarmbact_speed;
 }
 
 unsigned int SwarmBacterium::getSwarmCounter()
@@ -98,6 +105,26 @@ Quantity SwarmBacterium::eatableQuantity(NutrimentA& nutriment)
 Quantity SwarmBacterium::eatableQuantity(NutrimentB& nutriment)
 {
     return nutriment.eatenBy(*this);
+}
+
+Quantity SwarmBacterium::eatableQuantity(Poison& poison)
+{
+    return poison.eatenBy(*this);
+}
+
+double SwarmBacterium::getPositionScore(const NutrimentA& nutriment) const
+{
+    return nutriment.getPositionScore(*this);
+}
+
+double SwarmBacterium::getPositionScore(const NutrimentB& nutriment) const
+{
+    return nutriment.getPositionScore(*this);
+}
+
+double SwarmBacterium::getPositionScore(const Poison& poison) const
+{
+    return poison.getPositionScore(*this);
 }
 
 SwarmBacterium::~SwarmBacterium()

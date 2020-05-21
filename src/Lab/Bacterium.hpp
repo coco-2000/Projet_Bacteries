@@ -10,6 +10,7 @@
 class Nutriment;
 class NutrimentA;
 class NutrimentB;
+class Poison;
 
 class Bacterium : public CircularBody, public Drawable, public Updatable
 {
@@ -24,9 +25,8 @@ public :
      * @param param_mutables ensemble de paramètres numériques mutables
      * @param abstinence si la bacterie consomme des nutriments ou non
      */
-    Bacterium(Quantity energy, const Vec2d& position, const Vec2d& direction,
-              double radius, const MutableColor& color,
-              const std::map<std::string, MutableNumber>& paramMutables = {},
+    Bacterium(const Vec2d& position, const Vec2d& direction, double radius, Quantity energie,
+              const MutableColor& couleur, const std::map<std::string, MutableNumber>& param_mutables = {},
               bool abstinence = 0);
 
     /**
@@ -107,6 +107,14 @@ public :
     virtual double getpHResistanceEnergy() const = 0;
     bool TemperatureViable() const;
     bool pHviable() const; */
+
+    virtual Quantity eatableQuantity(Poison& poison) = 0;
+
+    virtual double getPositionScore(const NutrimentA& nutriment) const = 0;
+
+    virtual double getPositionScore(const NutrimentB& nutriment) const = 0;
+
+    virtual double getPositionScore(const Poison& poison) const = 0;
 
 protected :
     /**
@@ -190,7 +198,7 @@ protected :
      * @param offset Vecteur a ajouter à la position
      * @return Score associé à la nouvelle position
      */
-    double helperPositionScore(const Vec2d& offset) const;
+    double helperPositionScore(const Vec2d& offset, const Bacterium& bacterie) const;
 
     /**
      * @brief strategy1 Première façon d'effectuer le basculement : choisir au hasard une direction

@@ -55,6 +55,14 @@ public:
      */
     Quantity eatableQuantity(NutrimentB& nutriment) override;
 
+    Quantity eatableQuantity(Poison& poison) override;
+
+    double getPositionScore(const NutrimentA& nutriment) const override;
+
+    double getPositionScore(const NutrimentB& nutriment) const override;
+
+    double getPositionScore(const Poison& poison) const override;
+
     /**
     * @brief Destructeur
     * Détruit le pointeur vers le groupe auquel la bactérie appartient (sans détruire le Swarm lui-même)

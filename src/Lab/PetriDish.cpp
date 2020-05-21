@@ -2,13 +2,18 @@
 #include "SimpleBacterium.hpp"
 #include "TwitchingBacterium.hpp"
 #include "SwarmBacterium.hpp"
+#include "PoisonBacterium.hpp"
 #include "../Utility/Utility.hpp"
 #include "CircularBody.hpp"
 #include <vector>
 #include "Application.hpp"
 #include <algorithm>
+<<<<<<< HEAD
 #include <cmath>
 #include<limits>
+=======
+
+>>>>>>> 293e7ad3f1de6c282d57c4e6b916b6a269c064bd
 typedef std::unordered_map<std::string, double> GraphData;
 
 PetriDish::PetriDish(Vec2d position, double radius)
@@ -160,7 +165,7 @@ void PetriDish::updateBacteries (sf::Time dt)
     {
         if(bacterie->alive())
         {
-            bacterie->setScore(getPositionScore(bacterie->getPosition()));
+            bacterie->setScore(getPositionScore(bacterie->getPosition(), *bacterie));
             bacterie->update(dt);
         }
         else
@@ -257,7 +262,11 @@ Nutriment* PetriDish::getNutrimentColliding(CircularBody const& body) const
     return nullptr;
 }
 
+<<<<<<< HEAD
 double PetriDish::getPositionScore(const Vec2d& position, const Bacterium &bacterie) const
+=======
+double PetriDish::getPositionScore(const Vec2d& position, const Bacterium& bacterie) const
+>>>>>>> 293e7ad3f1de6c282d57c4e6b916b6a269c064bd
 {
     double somme(0);
 
@@ -271,7 +280,11 @@ double PetriDish::getPositionScore(const Vec2d& position, const Bacterium &bacte
 
     for(const auto&  obstacle : lesObstacles)
     {
+<<<<<<< HEAD
          somme -= obstacle->getRadius()/ pow(distance(position, obstacle->getPosition()), power*1.8);
+=======
+        somme += (nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power)) * nutriment->getPositionScore(bacterie);
+>>>>>>> 293e7ad3f1de6c282d57c4e6b916b6a269c064bd
     }
 
     return somme;
@@ -373,9 +386,11 @@ GraphData PetriDish::getPropertyGeneral() const
         {s::SIMPLE_BACTERIA, SimpleBacterium::getSimpleCounter()},
         {s::TWITCHING_BACTERIA, TwitchingBacterium::getTwitchCounter()},
         {s::SWARM_BACTERIA, SwarmBacterium::getSwarmCounter()},
+        {s::POISON_BACTERIA, PoisonBacterium::getPoisonCounter()},
         {s::NUTRIMENT_SOURCES, lesNutriments.size()},
         {s::DISH_TEMPERATURE, getTemperature()}
         };
+
 }
 
 GraphData PetriDish::getPropertyNutrimentQuantity() const
