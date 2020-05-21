@@ -28,7 +28,9 @@ SimpleBacterium::SimpleBacterium(const Vec2d& position, const Vec2d& direction, 
                                  const std::map<std::string, MutableNumber>& param_mutables,
                                  bool abstinence)
    : Bacterium(position, direction, radius, energie, couleur, param_mutables, abstinence), timeFlagellum(uniform(0.0, M_PI))
-{}
+{
+    ++simpleCounter;
+}
 
 SimpleBacterium::SimpleBacterium(const SimpleBacterium& other)
     : Bacterium (other), timeFlagellum(uniform(0.0, M_PI))
