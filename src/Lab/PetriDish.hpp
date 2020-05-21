@@ -192,7 +192,10 @@ public:
      */
     GraphData getPropertyGeneral() const;
 
+    //bool doesOverlapWithObstacle(CircularBody const& body) const;
+
     bool doesCollideWithObstacle(CircularBody const& body) const;
+
 
     /**
      * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri

@@ -28,6 +28,11 @@ bool Lab::doesCollideWithDish(CircularBody const& body) const
     return !contains(body);
 }
 
+/*bool Lab::doesOverlapWithObstacle(CircularBody const& body) const
+{
+    return  petri.doesOverlapWithObstacle(body);
+}*/
+
 bool Lab::doesCollideWithObstacle(CircularBody const& body) const
 {
     return  petri.doesCollideWithObstacle(body);

@@ -80,6 +80,8 @@ public:
 private:
     Swarm* group;
     static unsigned int swarmCounter;
+    //sf::Time timeSwitching;
+
 
     /**
      * @brief move Déplace une bactérie

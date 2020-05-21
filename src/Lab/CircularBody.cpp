@@ -58,6 +58,11 @@ bool CircularBody::isColliding(const CircularBody& other) const
     return (distance(position, other.position) <= radius + other.radius);
 }
 
+/*bool CircularBody::isOverlapping(const CircularBody& other) const
+{
+    return (distance(position, other.position) < radius + other.radius);
+}*/
+
 bool CircularBody::contains(const Vec2d& point) const
 {
     return (distance(position, point) <= radius);
@@ -88,17 +93,17 @@ Vec2d CircularBody::decalage(const Vec2d& vector) const
     return vector + position;
 }
 
-bool operator>      (CircularBody const& body1, CircularBody const& body2)
+bool operator>(CircularBody const& body1, CircularBody const& body2)
 {
     return body1.contains(body2);
 }
 
-bool operator&      (CircularBody const& body1, CircularBody const& body2)
+bool operator&(CircularBody const& body1, CircularBody const& body2)
 {
     return body1.isColliding(body2);
 }
 
-bool operator>      (CircularBody  const& body, Vec2d const& point)
+bool operator>(CircularBody  const& body, Vec2d const& point)
 {
     return body.contains(point);
 }

@@ -97,6 +97,7 @@ void PetriDish::deleteUnderObstacle()
     }
     lesBacteries.erase(std::remove(lesBacteries.begin(), lesBacteries.end(), nullptr),
                        lesBacteries.end());
+
     for (auto& nutriment : lesNutriments)
     {
         if(doesCollideWithObstacle(*nutriment))
@@ -136,6 +137,7 @@ void PetriDish::reset()
         delete obstacle;
         obstacle = nullptr;
     }
+    lesObstacles.clear();
 
     initTemperature();
 }
@@ -151,7 +153,6 @@ void PetriDish::update(sf::Time dt)
     updateSwarms(dt);
     updateBacteries(dt);
 }
-
 
 void PetriDish::updateBacteries (sf::Time dt)
 {
@@ -272,10 +273,10 @@ double PetriDish::getPositionScore(const Vec2d& position, const Bacterium& bacte
         }
     }
 
-    for(const auto&  obstacle : lesObstacles)
+    /*for(const auto&  obstacle : lesObstacles)
     {
          somme -= obstacle->getRadius()/ pow(distance(position, obstacle->getPosition()), power*1.8);
-    }
+    }*/
 
     return somme;
 }
@@ -333,13 +334,25 @@ bool PetriDish::doesCollideWithObstacle(const CircularBody &body) const
 {
     for (auto obstacle : lesObstacles)
     {
-        if(*obstacle & body or obstacle->contains(body))
+        if(*obstacle & body or *obstacle>body)
         {
             return true;
         }
     }
    return false;
 }
+
+/*bool PetriDish::doesOverlapWithObstacle(const CircularBody &body) const
+{
+    for (auto obstacle : lesObstacles)
+    {
+        if(body.isOverlapping(*obstacle))
+        {
+            return true;
+        }
+    }
+   return false;
+}*/
 
 double PetriDish::getMeanBacteria(const std::string &s) const
 {

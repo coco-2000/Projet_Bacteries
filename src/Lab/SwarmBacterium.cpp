@@ -38,23 +38,37 @@ j::Value const& SwarmBacterium::getConfig() const
 
 void SwarmBacterium::move(sf::Time dt)
 {
-    const DiffEqResult deplacement(stepDiffEq(getPosition(), getSpeedVector(), dt, *group));
-
-    const Vec2d new_position(deplacement.position);
-    setDirection(deplacement.speed.normalised());
-
-    const auto deltaPos = new_position - getPosition();
-
-    if(deltaPos.lengthSquared() >= 0.001)
+    if(!isLost())
     {
-        consumeEnergy(deltaPos.length() * getStepEnergy());
-        CircularBody::move(deltaPos);
-    }
+        const DiffEqResult deplacement(stepDiffEq(getPosition(), getSpeedVector(), dt, *group));
 
-    if(group->IsLeader(this))
-    {
-        moveLeader();
+        const Vec2d new_position(deplacement.position);
+        setDirection(deplacement.speed.normalised());
+
+        const auto deltaPos = new_position - getPosition();
+
+        if(deltaPos.lengthSquared() >= 0.001)
+        {
+            consumeEnergy(deltaPos.length() * getStepEnergy());
+            CircularBody::move(deltaPos);
+        }
+
+        if(group->IsLeader(this))
+        {
+            moveLeader();
+        }
     }
+    /*else
+    {
+        timeSwitching += dt;
+        const double proba_basculement = getConfig()["lambda basculement"].toDouble() != 0 ? 1 - exp(- timeSwitching.asSeconds() / getConfig()["lambda basculement"].toDouble()) : 1;
+
+        if(bernoulli(proba_basculement) == 1)
+        {
+            strategy1();
+            timeSwitching = sf::Time::Zero;
+        }
+    }*/
 }
 
 void SwarmBacterium::moveLeader()
