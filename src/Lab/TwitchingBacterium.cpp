@@ -86,15 +86,7 @@ void TwitchingBacterium::move(sf::Time dt)
 
 void TwitchingBacterium::waitToDeployState()
 {
-    constexpr int N(20); // nb de directions aléatoires à générer
-
-    for(int i(0); i < N; ++i)
-    {
-        const Vec2d new_dir (Vec2d::fromRandomAngle());
-        if(helperPositionScore (new_dir, *this) > helperPositionScore(getDirection(), *this))
-            setDirection(new_dir);
-    }
-
+    strategy2();
     state = DEPLOY;
 }
 

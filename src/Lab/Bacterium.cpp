@@ -109,8 +109,9 @@ void Bacterium::collision()
 {
     if (getAppEnv().doesCollideWithObstacle(*this))
     {
-        setDirection(Vec2d::fromAngle(getAngle() + M_PI/2)*2);
+        //setDirection(Vec2d::fromAngle(getAngle() + M_PI/2)*2);
         lost = true;
+        strategy2();
     }
 
     else if(getAppEnv().doesCollideWithDish(*this))
