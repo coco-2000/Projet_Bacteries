@@ -77,8 +77,8 @@ void Swarm::setLeader()
         SwarmBacterium* temp(group.front());
         for(auto& bacterie : group)
         {
-            if (getAppEnv().getPositionScore(bacterie->getPosition())
-                > getAppEnv().getPositionScore(temp->getPosition()))
+            if (getAppEnv().getPositionScore(bacterie->getPosition(), *bacterie)
+                > getAppEnv().getPositionScore(temp->getPosition(), *temp))
             {
                 temp = bacterie;
             }

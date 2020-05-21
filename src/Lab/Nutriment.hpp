@@ -14,7 +14,7 @@ class Bacterium;
 class SimpleBacterium;
 class SwarmBacterium;
 class TwitchingBacterium;
-
+class PoisonBacterium;
 
 class Nutriment : public CircularBody, public Drawable, public Updatable
 {
@@ -95,6 +95,30 @@ public :
      */
     virtual Quantity eatenBy(TwitchingBacterium& bacterie) = 0;
 
+    /**
+     * Methode virtuelle pure
+     * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à poison
+     * @return la quantité de nutriment consommée
+     */
+    virtual Quantity eatenBy(PoisonBacterium& bacterie) = 0;
+
+    virtual double getPositionScore(const Bacterium& bacterie) const = 0;
+
+    virtual double getPositionScore(const SimpleBacterium& bacterie) const = 0;
+
+    virtual double getPositionScore(const SwarmBacterium& bacterie) const = 0;
+
+    virtual double getPositionScore(const TwitchingBacterium& bacterie) const = 0;
+
+    virtual double getPositionScore(const PoisonBacterium& bacterie) const = 0;
+
+protected :
+    /**
+     * @brief Nutriment::setQuantity Manipulateur de quantité, actualise égalment le rayon du nutriment
+     * @param quantity Nouvelle quantité à assigner à quantité (+ rayon)
+     */
+    void setQuantity(Quantity quantity);
+
 private :
 
     const double distPetri;
@@ -113,10 +137,7 @@ private :
      */
      virtual j::Value const& getConfig() const = 0;
 
-    /**
-     * @brief Nutriment::setQuantity Manipulateur de quantité, actualise égalment le rayon du nutriment
-     * @param quantity Nouvelle quantité à assigner à quantité (+ rayon)
-     */
-    void setQuantity(Quantity quantity);
+    double getGrowthSpeed() const;
+    double getMaxQuantity() const;
 
 };

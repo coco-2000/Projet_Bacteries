@@ -12,6 +12,12 @@ public:
      */
     SimpleBacterium(const Vec2d& position);
 
+    SimpleBacterium(const Vec2d& position, const Vec2d& direction, double radius,
+                    Quantity energie, const MutableColor& couleur,
+                    const std::map<std::string, MutableNumber>& param_mutables = {},
+                    bool abstinence = 0);
+
+
     /**
      * @brief SimpleBacterium constructeur de copie
      * Incrémente le compteur d'instances
@@ -45,6 +51,15 @@ public:
      */
     Quantity eatableQuantity(NutrimentB& nutriment) override;
 
+    Quantity eatableQuantity(Poison& poison) override;
+
+    double getPositionScore(const NutrimentA& nutriment) const override;
+
+    double getPositionScore(const NutrimentB& nutriment) const override;
+
+    double getPositionScore(const Poison& poison) const override;
+
+
     void setTimeSwitching(sf::Time);
 
     /**
@@ -60,8 +75,18 @@ public:
      */
     static double getSimpleCounter();
 
+protected :
+
+    /**
+     * Redéfinition d'une méthode virtuelle pure
+     * @brief move Déplace une bactérie
+     * @param dt Pas de temps depuis le dernier déplacement de l'instance courante
+     */
+    void move(sf::Time dt) override;
+
+
 private :
-    double t;
+    double timeFlagellum;
     sf::Time timeSwitching;
     static double simpleCounter;
 
@@ -101,13 +126,6 @@ private :
      * @return La valeur associée à getAppConfig()["simple bacterium"]
      */
     j::Value const& getConfig() const override;
-
-    /**
-     * Redéfinition d'une méthode virtuelle pure
-     * @brief move Déplace une bactérie
-     * @param dt Pas de temps depuis le dernier déplacement de l'instance courante
-     */
-    void move(sf::Time dt) override;
 
     /**
      * Redéfinition d'une méthode virtuelle pure

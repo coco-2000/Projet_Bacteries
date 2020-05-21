@@ -65,7 +65,7 @@
             "resistance factor" : 5,
             "quantity" : {
                 "min" : 2,
-                "max" : 10
+                "max" : 6
             }
 
         }

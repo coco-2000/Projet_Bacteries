@@ -5,14 +5,14 @@
 #include "../Utility/Utility.hpp"
 #include "NutrimentA.hpp"
 #include "NutrimentB.hpp"
+#include "Poison.hpp"
 
 double TwitchingBacterium::twitchCounter(0);
 
 TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
-    : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(), getConfig()["energy"]["max"].toDouble()),
-                position,
-                Vec2d::fromRandomAngle(),
-                uniform(getConfig()["radius"]["min"].toDouble(), getConfig()["radius"]["max"].toDouble()),
+    : Bacterium(position, Vec2d::fromRandomAngle(),
+                uniform(getShortConfig().twitchingbact_min_radius, getShortConfig().twitchingbact_max_radius),
+                uniform(getShortConfig().twitchingbact_min_energy, getShortConfig().twitchingbact_max_energy),
                 getConfig()["color"],
                 {{"tentacle speed", MutableNumber::positive(getConfig()["tentacle"]["speed"])},
                 {"tentacle length", MutableNumber::positive(getConfig()["tentacle"]["length"])}}),
@@ -53,12 +53,12 @@ void TwitchingBacterium::drawOn(sf::RenderTarget& target) const
 
 Quantity TwitchingBacterium::getStepEnergy() const
 {
-    return getConfig()["energy"]["consumption factor"]["move"].toDouble();
+    return getShortConfig().twitchingbact_consumption_factor_move;
 }
 
 Quantity TwitchingBacterium::getTentacleEnergy() const
 {
-    return getConfig()["energy"]["consumption factor"]["tentacle"].toDouble();
+    return getShortConfig().twitchingbact_consumption_factor_tentacle;
 }
 
 void TwitchingBacterium::moveGrip(const Vec2d& delta)
@@ -90,7 +90,7 @@ void TwitchingBacterium::waitToDeployState()
     for(int i(0); i < N; ++i)
     {
         const Vec2d new_dir (Vec2d::fromRandomAngle());
-        if(helperPositionScore (new_dir) > helperPositionScore(getDirection()))
+        if(helperPositionScore (new_dir, *this) > helperPositionScore(getDirection(), *this))
             setDirection(new_dir);
     }
 
@@ -168,6 +168,26 @@ Quantity TwitchingBacterium::eatableQuantity(NutrimentA& nutriment)
 Quantity TwitchingBacterium::eatableQuantity(NutrimentB& nutriment)
 {
     return nutriment.eatenBy(*this);
+}
+
+Quantity TwitchingBacterium::eatableQuantity(Poison& poison)
+{
+    return poison.eatenBy(*this);
+}
+
+double TwitchingBacterium::getPositionScore(const NutrimentA& nutriment) const
+{
+    return nutriment.getPositionScore(*this);
+}
+
+double TwitchingBacterium::getPositionScore(const NutrimentB& nutriment) const
+{
+    return nutriment.getPositionScore(*this);
+}
+
+double TwitchingBacterium::getPositionScore(const Poison& poison) const
+{
+    return poison.getPositionScore(*this);
 }
 
 TwitchingBacterium::~TwitchingBacterium()

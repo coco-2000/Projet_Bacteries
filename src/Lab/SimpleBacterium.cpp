@@ -8,26 +8,30 @@
 #include "../Utility/Constants.hpp"
 #include "NutrimentA.hpp"
 #include "NutrimentB.hpp"
+#include "Poison.hpp"
 
 double SimpleBacterium::simpleCounter(0);
 
 SimpleBacterium::SimpleBacterium(const Vec2d& position)
-    : Bacterium(uniform(getConfig()["energy"]["min"].toDouble(), getConfig()["energy"]["max"].toDouble()),
-                position,
-                Vec2d::fromRandomAngle(),
-                uniform(getConfig()["radius"]["min"].toDouble(), getConfig()["radius"]["max"].toDouble()),
-                getConfig()["color"],
+    : Bacterium(position, Vec2d::fromRandomAngle(), uniform(getShortConfig().simplebact_min_radius, getShortConfig().simplebact_max_radius),
+                uniform(getShortConfig().simplebact_min_energy, getShortConfig().simplebact_max_energy), getAppConfig()["simple bacterium"]["color"],
                 {{"speed", MutableNumber::positive(getConfig()["speed"])},
                  {"tumble better prob", MutableNumber::positive(getConfig()["tumble"]["better"])},
                  {"tumble worse prob", MutableNumber::positive(getConfig()["tumble"]["worse"])}}),
-       t(uniform(0.0, M_PI))
-
+       timeFlagellum(uniform(0.0, M_PI))
 {
     ++simpleCounter;
 }
 
+SimpleBacterium::SimpleBacterium(const Vec2d& position, const Vec2d& direction, double radius,
+                                 Quantity energie, const MutableColor& couleur,
+                                 const std::map<std::string, MutableNumber>& param_mutables,
+                                 bool abstinence)
+   : Bacterium(position, direction, radius, energie, couleur, param_mutables, abstinence), timeFlagellum(uniform(0.0, M_PI))
+{}
+
 SimpleBacterium::SimpleBacterium(const SimpleBacterium& other)
-    : Bacterium (other), t(uniform(0.0, M_PI))
+    : Bacterium (other), timeFlagellum(uniform(0.0, M_PI))
 {
     ++simpleCounter;
 }
@@ -54,7 +58,7 @@ void SimpleBacterium::move(sf::Time dt)
     }
 
     constexpr int COEFF_T = 3;
-    t += COEFF_T * dt.asSeconds();
+    timeFlagellum += COEFF_T * dt.asSeconds();
 
     timeSwitching += dt;
     trySwitch();
@@ -76,7 +80,7 @@ void SimpleBacterium::drawOn(sf::RenderTarget& target) const
     for(int i(1); i < nb_point; ++i)
     {
         set_of_points.append({{static_cast<float>(-i * (getRadius() / 10.0)),
-                               static_cast<float>(getRadius() * sin(t) * sin(2 * i / 10.0))},
+                               static_cast<float>(getRadius() * sin(timeFlagellum) * sin(2 * i / 10.0))},
                                getColor()});
     }
 
@@ -93,7 +97,7 @@ void SimpleBacterium::trySwitch()
 {
     double lambda(getProperty("tumble worse prob").get());
 
-    if(getAppEnv().getPositionScore(getPosition()) >= getOldScore())
+    if(getAppEnv().getPositionScore(getPosition(), *this) >= getOldScore())
     {
         lambda = getProperty("tumble better prob").get();
     }
@@ -109,11 +113,11 @@ void SimpleBacterium::trySwitch()
 
 void SimpleBacterium::switchDirection()
 {
-    if(getConfig()["tumble"]["algo"] == "single random vector")
+    if(getShortConfig().simplebact_tumble_algo == "single random vector")
     {
         strategy1();
     }
-    else if(getConfig()["tumble"]["algo"] == "best of N")
+    else if(getShortConfig().simplebact_tumble_algo == "best of N")
     {
         strategy2();
     }
@@ -132,7 +136,7 @@ void SimpleBacterium::strategy2()
     {
         const Vec2d new_dir (Vec2d::fromRandomAngle());
 
-        if(helperPositionScore (new_dir) > helperPositionScore(getDirection()))
+        if(helperPositionScore (new_dir, *this) > helperPositionScore(getDirection(), *this))
         {
             setDirection(new_dir);
         }
@@ -158,6 +162,27 @@ Quantity SimpleBacterium::eatableQuantity(NutrimentB& nutriment)
 {
     return nutriment.eatenBy(*this);
 }
+
+Quantity SimpleBacterium::eatableQuantity(Poison& poison)
+{
+    return poison.eatenBy(*this);
+}
+
+double SimpleBacterium::getPositionScore(const NutrimentA& nutriment) const
+{
+    return nutriment.getPositionScore(*this);
+}
+
+double SimpleBacterium::getPositionScore(const NutrimentB& nutriment) const
+{
+    return nutriment.getPositionScore(*this);
+}
+
+double SimpleBacterium::getPositionScore(const Poison& poison) const
+{
+    return poison.getPositionScore(*this);
+}
+
 
 SimpleBacterium::~SimpleBacterium()
 {

@@ -12,13 +12,13 @@ NutrimentGenerator::NutrimentGenerator()
 
 void NutrimentGenerator::update(sf::Time dt)
 {
-    if(compteur >= (sf::seconds(getAppConfig()["generator"]["nutriment"]["delay"].toDouble())))
+    if(compteur >= (sf::seconds(getShortConfig().generator_nutriment_delay)))
     {
         reset();
         const Vec2d position(normal(getApp().getLabSize().x/2, pow(getApp().getLabSize().x/4,2)),
                              normal(getApp().getLabSize().y/2, pow(getApp().getLabSize().y/4,2)));
 
-        if (bernoulli(getAppConfig()["generator"]["nutriment"]["prob"].toDouble()))
+        if (bernoulli(getShortConfig().generator_nutriment_prob))
         {
             getAppEnv().addNutriment(new NutrimentA(uniform(getShortConfig().nutrimentA_min_qty, getShortConfig().nutrimentA_max_qty),
                                      position));

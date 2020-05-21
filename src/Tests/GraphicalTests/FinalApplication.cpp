@@ -9,6 +9,7 @@
 #include <Lab/SwarmBacterium.hpp>
 #include <Lab/Obstacle.hpp>
 #include <Lab/TwitchingBacterium.hpp>
+#include <Lab/PoisonBacterium.hpp>
 #include "FinalApplication.hpp"
 
 #include <cassert>
@@ -21,7 +22,7 @@ void FinalApplication::onRun()
     Application::onRun();
 	// add graphs for statistics
 	setStats(true);
-    addGraph(s::GENERAL, { s::SIMPLE_BACTERIA, s::TWITCHING_BACTERIA, s::SWARM_BACTERIA, s::NUTRIMENT_SOURCES,s::DISH_TEMPERATURE}, 0, 150);
+    addGraph(s::GENERAL, { s::SIMPLE_BACTERIA, s::TWITCHING_BACTERIA, s::SWARM_BACTERIA, s::POISON_BACTERIA, s::NUTRIMENT_SOURCES,s::DISH_TEMPERATURE}, 0, 150);
     addGraph(s::NUTRIMENT_QUANTITY, {s::NUTRIMENT_QUANTITY}, 0, 2000);
     addGraph(s::SIMPLE_BACTERIA, { s::BETTER, s::WORSE}, 0, 10);
     addGraph(s::TWITCHING_BACTERIA, { s::TENTACLE_LENGTH, s::TENTACLE_SPEED}, 0, 150);
@@ -51,6 +52,10 @@ void FinalApplication::onEvent(sf::Event event, sf::RenderWindow&)
 
         case sf::Keyboard::T:
             getEnv().addBacterium(new TwitchingBacterium(getCursorPositionInView()));
+            break;
+
+        case sf::Keyboard::P:
+            getEnv().addBacterium(new PoisonBacterium(getCursorPositionInView()));
             break;
 
         case sf::Keyboard::Num1: {

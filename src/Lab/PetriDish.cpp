@@ -2,11 +2,13 @@
 #include "SimpleBacterium.hpp"
 #include "TwitchingBacterium.hpp"
 #include "SwarmBacterium.hpp"
+#include "PoisonBacterium.hpp"
 #include "../Utility/Utility.hpp"
 #include "CircularBody.hpp"
 #include <vector>
 #include "Application.hpp"
 #include <algorithm>
+
 typedef std::unordered_map<std::string, double> GraphData;
 
 PetriDish::PetriDish(Vec2d position, double radius)
@@ -156,7 +158,7 @@ void PetriDish::updateBacteries (sf::Time dt)
     {
         if(bacterie->alive())
         {
-            bacterie->setScore(getPositionScore(bacterie->getPosition()));
+            bacterie->setScore(getPositionScore(bacterie->getPosition(), *bacterie));
             bacterie->update(dt);
         }
         else
@@ -253,13 +255,13 @@ Nutriment* PetriDish::getNutrimentColliding(CircularBody const& body) const
     return nullptr;
 }
 
-double PetriDish::getPositionScore(const Vec2d& position) const
+double PetriDish::getPositionScore(const Vec2d& position, const Bacterium& bacterie) const
 {
     double somme(0);
 
     for(const auto& nutriment : lesNutriments)
     {
-        somme += nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power);
+        somme += (nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power)) * nutriment->getPositionScore(bacterie);
     }
 
     return somme;
@@ -361,9 +363,11 @@ GraphData PetriDish::getPropertyGeneral() const
         {s::SIMPLE_BACTERIA, SimpleBacterium::getSimpleCounter()},
         {s::TWITCHING_BACTERIA, TwitchingBacterium::getTwitchCounter()},
         {s::SWARM_BACTERIA, SwarmBacterium::getSwarmCounter()},
+        {s::POISON_BACTERIA, PoisonBacterium::getPoisonCounter()},
         {s::NUTRIMENT_SOURCES, lesNutriments.size()},
         {s::DISH_TEMPERATURE, getTemperature()}
         };
+
 }
 
 GraphData PetriDish::getPropertyNutrimentQuantity() const

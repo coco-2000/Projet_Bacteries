@@ -38,6 +38,23 @@ public :
      */
     Quantity eatenBy(TwitchingBacterium& bacterie) override;
 
+    /**
+     * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à poison
+     * @return la quantité de nutriment consommée
+     */
+    Quantity eatenBy(PoisonBacterium& bacterie) override;
+
+    double getPositionScore(const Bacterium& bacterie) const override;
+
+    double getPositionScore(const SimpleBacterium& bacterie) const override;
+
+    double getPositionScore(const SwarmBacterium& bacterie) const override;
+
+    double getPositionScore(const TwitchingBacterium& bacterie) const override;
+
+    double getPositionScore(const PoisonBacterium& bacterie) const override;
+
+
 private :
     /**
      * @brief getConfig redéfinition de la méthode virtuelle héritée de Nutriment

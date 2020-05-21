@@ -23,6 +23,7 @@ std::string const GENERAL = "general";
 std::string const SIMPLE_BACTERIA = "simple bacteria";
 std::string const TWITCHING_BACTERIA = "twitching bacteria";
 std::string const SWARM_BACTERIA = "swarm bacteria";
+std::string const POISON_BACTERIA = "poison bacteria";
 std::string const BACTERIA = "bacteria";
 std::string const SPEED = "speed";
 std::string const BETTER = "tumble better prob";

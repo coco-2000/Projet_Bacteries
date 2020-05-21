@@ -109,7 +109,7 @@ public:
      * @param position Coordonnées de la position dont il faut calculer le score
      * @return Score associée à la position
      */
-    double getPositionScore(const Vec2d& position) const;
+    double getPositionScore(const Vec2d& position, const Bacterium& bacterie) const;
 
     /**
      * @brief increaseGradientExponent Augmente l'attribut puissance de l'assiette de

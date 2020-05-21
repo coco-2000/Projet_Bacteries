@@ -3,12 +3,9 @@
 #include "Application.hpp"
 #include "CircularBody.hpp"
 #include "Nutriment.hpp"
-#include "NutrimentA.hpp"
-#include "NutrimentB.hpp"
 
-Bacterium::Bacterium(Quantity energie, const Vec2d& position, const Vec2d& direction,
-                     double radius, const MutableColor& couleur,
-                     const std::map<std::string, MutableNumber>& param_mutables,
+Bacterium::Bacterium(const Vec2d& position, const Vec2d& direction, double radius, Quantity energie,
+                     const MutableColor& couleur, const std::map<std::string, MutableNumber>& param_mutables,
                      bool abstinence)
 
     : CircularBody(position, radius), color(couleur), direction(direction), energy(energie),
@@ -50,6 +47,11 @@ bool Bacterium::alive() const
     return energy > 0;
 }
 
+Quantity Bacterium::getStepEnergy() const
+{
+    return getConfig()["energy"]["consumption factor"].toDouble();
+}
+
 Quantity Bacterium::getEnergy() const
 {
     return getConfig()["energy"]["division"].toDouble();
@@ -60,9 +62,9 @@ sf::Time Bacterium::getDelay() const
     return sf::seconds(getConfig()["meal"]["delay"].toDouble());
 }
 
-Quantity Bacterium::getStepEnergy() const
+Quantity Bacterium::getMaxEatableQuantity() const
 {
-    return getConfig()["energy"]["consumption factor"].toDouble();
+    return getConfig()["meal"]["max"].toDouble();
 }
 
 void Bacterium::drawOn(sf::RenderTarget& target) const
@@ -166,11 +168,10 @@ void Bacterium::rotationAngle(sf::Time dt)
     angle += dalpha; // angle de rotation mis à jour
 }
 
-double Bacterium::helperPositionScore (const Vec2d& offset) const
+double Bacterium::helperPositionScore (const Vec2d& offset, const Bacterium& bacterie) const
 {
-    return getAppEnv().getPositionScore(getPosition() + offset);
+    return getAppEnv().getPositionScore(getPosition() + offset, bacterie);
 }
-
 
 std::map<std::string, MutableNumber> Bacterium::getparamMutables() const
 {
@@ -200,11 +201,6 @@ void Bacterium::setDirection(const Vec2d& new_dir)
 double Bacterium::getOldScore() const
 {
     return oldScore;
-}
-
-Quantity Bacterium::getMaxEatableQuantity() const
-{
-    return getConfig()["meal"]["max"].toDouble();
 }
 
 void Bacterium::eat(Nutriment& nutriment)
