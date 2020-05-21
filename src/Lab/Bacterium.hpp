@@ -97,6 +97,17 @@ public :
      */
     virtual Quantity eatableQuantity(NutrimentB& nutriment) = 0;
 
+    bool isLost() const;
+
+   /* virtual double getMaxpHviable() const = 0;
+    virtual double getMinpHviable() const = 0;
+    virtual double getMaxTemperatureViable() const =0;
+    virtual double getMinTemperatureViable() const =0;
+    virtual double getHeatResistanceEnergy() const = 0;
+    virtual double getpHResistanceEnergy() const = 0;
+    bool TemperatureViable() const;
+    bool pHviable() const; */
+
     /**
      * Méthode virtuelle pure
      * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
@@ -217,6 +228,22 @@ protected :
      */
     double helperPositionScore(const Vec2d& offset, const Bacterium& bacterie) const;
 
+    /**
+     * @brief strategy1 Première façon d'effectuer le basculement : choisir au hasard une direction
+     * associer à l'étiquette "single random vector" dans le fichier de configuration
+     */
+    void strategy1();
+
+    /**
+     * @brief strategy2 Deuxième façon d'effectuer le basculement :
+     * Générer N direction et retenir celle qui a le meilleur score
+     * associer à l'helperétiquette "best of N" dans le fichier de configuration
+     */
+    void strategy2();
+
+    sf::Time getMaxTimeLost() const;
+    void manageLost(sf::Time dt);
+
 private :
     MutableColor color;
     double angle;
@@ -226,6 +253,8 @@ private :
     bool abstinence;
     sf::Time counter;
     double oldScore;
+    bool lost;
+    sf::Time timeLost;
 
     /**
      * @brief displayEnergy Affiche la quantité d'énergie de la bacterie (si mode debugging activé)

@@ -7,7 +7,7 @@
 #include "NutrimentB.hpp"
 #include "Poison.hpp"
 
-double SwarmBacterium::swarmCounter(0);
+unsigned int SwarmBacterium::swarmCounter(0);
 
 SwarmBacterium::SwarmBacterium(const Vec2d& position, Swarm* groupe)
     : Bacterium(position, Vec2d::fromRandomAngle(),
@@ -92,7 +92,7 @@ Vec2d SwarmBacterium::getSpeedVector() const
     return getDirection() * getShortConfig().swarmbact_speed;
 }
 
-double SwarmBacterium::getSwarmCounter()
+unsigned int SwarmBacterium::getSwarmCounter()
 {
     return swarmCounter;
 }

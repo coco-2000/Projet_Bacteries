@@ -7,7 +7,7 @@
 #include "NutrimentB.hpp"
 #include "Poison.hpp"
 
-double TwitchingBacterium::twitchCounter(0);
+unsigned int TwitchingBacterium::twitchCounter(0);
 
 TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
     : Bacterium(position, Vec2d::fromRandomAngle(),
@@ -58,7 +58,8 @@ Quantity TwitchingBacterium::getStepEnergy() const
 
 Quantity TwitchingBacterium::getTentacleEnergy() const
 {
-    return getShortConfig().twitchingbact_consumption_factor_tentacle;
+    double tentacleEnergy(getShortConfig().twitchingbact_consumption_factor_tentacle);
+    return isLost() ? 1/5*tentacleEnergy : tentacleEnergy;
 }
 
 void TwitchingBacterium::moveGrip(const Vec2d& delta)
@@ -104,7 +105,7 @@ void TwitchingBacterium::deployState(sf::Time dt, const Nutriment* nutriment_ptr
     if(nutriment_ptr != nullptr)
         state = ATTRACT;
     else if ( (grip.getPosition() - getPosition()).length() >= getProperty("tentacle length").get()
-              or getAppEnv().doesCollide(grip))
+              or getAppEnv().doesCollideWithObstacle(grip))
         state = RETRACT;
 }
 
@@ -155,7 +156,7 @@ void TwitchingBacterium::shiftClone(const Vec2d& v)
     moveGrip(v);
 }
 
-double TwitchingBacterium::getTwitchCounter()
+unsigned int TwitchingBacterium::getTwitchCounter()
 {
     return twitchCounter;
 }

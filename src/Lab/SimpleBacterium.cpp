@@ -10,7 +10,7 @@
 #include "NutrimentB.hpp"
 #include "Poison.hpp"
 
-double SimpleBacterium::simpleCounter(0);
+unsigned int SimpleBacterium::simpleCounter(0);
 
 SimpleBacterium::SimpleBacterium(const Vec2d& position)
     : Bacterium(position, Vec2d::fromRandomAngle(), uniform(getShortConfig().simplebact_min_radius, getShortConfig().simplebact_max_radius),
@@ -98,6 +98,7 @@ void SimpleBacterium::trySwitch()
     double lambda(getProperty("tumble worse prob").get());
 
     if(getAppEnv().getPositionScore(getPosition(), *this) >= getOldScore())
+
     {
         lambda = getProperty("tumble better prob").get();
     }
@@ -113,7 +114,7 @@ void SimpleBacterium::trySwitch()
 
 void SimpleBacterium::switchDirection()
 {
-    if(getShortConfig().simplebact_tumble_algo == "single random vector")
+    if(getShortConfig().simplebact_tumble_algo == "single random vector" and !isLost())
     {
         strategy1();
     }
@@ -123,7 +124,8 @@ void SimpleBacterium::switchDirection()
     }
 }
 
-void SimpleBacterium::strategy1()
+
+/*void SimpleBacterium::strategy1()
 {
     setDirection(Vec2d::fromRandomAngle());
 }
@@ -141,14 +143,14 @@ void SimpleBacterium::strategy2()
             setDirection(new_dir);
         }
     }
-}
+}*/
 
 Vec2d SimpleBacterium::f(Vec2d position, Vec2d speed) const
 {
     return {0, 0};
 }
 
-double SimpleBacterium::getSimpleCounter()
+unsigned int SimpleBacterium::getSimpleCounter()
 {
     return simpleCounter;
 }

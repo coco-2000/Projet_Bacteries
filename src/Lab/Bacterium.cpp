@@ -9,7 +9,7 @@ Bacterium::Bacterium(const Vec2d& position, const Vec2d& direction, double radiu
                      bool abstinence)
 
     : CircularBody(position, radius), color(couleur), direction(direction), energy(energie),
-      paramMutables(param_mutables), abstinence(abstinence)
+      paramMutables(param_mutables), abstinence(abstinence), lost(false)
 {
     angle = direction.angle();
 }
@@ -47,11 +47,6 @@ bool Bacterium::alive() const
     return energy > 0;
 }
 
-Quantity Bacterium::getStepEnergy() const
-{
-    return getConfig()["energy"]["consumption factor"].toDouble();
-}
-
 Quantity Bacterium::getEnergy() const
 {
     return getConfig()["energy"]["division"].toDouble();
@@ -60,6 +55,17 @@ Quantity Bacterium::getEnergy() const
 sf::Time Bacterium::getDelay() const
 {
     return sf::seconds(getConfig()["meal"]["delay"].toDouble());
+}
+
+sf::Time Bacterium::getMaxTimeLost() const
+{
+    return sf::seconds(7.0);
+}
+
+Quantity Bacterium::getStepEnergy() const
+{
+    double stepEnergy(getConfig()["energy"]["consumption factor"].toDouble());
+    return lost ? 1/5*stepEnergy : stepEnergy;
 }
 
 Quantity Bacterium::getMaxEatableQuantity() const
@@ -94,13 +100,22 @@ void Bacterium::update(sf::Time dt)
     rotationAngle(dt);
     consumeNutriment(dt);
     divide();
+
+    if(lost)
+        manageLost(dt);
 }
 
 void Bacterium::collision()
 {
-    if (getAppEnv().doesCollide(*this))
+    if (getAppEnv().doesCollideWithObstacle(*this))
     {
         setDirection(Vec2d::fromAngle(getAngle() + M_PI/2)*2);
+        lost = true;
+    }
+
+    else if(getAppEnv().doesCollideWithDish(*this))
+    {
+        direction = - direction;
     }
 }
 
@@ -113,11 +128,21 @@ void Bacterium::consumeNutriment(sf::Time dt)
         counter = sf::Time::Zero;
         eat(*nutriment_ptr);
         nutriment_ptr = nullptr;
+        lost = false;
+        timeLost = sf::Time::Zero;
     }
     else
     {
       counter += dt;
     }
+}
+
+void Bacterium::manageLost(sf::Time dt)
+{
+    if (timeLost>=getMaxTimeLost())
+        lost = false;
+    else
+        timeLost += dt;
 }
 
 void Bacterium::consumeEnergy(Quantity qt)
@@ -203,9 +228,33 @@ double Bacterium::getOldScore() const
     return oldScore;
 }
 
+bool Bacterium::isLost() const
+{
+    return lost;
+}
+
 void Bacterium::eat(Nutriment& nutriment)
 {
   Quantity eaten(nutriment.eatenBy(*this));
   energy += eaten;
+}
 
+void Bacterium::strategy1()
+{
+    setDirection(Vec2d::fromRandomAngle());
+}
+
+void Bacterium::strategy2()
+{
+    constexpr int N(20); // nb de directions aléatoires à générer
+
+    for(int i(0); i < N; ++i)
+    {
+        const Vec2d new_dir (Vec2d::fromRandomAngle());
+
+        if(helperPositionScore (new_dir, *this) > helperPositionScore(getDirection(), *this))
+        {
+            setDirection(new_dir);
+        }
+    }
 }

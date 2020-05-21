@@ -11,14 +11,12 @@ class TwitchingBacterium : public Bacterium
 public :
     /**
      * @brief TwitchingBacterium Constructeur
-     * Incrémente le compteur d'instances
      * @param position Coordonnées de la position de l'instance à créer
      */
     TwitchingBacterium(const Vec2d& position);
 
     /**
      * @brief TwitchingBacterium Constructeur de copie
-     * Incrémente le compteur d'instances
      * @param other TwitchingBacterium à copier
      */
     TwitchingBacterium(const TwitchingBacterium& other);
@@ -72,14 +70,14 @@ public :
      * de Pétri
      * @return le nombre total d'instances
      */
-    static double getTwitchCounter();
+    static unsigned int getTwitchCounter();
 
 
 
 protected :
     Grip grip;
     Etat state;
-    static double twitchCounter;
+    static unsigned int twitchCounter;
 
     /**
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bactéries à tentacule
@@ -133,7 +131,7 @@ protected :
     void deployState(sf::Time dt, const Nutriment* nutriment_ptr);
 
     /**
-     * @brief attract_state Etat dans lequel le tentacule attire la bacterie vers la nourriture
+     * @brief attractState Etat dans lequel le tentacule attire la bacterie vers la nourriture
      * @param dt Pas de temps apres lequel la simulation est mise à jour
      * @param nutriment_ptr source de nutriment vers laquelle la bacterie se déplace
      */

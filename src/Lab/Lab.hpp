@@ -83,7 +83,7 @@ public:
       */
      bool doesCollideWithDish(CircularBody const& body) const;
 
-     bool doesCollide(CircularBody const& body) const;
+     bool doesCollideWithObstacle(CircularBody const& body) const;
      double minimumDistToObstacle(const Vec2d& position) const;
 
      /**

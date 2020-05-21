@@ -2,8 +2,6 @@
 #include "CircularBody.hpp"
 #include "Application.hpp"
 
-typedef std::function<std::unordered_map<std::string, double>()> Result;
-
 Lab::Lab()
     : petri(getApp().getCentre(), (0.95/2)*getApp().getLabSize().x)
 {
@@ -30,9 +28,9 @@ bool Lab::doesCollideWithDish(CircularBody const& body) const
     return !contains(body);
 }
 
-bool Lab::doesCollide(CircularBody const& body) const
+bool Lab::doesCollideWithObstacle(CircularBody const& body) const
 {
-    return doesCollideWithDish(body) or petri.doesCollideWithObstacle(body);
+    return  petri.doesCollideWithObstacle(body);
 }
 
 double Lab::minimumDistToObstacle(const Vec2d &position) const
