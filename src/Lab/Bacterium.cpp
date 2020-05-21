@@ -62,7 +62,7 @@ sf::Time Bacterium::getDelay() const
 
 sf::Time Bacterium::getMaxTimeLost() const
 {
-    return sf::seconds(5.0);
+    return sf::seconds(7.0);
 }
 
 Quantity Bacterium::getStepEnergy() const
@@ -105,10 +105,15 @@ void Bacterium::update(sf::Time dt)
 
 void Bacterium::collision()
 {
-    if (getAppEnv().doesCollide(*this))
+    if (getAppEnv().doesCollideWithObstacle(*this))
     {
         setDirection(Vec2d::fromAngle(getAngle() + M_PI/2)*2);
         lost = true;
+    }
+
+    else if(getAppEnv().doesCollideWithDish(*this))
+    {
+        direction = - direction;
     }
 }
 

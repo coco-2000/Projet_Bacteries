@@ -58,7 +58,8 @@ Quantity TwitchingBacterium::getStepEnergy() const
 
 Quantity TwitchingBacterium::getTentacleEnergy() const
 {
-    return getConfig()["energy"]["consumption factor"]["tentacle"].toDouble();
+    double tentacleEnergy(getConfig()["energy"]["consumption factor"]["tentacle"].toDouble());
+    return isLost() ? 1/5*tentacleEnergy : tentacleEnergy;
 }
 
 void TwitchingBacterium::moveGrip(const Vec2d& delta)
@@ -85,14 +86,7 @@ void TwitchingBacterium::move(sf::Time dt)
 
 void TwitchingBacterium::waitToDeployState()
 {
-    constexpr int N(20); // nb de directions aléatoires à générer
-
-    for(int i(0); i < N; ++i)
-    {
-        const Vec2d new_dir (Vec2d::fromRandomAngle());
-        if(helperPositionScore (new_dir) > helperPositionScore(getDirection()))
-            setDirection(new_dir);
-    }
+    strategy2();
 
     state = DEPLOY;
 }
@@ -104,7 +98,7 @@ void TwitchingBacterium::deployState(sf::Time dt, const Nutriment* nutriment_ptr
     if(nutriment_ptr != nullptr)
         state = ATTRACT;
     else if ( (grip.getPosition() - getPosition()).length() >= getProperty("tentacle length").get()
-              or getAppEnv().doesCollide(grip))
+              or getAppEnv().doesCollideWithObstacle(grip))
         state = RETRACT;
 }
 

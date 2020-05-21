@@ -257,18 +257,21 @@ Nutriment* PetriDish::getNutrimentColliding(CircularBody const& body) const
     return nullptr;
 }
 
-double PetriDish::getPositionScore(const Vec2d& position) const
+double PetriDish::getPositionScore(const Vec2d& position, const Bacterium &bacterie) const
 {
     double somme(0);
 
-    for(const auto& nutriment : lesNutriments)
+    if(!bacterie.isLost())
     {
-         somme += nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power);
+        for(const auto& nutriment : lesNutriments)
+        {
+             somme += nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power);
+        }
     }
 
     for(const auto&  obstacle : lesObstacles)
     {
-         somme -= obstacle->getRadius()/ pow(distance(position, obstacle->getPosition()), power*2);
+         somme -= obstacle->getRadius()/ pow(distance(position, obstacle->getPosition()), power*1.8);
     }
 
     return somme;
@@ -327,7 +330,7 @@ bool PetriDish::doesCollideWithObstacle(const CircularBody &body) const
 {
     for (auto obstacle : lesObstacles)
     {
-        if(*obstacle & body)
+        if(*obstacle & body or obstacle->contains(body))
         {
             return true;
         }

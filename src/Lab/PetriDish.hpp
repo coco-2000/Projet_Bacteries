@@ -109,10 +109,8 @@ public:
      * @param position Coordonnées de la position dont il faut calculer le score
      * @return Score associée à la position
      */
-    double getPositionScore(const Vec2d& position) const;
+    double getPositionScore(const Vec2d& position, const Bacterium& bacterie) const;
 
-    bool lineInstersectCircle(Vec2d orientation,Vec2d bacteriaPos, double radius, Vec2d centre, Vec2d nutrimentPos) const;
-    bool segmentIntersectCircle(Vec2d position1, Vec2d position2, Vec2d position3) const;
     /**
      * @brief increaseGradientExponent Augmente l'attribut puissance de l'assiette de
      *        Petri qui est associée au paramètre "Gradient exponent"

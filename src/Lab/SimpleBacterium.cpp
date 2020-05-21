@@ -93,12 +93,12 @@ void SimpleBacterium::trySwitch()
 {
     double lambda(getProperty("tumble worse prob").get());
 
-    if(isLost())
+    /*if(isLost())
     {
         lambda = 1000;
-    }
+    }*/
 
-    else if(getAppEnv().getPositionScore(getPosition()) >= getOldScore())
+    if(getAppEnv().getPositionScore(getPosition()) >= getOldScore())
     {
         lambda = getProperty("tumble better prob").get();
     }
@@ -114,7 +114,7 @@ void SimpleBacterium::trySwitch()
 
 void SimpleBacterium::switchDirection()
 {
-    if((getConfig()["tumble"]["algo"] == "single random vector") or isLost())
+    if((getConfig()["tumble"]["algo"] == "single random vector"))
     {
         strategy1();
     }

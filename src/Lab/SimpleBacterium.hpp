@@ -45,8 +45,6 @@ public:
      */
     Quantity eatableQuantity(NutrimentB& nutriment) override;
 
-    void setTimeSwitching(sf::Time);
-
     /**
      * @brief ~SimpleBacterium Destructeur
      * Décrémente le compteur d'instances

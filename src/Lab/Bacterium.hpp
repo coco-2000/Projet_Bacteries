@@ -97,6 +97,8 @@ public :
      */
     virtual Quantity eatableQuantity(NutrimentB& nutriment) = 0;
 
+    bool isLost() const;
+
    /* virtual double getMaxpHviable() const = 0;
     virtual double getMinpHviable() const = 0;
     virtual double getMaxTemperatureViable() const =0;
@@ -131,8 +133,6 @@ protected :
      * précédent
      */
     double getOldScore() const;
-
-    bool isLost() const;
 
     /**
      * @brief setDirection modifie la direction de la bactérie
@@ -207,6 +207,7 @@ protected :
 
     sf::Time getMaxTimeLost() const;
     void manageLost(sf::Time dt);
+
 private :
     MutableColor color;
     double angle;
