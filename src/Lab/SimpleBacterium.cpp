@@ -114,11 +114,11 @@ void SimpleBacterium::trySwitch()
 
 void SimpleBacterium::switchDirection()
 {
-    if(getShortConfig().simplebact_tumble_algo == "single random vector" and !isLost())
+    /*if(getShortConfig().simplebact_tumble_algo == "single random vector" and !isLost())
     {
         strategy1();
-    }
-    else if(getShortConfig().simplebact_tumble_algo == "best of N")
+    }*/
+   //if(getShortConfig().simplebact_tumble_algo == "best of N")
     {
         strategy2();
     }
