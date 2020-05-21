@@ -124,27 +124,6 @@ void SimpleBacterium::switchDirection()
     }
 }
 
-
-/*void SimpleBacterium::strategy1()
-{
-    setDirection(Vec2d::fromRandomAngle());
-}
-
-void SimpleBacterium::strategy2()
-{
-    constexpr int N(20); // nb de directions aléatoires à générer
-
-    for(int i(0); i < N; ++i)
-    {
-        const Vec2d new_dir (Vec2d::fromRandomAngle());
-
-        if(helperPositionScore (new_dir, *this) > helperPositionScore(getDirection(), *this))
-        {
-            setDirection(new_dir);
-        }
-    }
-}*/
-
 Vec2d SimpleBacterium::f(Vec2d position, Vec2d speed) const
 {
     return {0, 0};

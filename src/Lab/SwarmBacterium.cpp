@@ -59,17 +59,7 @@ void SwarmBacterium::move(sf::Time dt)
 
 void SwarmBacterium::moveLeader()
 {
-    constexpr int nb_vecteur(20); // nb de directions aléatoires à générer
-
-    for(int i(0); i < nb_vecteur; ++i)
-    {
-        Vec2d new_dir(Vec2d::fromRandomAngle());
-
-        if(helperPositionScore(new_dir, *this) > helperPositionScore(getDirection(), *this))
-        {
-            setDirection(new_dir);
-        }
-    }
+    strategy2();
 }
 
 void SwarmBacterium::drawOn(sf::RenderTarget &target) const
