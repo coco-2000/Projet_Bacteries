@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-
 #include "PetriDish.hpp"
 #include "Swarm.hpp"
 #include "Interface/Drawable.hpp"
@@ -13,7 +12,6 @@ typedef std::function<std::unordered_map<std::string, double>()> Result;
 class Lab : public Drawable, public Updatable
 {
 public:
-
     /**
       * @brief Lab constructeur permet de positionner l'assiette de Petri au centre
       * de la fenêtre graphique associée au Lab et avec un diamètre occupant les 95%
@@ -54,7 +52,7 @@ public:
 
      /**
       * @brief initTemp Réinitialise la température de la boite de Petri du Lab d'après
-      *                         la valeur du fichier de configuration
+      *                 la valeur du fichier de configuration
       */
      void initTemp();
 
@@ -73,15 +71,13 @@ public:
      void addObstacle(Obstacle* obstacle);
 
      /**
-      * @brief getTemperature obtenir la temperature de l'assiette de petri
-      * du lab
+      * @brief getTemperature obtenir la temperature de l'assiette de petri du lab
       * @return la température de l'assiette de petri
       */
      double getTemperature() const;
 
      /**
-      * @brief doesCollideWithDish regarde si le body rentre en collision
-      * avec l'assiette de petri
+      * @brief doesCollideWithDish regarde si le body rentre en collision avec l'assiette de petri
       * @param body le corps qui peut rentrer en collision
       * @return vrai s'il est en collision
       */
@@ -132,8 +128,7 @@ public:
      void initGradient();
 
      /**
-      * @brief addAnnex Ajoute un pointeur sur une bactérie le vecteur annexe
-      *                 de l'assiette de Petri
+      * @brief addAnnex Ajoute un pointeur sur une bactérie le vecteur annexe de l'assiette de Petri
       * @param clone Pointeur sur la bactérie à ajouter (créée par clonage en l'occurence)
       */
      void addAnnex(Bacterium* clone);
@@ -166,7 +161,6 @@ public:
      /** @brief Destructeur
        */
      ~Lab() override;
-
 
 private :
 

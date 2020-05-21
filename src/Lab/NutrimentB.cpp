@@ -42,27 +42,27 @@ Quantity NutrimentB::eatenBy(PoisonBacterium& bacterie)
     return takeQuantity(bacterie.getMaxEatableQuantity() / getShortConfig().nutrimentB_resistance_factor);
 }
 
-double NutrimentB::getPositionScore(const Bacterium& bacterie) const
+double NutrimentB::getScoreCoefficient(const Bacterium& bacterie) const
 {
-    return bacterie.getPositionScore(*this);
+    return bacterie.getScoreCoefficient(*this);
 }
 
-double NutrimentB::getPositionScore(const SimpleBacterium& bacterie) const
+double NutrimentB::getScoreCoefficient(const SimpleBacterium& bacterie) const
 {
     return 1 / getShortConfig().nutrimentB_resistance_factor;
 }
 
-double NutrimentB::getPositionScore(const SwarmBacterium& bacterie) const
+double NutrimentB::getScoreCoefficient(const SwarmBacterium& bacterie) const
 {
     return - 1;
 }
 
-double NutrimentB::getPositionScore(const TwitchingBacterium& bacterie) const
+double NutrimentB::getScoreCoefficient(const TwitchingBacterium& bacterie) const
 {
     return getShortConfig().nutrimentB_nutritive_factor;
 }
 
-double NutrimentB::getPositionScore(const PoisonBacterium& bacterie) const
+double NutrimentB::getScoreCoefficient(const PoisonBacterium& bacterie) const
 {
     return 1 / getShortConfig().nutrimentB_resistance_factor;
 }

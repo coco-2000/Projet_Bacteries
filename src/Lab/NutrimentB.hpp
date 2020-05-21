@@ -44,15 +44,15 @@ public :
      */
     Quantity eatenBy(PoisonBacterium& bacterie) override;
 
-    double getPositionScore(const Bacterium& bacterie) const override;
+    double getScoreCoefficient(const Bacterium& bacterie) const override;
 
-    double getPositionScore(const SimpleBacterium& bacterie) const override;
+    double getScoreCoefficient(const SimpleBacterium& bacterie) const override;
 
-    double getPositionScore(const SwarmBacterium& bacterie) const override;
+    double getScoreCoefficient(const SwarmBacterium& bacterie) const override;
 
-    double getPositionScore(const TwitchingBacterium& bacterie) const override;
+    double getScoreCoefficient(const TwitchingBacterium& bacterie) const override;
 
-    double getPositionScore(const PoisonBacterium& bacterie) const override;
+    double getScoreCoefficient(const PoisonBacterium& bacterie) const override;
 
 
 private :

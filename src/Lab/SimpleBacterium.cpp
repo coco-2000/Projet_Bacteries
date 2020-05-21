@@ -168,19 +168,19 @@ Quantity SimpleBacterium::eatableQuantity(Poison& poison)
     return poison.eatenBy(*this);
 }
 
-double SimpleBacterium::getPositionScore(const NutrimentA& nutriment) const
+double SimpleBacterium::getScoreCoefficient(const NutrimentA& nutriment) const
 {
-    return nutriment.getPositionScore(*this);
+    return nutriment.getScoreCoefficient(*this);
 }
 
-double SimpleBacterium::getPositionScore(const NutrimentB& nutriment) const
+double SimpleBacterium::getScoreCoefficient(const NutrimentB& nutriment) const
 {
-    return nutriment.getPositionScore(*this);
+    return nutriment.getScoreCoefficient(*this);
 }
 
-double SimpleBacterium::getPositionScore(const Poison& poison) const
+double SimpleBacterium::getScoreCoefficient(const Poison& poison) const
 {
-    return poison.getPositionScore(*this);
+    return poison.getScoreCoefficient(*this);
 }
 
 

@@ -17,10 +17,10 @@ class Bacterium : public CircularBody, public Drawable, public Updatable
 public :
     /**
      * @brief Bacterium Constructeur
-     * @param energie niveau d'énergie intiale de la bacterie
      * @param position Coordonnées de la position intiale de la bacterie
      * @param direction Direction du déplacement initiale de la bacterie
      * @param radius Rayon initiale de la bactérie
+     * @param energie niveau d'énergie intiale de la bacterie
      * @param couleur Couleur initiale de la bacterie
      * @param param_mutables ensemble de paramètres numériques mutables
      * @param abstinence si la bacterie consomme des nutriments ou non
@@ -97,13 +97,40 @@ public :
      */
     virtual Quantity eatableQuantity(NutrimentB& nutriment) = 0;
 
+    /**
+     * Méthode virtuelle pure
+     * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
+     *                        retire cette quantité au nutriment
+     * (appelle la méthode eatenBy du poison qui prend pour argument une bactérie dont le type
+     * correspond à celui de l'instance courante de bactérie)
+     * @param nutriment de type poison qui est consommé par la bactérie
+     * @return La quantité de poison consommé
+     */
     virtual Quantity eatableQuantity(Poison& poison) = 0;
 
-    virtual double getPositionScore(const NutrimentA& nutriment) const = 0;
+    /**
+     * Méthode virtuelle pure
+     * @brief getPositionScore Calcul le coefficient associé à un nutriment (ici de type A) pour le calcul du
+     * score de la position en fonction du type de la bactérie
+     * @return le coefficient par lequel est multiplié le score par rapport à une source de nutriments
+     */
+    virtual double getScoreCoefficient(const NutrimentA& nutriment) const = 0;
 
-    virtual double getPositionScore(const NutrimentB& nutriment) const = 0;
+    /**
+     * Méthode virtuelle pure
+     * @brief getPositionScore Calcul le coefficient associé à un nutriment (ici de type B) pour le calcul du
+     * score de la position en fonction du type de la bactérie
+     * @return le coefficient par lequel est multiplié le score par rapport à une source de nutriments
+     */
+    virtual double getScoreCoefficient(const NutrimentB& nutriment) const = 0;
 
-    virtual double getPositionScore(const Poison& poison) const = 0;
+    /**
+     * Méthode virtuelle pure
+     * @brief getPositionScore Calcul le coefficient associé à un nutriment (ici de type poison) pour le calcul du
+     * score de la position en fonction du type de la bactérie
+     * @return le coefficient par lequel est multiplié le score par rapport à une source de nutriments
+     */
+    virtual double getScoreCoefficient(const Poison& poison) const = 0;
 
 protected :
     /**
@@ -183,8 +210,9 @@ protected :
     MutableNumber getProperty(const std::string& key) const;
 
     /**
-     * @brief helperPositionScore Calcul score de la position de l'instance + un vecteur
+     * @brief helperPositionScore Calcul le score de la position de l'instance + un vecteur
      * @param offset Vecteur a ajouter à la position
+     * @param bacterie Instance courante dont on calcule le score
      * @return Score associé à la nouvelle position
      */
     double helperPositionScore(const Vec2d& offset, const Bacterium& bacterie) const;
@@ -258,8 +286,8 @@ private :
     void rotationAngle(sf::Time dt);
 
     /**
-     * @brief eat Gère la consommation de nutriment par la bactérie (en fonction de du type de nutriment et de bactérie) :
-     *            calcul quantité consommée par bactérie et la retire de la source de nutriment
+     * @brief eat Gère la consommation de nutriment par la bactérie (en fonction du type du nutriment et de la bactérie) :
+     *            -> calcul la quantité consommée par bactérie et la retire de la source de nutriment
      * @param nutriment qui est consommé par l'instance
      */
     void eat(Nutriment& nutriment);

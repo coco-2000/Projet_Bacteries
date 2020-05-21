@@ -38,19 +38,19 @@ Quantity PoisonBacterium::eatableQuantity(Poison& nutriment)
     return nutriment.eatenBy(*this);
 }
 
-double PoisonBacterium::getPositionScore(const NutrimentA& nutriment) const
+double PoisonBacterium::getScoreCoefficient(const NutrimentA& nutriment) const
 {
-    return nutriment.getPositionScore(*this);
+    return nutriment.getScoreCoefficient(*this);
 }
 
-double PoisonBacterium::getPositionScore(const NutrimentB& nutriment) const
+double PoisonBacterium::getScoreCoefficient(const NutrimentB& nutriment) const
 {
-    return nutriment.getPositionScore(*this);
+    return nutriment.getScoreCoefficient(*this);
 }
 
-double PoisonBacterium::getPositionScore(const Poison& poison) const
+double PoisonBacterium::getScoreCoefficient(const Poison& poison) const
 {
-    return poison.getPositionScore(*this);
+    return poison.getScoreCoefficient(*this);
 }
 
 j::Value const& PoisonBacterium::getConfig() const
