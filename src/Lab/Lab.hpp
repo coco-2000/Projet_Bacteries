@@ -69,6 +69,8 @@ public:
      void addBacterium(Bacterium* bacterie);
 
      void addObstacle(Obstacle* obstacle);
+     void deleteObstacle(const Vec2d& position);
+     void createWall(const Vec2d& position1, const Vec2d& position);
 
      /**
       * @brief getTemperature obtenir la temperature de l'assiette de petri du lab

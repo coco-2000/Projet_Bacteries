@@ -24,9 +24,9 @@ PetriDish::PetriDish(Vec2d position, double radius)
 
 double PetriDish::minimumDistToObstacle(const Vec2d &position) const
 {
-    if(lesObstacles.empty())
+    if(obstacles.empty())
         return std::numeric_limits<double>::max();
-    Obstacle* nearestObstacle = (*std::min_element(lesObstacles.begin(), lesObstacles.end(),
+    Obstacle* nearestObstacle = (*std::min_element(obstacles.begin(), obstacles.end(),
                                   [position](Obstacle* o,Obstacle* p)
                                   {
                                        return distance(position, p->getPosition()) > distance(position, o->getPosition());
@@ -37,7 +37,15 @@ double PetriDish::minimumDistToObstacle(const Vec2d &position) const
 
 void PetriDish::deleteObstacle(const Vec2d &position)
 {
-
+    for (auto& obstacle : obstacles)
+    {
+        if(distance(position, obstacle->getPosition())< obstacle->getRadius())
+        {
+            delete obstacle;
+            obstacle = nullptr;
+        }
+    }
+    obstacles.erase(std::remove(obstacles.begin(), obstacles.end(), nullptr), obstacles.end());
 }
 
 
@@ -46,7 +54,7 @@ bool PetriDish::addBacterium(Bacterium* bacterie)
     bool addable = contains(*bacterie) and !doesCollideWithObstacle(*bacterie);
     if (addable)
     {
-        lesBacteries.push_back(bacterie);
+        bacteries.push_back(bacterie);
     }
     else
     {
@@ -63,7 +71,7 @@ bool PetriDish::addNutriment(Nutriment* nutriment)
     bool addable = contains(*nutriment) and !doesCollideWithObstacle(*nutriment);
     if (addable)
     {
-        lesNutriments.push_back(nutriment);
+        nutriments.push_back(nutriment);
     }
     else
     {
@@ -79,7 +87,7 @@ bool PetriDish::addObstacle(Obstacle *obstacle)
     bool addable = contains(*obstacle);
     if (addable)
     {
-        lesObstacles.push_back(obstacle);
+        obstacles.push_back(obstacle);
         deleteUnderObstacle();
     }
     else
@@ -91,9 +99,25 @@ bool PetriDish::addObstacle(Obstacle *obstacle)
     return addable;
 }
 
+void PetriDish::createWall(const Vec2d &position1, const Vec2d &position2)
+{
+   Vec2d direction = (position2-position1).normalised();
+   double dist(distance(position1, position2));
+   int nbObstacles = (dist - 50)/100;
+
+   Vec2d pos(position1);
+   bool addable = true;
+   for (int i(0); i<=nbObstacles and addable; ++i)
+   {
+       pos += 100*direction;
+       addable = addObstacle(new Obstacle(pos));
+   }
+
+}
+
 void PetriDish::deleteUnderObstacle()
 {
-    for (auto& bacterie : lesBacteries)
+    for (auto& bacterie : bacteries)
     {
         if(doesCollideWithObstacle(*bacterie))
         {
@@ -101,10 +125,10 @@ void PetriDish::deleteUnderObstacle()
             bacterie = nullptr;
         }
     }
-    lesBacteries.erase(std::remove(lesBacteries.begin(), lesBacteries.end(), nullptr),
-                       lesBacteries.end());
+    bacteries.erase(std::remove(bacteries.begin(), bacteries.end(), nullptr),
+                       bacteries.end());
 
-    for (auto& nutriment : lesNutriments)
+    for (auto& nutriment : nutriments)
     {
         if(doesCollideWithObstacle(*nutriment))
         {
@@ -112,38 +136,38 @@ void PetriDish::deleteUnderObstacle()
             nutriment = nullptr;
         }
     }
-    lesNutriments.erase(std::remove(lesNutriments.begin(), lesNutriments.end(), nullptr), lesNutriments.end());
+    nutriments.erase(std::remove(nutriments.begin(), nutriments.end(), nullptr), nutriments.end());
 }
 
 void PetriDish::reset()
 {
-    for (auto& bacterie : lesBacteries)
+    for (auto& bacterie : bacteries)
     {
         delete bacterie;
         bacterie = nullptr;
     }
-    lesBacteries.clear();
+    bacteries.clear();
 
-    for (auto& nutriment : lesNutriments)
+    for (auto& nutriment : nutriments)
     {
         delete nutriment;
         nutriment = nullptr;
     }
-    lesNutriments.clear();
+    nutriments.clear();
 
-    for(auto& swarm : lesSwarms)
+    for(auto& swarm : swarms)
     {
         delete swarm;
         swarm = nullptr;
     }
-    lesSwarms.clear();
+    swarms.clear();
 
-    for(auto& obstacle : lesObstacles)
+    for(auto& obstacle : obstacles)
     {
         delete obstacle;
         obstacle = nullptr;
     }
-    lesObstacles.clear();
+    obstacles.clear();
 
     initTemperature();
 }
@@ -162,10 +186,10 @@ void PetriDish::update(sf::Time dt)
 
 void PetriDish::updateBacteries (sf::Time dt)
 {
-    append(annex, lesBacteries);
+    append(annex, bacteries);
     initAnnex();
 
-    for(auto& bacterie : lesBacteries)
+    for(auto& bacterie : bacteries)
     {
         if(bacterie->alive())
         {
@@ -179,13 +203,13 @@ void PetriDish::updateBacteries (sf::Time dt)
         }
     }
 
-    lesBacteries.erase(std::remove(lesBacteries.begin(), lesBacteries.end(), nullptr),
-                       lesBacteries.end());
+    bacteries.erase(std::remove(bacteries.begin(), bacteries.end(), nullptr),
+                       bacteries.end());
 }
 
 void PetriDish::updateNutriments (sf::Time dt)
 {
-    for(auto& nutriment : lesNutriments)
+    for(auto& nutriment : nutriments)
     {
         if (!(nutriment->isEmpty()))
         {
@@ -200,12 +224,12 @@ void PetriDish::updateNutriments (sf::Time dt)
             nutriment = nullptr;
         }
     }
-    lesNutriments.erase(std::remove(lesNutriments.begin(), lesNutriments.end(), nullptr), lesNutriments.end());
+    nutriments.erase(std::remove(nutriments.begin(), nutriments.end(), nullptr), nutriments.end());
 }
 
 void PetriDish::updateSwarms(sf::Time dt)
 {
-    for(auto& swarms : lesSwarms)
+    for(auto& swarms : swarms)
     {
         swarms->update(dt);
     }
@@ -217,17 +241,17 @@ void PetriDish::drawOn(sf::RenderTarget& targetWindow) const
     const auto border = buildAnnulus(getPosition(), getRadius(), sf::Color::Black, 5);
     targetWindow.draw(border);
 
-    for(const auto& nutriment : lesNutriments)
+    for(const auto& nutriment : nutriments)
     {
         nutriment->drawOn(targetWindow);
     }
 
-    for(const auto& bacterie : lesBacteries)
+    for(const auto& bacterie : bacteries)
     {
         bacterie->drawOn(targetWindow);
     }
 
-    for(const auto& obstacle : lesObstacles)
+    for(const auto& obstacle : obstacles)
     {
         obstacle->drawOn(targetWindow);
     }
@@ -255,7 +279,7 @@ void PetriDish::initTemperature()
 
 Nutriment* PetriDish::getNutrimentColliding(CircularBody const& body) const
 {
-    for (const auto& nutriment : lesNutriments)
+    for (const auto& nutriment : nutriments)
     {
         if (*nutriment & body)
         {
@@ -273,13 +297,13 @@ double PetriDish::getPositionScore(const Vec2d& position, const Bacterium& bacte
 
     if(!bacterie.isLost())
     {
-        for(const auto& nutriment : lesNutriments)
+        for(const auto& nutriment : nutriments)
         {
              somme += (nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power)) * nutriment->getScoreCoefficient(bacterie);
         }
     }
 
-    for(const auto&  obstacle : lesObstacles)
+    for(const auto&  obstacle : obstacles)
     {
          somme -= obstacle->getRadius()/ pow(distance(position, obstacle->getPosition()), power*1.7);
     }
@@ -321,12 +345,12 @@ void PetriDish::addAnnex(Bacterium* clone)
 
 void PetriDish::addSwarm(Swarm* groupe)
 {
-    lesSwarms.push_back(groupe);
+    swarms.push_back(groupe);
 }
 
 Swarm* PetriDish::getSwarmWithId(std::string id) const
 {
-    for(const auto& swarm : lesSwarms)
+    for(const auto& swarm : swarms)
     {
         if(swarm->getId() == id)
         {
@@ -338,7 +362,7 @@ Swarm* PetriDish::getSwarmWithId(std::string id) const
 
 bool PetriDish::doesCollideWithObstacle(const CircularBody &body) const
 {
-    for (auto& obstacle : lesObstacles)
+    for (auto& obstacle : obstacles)
     {
         if(*obstacle & body or *obstacle>body)
         {
@@ -353,7 +377,7 @@ double PetriDish::getMeanBacteria(const std::string &s) const
     double value(0.0);
     int sum(0);
 
-    for (const auto& bacterie : lesBacteries) {
+    for (const auto& bacterie : bacteries) {
         auto p_mutable = bacterie->getparamMutables();
         if(p_mutable.find(s) != p_mutable.end())
         {
@@ -368,7 +392,7 @@ double PetriDish::getTotalNutriment() const
 
 {
     double value(0.0);
-    for (const auto& nutriment : lesNutriments)
+    for (const auto& nutriment : nutriments)
     {
         value += nutriment->getQuantity();
     }
@@ -384,7 +408,7 @@ GraphData PetriDish::getPropertyGeneral() const
         {s::TWITCHING_BACTERIA, TwitchingBacterium::getTwitchCounter()},
         {s::SWARM_BACTERIA, SwarmBacterium::getSwarmCounter()},
         {s::POISON_BACTERIA, PoisonBacterium::getPoisonCounter()},
-        {s::NUTRIMENT_SOURCES, lesNutriments.size() - Poison::getPoisonCounter()},
+        {s::NUTRIMENT_SOURCES, nutriments.size() - Poison::getPoisonCounter()},
         {s::DISH_TEMPERATURE, getTemperature()}
         };
 

@@ -20,6 +20,10 @@ public:
     virtual void onRun() override final;
     virtual void onSimulationStart() override final;
     virtual void onEvent(sf::Event event, sf::RenderWindow& window) override final;
+
+private :
+    Obstacle* lastCreated = nullptr;
+    Vec2d lastObstaclePosition;
 };
 
 #endif // INFOSV_FINAL_APPLICATION_HPP

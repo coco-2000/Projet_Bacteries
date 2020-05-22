@@ -145,6 +145,16 @@ std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphN
     return namesGraph.at(graphName)(); //at jettera une exception si graphName n'est pas dans la map
 }
 
+void Lab::deleteObstacle(const Vec2d &position)
+{
+    petri.deleteObstacle(position);
+}
+
+void Lab::createWall(const Vec2d &position1, const Vec2d &position2)
+{
+    petri.createWall(position1, position2);
+}
+
 Lab::~Lab()
 {
     reset();

@@ -140,7 +140,7 @@ void Bacterium::consumeNutriment(sf::Time dt)
 
 void Bacterium::manageLost(sf::Time dt)
 {
-    if (timeLost>=getMaxTimeLost())
+    if (timeLost >= getMaxTimeLost())
     {
         lost = false;
         timeLost = sf::Time::Zero;

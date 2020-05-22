@@ -2,7 +2,7 @@
 #include "../Utility/Utility.hpp"
 #include "Application.hpp"
 
-Obstacle::Obstacle(const Vec2d &position, double radius)
+Obstacle::Obstacle(const Vec2d &position)
     : CircularBody (position, getAppConfig()["obstacle"]["radius"].toDouble())
 {}
 
