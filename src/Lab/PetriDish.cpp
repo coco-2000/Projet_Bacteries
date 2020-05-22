@@ -102,16 +102,16 @@ void PetriDish::createWall(const Vec2d &position1, const Vec2d &position2)
 {
    Vec2d direction = (position2-position1).normalised();
    double dist(distance(position1, position2));
-   int nbObstacles = (dist - 50)/100;
-
+   double radius = getAppConfig()["obstacle"]["radius"].toDouble();
    Vec2d pos(position1);
    bool addable = true;
+
+   int nbObstacles = (dist - radius)/(radius*2);
    for (int i(0); i<=nbObstacles and addable; ++i)
    {
-       pos += 100*direction;
+       pos += 2*radius*direction;
        addable = addObstacle(new Obstacle(pos));
    }
-
 }
 
 void PetriDish::deleteUnderObstacle()
@@ -369,6 +369,11 @@ bool PetriDish::doesCollideWithObstacle(const CircularBody &body) const
         }
     }
    return false;
+}
+
+Vec2d PetriDish::getLastObstaclePos()
+{
+    return obstacles.back()->getPosition();
 }
 
 double PetriDish::getMeanBacteria(const std::string &s) const
