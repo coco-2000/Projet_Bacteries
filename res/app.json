@@ -453,7 +453,8 @@
     },
     "obstacle" : {
         "radius" : 50,
-        "gradient factor" : 1.8
+        "gradient factor" : 1.8,
+        "texture" : "rock.png"
     },
 
     "window" : {

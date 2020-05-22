@@ -75,12 +75,12 @@ void FinalApplication::onEvent(sf::Event event, sf::RenderWindow&)
             getEnv().addObstacle(new Obstacle(lastObstaclePosition));
         }break;
 
-        case sf::Keyboard::W: {
+        case sf::Keyboard::W:{
+            lastObstaclePosition = getEnv().getLastObstaclePos();
             getEnv().createWall(lastObstaclePosition, getCursorPositionInView());
-            lastObstaclePosition = getCursorPositionInView();
         }break;
 
-        case sf::Keyboard::D:
+        case sf::Keyboard::E:
             getEnv().deleteObstacle(getCursorPositionInView());
         }
     }

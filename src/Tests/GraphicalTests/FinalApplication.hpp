@@ -22,7 +22,6 @@ public:
     virtual void onEvent(sf::Event event, sf::RenderWindow& window) override final;
 
 private :
-    Obstacle* lastCreated = nullptr;
     Vec2d lastObstaclePosition;
 };
 

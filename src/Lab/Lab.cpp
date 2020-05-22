@@ -150,9 +150,14 @@ void Lab::deleteObstacle(const Vec2d &position)
     petri.deleteObstacle(position);
 }
 
-void Lab::createWall(const Vec2d &position1, const Vec2d &position2)
+void Lab::createWall(const Vec2d& position1, const Vec2d &position2)
 {
-    petri.createWall(position1, position2);
+   petri.createWall(position1, position2);
+}
+
+Vec2d Lab::getLastObstaclePos()
+{
+    return petri.getLastObstaclePos();
 }
 
 Lab::~Lab()
@@ -165,4 +170,6 @@ void Lab::resetControls()
     initTemp();
     initGradient();
 }
+
+
 

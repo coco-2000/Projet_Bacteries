@@ -70,7 +70,7 @@ public:
 
      void addObstacle(Obstacle* obstacle);
      void deleteObstacle(const Vec2d& position);
-     void createWall(const Vec2d& position1, const Vec2d& position);
+     void createWall(const Vec2d& position1, const Vec2d &position2);
 
      /**
       * @brief getTemperature obtenir la temperature de l'assiette de petri du lab
@@ -90,6 +90,7 @@ public:
      //bool doesOverlapWithObstacle(CircularBody const& body) const;
 
      double minimumDistToObstacle(const Vec2d& position) const;
+     Vec2d getLastObstaclePos();
 
      /**
       * @brief getNutrimentColliding obtenir le nutriment en collision avec le body
