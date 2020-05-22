@@ -16,7 +16,4 @@ void Obstacle::drawOn(sf::RenderTarget &target) const
     nutrimentSprite.setScale(2 * getRadius() / getAppTexture(texture).getSize().x,
                              2 * getRadius() / getAppTexture(texture).getSize().y);
     target.draw(nutrimentSprite);
-
-    //const auto border = buildAnnulus(getPosition(), getRadius(), sf::Color::Black, 5);
-    //target.draw(border);
 }
