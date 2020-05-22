@@ -51,16 +51,18 @@ void SwarmBacterium::move(sf::Time dt)
         CircularBody::move(deltaPos);
     }
 
+    if(isLost())
+    {
+        strategy2();
+        setDirection(2*getDirection());
+    }
+
     if(group->IsLeader(this))
     {
-        moveLeader();
+        strategy2();
     }
 }
 
-void SwarmBacterium::moveLeader()
-{
-    strategy2();
-}
 
 void SwarmBacterium::drawOn(sf::RenderTarget &target) const
 {

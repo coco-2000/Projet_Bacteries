@@ -34,6 +34,11 @@ double PetriDish::minimumDistToObstacle(const Vec2d &position) const
     return distance(position, nearestObstacle->getPosition()) - nearestObstacle->getRadius();
 }
 
+void PetriDish::deleteObstacle(const Vec2d &position)
+{
+
+}
+
 
 bool PetriDish::addBacterium(Bacterium* bacterie)
 {
@@ -136,6 +141,7 @@ void PetriDish::reset()
         delete obstacle;
         obstacle = nullptr;
     }
+    lesObstacles.clear();
 
     initTemperature();
 }
@@ -268,13 +274,14 @@ double PetriDish::getPositionScore(const Vec2d& position, const Bacterium& bacte
     {
         for(const auto& nutriment : lesNutriments)
         {
-             somme += (nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power)) * nutriment->getPositionScore(bacterie);
+           somme += (nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power)) *
+                    nutriment->getPositionScore(bacterie);;
         }
     }
 
     for(const auto&  obstacle : lesObstacles)
     {
-         somme -= obstacle->getRadius()/ pow(distance(position, obstacle->getPosition()), power*1.8);
+         somme -= obstacle->getRadius()/ pow(distance(position, obstacle->getPosition()), power*1.7);
     }
 
     return somme;
@@ -331,9 +338,9 @@ Swarm* PetriDish::getSwarmWithId(std::string id) const
 
 bool PetriDish::doesCollideWithObstacle(const CircularBody &body) const
 {
-    for (auto obstacle : lesObstacles)
+    for (auto& obstacle : lesObstacles)
     {
-        if(*obstacle & body or obstacle->contains(body))
+        if(obstacle->isColliding(body) or obstacle->contains(body))
         {
             return true;
         }

@@ -1,8 +1,9 @@
 #include "Obstacle.hpp"
 #include "../Utility/Utility.hpp"
+#include "Application.hpp"
 
 Obstacle::Obstacle(const Vec2d &position, double radius)
-    : CircularBody (position, radius)
+    : CircularBody (position, getAppConfig()["obstacle"]["radius"].toDouble())
 {}
 
 void Obstacle::drawOn(sf::RenderTarget &target) const

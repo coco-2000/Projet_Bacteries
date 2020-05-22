@@ -116,6 +116,7 @@ public :
 
     virtual double getPositionScore(const Poison& poison) const = 0;
 
+    void strategy3();
 protected :
     /**
      * @brief getAngle
@@ -215,6 +216,7 @@ protected :
 
     sf::Time getMaxTimeLost() const;
     void manageLost(sf::Time dt);
+    void setLost(bool islost);
 
 private :
     MutableColor color;
