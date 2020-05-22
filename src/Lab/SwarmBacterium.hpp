@@ -80,7 +80,8 @@ public:
 private:
     Swarm* group;
     static unsigned int swarmCounter;
-    //sf::Time timeSwitching;
+    double speed;
+    sf::Time timeSwitching;
 
 
     /**

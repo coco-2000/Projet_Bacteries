@@ -299,7 +299,7 @@ double PetriDish::getPositionScore(const Vec2d& position, const Bacterium& bacte
     {
         for(const auto& nutriment : nutriments)
         {
-             somme += (nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power)) * nutriment->getScoreCoefficient(bacterie);
+             somme += nutriment->getScoreCoefficient(bacterie) * (nutriment->getRadius() / pow(distance(position, nutriment->getPosition()), power));
         }
     }
 

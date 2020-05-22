@@ -65,7 +65,7 @@ sf::Time Bacterium::getMaxTimeLost() const
 Quantity Bacterium::getStepEnergy() const
 {
     double stepEnergy(getConfig()["energy"]["consumption factor"].toDouble());
-    return lost ? 1/2*stepEnergy : stepEnergy;
+    return lost ? stepEnergy/2 : stepEnergy;
 }
 
 Quantity Bacterium::getMaxEatableQuantity() const
@@ -113,7 +113,6 @@ void Bacterium::collision()
         lost = true;
         strategy2();
     }
-
     else if(getAppEnv().doesCollideWithDish(*this))
     {
         direction = - direction;

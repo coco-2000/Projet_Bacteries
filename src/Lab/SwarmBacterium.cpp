@@ -40,16 +40,26 @@ void SwarmBacterium::move(sf::Time dt)
 {
     Vec2d new_position(getPosition());
 
-    if(!isLost())
+    if(isLost())
     {
-        const DiffEqResult deplacement(stepDiffEq(getPosition(), getSpeedVector(), dt, *group));
-        new_position = deplacement.position;
-        setDirection(deplacement.speed.normalised());
+        new_position = stepDiffEq(getPosition(), getSpeedVector(), dt, *this).position;
+
+        timeSwitching += dt;
+        double lambda(getConfig()["lambda basculement"].toDouble());
+        const double proba_basculement =  lambda!= 0 ? 1 - exp(- timeSwitching.asSeconds() / lambda) : 1;
+
+        if(bernoulli(proba_basculement) == 1)
+        {
+         strategy1();
+         timeSwitching = sf::Time::Zero;
+        }
     }
     else
     {
-        new_position = stepDiffEq(getPosition(), getSpeedVector(), dt, *this).position;
-        strategy2();
+        const DiffEqResult deplacement(stepDiffEq(getPosition(), getSpeedVector(), dt, *group));
+        new_position = deplacement.position;
+        speed = deplacement.speed.length();
+        setDirection(deplacement.speed.normalised());
     }
 
     const auto deltaPos = new_position - getPosition();
@@ -88,7 +98,10 @@ void SwarmBacterium::drawOn(sf::RenderTarget &target) const
 
 Vec2d SwarmBacterium::getSpeedVector() const
 {
-    return getDirection() * getShortConfig().swarmbact_speed;
+    if(isLost())
+        return getDirection() * (speed + getShortConfig().swarmbact_speed)/2;
+    else
+        return getDirection() * getShortConfig().swarmbact_speed;
 }
 
 unsigned int SwarmBacterium::getSwarmCounter()
