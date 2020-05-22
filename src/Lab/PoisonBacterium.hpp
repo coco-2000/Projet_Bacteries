@@ -34,11 +34,11 @@ public:
 
     Quantity eatableQuantity(Poison& nutriment) override;
 
-    double getPositionScore(const NutrimentA& nutriment) const override;
+    double getScoreCoefficient(const NutrimentA& nutriment) const override;
 
-    double getPositionScore(const NutrimentB& nutriment) const override;
+    double getScoreCoefficient(const NutrimentB& nutriment) const override;
 
-    double getPositionScore(const Poison& poison) const override;
+    double getScoreCoefficient(const Poison& poison) const override;
 
     /**
      * Redéfinition d'une méthode virtuelle pure

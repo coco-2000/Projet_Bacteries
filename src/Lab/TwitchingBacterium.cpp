@@ -172,19 +172,19 @@ Quantity TwitchingBacterium::eatableQuantity(Poison& poison)
     return poison.eatenBy(*this);
 }
 
-double TwitchingBacterium::getPositionScore(const NutrimentA& nutriment) const
+double TwitchingBacterium::getScoreCoefficient(const NutrimentA& nutriment) const
 {
-    return nutriment.getPositionScore(*this);
+    return nutriment.getScoreCoefficient(*this);
 }
 
-double TwitchingBacterium::getPositionScore(const NutrimentB& nutriment) const
+double TwitchingBacterium::getScoreCoefficient(const NutrimentB& nutriment) const
 {
-    return nutriment.getPositionScore(*this);
+    return nutriment.getScoreCoefficient(*this);
 }
 
-double TwitchingBacterium::getPositionScore(const Poison& poison) const
+double TwitchingBacterium::getScoreCoefficient(const Poison& poison) const
 {
-    return poison.getPositionScore(*this);
+    return poison.getScoreCoefficient(*this);
 }
 
 TwitchingBacterium::~TwitchingBacterium()

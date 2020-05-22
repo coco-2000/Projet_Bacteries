@@ -48,27 +48,27 @@ Quantity Poison::eatenBy(PoisonBacterium& bacterie)
     return 0;
 }
 
-double Poison::getPositionScore(const Bacterium& bacterie) const
+double Poison::getScoreCoefficient(const Bacterium& bacterie) const
 {
-    return bacterie.getPositionScore(*this);
+    return bacterie.getScoreCoefficient(*this);
 }
 
-double Poison::getPositionScore(const SimpleBacterium& bacterie) const
+double Poison::getScoreCoefficient(const SimpleBacterium& bacterie) const
 {
     return - 1;
 }
 
-double Poison::getPositionScore(const SwarmBacterium& bacterie) const
+double Poison::getScoreCoefficient(const SwarmBacterium& bacterie) const
 {
     return - 1 / getShortConfig().poison_resistance_factor;
 }
 
-double Poison::getPositionScore(const TwitchingBacterium& bacterie) const
+double Poison::getScoreCoefficient(const TwitchingBacterium& bacterie) const
 {
     return - 1;
 }
 
-double Poison::getPositionScore(const PoisonBacterium& bacterie) const
+double Poison::getScoreCoefficient(const PoisonBacterium& bacterie) const
 {
     return 0;
 }

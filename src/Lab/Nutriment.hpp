@@ -102,15 +102,15 @@ public :
      */
     virtual Quantity eatenBy(PoisonBacterium& bacterie) = 0;
 
-    virtual double getPositionScore(const Bacterium& bacterie) const = 0;
+    virtual double getScoreCoefficient(const Bacterium& bacterie) const = 0;
 
-    virtual double getPositionScore(const SimpleBacterium& bacterie) const = 0;
+    virtual double getScoreCoefficient(const SimpleBacterium& bacterie) const = 0;
 
-    virtual double getPositionScore(const SwarmBacterium& bacterie) const = 0;
+    virtual double getScoreCoefficient(const SwarmBacterium& bacterie) const = 0;
 
-    virtual double getPositionScore(const TwitchingBacterium& bacterie) const = 0;
+    virtual double getScoreCoefficient(const TwitchingBacterium& bacterie) const = 0;
 
-    virtual double getPositionScore(const PoisonBacterium& bacterie) const = 0;
+    virtual double getScoreCoefficient(const PoisonBacterium& bacterie) const = 0;
 
 protected :
     /**

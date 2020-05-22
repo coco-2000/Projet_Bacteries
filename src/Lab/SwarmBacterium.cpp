@@ -104,19 +104,19 @@ Quantity SwarmBacterium::eatableQuantity(Poison& poison)
     return poison.eatenBy(*this);
 }
 
-double SwarmBacterium::getPositionScore(const NutrimentA& nutriment) const
+double SwarmBacterium::getScoreCoefficient(const NutrimentA& nutriment) const
 {
-    return nutriment.getPositionScore(*this);
+    return nutriment.getScoreCoefficient(*this);
 }
 
-double SwarmBacterium::getPositionScore(const NutrimentB& nutriment) const
+double SwarmBacterium::getScoreCoefficient(const NutrimentB& nutriment) const
 {
-    return nutriment.getPositionScore(*this);
+    return nutriment.getScoreCoefficient(*this);
 }
 
-double SwarmBacterium::getPositionScore(const Poison& poison) const
+double SwarmBacterium::getScoreCoefficient(const Poison& poison) const
 {
-    return poison.getPositionScore(*this);
+    return poison.getScoreCoefficient(*this);
 }
 
 SwarmBacterium::~SwarmBacterium()

@@ -12,19 +12,19 @@ public :
      * @brief CircularBody::getPosition Accesseur de position
      * @return Position actuelle de l'instance courante
      */
-    const Vec2d& getPosition()  const;
+    const Vec2d& getPosition() const;
 
     /**
      * @brief CircularBody::getRadius Accesseur de rayon
      * @return Rayon actuel de l'instance courante
      */
-    double getRadius()          const;
+    double getRadius() const;
 
     /**
      * @brief CircularBody::move Ajoute à la position de l'instance courante un vecteur de déplacement (permet de faire bouger le CircularBody)
      * @param vector Coordonnées du vecteur de déplacement
      */
-    void move           (const Vec2d& vector);
+    void move (const Vec2d& vector);
 
     /**
      * @brief decalage Donne position d'un objet qui doit se touver à côté de l'instance courante
@@ -66,7 +66,7 @@ public :
      * @param out : flux de sortie
      * @return le flux passé en paramètre
      */
-    std::ostream& affiche(std::ostream& out)  const;
+    std::ostream& affiche(std::ostream& out) const;
 
 protected :
 
@@ -75,7 +75,7 @@ protected :
      * @param position Coordonnées de la position du CircularBody
      * @param radius Rayon du CircularBody
      */
-    CircularBody( Vec2d const& position, double radius);
+    CircularBody(Vec2d const& position, double radius);
     /**
      * @brief CircularBody::CircularBody Constructeur de copie
      * @param other CircularBody à copier
@@ -86,13 +86,13 @@ protected :
      * @brief CircularBody::setPosition Manipulateur de position
      * @param pos Coordonnées de la nouvelle position à assigner à l'instance courante
      */
-    void setPosition    (const Vec2d& pos);
+    void setPosition (const Vec2d& pos);
 
     /**
      * @brief CircularBody::setRadius Manipulateur de rayon
      * @param rayon Valeur du nouveau rayon à assigner à l'instance courante
      */
-    void setRadius      (double rayon);
+    void setRadius (double rayon);
 
 private :
 
@@ -103,7 +103,7 @@ private :
      * @brief CircularBody::copie Effectue la copie des attributs d'un autre corps dans l'instance courante
      * @param body instance à copier
      */
-    void copie           (const CircularBody& body);
+    void copie (const CircularBody& body);
 
 };
 
