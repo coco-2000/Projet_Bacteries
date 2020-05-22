@@ -4,13 +4,21 @@
 #include "SimpleBacterium.hpp"
 #include "TwitchingBacterium.hpp"
 
-
+double Poison::poisonCounter(0);
 
 Poison::Poison(Vec2d const& position)
     : Nutriment(uniform(getShortConfig().poison_min_qty,
                         getShortConfig().poison_max_qty),
                 position)
-{}
+{
+    ++poisonCounter;
+}
+
+Poison::Poison(const Poison& other)
+    : Nutriment(other)
+{
+    ++poisonCounter;
+}
 
 j::Value const& Poison::getConfig() const
 {
@@ -20,6 +28,11 @@ j::Value const& Poison::getConfig() const
 void Poison::drawOn(sf::RenderTarget& target) const
 {
     target.draw(buildCircle(getPosition(), getRadius(), sf::Color::Black));
+}
+
+double Poison::getPoisonCounter()
+{
+    return poisonCounter;
 }
 
 Quantity Poison::eatenBy(Bacterium& bacterie)
@@ -55,20 +68,25 @@ double Poison::getScoreCoefficient(const Bacterium& bacterie) const
 
 double Poison::getScoreCoefficient(const SimpleBacterium& bacterie) const
 {
-    return - 1;
+    return 0;
 }
 
 double Poison::getScoreCoefficient(const SwarmBacterium& bacterie) const
 {
-    return - 1 / getShortConfig().poison_resistance_factor;
+    return 0;
 }
 
 double Poison::getScoreCoefficient(const TwitchingBacterium& bacterie) const
 {
-    return - 1;
+    return 0;
 }
 
 double Poison::getScoreCoefficient(const PoisonBacterium& bacterie) const
 {
     return 0;
+}
+
+Poison::~Poison()
+{
+    --poisonCounter;
 }

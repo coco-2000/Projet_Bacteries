@@ -65,7 +65,7 @@ sf::Time Bacterium::getMaxTimeLost() const
 Quantity Bacterium::getStepEnergy() const
 {
     double stepEnergy(getConfig()["energy"]["consumption factor"].toDouble());
-    return lost ? 1/5*stepEnergy : stepEnergy;
+    return lost ? 1/2*stepEnergy : stepEnergy;
 }
 
 Quantity Bacterium::getMaxEatableQuantity() const
@@ -107,11 +107,11 @@ void Bacterium::update(sf::Time dt)
 
 void Bacterium::collision()
 {
+   // constexpr double EPSILON = 22;
     if (getAppEnv().doesCollideWithObstacle(*this))
     {
-        setDirection(Vec2d::fromRandomAngle(getAngle() + M_PI/2, getAngle() + 3*M_PI/2));
-
         lost = true;
+        strategy2();
     }
 
     else if(getAppEnv().doesCollideWithDish(*this))
@@ -227,6 +227,11 @@ void Bacterium::setDirection(const Vec2d& new_dir)
     direction = new_dir;
 }
 
+void Bacterium::setLost(bool islost)
+{
+   lost = islost;
+}
+
 double Bacterium::getOldScore() const
 {
     return oldScore;
@@ -255,8 +260,9 @@ void Bacterium::strategy2()
     for(int i(0); i < N; ++i)
     {
         const Vec2d new_dir (Vec2d::fromRandomAngle());
+        double newScore = helperPositionScore (new_dir, *this);
 
-        if(helperPositionScore (new_dir, *this) > helperPositionScore(getDirection(), *this))
+        if(newScore > helperPositionScore(getDirection(), *this))
         {
             setDirection(new_dir);
         }

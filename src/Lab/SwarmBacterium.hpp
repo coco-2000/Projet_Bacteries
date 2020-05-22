@@ -7,7 +7,7 @@
 
 class Swarm;
 
-class SwarmBacterium : public Bacterium
+class SwarmBacterium : public Bacterium, public DiffEqFunction
 {
 public:
 
@@ -107,9 +107,6 @@ private:
      */
     Vec2d getSpeedVector() const;
 
-    /**
-     * @brief moveLeader Déplace la bactérie leader du groupe
-     */
-    void moveLeader();
+    Vec2d f(Vec2d position, Vec2d speed) const override;
 
 };

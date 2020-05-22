@@ -23,8 +23,6 @@ public:
      */
     PetriDish(Vec2d position, double radius);
 
-    double minimumDistToObstacle(const Vec2d& position) const;
-
     /**
      * @brief PetriDish Empêche la copie
      */
@@ -48,9 +46,6 @@ public:
      * @return vrai si le nutriment a pu être placé dans l'assiette
      */
     bool addNutriment(Nutriment* nutriment);
-
-    bool addObstacle(Obstacle* obstacle);
-    void deleteUnderObstacle();
 
     /**
      * @brief update Effectue la croissance des nutriments de l'assiette de Petri en mettant à jour leur quantité et leur rayon
@@ -192,16 +187,17 @@ public:
      */
     GraphData getPropertyGeneral() const;
 
-    //bool doesOverlapWithObstacle(CircularBody const& body) const;
-
-    bool doesCollideWithObstacle(CircularBody const& body) const;
-
-
     /**
      * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
      * avec les bactéries et les nutriments qu'elle contient
      */
     ~PetriDish() override;
+
+    void deleteObstacle(const Vec2d& position);
+    bool addObstacle(Obstacle* obstacle);
+    void deleteUnderObstacle();
+    double minimumDistToObstacle(const Vec2d& position) const;
+    bool doesCollideWithObstacle(CircularBody const& body) const;
 
 private :
     std::vector<Bacterium*> lesBacteries;

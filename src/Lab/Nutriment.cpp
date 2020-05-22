@@ -11,6 +11,10 @@ Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
       quantity_(quantity)
 {};
 
+Nutriment::Nutriment(const Nutriment& other)
+    : CircularBody(other), distPetri(other.distPetri), quantity_(other.quantity_)
+{}
+
 Quantity Nutriment::takeQuantity(Quantity prelevement)
 {
         prelevement = std::min(quantity_, prelevement);

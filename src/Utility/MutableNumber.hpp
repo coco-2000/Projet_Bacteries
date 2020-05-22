@@ -90,12 +90,12 @@ public:
 
 private :
     double valeur;
-    double mutation_proba;
+    double mutationProbability;
     double EcartType;
-    bool hasMin_;
-    double Min_;
-    bool hasMax_;
-    double Max_;
+    bool hasMin;
+    double Min;
+    bool hasMax;
+    double Max;
 };
 
 

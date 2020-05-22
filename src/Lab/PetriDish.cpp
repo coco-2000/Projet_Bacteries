@@ -3,6 +3,7 @@
 #include "TwitchingBacterium.hpp"
 #include "SwarmBacterium.hpp"
 #include "PoisonBacterium.hpp"
+#include "Poison.hpp"
 #include "../Utility/Utility.hpp"
 #include "CircularBody.hpp"
 #include <vector>
@@ -32,6 +33,11 @@ double PetriDish::minimumDistToObstacle(const Vec2d &position) const
                                   }
                              ));
     return distance(position, nearestObstacle->getPosition()) - nearestObstacle->getRadius();
+}
+
+void PetriDish::deleteObstacle(const Vec2d &position)
+{
+
 }
 
 
@@ -273,10 +279,10 @@ double PetriDish::getPositionScore(const Vec2d& position, const Bacterium& bacte
         }
     }
 
-    /*for(const auto&  obstacle : lesObstacles)
+    for(const auto&  obstacle : lesObstacles)
     {
-         somme -= obstacle->getRadius()/ pow(distance(position, obstacle->getPosition()), power*1.8);
-    }*/
+         somme -= obstacle->getRadius()/ pow(distance(position, obstacle->getPosition()), power*1.7);
+    }
 
     return somme;
 }
@@ -332,7 +338,7 @@ Swarm* PetriDish::getSwarmWithId(std::string id) const
 
 bool PetriDish::doesCollideWithObstacle(const CircularBody &body) const
 {
-    for (auto obstacle : lesObstacles)
+    for (auto& obstacle : lesObstacles)
     {
         if(*obstacle & body or *obstacle>body)
         {
@@ -341,18 +347,6 @@ bool PetriDish::doesCollideWithObstacle(const CircularBody &body) const
     }
    return false;
 }
-
-/*bool PetriDish::doesOverlapWithObstacle(const CircularBody &body) const
-{
-    for (auto obstacle : lesObstacles)
-    {
-        if(body.isOverlapping(*obstacle))
-        {
-            return true;
-        }
-    }
-   return false;
-}*/
 
 double PetriDish::getMeanBacteria(const std::string &s) const
 {
@@ -386,11 +380,11 @@ double PetriDish::getTotalNutriment() const
 GraphData PetriDish::getPropertyGeneral() const
 {
     return {
-        {s::SIMPLE_BACTERIA, SimpleBacterium::getSimpleCounter()},
+        {s::SIMPLE_BACTERIA, SimpleBacterium::getSimpleCounter() - PoisonBacterium::getPoisonCounter()},
         {s::TWITCHING_BACTERIA, TwitchingBacterium::getTwitchCounter()},
         {s::SWARM_BACTERIA, SwarmBacterium::getSwarmCounter()},
         {s::POISON_BACTERIA, PoisonBacterium::getPoisonCounter()},
-        {s::NUTRIMENT_SOURCES, lesNutriments.size()},
+        {s::NUTRIMENT_SOURCES, lesNutriments.size() - Poison::getPoisonCounter()},
         {s::DISH_TEMPERATURE, getTemperature()}
         };
 

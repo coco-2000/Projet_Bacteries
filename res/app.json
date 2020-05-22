@@ -156,6 +156,10 @@
                 "rate" : 0.8,
                 "sigma" : 0.1
             }
+        },
+        "lost" : {
+            "time" : 7,
+            "energy factor" : 0.5
         }
     },
 
@@ -444,8 +448,13 @@
                 "sigma" : 0.1
             }
         },
-        "poison delay" : 5
+        "poison delay" : 8
     },
+    "obstacle" : {
+        "radius" : 50,
+        "gradient factor" : 1.8
+    },
+
     "window" : {
         "antialiasing level" : 4,
         "title" : "INFOSV Simulation",

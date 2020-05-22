@@ -7,7 +7,11 @@ class Poison : public Nutriment
 public:
     Poison(Vec2d const& position);
 
+    Poison(const Poison& other);
+
     void drawOn(sf::RenderTarget& target) const override;
+
+    static double getPoisonCounter();
 
     Quantity eatenBy(Bacterium& bacterie) override;
 
@@ -29,6 +33,10 @@ public:
 
     double getScoreCoefficient(const PoisonBacterium& bacterie) const override;
 
+    ~Poison();
+
 private :
+    static double poisonCounter;
+
     j::Value const& getConfig() const override;
 };

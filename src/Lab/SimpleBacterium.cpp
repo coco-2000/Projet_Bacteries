@@ -6,6 +6,7 @@
 #include "../Utility/DiffEqSolver.hpp"
 #include <SFML/Graphics.hpp>
 #include "../Utility/Constants.hpp"
+#include "PoisonBacterium.hpp"
 #include "NutrimentA.hpp"
 #include "NutrimentB.hpp"
 #include "Poison.hpp"

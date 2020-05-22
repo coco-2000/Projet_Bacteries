@@ -2,6 +2,7 @@
 #include "CircularBody.hpp"
 #include "../Interface/Drawable.hpp"
 
+
 class Obstacle : public CircularBody, public Drawable
 {
 public :

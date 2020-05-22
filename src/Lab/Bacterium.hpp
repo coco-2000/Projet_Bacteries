@@ -243,6 +243,7 @@ protected :
 
     sf::Time getMaxTimeLost() const;
     void manageLost(sf::Time dt);
+    void setLost(bool islost);
 
 private :
     MutableColor color;

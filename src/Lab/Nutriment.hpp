@@ -27,6 +27,8 @@ public :
      */
     Nutriment(Quantity quantity, const Vec2d& position);
 
+    Nutriment(const Nutriment& other);
+
     /**
      * @brief drawOn Dessine un nutriment
      * @param target

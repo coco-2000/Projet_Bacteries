@@ -3,8 +3,8 @@
 MutableNumber::MutableNumber(double value, double mutate_proba, double ecart_type,
                              bool hasMin, bool hasMax,
                              double Min, double Max)
-    : mutation_proba(mutate_proba), EcartType(ecart_type),
-      hasMin_(hasMin), Min_(Min), hasMax_(hasMax), Max_(Max)
+    : mutationProbability(mutate_proba), EcartType(ecart_type),
+      hasMin(hasMin), Min(Min), hasMax(hasMax), Max(Max)
 {
     set(value);
 }
@@ -26,23 +26,23 @@ double MutableNumber::get() const
 
 void MutableNumber::set(double value)
 {
-    if((!hasMin_ or value > Min_) and (!hasMax_ or value < Max_))
+    if((!hasMin or value > Min) and (!hasMax or value < Max))
     {
         valeur = value;
     }
-    else if(hasMin_ and value < Min_)
+    else if(hasMin and value < Min)
     {
-        valeur = Min_;
+        valeur = Min;
     }
     else
     {
-        valeur = Max_;
+        valeur = Max;
     }
 }
 
 void MutableNumber::mutate()
 {
-    if(bernoulli(mutation_proba))
+    if(bernoulli(mutationProbability))
     {
         set(valeur + normal(0, EcartType*EcartType));
     }
