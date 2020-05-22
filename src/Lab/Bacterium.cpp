@@ -24,7 +24,7 @@ void Bacterium::divide()
         copie->mutate();
         copie->shiftClone({10,-10}); //pour que l'on puisse tout de suite voir s'il y a eu division
         getAppEnv().addAnnex(copie);
-        direction = Vec2d::fromAngle(M_PI/2);
+        direction = Vec2d::fromAngle(getAngle() + M_PI/2);
     }
 }
 void Bacterium::shiftClone(const Vec2d& v)
@@ -59,7 +59,7 @@ sf::Time Bacterium::getDelay() const
 
 sf::Time Bacterium::getMaxTimeLost() const
 {
-    return sf::seconds(7.0);
+    return sf::seconds(10.0);
 }
 
 Quantity Bacterium::getStepEnergy() const
@@ -109,7 +109,8 @@ void Bacterium::collision()
 {
     if (getAppEnv().doesCollideWithObstacle(*this))
     {
-        setDirection(Vec2d::fromRandomAngle(M_PI/2, -M_PI/2));
+        setDirection(Vec2d::fromRandomAngle(getAngle() + M_PI/2, getAngle() + 3*M_PI/2));
+
         lost = true;
     }
 
@@ -140,7 +141,10 @@ void Bacterium::consumeNutriment(sf::Time dt)
 void Bacterium::manageLost(sf::Time dt)
 {
     if (timeLost>=getMaxTimeLost())
+    {
         lost = false;
+        timeLost = sf::Time::Zero;
+    }
     else
         timeLost += dt;
 }
