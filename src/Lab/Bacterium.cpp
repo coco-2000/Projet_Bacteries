@@ -140,7 +140,7 @@ void Bacterium::consumeNutriment(sf::Time dt)
 
 void Bacterium::manageLost(sf::Time dt)
 {
-    if (timeLost >=getMaxTimeLost() && getAppEnv().minimumDistToObstacle(this->getPosition()) > 25)
+    if (timeLost >=getMaxTimeLost())
     {
         lost = false;
         timeLost =sf::Time::Zero;
@@ -270,18 +270,3 @@ void Bacterium::strategy2()
 }
 
 
-void Bacterium::strategy3()
-{
-    constexpr int N(20); // nb de directions aléatoires à générer
-
-    for(int i(0); i < N; ++i)
-    {
-        const Vec2d new_dir (Vec2d::fromAngle(PI*i/N));
-        double newScore = helperPositionScore (new_dir, *this);
-
-        if(newScore > helperPositionScore(getDirection(), *this))
-        {
-            setDirection(new_dir);
-        }
-    }
-}

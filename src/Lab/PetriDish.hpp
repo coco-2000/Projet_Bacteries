@@ -195,15 +195,16 @@ public:
 
     void deleteObstacle(const Vec2d& position);
     bool addObstacle(Obstacle* obstacle);
-    void deleteUnderObstacle();
+    void createWall(const Vec2d &position1, const Vec2d &position2);
     double minimumDistToObstacle(const Vec2d& position) const;
     bool doesCollideWithObstacle(CircularBody const& body) const;
+    void deleteUnderObstacle();
 
 private :
-    std::vector<Bacterium*> lesBacteries;
-    std::vector<Swarm*> lesSwarms;
-    std::vector<Nutriment*> lesNutriments;
-    std::vector<Obstacle*> lesObstacles;
+    std::vector<Bacterium*> bacteries;
+    std::vector<Swarm*> swarms;
+    std::vector<Nutriment*> nutriments;
+    std::vector<Obstacle*> obstacles;
     double power;
     double temperature;
     std::vector<Bacterium*> annex;

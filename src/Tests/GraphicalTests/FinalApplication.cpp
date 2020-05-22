@@ -70,9 +70,18 @@ void FinalApplication::onEvent(sf::Event event, sf::RenderWindow&)
             getEnv().addBacterium(new SwarmBacterium(getCursorPositionInView(), swarm));
         } break;
 
-        case sf::Keyboard::O:
-            getEnv().addObstacle(new Obstacle(getCursorPositionInView(), 50));
-            break;
+        case sf::Keyboard::O: {
+            lastObstaclePosition = getCursorPositionInView();
+            getEnv().addObstacle(new Obstacle(lastObstaclePosition));
+        }break;
+
+        case sf::Keyboard::W: {
+            getEnv().createWall(lastObstaclePosition, getCursorPositionInView());
+            lastObstaclePosition = getCursorPositionInView();
+        }break;
+
+        case sf::Keyboard::D:
+            getEnv().deleteObstacle(getCursorPositionInView());
         }
     }
 }

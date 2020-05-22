@@ -6,7 +6,7 @@
 class Obstacle : public CircularBody, public Drawable
 {
 public :
-    Obstacle( Vec2d const& position, double radius);
+    Obstacle( Vec2d const& position);
     void drawOn(sf::RenderTarget& target) const override;
 };
 
