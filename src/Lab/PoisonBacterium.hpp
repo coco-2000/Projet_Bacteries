@@ -64,7 +64,7 @@ private :
     static double poisonCounter;
     sf::Time delayPoison;
 
-    void dropPoison();
+    void dropPoison() const;
 
     void resetDelay();
 };

@@ -20,24 +20,18 @@ SimpleBacterium::SimpleBacterium(const Vec2d& position)
                  {"tumble better prob", MutableNumber::positive(getConfig()["tumble"]["better"])},
                  {"tumble worse prob", MutableNumber::positive(getConfig()["tumble"]["worse"])}}),
        timeFlagellum(uniform(0.0, M_PI))
-{
-    ++simpleCounter;
-}
+{ ++simpleCounter; }
 
 SimpleBacterium::SimpleBacterium(const Vec2d& position, const Vec2d& direction, double radius,
-                                 Quantity energie, const MutableColor& couleur,
-                                 const std::map<std::string, MutableNumber>& param_mutables,
+                                 Quantity energy, const MutableColor& color,
+                                 const std::map<std::string, MutableNumber>& paramMutables,
                                  bool abstinence)
-   : Bacterium(position, direction, radius, energie, couleur, param_mutables, abstinence), timeFlagellum(uniform(0.0, M_PI))
-{
-    ++simpleCounter;
-}
+   : Bacterium(position, direction, radius, energy, color, paramMutables, abstinence), timeFlagellum(uniform(0.0, M_PI))
+{ ++simpleCounter; }
 
 SimpleBacterium::SimpleBacterium(const SimpleBacterium& other)
     : Bacterium (other), timeFlagellum(uniform(0.0, M_PI))
-{
-    ++simpleCounter;
-}
+{ ++simpleCounter; }
 
 SimpleBacterium* SimpleBacterium::clone() const
 {
@@ -74,24 +68,24 @@ Vec2d SimpleBacterium::getSpeedVector() const
 
 void SimpleBacterium::drawOn(sf::RenderTarget& target) const
 {
-    constexpr int nb_point(30);            
-    sf::VertexArray set_of_points = sf::VertexArray(sf::LinesStrip);
+    constexpr int nbPoint(30);
+    sf::VertexArray setOfPoints = sf::VertexArray(sf::LinesStrip);
       // ajout de points à l'ensemble:
 
-    set_of_points.append({{0,0}, getColor()});
+    setOfPoints.append({{0,0}, getColor()});
 
-    for(int i(1); i < nb_point; ++i)
+    for(int i(1); i < nbPoint; ++i)
     {
-        set_of_points.append({{static_cast<float>(-i * (getRadius() / 10.0)),
-                               static_cast<float>(getRadius() * sin(timeFlagellum) * sin(2 * i / 10.0))},
-                               getColor()});
+        setOfPoints.append({{static_cast<float>(-i * (getRadius() / 10.0)),
+                             static_cast<float>(getRadius() * sin(timeFlagellum) * sin(2 * i / 10.0))},
+                            getColor()});
     }
 
      auto transform = sf::Transform(); // déclare une matrice de transformation
      // ici ensemble d'opérations comme des translations ou rotations faites sur transform:
      transform.translate(getPosition());
      transform.rotate(getAngle() / DEG_TO_RAD);
-     target.draw(set_of_points, transform);
+     target.draw(setOfPoints, transform);
 
      Bacterium::drawOn(target);
 }
@@ -105,9 +99,9 @@ void SimpleBacterium::trySwitch()
         lambda = getProperty("tumble better prob").get();
     }
 
-    const double proba_basculement = lambda != 0 ? 1 - exp(- timeSwitching.asSeconds() / lambda) : 1;
+    const double switchProba = lambda != 0 ? 1 - exp(- timeSwitching.asSeconds() / lambda) : 1;
 
-     if(bernoulli(proba_basculement) == 1)
+     if(bernoulli(switchProba) == 1)
      {
          switchDirection();
          timeSwitching = sf::Time::Zero;
@@ -168,6 +162,4 @@ double SimpleBacterium::getScoreCoefficient(const Poison& poison) const
 
 
 SimpleBacterium::~SimpleBacterium()
-{
-    --simpleCounter;
-}
+{ --simpleCounter; }

@@ -9,7 +9,7 @@ double PoisonBacterium::poisonCounter(0);
 PoisonBacterium::PoisonBacterium(const Vec2d& position)
     : SimpleBacterium(position, Vec2d::fromRandomAngle(), uniform(getShortConfig().poisonbact_min_radius, getShortConfig().poisonbact_max_radius),
                       uniform(getShortConfig().poisonbact_min_energy, getShortConfig().poisonbact_max_energy),
-                      getAppConfig()["poison bacterium"]["color"],
+                      getConfig()["color"],
                       {{"speed", MutableNumber::positive(getConfig()["speed"])},
                        {"tumble better prob", MutableNumber::positive(getConfig()["tumble"]["better"])},
                        {"tumble worse prob", MutableNumber::positive(getConfig()["tumble"]["worse"])}})
@@ -20,9 +20,7 @@ PoisonBacterium::PoisonBacterium(const Vec2d& position)
 
 PoisonBacterium::PoisonBacterium(const PoisonBacterium& other)
     : SimpleBacterium(other)
-{
-    ++poisonCounter;
-}
+{ ++poisonCounter; }
 
 Quantity PoisonBacterium::eatableQuantity(NutrimentA& nutriment) const
 {
@@ -65,11 +63,9 @@ PoisonBacterium* PoisonBacterium::clone() const
 }
 
 PoisonBacterium::~PoisonBacterium()
-{
-    --poisonCounter;
-}
+{ --poisonCounter; }
 
-void PoisonBacterium::dropPoison()
+void PoisonBacterium::dropPoison() const
 {
     getAppEnv().addNutriment(new Poison(getPosition()));
 }

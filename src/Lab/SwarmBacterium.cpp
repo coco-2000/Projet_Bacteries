@@ -9,18 +9,18 @@
 
 unsigned int SwarmBacterium::swarmCounter(0);
 
-SwarmBacterium::SwarmBacterium(const Vec2d& position, Swarm* groupe)
+SwarmBacterium::SwarmBacterium(const Vec2d& position, Swarm* group)
     : Bacterium(position, Vec2d::fromRandomAngle(),
                 uniform(getShortConfig().swarmbact_min_radius, getShortConfig().swarmbact_max_radius),
                 uniform(getShortConfig().swarmbact_min_energy, getShortConfig().swarmbact_max_energy),
-                (*groupe).getColor()), group(groupe)
+                (*group).getColor()), group(group)
 {
-    groupe->addBacterium(this);
+    group->addBacterium(this);
     ++swarmCounter;
 }
 
-SwarmBacterium::SwarmBacterium(SwarmBacterium const& autre)
-    : Bacterium(autre), group(autre.group)
+SwarmBacterium::SwarmBacterium(SwarmBacterium const& other)
+    : Bacterium(other), group(other.group)
 {
     group->addBacterium(this);
     ++ swarmCounter;
@@ -38,17 +38,17 @@ j::Value const& SwarmBacterium::getConfig() const
 
 void SwarmBacterium::move(sf::Time dt)
 {
-    Vec2d new_position(getPosition());
+    Vec2d newPosition(getPosition());
 
     if(isLost())
     {
-        new_position = stepDiffEq(getPosition(), getSpeedVector(), dt, *this).position;
+        newPosition = stepDiffEq(getPosition(), getSpeedVector(), dt, *this).position;
 
         timeSwitching += dt;
         double lambda(getConfig()["lambda basculement"].toDouble());
-        const double proba_basculement =  lambda!= 0 ? 1 - exp(- timeSwitching.asSeconds() / lambda) : 1;
+        const double switchProba =  lambda != 0 ? 1 - exp(- timeSwitching.asSeconds() / lambda) : 1;
 
-        if(bernoulli(proba_basculement) == 1)
+        if(bernoulli(switchProba) == 1)
         {
          strategy1();
          timeSwitching = sf::Time::Zero;
@@ -56,13 +56,13 @@ void SwarmBacterium::move(sf::Time dt)
     }
     else
     {
-        const DiffEqResult deplacement(stepDiffEq(getPosition(), getSpeedVector(), dt, *group));
-        new_position = deplacement.position;
-        speed = deplacement.speed.length();
-        setDirection(deplacement.speed.normalised());
+        const DiffEqResult shifting(stepDiffEq(getPosition(), getSpeedVector(), dt, *group));
+        newPosition = shifting.position;
+        speed = shifting.speed.length();
+        setDirection(shifting.speed.normalised());
     }
 
-    const auto deltaPos = new_position - getPosition();
+    const auto deltaPos = newPosition - getPosition();
 
     if(deltaPos.lengthSquared() >= 0.001)
     {
@@ -81,17 +81,15 @@ Vec2d SwarmBacterium::f(Vec2d position, Vec2d speed) const
     return {0,0};
 }
 
-void SwarmBacterium::drawOn(sf::RenderTarget &target) const
+void SwarmBacterium::drawOn(sf::RenderTarget& target) const
 {
     Bacterium::drawOn(target);
 
     if(isDebugOn() and group->IsLeader(this))
     {
         //on a ici décidé que l'epaisseur de l'anneau serait 5
-        const auto anneau = buildAnnulus(getPosition(),
-                                         getRadius(),
-                                         sf::Color::Red,
-                                         5);
+        const auto anneau = buildAnnulus(getPosition(), getRadius(),
+                                         sf::Color::Red, 5);
         target.draw(anneau);
     }
 }

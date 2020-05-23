@@ -10,10 +10,10 @@ class Swarm : public Updatable, public DiffEqFunction
 public:
     /**
      * @brief Swarm Constructeur
-     * @param identificateur
-     * @param groupe
+     * @param id
+     * @param group
      */
-    Swarm(const std::string& id, const std::vector <SwarmBacterium*>& group = {});
+    Swarm(const std::string& id, const std::vector<SwarmBacterium*>& group = {});
 
     /**
      * @brief getColor Cherche la couleur du Swarm dans le fichier de configuration
@@ -34,27 +34,16 @@ public:
     void supprBacterium(SwarmBacterium* bacterie);
 
     /**
-     * @brief getLeaderPosition Calcul la position du leader
-     * @return la position du leader
-     */
-    Vec2d getLeaderPosition() const;
-
-    /**
      * @brief getId Accesseur pour l'identificateur du Swarm
      * @return l'identificateur du Swarm
      */
-    std::string getId() const;
+    const std::string& getId() const;
 
     /**
      * @brief update Met à jour le leader du groupe
      * @param dt Pas de temps après lequel la simulation est mise à jour
      */
     void update(sf::Time dt) override;
-
-    /**
-     * @brief updateLeaderDirection Met à jour la direction du leader
-     */
-    void updateLeaderDirection();
 
     /**
      * @brief IsLeader Vérifie si une bactérie est leader du groupe
@@ -93,6 +82,12 @@ private:
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux Swarms
      * @return La valeur associée à getAppConfig()["swarm"]
      */
-    j::Value getConfig() const;
+    const j::Value& getConfig() const;
+
+    /**
+     * @brief getLeaderPosition Calcul la position du leader
+     * @return la position du leader
+     */
+    const Vec2d& getLeaderPosition() const;
 };
 

@@ -30,13 +30,6 @@ public :
               bool abstinence = 0);
 
     /**
-     * @brief operator = empecher l'usage de l'opérateur d'affectation car il n'est pas utilisé
-     * et afin d'éviter d'avoir à le redéfinir dans les sous classes de bactérium lorsque le
-     * constructeur de copie est redéfini pour incrémenter les compteurs par exemple
-     */
-    Bacterium& operator=(Bacterium const&) = delete;
-
-    /**
      * @brief alive savoir si la bacterie a suffisamment d'energie pour etre en vie
      * @return vrai si l'energie est suffisante
      */
@@ -323,6 +316,13 @@ private :
     sf::Time getMaxTimeLost() const;
 
     void manageLost(sf::Time dt);
+
+    /**
+     * @brief operator = empecher l'usage de l'opérateur d'affectation car il n'est pas utilisé
+     * et afin d'éviter d'avoir à le redéfinir dans les sous classes de bactérium lorsque le
+     * constructeur de copie est redéfini pour incrémenter les compteurs par exemple
+     */
+    Bacterium& operator=(Bacterium const&) = delete;
 };
 
 

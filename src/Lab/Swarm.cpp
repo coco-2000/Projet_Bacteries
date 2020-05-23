@@ -7,11 +7,9 @@
 #include "SwarmBacterium.hpp"
 
 
-Swarm::Swarm(const std::string& identificateur, const std::vector <SwarmBacterium*>& groupe)
-    : id(identificateur), group(groupe), color(getColor())
-{
-    setLeader();
-}
+Swarm::Swarm(const std::string& id, const std::vector <SwarmBacterium*>& group)
+    : id(id), group(group), color(getColor())
+{ setLeader(); }
 
 void Swarm::update(sf::Time dt)
 {
@@ -52,12 +50,12 @@ void Swarm::supprBacterium(SwarmBacterium* bacterie)
     }
 }
 
-Vec2d Swarm::getLeaderPosition() const
+const Vec2d& Swarm::getLeaderPosition() const
 {
      return leader->getPosition();
 }
 
-std::string Swarm::getId() const
+const std::string& Swarm::getId() const
 {
     return id;
 }
@@ -74,21 +72,21 @@ void Swarm::setLeader()
     }
     else
     {
-        SwarmBacterium* temp(group.front());
-        for(auto& bacterie : group)
+        SwarmBacterium* tmp(group.front());
+        for(const auto& bacterie : group)
         {
             if (getAppEnv().getPositionScore(bacterie->getPosition(), *bacterie)
-                > getAppEnv().getPositionScore(temp->getPosition(), *temp))
+                > getAppEnv().getPositionScore(tmp->getPosition(), *tmp))
             {
-                temp = bacterie;
+                tmp = bacterie;
             }
         }
-        leader = temp;
-        temp = nullptr;
+        leader = tmp;
+        tmp = nullptr;
     }
 }
 
-j::Value Swarm::getConfig() const
+const j::Value& Swarm::getConfig() const
 {
     return getAppConfig()["swarms"];
 }
@@ -105,9 +103,9 @@ bool Swarm::IsLeader(const SwarmBacterium* bacterie) const
 
 Swarm::~Swarm()
 {
-    for(auto& element : group)
+    for(auto& bacterie : group)
     {
-        element = nullptr;
+        bacterie = nullptr;
     }
     leader = nullptr;
 }
