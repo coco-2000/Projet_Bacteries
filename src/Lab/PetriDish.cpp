@@ -389,7 +389,10 @@ double PetriDish::getMeanBacteria(const std::string &s) const
             value += bacterie->getparamMutables().at(s).get();
         }
     }
-    return sum != 0 ? value/sum : -1;
+    double a(sum != 0 ? value/sum : -1);
+    if(a != -1)
+        std::cerr << a;
+    return a;
 }
 
 double PetriDish::getTotalNutriment() const

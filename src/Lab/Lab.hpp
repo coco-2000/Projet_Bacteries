@@ -152,6 +152,10 @@ public:
       */
      void resetControls();
 
+     double getDistToPetri(const Vec2d& position) const;
+
+     Vec2d getMiddleDirectionVector(const Vec2d& position) const;
+
      /** @brief Destructeur
        */
      ~Lab() override;

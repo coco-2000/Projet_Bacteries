@@ -246,9 +246,9 @@ private :
     Quantity energy;
     std::map<std::string, MutableNumber> paramMutables;
     bool abstinence;
-    sf::Time consumeCounter;
     double oldScore;
     bool lost;
+    sf::Time consumeCounter;
     sf::Time timeLost;
     sf::Time timeSwitch;
 
@@ -337,6 +337,8 @@ private :
      * constructeur de copie est redéfini pour incrémenter les compteurs par exemple
      */
     Bacterium& operator=(Bacterium const&) = delete;
+
+    void manageGap();
 };
 
 

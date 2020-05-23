@@ -12,13 +12,16 @@ O       : create obstacle
 E       : delete obstacle
 W       : create obstacle wall
 Arrows	: move simulation
-	view
+          view
 Tab	: switch to next
-	control
+          control
 PageUp	: increase CC
-PageDown  : decrease CC
-S	  : add simple bacterium
+PageDown: decrease CC
+S	: add simple bacterium
+          at MP
 T	: add TwitchingMotility
-	bacterium at MP
+          bacterium at MP
 1-2	: add swarm bacterium
 	  of type 1-2 at MP
+P       : add poison bacterium
+          at MP

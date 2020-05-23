@@ -1,6 +1,7 @@
 #include "Lab.hpp"
 #include "CircularBody.hpp"
 #include "Application.hpp"
+#include "../Utility/Vec2d.hpp"
 
 Lab::Lab()
     : petri(getApp().getCentre(), (0.95/2)*getApp().getLabSize().x)
@@ -153,6 +154,16 @@ void Lab::createWall(const Vec2d& position1, const Vec2d& position2)
 Vec2d Lab::getLastObstaclePos() const
 {
     return petri.getLastObstaclePos();
+}
+
+double Lab::getDistToPetri(const Vec2d& position) const
+{
+    return distance(petri.getPosition(), position) - petri.getRadius();
+}
+
+Vec2d Lab::getMiddleDirectionVector(const Vec2d& position) const
+{
+    return (petri.getPosition() - position).normalised();
 }
 
 Lab::~Lab()
