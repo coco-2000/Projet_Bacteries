@@ -184,6 +184,7 @@ public:
      */
     ~PetriDish() override;
 
+
     void deleteObstacle(const Vec2d& position);
     bool addObstacle(Obstacle* obstacle);
     void createWall(const Vec2d& position1, const Vec2d& position2);
