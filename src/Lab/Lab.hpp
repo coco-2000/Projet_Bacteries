@@ -53,20 +53,49 @@ public:
      /**
       * @brief addNutriment Ajoute un nutriment à la boite de Petri du Lab
       * @param Nutriment qui est ajouté à la boite de Petri du Lab
+      * @return vrai si le nutriment a pu être ajouté
       */
-     void addNutriment(Nutriment* nutriment);
+     bool addNutriment(Nutriment* nutriment);
 
      /**
       * @brief addBacterium permet d'ajouter des bacteries au lab
       * @param bacterie : celle qui est ajoutée au lab
+      * @return vrai si la bactérie a pu être ajoutée
       */
-     void addBacterium(Bacterium* bacterie);
+     bool addBacterium(Bacterium* bacterie);
 
-     void addObstacle(Obstacle* obstacle);
+     /**
+      * @brief addObstacle ajoute obstacle au lab
+      * @param obstacle ajouté au lab
+      * @return vrai si l'obstacle a pu être ajouté
+      */
+     bool addObstacle(Obstacle* obstacle);
 
+     /**
+      * @brief createWall crée un mur d'obstacles dans le lab
+      * @param position1 position du 1er obstacle du mur
+      * @param position2 position du dernier obstacle du mur
+      */
+     void createWall(const Vec2d& position1, const Vec2d &position2);
+
+     /**
+      * @brief deleteObstacle supprime obstacle de l'assiette
+      * @param position coordonnées de l'obstacle à supprimer
+      */
      void deleteObstacle(const Vec2d& position);
 
-     void createWall(const Vec2d& position1, const Vec2d &position2);
+     /**
+      * @brief minimumDistToObstacle
+      * @param position
+      * @return la distance entre la position donnée et l'obstacle le plus proche
+      */
+     double minimumDistToObstacle(const Vec2d& position) const;
+
+     /**
+      * @brief getLastObstaclePos
+      * @return la position du dernier obstacle créé et non supprimé
+      */
+     Vec2d getLastObstaclePos() const;
 
      /**
       * @brief getTemperature obtenir la temperature de l'assiette de petri du lab
@@ -81,11 +110,12 @@ public:
       */
      bool doesCollideWithDish(CircularBody const& body) const;
 
+     /**
+      * @brief doesCollideWithDish regarde si le body rentre en collision avec un obstacle de la petri
+      * @param body le corps qui peut rentrer en collision
+      * @return vrai s'il est en collision
+      */
      bool doesCollideWithObstacle(CircularBody const& body) const;
-
-     double minimumDistToObstacle(const Vec2d& position) const;
-
-     Vec2d getLastObstaclePos() const;
 
      /**
       * @brief getNutrimentColliding obtenir le nutriment en collision avec le body

@@ -24,18 +24,71 @@ public:
     PetriDish(Vec2d position, double radius);
 
     /**
-     * @brief PetriDish::addBacterium peuple l'assiette
+     * @brief addBacterium ajoute bactérie à l'assiette
      * @param bacterie ajoutée à l'assiette
      * @return vrai si la bacterie a pu être placé dans l'assiette
      */
    bool addBacterium(Bacterium* bacterie);
 
     /**
-     * @brief PetriDish::addNutriment place nutriments dans l'assiette
+     * @brief addNutriment ajoute nutriment à l'assiette
      * @param nutriment ajouté à l'assiette
      * @return vrai si le nutriment a pu être placé dans l'assiette
      */
     bool addNutriment(Nutriment* nutriment);
+
+    /**
+     * @brief addObstacle ajoute obstacle à l'assiette
+     * @param obstacle ajouté à l'assiette
+     * @return vrai si l'obstacle a pu être placé dans l'assiette
+     */
+    bool addObstacle(Obstacle* obstacle);
+
+    /**
+     * @brief createWall crée un mur d'obstacles dans l'assiette
+     * @param position1 position du 1er obstacle du mur
+     * @param position2 position du dernier obstacle du mur
+     */
+    void createWall(const Vec2d& position1, const Vec2d& position2);
+
+    /**
+     * @brief deleteObstacle supprime obstacle de l'assiette
+     * @param position coordonnées de l'obstacle à supprimer
+     */
+    void deleteObstacle(const Vec2d& position);
+
+    /**
+     * @brief minimumDistToObstacle
+     * @param position
+     * @return la distance entre la position donnée et l'obstacle le plus proche
+     */
+    double minimumDistToObstacle(const Vec2d& position) const;
+
+    /**
+     * @brief doesCollideWithDish regarde si le body rentre en collision avec un obstacle
+     * @param body le corps qui peut rentrer en collision
+     * @return vrai s'il est en collision
+     */
+    bool doesCollideWithObstacle(CircularBody const& body) const;
+
+    /**
+     * @brief getLastObstaclePos
+     * @return la position du dernier obstacle créé et non supprimé
+     */
+    const Vec2d& getLastObstaclePos() const;
+
+    /**
+     * @brief addSwarm Ajoute un groupe Swarm à la boîte de Petri
+     * @param swarm Groupe à ajouter
+     */
+    void addSwarm(Swarm* swarm);
+
+    /**
+     * @brief getSwarmWithId Accesseur pour le Swarm de la boite de Petri associé à un identificateur donné
+     * @param id Identificateur du Swarm à retourner
+     * @return Swarm dont l'identifiacteur est id
+     */
+    Swarm* getSwarmWithId(const std::string& id) const;
 
     /**
      * @brief update Effectue la croissance des nutriments de l'assiette de Petri en mettant à jour leur quantité et leur rayon
@@ -131,19 +184,6 @@ public:
     void addAnnex(Bacterium* bacterie);
 
     /**
-     * @brief addSwarm Ajoute un groupe Swarm à la boîte de Petri
-     * @param swarm Groupe à ajouter
-     */
-    void addSwarm(Swarm* swarm);
-
-    /**
-     * @brief getSwarmWithId Accesseur pour le Swarm de la boite de Petri associé à un identificateur donné
-     * @param id Identificateur du Swarm à retourner
-     * @return Swarm dont l'identifiacteur est id
-     */
-    Swarm* getSwarmWithId(const std::string& id) const;
-
-    /**
      * @brief getPropertySimpleBacterium calcule les nouvelles valeurs associées
      * à chacune des series du graphe SimpleBacteria
      * @return l'ensemble des nouvelles valeurs calculées
@@ -183,13 +223,6 @@ public:
      * avec les bactéries et les nutriments qu'elle contient
      */
     ~PetriDish() override;
-
-    void deleteObstacle(const Vec2d& position);
-    bool addObstacle(Obstacle* obstacle);
-    void createWall(const Vec2d& position1, const Vec2d& position2);
-    double minimumDistToObstacle(const Vec2d& position) const;
-    bool doesCollideWithObstacle(CircularBody const& body) const;
-    const Vec2d& getLastObstaclePos() const;
 
 private :
     std::vector<Bacterium*> bacteries;
@@ -257,7 +290,12 @@ private :
      */
     PetriDish& operator=(PetriDish const&) = delete;
 
-    void deleteUnderObstacle();
+    /**
+     * @brief deleteUnderObstacle supprime toutes les bacteries et tous les nutriments se trouvant
+     * en contact avec l'obstacle passé en paramètre
+     * @param obstacle
+     */
+    void deleteUnderObstacle(Obstacle* obstacle);
 };
 
 

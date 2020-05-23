@@ -235,6 +235,8 @@ protected :
 
     void setLost(bool islost);
 
+    void setTimeLost(sf::Time dt);
+
     void lostTrySwitch(sf::Time dt);
 
 

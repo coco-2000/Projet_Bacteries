@@ -160,21 +160,16 @@ void Bacterium::consumeNutriment(sf::Time dt)
         consumeCounter = sf::Time::Zero;
         eat(*nutrimentPtr);
         nutrimentPtr = nullptr;
-
         setLost(false);
     }
     else
-    {
       consumeCounter += dt;
-    }
 }
 
 void Bacterium::manageLost(sf::Time dt)
 {
     if (timeLost >= getMaxTimeLost())
-    {
         setLost(false);
-    }
     else
         timeLost += dt;
 }
@@ -187,33 +182,25 @@ void Bacterium::consumeEnergy(Quantity qt)
 void Bacterium::setScore(double score)
 {
     if(score > 0)
-    {
         oldScore = score;
-    }
 }
 
 void Bacterium::addProperty(const std::string& key, const MutableNumber& value)
 {
     if(paramMutables.find(key) != paramMutables.end())
-    {
         throw std::invalid_argument("ajout d'une propriété associée à une clé déjà existante");
-    }
+
     else
-    {
         paramMutables.at(key) = value;
-    }
 }
 
 MutableNumber Bacterium::getProperty(const std::string& key) const
 {
     if(paramMutables.find(key) == paramMutables.end())
-    {
         throw std::out_of_range("recherche de la valeur d'une clé invalide ");
-    }
+
     else
-    {
         return paramMutables.find(key)->second;
-    }
 }
 
 void Bacterium::rotationAngle(sf::Time dt)
@@ -263,6 +250,11 @@ void Bacterium::setLost(bool islost)
    timeLost = sf::Time::Zero;
 }
 
+void Bacterium::setTimeLost(sf::Time dt)
+{
+    timeLost = dt;
+}
+
 double Bacterium::getOldScore() const
 {
     return oldScore;
@@ -308,8 +300,6 @@ void Bacterium::strategy2()
         double newScore = helperPositionScore (newDir, *this);
 
         if(newScore > helperPositionScore(getDirection(), *this))
-        {
             setDirection(newDir);
-        }
     }
 }
