@@ -127,12 +127,16 @@ void Bacterium::update(sf::Time dt)
 
 void Bacterium::collision()
 {
-    lost = true;
     if (getAppEnv().doesCollideWithObstacle(*this))
+    {
+        lost = true;
         strategy2();
-
+    }
     else if(getAppEnv().doesCollideWithDish(*this))
+    {
+        lost = true;
         direction = - direction;
+    }
 }
 
 void Bacterium::consumeNutriment(sf::Time dt)
