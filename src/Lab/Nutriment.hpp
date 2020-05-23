@@ -56,10 +56,10 @@ public :
 
     /**
      * @brief Nutriment::takeQuantity Prélève une quantité donnée de nutriments de l'instance courante
-     * @param prelevement Quantité de nutriments à prélever
+     * @param taking Quantité de nutriments à prélever
      * @return Quantité de nutriments qui a pu être prélevée
      */
-    Quantity takeQuantity(Quantity prelevement);
+    Quantity takeQuantity(Quantity taking);
 
     /**
      * @brief getQuantity
@@ -74,35 +74,35 @@ public :
      * @param bacterie dont on calcule la quantité de nutriment qu'elle consomme
      * @return la quantité de nutriment consommée
      */
-    virtual Quantity eatenBy(Bacterium& bacterie) = 0;
+    virtual Quantity eatenBy(const Bacterium& bacterie) = 0;
 
     /**
      * Methode virtuelle pure
      * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie simple
      * @return la quantité de nutriment consommée
      */
-    virtual Quantity eatenBy(SimpleBacterium& bacterie) = 0;
+    virtual Quantity eatenBy(const SimpleBacterium& bacterie) = 0;
 
     /**
      * Methode virtuelle pure
      * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à comportement de groupe
      * @return la quantité de nutriment consommée
      */
-    virtual Quantity eatenBy(SwarmBacterium& bacterie) = 0;
+    virtual Quantity eatenBy(const SwarmBacterium& bacterie) = 0;
 
     /**
      * Methode virtuelle pure
      * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à tentacule
      * @return la quantité de nutriment consommée
      */
-    virtual Quantity eatenBy(TwitchingBacterium& bacterie) = 0;
+    virtual Quantity eatenBy(const TwitchingBacterium& bacterie) = 0;
 
     /**
      * Methode virtuelle pure
      * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à poison
      * @return la quantité de nutriment consommée
      */
-    virtual Quantity eatenBy(PoisonBacterium& bacterie) = 0;
+    virtual Quantity eatenBy(const PoisonBacterium& bacterie) = 0;
 
     virtual double getScoreCoefficient(const Bacterium& bacterie) const = 0;
 
@@ -115,6 +115,7 @@ public :
     virtual double getScoreCoefficient(const PoisonBacterium& bacterie) const = 0;
 
 protected :
+
     /**
      * @brief Nutriment::setQuantity Manipulateur de quantité, actualise égalment le rayon du nutriment
      * @param quantity Nouvelle quantité à assigner à quantité (+ rayon)
@@ -124,14 +125,13 @@ protected :
 private :
 
     const double distPetri;
-    Quantity quantity_;
+    Quantity quantity;
 
     /**
      * @brief displayQuantity Affiche de la quantité du nutriment (si mode debugging activé)
      * @param target Cible pour l'affichage
      */
     void displayQuantity(sf::RenderTarget& target) const;
-
 
     /**
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux nutriments
@@ -140,6 +140,7 @@ private :
      virtual j::Value const& getConfig() const = 0;
 
     double getGrowthSpeed() const;
+
     double getMaxQuantity() const;
 
 };

@@ -20,13 +20,13 @@ public :
      * @param position Coordonnées de la position intiale de la bacterie
      * @param direction Direction du déplacement initiale de la bacterie
      * @param radius Rayon initiale de la bactérie
-     * @param energie niveau d'énergie intiale de la bacterie
-     * @param couleur Couleur initiale de la bacterie
-     * @param param_mutables ensemble de paramètres numériques mutables
+     * @param energy niveau d'énergie intiale de la bacterie
+     * @param color Couleur initiale de la bacterie
+     * @param paramMutables ensemble de paramètres numériques mutables
      * @param abstinence si la bacterie consomme des nutriments ou non
      */
-    Bacterium(const Vec2d& position, const Vec2d& direction, double radius, Quantity energie,
-              const MutableColor& couleur, const std::map<std::string, MutableNumber>& param_mutables = {},
+    Bacterium(const Vec2d& position, const Vec2d& direction, double radius, Quantity energy,
+              const MutableColor& color, const std::map<std::string, MutableNumber>& paramMutables = {},
               bool abstinence = 0);
 
     /**
@@ -84,7 +84,7 @@ public :
      * @param nutriment de type A qui est consommé par la bactérie
      * @return La quantité de nutriment consommé
      */
-    virtual Quantity eatableQuantity(NutrimentA& nutriment) = 0;
+    virtual Quantity eatableQuantity(NutrimentA& nutriment) const = 0;
 
     /**
      * Méthode virtuelle pure
@@ -95,7 +95,18 @@ public :
      * @param nutriment de type B qui est consommé par la bactérie
      * @return La quantité de nutriment consommé
      */
-    virtual Quantity eatableQuantity(NutrimentB& nutriment) = 0;
+    virtual Quantity eatableQuantity(NutrimentB& nutriment) const = 0;
+
+    /**
+     * Méthode virtuelle pure
+     * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
+     *                        retire cette quantité au nutriment
+     * (appelle la méthode eatenBy du poison qui prend pour argument une bactérie dont le type
+     * correspond à celui de l'instance courante de bactérie)
+     * @param nutriment de type poison qui est consommé par la bactérie
+     * @return La quantité de poison consommé
+     */
+    virtual Quantity eatableQuantity(Poison& poison) const = 0;
 
     bool isLost() const;
 
@@ -107,17 +118,6 @@ public :
     virtual double getpHResistanceEnergy() const = 0;
     bool TemperatureViable() const;
     bool pHviable() const; */
-
-    /**
-     * Méthode virtuelle pure
-     * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
-     *                        retire cette quantité au nutriment
-     * (appelle la méthode eatenBy du poison qui prend pour argument une bactérie dont le type
-     * correspond à celui de l'instance courante de bactérie)
-     * @param nutriment de type poison qui est consommé par la bactérie
-     * @return La quantité de poison consommé
-     */
-    virtual Quantity eatableQuantity(Poison& poison) = 0;
 
     /**
      * Méthode virtuelle pure
@@ -171,9 +171,9 @@ protected :
 
     /**
      * @brief setDirection modifie la direction de la bactérie
-     * @param new_dir nouvelle direction que la bactérie doit prendre
+     * @param newDir nouvelle direction que la bactérie doit prendre
      */
-    void setDirection(const Vec2d& new_dir);
+    void setDirection(const Vec2d& newDir);
 
     /**
      * @brief move Méthode virtuelle pure de déplacement des bactéries
@@ -182,11 +182,6 @@ protected :
      * l'instance courante
      */
     virtual void move(sf::Time dt) = 0;
-
-    /**
-     * @brief mutate Méthode de mutation d'une bactérie
-     */
-    virtual void mutate();
 
     /**
      * @brief getStepEnergy
@@ -207,26 +202,11 @@ protected :
     virtual void shiftClone(const Vec2d& v);
 
     /**
-     * @brief addProperty Ajoute à l'ensemble des paramètres mutables numériques de la bactérie une valeur numérique mutable donnée
-     * @param key Clé (=nom) du paramètre mutable à ajouter
-     * @param valeur Valeur associée à la clé, sous forme de MutableNumber
-     */
-    void addProperty(const std::string& key, const MutableNumber& valeur);
-
-    /**
      * @brief getProperty Accesseur d'un paramètre mutable
      * @param key Clé (=nom) du paramètre mutable à renvoyer
      * @return La valeur, sous forme de MutableNumber, du paramètre associé à la clé
      */
     MutableNumber getProperty(const std::string& key) const;
-
-    /**
-     * @brief helperPositionScore Calcul le score de la position de l'instance + un vecteur
-     * @param offset Vecteur a ajouter à la position
-     * @param bacterie Instance courante dont on calcule le score
-     * @return Score associé à la nouvelle position
-     */
-    double helperPositionScore(const Vec2d& offset, const Bacterium& bacterie) const;
 
     /**
      * @brief strategy1 Première façon d'effectuer le basculement : choisir au hasard une direction
@@ -241,8 +221,6 @@ protected :
      */
     void strategy2();
 
-    sf::Time getMaxTimeLost() const;
-    void manageLost(sf::Time dt);
     void setLost(bool islost);
 
 private :
@@ -252,7 +230,7 @@ private :
     Quantity energy;
     std::map<std::string, MutableNumber> paramMutables;
     bool abstinence;
-    sf::Time counter;
+    sf::Time consumeCounter;
     double oldScore;
     bool lost;
     sf::Time timeLost;
@@ -322,6 +300,29 @@ private :
      */
     void eat(Nutriment& nutriment);
 
+    /**
+     * @brief mutate Méthode de mutation d'une bactérie
+     */
+    virtual void mutate();
+
+    /**
+     * @brief addProperty Ajoute à l'ensemble des paramètres mutables numériques de la bactérie une valeur numérique mutable donnée
+     * @param key Clé (=nom) du paramètre mutable à ajouter
+     * @param value Valeur associée à la clé, sous forme de MutableNumber
+     */
+    void addProperty(const std::string& key, const MutableNumber& value);
+
+    /**
+     * @brief helperPositionScore Calcul le score de la position de l'instance + un vecteur
+     * @param offset Vecteur a ajouter à la position
+     * @param bacterie Instance courante dont on calcule le score
+     * @return Score associé à la nouvelle position
+     */
+    double helperPositionScore(const Vec2d& offset, const Bacterium& bacterie) const;
+
+    sf::Time getMaxTimeLost() const;
+
+    void manageLost(sf::Time dt);
 };
 
 

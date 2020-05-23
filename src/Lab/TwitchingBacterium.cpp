@@ -157,17 +157,17 @@ unsigned int TwitchingBacterium::getTwitchCounter()
     return twitchCounter;
 }
 
-Quantity TwitchingBacterium::eatableQuantity(NutrimentA& nutriment)
+Quantity TwitchingBacterium::eatableQuantity(NutrimentA& nutriment) const
 {
     return nutriment.eatenBy(*this);
 }
 
-Quantity TwitchingBacterium::eatableQuantity(NutrimentB& nutriment)
+Quantity TwitchingBacterium::eatableQuantity(NutrimentB& nutriment) const
 {
     return nutriment.eatenBy(*this);
 }
 
-Quantity TwitchingBacterium::eatableQuantity(Poison& poison)
+Quantity TwitchingBacterium::eatableQuantity(Poison& poison) const
 {
     return poison.eatenBy(*this);
 }

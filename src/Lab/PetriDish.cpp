@@ -372,7 +372,7 @@ bool PetriDish::doesCollideWithObstacle(const CircularBody &body) const
    return false;
 }
 
-Vec2d PetriDish::getLastObstaclePos()
+Vec2d PetriDish::getLastObstaclePos() const
 {
     return obstacles.back()->getPosition();
 }

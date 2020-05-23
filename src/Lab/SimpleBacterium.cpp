@@ -15,7 +15,7 @@ unsigned int SimpleBacterium::simpleCounter(0);
 
 SimpleBacterium::SimpleBacterium(const Vec2d& position)
     : Bacterium(position, Vec2d::fromRandomAngle(), uniform(getShortConfig().simplebact_min_radius, getShortConfig().simplebact_max_radius),
-                uniform(getShortConfig().simplebact_min_energy, getShortConfig().simplebact_max_energy), getAppConfig()["simple bacterium"]["color"],
+                uniform(getShortConfig().simplebact_min_energy, getShortConfig().simplebact_max_energy), getConfig()["color"],
                 {{"speed", MutableNumber::positive(getConfig()["speed"])},
                  {"tumble better prob", MutableNumber::positive(getConfig()["tumble"]["better"])},
                  {"tumble worse prob", MutableNumber::positive(getConfig()["tumble"]["worse"])}}),
@@ -136,17 +136,17 @@ unsigned int SimpleBacterium::getSimpleCounter()
     return simpleCounter;
 }
 
-Quantity SimpleBacterium::eatableQuantity(NutrimentA& nutriment)
+Quantity SimpleBacterium::eatableQuantity(NutrimentA& nutriment) const
 {
     return nutriment.eatenBy(*this);
 }
 
-Quantity SimpleBacterium::eatableQuantity(NutrimentB& nutriment)
+Quantity SimpleBacterium::eatableQuantity(NutrimentB& nutriment) const
 {
     return nutriment.eatenBy(*this);
 }
 
-Quantity SimpleBacterium::eatableQuantity(Poison& poison)
+Quantity SimpleBacterium::eatableQuantity(Poison& poison) const
 {
     return poison.eatenBy(*this);
 }

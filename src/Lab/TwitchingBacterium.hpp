@@ -40,7 +40,7 @@ public :
      * @param nutriment de type A qui est consommé par la bactérie
      * @return La quantité de nutriment consommé
      */
-    Quantity eatableQuantity(NutrimentA& nutriment) override;
+    Quantity eatableQuantity(NutrimentA& nutriment) const override;
 
     /**
      * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
@@ -49,9 +49,9 @@ public :
      * @param nutriment de type B qui est consommé par la bactérie
      * @return La quantité de nutriment consommé
      */
-    Quantity eatableQuantity(NutrimentB& nutriment) override;
+    Quantity eatableQuantity(NutrimentB& nutriment) const override;
 
-    Quantity eatableQuantity(Poison& poison) override;
+    Quantity eatableQuantity(Poison& poison) const override;
 
     double getScoreCoefficient(const NutrimentA& nutriment) const override;
 

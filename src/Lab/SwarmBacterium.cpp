@@ -109,17 +109,17 @@ unsigned int SwarmBacterium::getSwarmCounter()
     return swarmCounter;
 }
 
-Quantity SwarmBacterium::eatableQuantity(NutrimentA& nutriment)
+Quantity SwarmBacterium::eatableQuantity(NutrimentA& nutriment) const
 {
     return nutriment.eatenBy(*this);
 }
 
-Quantity SwarmBacterium::eatableQuantity(NutrimentB& nutriment)
+Quantity SwarmBacterium::eatableQuantity(NutrimentB& nutriment) const
 {
     return nutriment.eatenBy(*this);
 }
 
-Quantity SwarmBacterium::eatableQuantity(Poison& poison)
+Quantity SwarmBacterium::eatableQuantity(Poison& poison) const
 {
     return poison.eatenBy(*this);
 }

@@ -14,30 +14,27 @@ j::Value const& NutrimentB::getConfig() const
     return getAppConfig()["nutriments"]["B"];
 }
 
-Quantity NutrimentB::eatenBy(Bacterium& bacterie)
+Quantity NutrimentB::eatenBy(const Bacterium& bacterie)
 {
     return bacterie.eatableQuantity(*this);
 }
 
-Quantity NutrimentB::eatenBy(SimpleBacterium& bacterie)
+Quantity NutrimentB::eatenBy(const SimpleBacterium& bacterie)
 {
-    Quantity prelevement(bacterie.getMaxEatableQuantity() / getConfig()["resistance factor"].toDouble());
-    return takeQuantity(prelevement);
+    return takeQuantity(bacterie.getMaxEatableQuantity() / getShortConfig().nutrimentB_resistance_factor);
 }
 
-Quantity NutrimentB::eatenBy(SwarmBacterium& bacterie)
+Quantity NutrimentB::eatenBy(const SwarmBacterium& bacterie)
 {
-    Quantity prelevement(bacterie.getMaxEatableQuantity());
-    return -getConfig()["poison factor"].toDouble() * takeQuantity(prelevement);
+    return - getShortConfig().nutrimentB_poison_factor * takeQuantity(bacterie.getMaxEatableQuantity());
 }
 
-Quantity NutrimentB::eatenBy(TwitchingBacterium& bacterie)
+Quantity NutrimentB::eatenBy(const TwitchingBacterium& bacterie)
 {
-    Quantity prelevement(bacterie.getMaxEatableQuantity());
-    return getConfig()["nutritive factor"].toDouble() * takeQuantity(prelevement);
+    return getShortConfig().nutrimentB_nutritive_factor * takeQuantity(bacterie.getMaxEatableQuantity());
 }
 
-Quantity NutrimentB::eatenBy(PoisonBacterium& bacterie)
+Quantity NutrimentB::eatenBy(const PoisonBacterium& bacterie)
 {
     return takeQuantity(bacterie.getMaxEatableQuantity() / getShortConfig().nutrimentB_resistance_factor);
 }

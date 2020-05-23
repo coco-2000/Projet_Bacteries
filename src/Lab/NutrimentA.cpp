@@ -14,27 +14,27 @@ j::Value const& NutrimentA::getConfig() const
     return getAppConfig()["nutriments"]["A"];
 }
 
-Quantity NutrimentA::eatenBy(Bacterium& bacterie)
+Quantity NutrimentA::eatenBy(const Bacterium& bacterie)
 {
     return bacterie.eatableQuantity(*this);
 }
 
-Quantity NutrimentA::eatenBy(SimpleBacterium& bacterie)
+Quantity NutrimentA::eatenBy(const SimpleBacterium& bacterie)
 {
     return takeQuantity(bacterie.getMaxEatableQuantity());
 }
 
-Quantity NutrimentA::eatenBy(SwarmBacterium& bacterie)
+Quantity NutrimentA::eatenBy(const SwarmBacterium& bacterie)
 {
     return takeQuantity(bacterie.getMaxEatableQuantity());
 }
 
-Quantity NutrimentA::eatenBy(TwitchingBacterium& bacterie)
+Quantity NutrimentA::eatenBy(const TwitchingBacterium& bacterie)
 {
     return takeQuantity(bacterie.getMaxEatableQuantity());
 }
 
-Quantity NutrimentA::eatenBy(PoisonBacterium& bacterie)
+Quantity NutrimentA::eatenBy(const PoisonBacterium& bacterie)
 {
     return takeQuantity(bacterie.getMaxEatableQuantity());
 }

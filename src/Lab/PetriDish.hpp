@@ -199,7 +199,7 @@ public:
     double minimumDistToObstacle(const Vec2d& position) const;
     bool doesCollideWithObstacle(CircularBody const& body) const;
     void deleteUnderObstacle();
-    Vec2d getLastObstaclePos();
+    Vec2d getLastObstaclePos() const;
 
 private :
     std::vector<Bacterium*> bacteries;
