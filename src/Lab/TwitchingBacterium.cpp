@@ -70,7 +70,7 @@ void TwitchingBacterium::move(sf::Time dt)
     switch(state)
     {
         case IDLE : state = WAIT_TO_DEPLOY; break;
-        case WAIT_TO_DEPLOY : waitToDeployState(); break;
+        case WAIT_TO_DEPLOY : waitToDeployState(dt); break;
         case DEPLOY : deployState(dt, nutrimentPtr); break;
         case ATTRACT : attractState(dt, nutrimentPtr); break;
         case RETRACT : retractState (dt); break;
@@ -80,8 +80,11 @@ void TwitchingBacterium::move(sf::Time dt)
     nutrimentPtr = nullptr;
 }
 
-void TwitchingBacterium::waitToDeployState()
+void TwitchingBacterium::waitToDeployState(sf::Time dt)
 {
+    if(isLost())
+        lostTrySwitch(dt);
+
     strategy2();
     state = DEPLOY;
 }

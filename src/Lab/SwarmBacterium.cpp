@@ -43,16 +43,7 @@ void SwarmBacterium::move(sf::Time dt)
     if(isLost())
     {
         newPosition = stepDiffEq(getPosition(), getSpeedVector(), dt, *this).position;
-
-        timeSwitching += dt;
-        double lambda(getConfig()["lambda basculement"].toDouble());
-        const double switchProba =  lambda != 0 ? 1 - exp(- timeSwitching.asSeconds() / lambda) : 1;
-
-        if(bernoulli(switchProba) == 1)
-        {
-         strategy1();
-         timeSwitching = sf::Time::Zero;
-        }
+        lostTrySwitch(dt);
     }
     else
     {
@@ -71,9 +62,7 @@ void SwarmBacterium::move(sf::Time dt)
     }
 
     if(group->IsLeader(this))
-    {
         strategy2();
-    }
 }
 
 Vec2d SwarmBacterium::f(Vec2d position, Vec2d speed) const

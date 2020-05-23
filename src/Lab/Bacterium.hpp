@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "Utility/Types.hpp"
 #include <string>
+#include <functional>
 
 class Nutriment;
 class NutrimentA;
@@ -214,7 +215,22 @@ protected :
      */
     void strategy2();
 
+    /**
+     * @brief consumeNutriment gère la consommation des bacteries
+     * @param dt Pas de temps après lequel la simulation est mise à jour
+     */
+    virtual void consumeNutriment(sf::Time dt);
+
+
+    sf::Time getTimeSwitch() const;
+
+    void setTimeSwitch(sf::Time newTime);
+
+    virtual void manageLost(sf::Time dt);
+
     void setLost(bool islost);
+
+    void lostTrySwitch(sf::Time dt);
 
 private :
     MutableColor color;
@@ -227,6 +243,7 @@ private :
     double oldScore;
     bool lost;
     sf::Time timeLost;
+    sf::Time timeSwitch;
 
     /**
      * @brief displayEnergy Affiche la quantité d'énergie de la bacterie (si mode debugging activé)
@@ -275,12 +292,6 @@ private :
     virtual j::Value const& getConfig() const = 0;
 
     /**
-     * @brief consumeNutriment gère la consommation des bacteries
-     * @param dt Pas de temps après lequel la simulation est mise à jour
-     */
-    void consumeNutriment(sf::Time dt);
-
-    /**
      * @brief rotationAngle mise à jour de l'angle de rotation
      * @param dt Pas de temps après lequel la simulation est mise à jour
      */
@@ -314,8 +325,6 @@ private :
     double helperPositionScore(const Vec2d& offset, const Bacterium& bacterie) const;
 
     sf::Time getMaxTimeLost() const;
-
-    void manageLost(sf::Time dt);
 
     /**
      * @brief operator = empecher l'usage de l'opérateur d'affectation car il n'est pas utilisé

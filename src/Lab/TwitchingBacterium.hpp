@@ -119,7 +119,7 @@ protected :
      * @brief Wait_to_deploy_state etat dans lequel le tentacule de la bactérie se prépare au déploiement.
      * Choix de la direction
      */
-    void waitToDeployState();
+    void waitToDeployState(sf::Time dt);
 
     /**
      * @brief deploy_state etat dans lequel le tentacule se déploie.

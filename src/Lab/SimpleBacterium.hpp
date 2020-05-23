@@ -72,10 +72,12 @@ protected :
      */
     void move(sf::Time dt) override;
 
+    void consumeNutriment(sf::Time dt) override;
+    void manageLost(sf::Time dt) override;
+
 
 private :
     double timeFlagellum;
-    sf::Time timeSwitching;
     static unsigned int simpleCounter;
 
     /**
@@ -88,7 +90,7 @@ private :
     /**
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
      */
-    void trySwitch();
+    void trySwitch(sf::Time dt);
 
     /**
      * @brief switchDirection effectue le basculement de l'instance courante

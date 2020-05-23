@@ -12,8 +12,13 @@ void Obstacle::drawOn(sf::RenderTarget &target) const
 
     const auto texture = getShortConfig().obstacle_texture;
     auto nutrimentSprite = buildSprite(getPosition(), TAILLE_OBJ_GRAPHIQUE, getAppTexture(texture));
-    // adapte la taille du Sprite au rayon du nutriment:
+    // adapte la taille du Sprite au rayon de l'obstacle:
     nutrimentSprite.setScale(2 * getRadius() / getAppTexture(texture).getSize().x,
                              2 * getRadius() / getAppTexture(texture).getSize().y);
     target.draw(nutrimentSprite);
+}
+
+j::Value const& Obstacle::getConfig() const
+{
+    return getAppConfig()["obstacle"];
 }

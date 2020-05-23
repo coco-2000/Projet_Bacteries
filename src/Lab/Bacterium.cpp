@@ -62,10 +62,20 @@ sf::Time Bacterium::getMaxTimeLost() const
     return sf::seconds(10.0);
 }
 
+sf::Time Bacterium::getTimeSwitch() const
+{
+    return timeSwitch;
+}
+
+void Bacterium::setTimeSwitch(sf::Time newTime)
+{
+    timeSwitch = newTime;
+}
+
 Quantity Bacterium::getStepEnergy() const
 {
     double stepEnergy(getConfig()["energy"]["consumption factor"].toDouble());
-    return lost ? stepEnergy/2 : stepEnergy;
+    return lost ? 1/2*stepEnergy : stepEnergy;
 }
 
 Quantity Bacterium::getMaxEatableQuantity() const
@@ -127,6 +137,7 @@ void Bacterium::consumeNutriment(sf::Time dt)
         consumeCounter = sf::Time::Zero;
         eat(*nutriment_ptr);
         nutriment_ptr = nullptr;
+
         lost = false;
         timeLost = sf::Time::Zero;
     }
@@ -244,6 +255,23 @@ void Bacterium::eat(Nutriment& nutriment)
 {
   Quantity eaten(nutriment.eatenBy(*this));
   energy += eaten;
+}
+
+void Bacterium::lostTrySwitch(sf::Time dt)
+{
+    timeSwitch += dt;
+    for (auto key : getConfig()["lost"].keys())
+    {
+        std::cout<< key << std::endl;
+
+    }
+    double lambda(getConfig()["lost"]["lambda basculement"].toDouble());
+    const double proba_basculement = lambda != 0 ? 1 - exp(-timeSwitch.asSeconds() / lambda) : 1;
+     if(bernoulli(proba_basculement))
+     {
+         strategy1();
+         timeSwitch = sf::Time::Zero;
+     }
 }
 
 void Bacterium::strategy1()
