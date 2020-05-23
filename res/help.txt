@@ -8,6 +8,9 @@ R	: resets simulation
 MW	: Zoom
 Esc	: close window
 C	: refresh config
+O       : create obstacle
+E       : delete obstacle
+W       : create obstacle wall
 Arrows	: move simulation
 	view
 Tab	: switch to next

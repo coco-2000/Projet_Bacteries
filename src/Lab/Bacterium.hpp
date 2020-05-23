@@ -221,6 +221,11 @@ protected :
      */
     virtual void consumeNutriment(sf::Time dt);
 
+    double getLostEnergyFactor() const;
+
+    double getLostLambdaSwitch() const;
+
+    sf::Time getMaxTimeLost() const;
 
     sf::Time getTimeSwitch() const;
 
@@ -231,6 +236,8 @@ protected :
     void setLost(bool islost);
 
     void lostTrySwitch(sf::Time dt);
+
+
 
 private :
     MutableColor color;
@@ -323,8 +330,6 @@ private :
      * @return Score associé à la nouvelle position
      */
     double helperPositionScore(const Vec2d& offset, const Bacterium& bacterie) const;
-
-    sf::Time getMaxTimeLost() const;
 
     /**
      * @brief operator = empecher l'usage de l'opérateur d'affectation car il n'est pas utilisé

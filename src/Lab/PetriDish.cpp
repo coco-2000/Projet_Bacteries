@@ -303,7 +303,7 @@ double PetriDish::getPositionScore(const Vec2d& position, const Bacterium& bacte
 
     for(const auto&  obstacle : obstacles)
     {
-         sum -= obstacle->getRadius()/ pow(distance(position, obstacle->getPosition()), power*1.7);
+         sum -= obstacle->getRadius()/ pow(distance(position, obstacle->getPosition()), power * getShortConfig().obstacle_gradient_factor);
     }
 
     return sum;

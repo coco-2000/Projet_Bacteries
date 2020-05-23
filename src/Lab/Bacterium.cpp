@@ -59,7 +59,7 @@ sf::Time Bacterium::getDelay() const
 
 sf::Time Bacterium::getMaxTimeLost() const
 {
-    return sf::seconds(10.0);
+    return sf::seconds(getConfig()["lost"]["time"].toDouble());
 }
 
 sf::Time Bacterium::getTimeSwitch() const
@@ -72,10 +72,20 @@ void Bacterium::setTimeSwitch(sf::Time newTime)
     timeSwitch = newTime;
 }
 
+double Bacterium::getLostEnergyFactor() const
+{
+    return getConfig()["lost"]["energy factor"].toDouble();
+}
+
+double Bacterium::getLostLambdaSwitch() const
+{
+    return getConfig()["lost"]["lambda switch"].toDouble();
+}
+
 Quantity Bacterium::getStepEnergy() const
 {
     double stepEnergy(getConfig()["energy"]["consumption factor"].toDouble());
-    return lost ? stepEnergy/2 : stepEnergy;
+    return lost ? getLostEnergyFactor()*stepEnergy : stepEnergy;
 }
 
 Quantity Bacterium::getMaxEatableQuantity() const
@@ -117,15 +127,12 @@ void Bacterium::update(sf::Time dt)
 
 void Bacterium::collision()
 {
+    lost = true;
     if (getAppEnv().doesCollideWithObstacle(*this))
-    {
-        lost = true;
         strategy2();
-    }
+
     else if(getAppEnv().doesCollideWithDish(*this))
-    {
         direction = - direction;
-    }
 }
 
 void Bacterium::consumeNutriment(sf::Time dt)
@@ -261,7 +268,7 @@ void Bacterium::lostTrySwitch(sf::Time dt)
 {
     timeSwitch += dt;
 
-    const double lambda(getConfig()["lost"]["lambda basculement"].toDouble());
+    const double lambda(getLostLambdaSwitch());
     const double switchProba = lambda != 0 ? 1 - exp(- timeSwitch.asSeconds() / lambda) : 1;
 
     if(bernoulli(switchProba))

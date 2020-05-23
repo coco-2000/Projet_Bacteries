@@ -160,7 +160,7 @@
         "lost" : {
             "time" : 7,
             "energy factor" : 0.5,
-            "lambda basculement" : 400
+            "lambda switch" : 400
         }
     },
     "poison bacterium" : {
@@ -299,7 +299,7 @@
         "lost" : {
             "time" : 7,
             "energy factor" : 0.5,
-            "lambda basculement" : 400
+            "lambda switch" : 400
         }
     },
     "swarms" : {
@@ -458,12 +458,12 @@
         "lost" : {
             "time" : 7,
             "energy factor" : 0.5,
-            "lambda basculement" : 100
+            "lambda switch" : 100
         }
     },
     "obstacle" : {
         "radius" : 50,
-        "gradient factor" : 1.8,
+        "gradient factor" : 1.7,
         "texture" : "rock.png"
     },
 

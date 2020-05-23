@@ -54,7 +54,7 @@ Quantity TwitchingBacterium::getStepEnergy() const
 Quantity TwitchingBacterium::getTentacleEnergy() const
 {
     double tentacleEnergy(getShortConfig().twitchingbact_consumption_factor_tentacle);
-    return isLost() ? 1/5*tentacleEnergy : tentacleEnergy;
+    return isLost() ? getLostEnergyFactor()*tentacleEnergy : tentacleEnergy;
 }
 
 void TwitchingBacterium::moveGrip(const Vec2d& delta)

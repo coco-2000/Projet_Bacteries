@@ -18,7 +18,4 @@ void Obstacle::drawOn(sf::RenderTarget &target) const
     target.draw(nutrimentSprite);
 }
 
-j::Value const& Obstacle::getConfig() const
-{
-    return getAppConfig()["obstacle"];
-}
+
