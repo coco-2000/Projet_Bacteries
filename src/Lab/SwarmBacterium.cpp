@@ -61,7 +61,7 @@ void SwarmBacterium::move(sf::Time dt)
         CircularBody::move(deltaPos);
     }
 
-    if(group->IsLeader(this))
+    if(group->IsLeader(this) and !isLost())
         strategy2();
 }
 

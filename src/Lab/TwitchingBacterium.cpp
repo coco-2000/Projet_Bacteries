@@ -1,5 +1,4 @@
 #include "TwitchingBacterium.hpp"
-
 #include "Application.hpp"
 #include <SFML/Graphics.hpp>
 #include "../Utility/Utility.hpp"
@@ -96,7 +95,7 @@ void TwitchingBacterium::deployState(sf::Time dt, const Nutriment* nutrimentPtr)
     if(nutrimentPtr != nullptr)
         state = ATTRACT;
     else if((grip.getPosition() - getPosition()).length() >= getProperty("tentacle length").get()
-              or getAppEnv().doesCollideWithDish(grip) or getAppEnv().doesCollideWithObstacle(grip))
+            or getAppEnv().doesCollideWithDish(grip) or getAppEnv().doesCollideWithObstacle(grip))
     {
         state = RETRACT;
         if(getAppEnv().doesCollideWithObstacle(grip))
@@ -133,17 +132,17 @@ void TwitchingBacterium::retractState(sf::Time dt)
     (*this > grip) ? tentacleInit() : gripToward((getPosition() - grip.getPosition()).normalised(), dt);
 }
 
-void TwitchingBacterium::gripToward (const Vec2d& dir, sf::Time dt)
+void TwitchingBacterium::gripToward(const Vec2d& direction, sf::Time dt)
 {
-    setDirection(dir);
-    const double dist_tentacule = getProperty("tentacle speed").get()*dt.asSeconds();
-    moveGrip(dir*dist_tentacule);
-    consumeEnergy(getTentacleEnergy()*dist_tentacule);
+    setDirection(direction);
+    const double distTentacle = getProperty("tentacle speed").get()*dt.asSeconds();
+    moveGrip(direction * distTentacle);
+    consumeEnergy(getTentacleEnergy() * distTentacle);
 }
 
-void TwitchingBacterium::eatState(const Nutriment *nutriment_ptr)
+void TwitchingBacterium::eatState(const Nutriment* nutrimentPtr)
 {
-    if ((nutriment_ptr == nullptr) or (!(*nutriment_ptr & *this)))
+    if ((nutrimentPtr == nullptr) or (!(*nutrimentPtr & *this)))
         state = IDLE;
 }
 
@@ -189,6 +188,4 @@ double TwitchingBacterium::getScoreCoefficient(const Poison& poison) const
 }
 
 TwitchingBacterium::~TwitchingBacterium()
-{
-    -- twitchCounter;
-}
+{ -- twitchCounter; }

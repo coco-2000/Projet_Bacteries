@@ -143,27 +143,23 @@ void Bacterium::collision()
 
 void Bacterium::consumeNutriment(sf::Time dt)
 {
-    Nutriment* nutriment_ptr = getAppEnv().getNutrimentColliding(*this);
+    Nutriment* nutrimentPtr = getAppEnv().getNutrimentColliding(*this);
 
-    if(nutriment_ptr != nullptr and consumeCounter >= getDelay() and !abstinence)
+    if(nutrimentPtr != nullptr and consumeCounter >= getDelay() and !abstinence)
     {
         consumeCounter = sf::Time::Zero;
-        eat(*nutriment_ptr);
-        nutriment_ptr = nullptr;
+        eat(*nutrimentPtr);
+        nutrimentPtr = nullptr;
         lost = false;
     }
     else
-    {
       consumeCounter += dt;
-    }
 }
 
 void Bacterium::manageLost(sf::Time dt)
 {
     if (timeLost >= getMaxTimeLost())
-    {
         lost = false;
-    }
     else
         timeLost += dt;
 }
@@ -176,33 +172,25 @@ void Bacterium::consumeEnergy(Quantity qt)
 void Bacterium::setScore(double score)
 {
     if(score > 0)
-    {
         oldScore = score;
-    }
 }
 
 void Bacterium::addProperty(const std::string& key, const MutableNumber& value)
 {
     if(paramMutables.find(key) != paramMutables.end())
-    {
         throw std::invalid_argument("ajout d'une propriété associée à une clé déjà existante");
-    }
+
     else
-    {
         paramMutables.at(key) = value;
-    }
 }
 
 MutableNumber Bacterium::getProperty(const std::string& key) const
 {
     if(paramMutables.find(key) == paramMutables.end())
-    {
         throw std::out_of_range("recherche de la valeur d'une clé invalide ");
-    }
+
     else
-    {
         return paramMutables.find(key)->second;
-    }
 }
 
 void Bacterium::rotationAngle(sf::Time dt)
@@ -275,14 +263,15 @@ void Bacterium::eat(Nutriment& nutriment)
 void Bacterium::lostTrySwitch(sf::Time dt)
 {
     timeSwitch += dt;
-    double lambda(getLostLambdaSwitch());
-    const double proba_basculement = lambda != 0 ? 1 - exp(-timeSwitch.asSeconds() / lambda) : 1;
 
-    if(bernoulli(proba_basculement))
-     {
-         strategy1();
-         timeSwitch = sf::Time::Zero;
-     }
+    const double lambda(getLostLambdaSwitch());
+    const double switchProba = lambda != 0 ? 1 - exp(- timeSwitch.asSeconds() / lambda) : 1;
+
+    if(bernoulli(switchProba))
+    {
+        strategy1();
+        timeSwitch = sf::Time::Zero;
+    }
 }
 
 void Bacterium::strategy1()
@@ -300,8 +289,6 @@ void Bacterium::strategy2()
         double newScore = helperPositionScore (newDir, *this);
 
         if(newScore > helperPositionScore(getDirection(), *this))
-        {
             setDirection(newDir);
-        }
     }
 }

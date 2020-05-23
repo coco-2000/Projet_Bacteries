@@ -2,7 +2,6 @@
 
 #include "Bacterium.hpp"
 #include "Grip.hpp"
-//#include "Nutriment.hpp"
 
 enum Etat {IDLE, WAIT_TO_DEPLOY, DEPLOY, ATTRACT, RETRACT, EAT};
 
@@ -124,16 +123,16 @@ private :
      * Changement d'état de la bactérie si le tentacule rencontre une source de nutriment,
      * si il rencontre un obstacle, le bord de la pétri ou si la tentacule à atteint sa taille maximale
      * @param dt Pas de temps apres lequel la simulation est mise à jour
-     * @param nutriment_ptr la source de nutriment que le tentacule pourrait rencontrer
+     * @param nutrimentPtr la source de nutriment que le tentacule pourrait rencontrer
      */
-    void deployState(sf::Time dt, const Nutriment* nutriment_ptr);
+    void deployState(sf::Time dt, const Nutriment* nutrimentPtr);
 
     /**
      * @brief attractState Etat dans lequel le tentacule attire la bacterie vers la nourriture
      * @param dt Pas de temps apres lequel la simulation est mise à jour
-     * @param nutriment_ptr source de nutriment vers laquelle la bacterie se déplace
+     * @param nutrimentPtr source de nutriment vers laquelle la bacterie se déplace
      */
-    void attractState(sf::Time dt, const Nutriment* nutriment_ptr);
+    void attractState(sf::Time dt, const Nutriment* nutrimentPtr);
 
     /**
      * @brief retract_state État dans lequel la bactérie rétracte le tentacule
@@ -144,17 +143,17 @@ private :
     /**
      * @brief eat_state état durant lequel la bactérie est entrain de consommer des nutriments
      * Gère le changement d'état si la bactérie ne peut plus consommer de nutriment
-     * @param nutriment_ptr la source de nutriment que la bactérie est entrain de consommer
+     * @param nutrimentPtr la source de nutriment que la bactérie est entrain de consommer
      */
-    void eatState(const Nutriment* nutriment_ptr);
+    void eatState(const Nutriment* nutrimentPtr);
 
     /**
      * @brief grapinToward gère le déplacement du grapin selon sa vitesse ainsi que la consommation
      * d'énergie associée à son mouvement
-     * @param dir direction dans laquelle le grapin se déplace
+     * @param direction dans laquelle le grapin se déplace
      * @param dt Pas de temps apres lequel la simulation est mise à jour
      */
-    void gripToward (const Vec2d& dir, sf::Time dt);
+    void gripToward (const Vec2d& direction, sf::Time dt);
 
     /**
      * @brief shift_clone décale la bactérie clonée pour la différencier de la bactérie d'origine
