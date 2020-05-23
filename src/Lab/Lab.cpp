@@ -60,17 +60,17 @@ void Lab::reset()
     nutrimentGenerator.reset();
 }
 
-void Lab::addNutriment(Nutriment* nutriment)
+bool Lab::addNutriment(Nutriment* nutriment)
 {
     petri.addNutriment(nutriment);
 }
 
-void Lab::addBacterium(Bacterium* bacterie)
+bool Lab::addBacterium(Bacterium* bacterie)
 {
     petri.addBacterium(bacterie);
 }
 
-void Lab::addObstacle(Obstacle* obstacle)
+bool Lab::addObstacle(Obstacle* obstacle)
 {
     petri.addObstacle(obstacle);
 }

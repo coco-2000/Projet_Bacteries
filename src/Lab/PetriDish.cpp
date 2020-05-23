@@ -88,7 +88,7 @@ bool PetriDish::addObstacle(Obstacle* obstacle)
     if (addable)
     {
         obstacles.push_back(obstacle);
-        deleteUnderObstacle();
+        deleteUnderObstacle(obstacle);
     }
     else
     {
@@ -115,11 +115,11 @@ void PetriDish::createWall(const Vec2d& position1, const Vec2d& position2)
    }
 }
 
-void PetriDish::deleteUnderObstacle()
+void PetriDish::deleteUnderObstacle(Obstacle *obstacle)
 {
     for (auto& bacterie : bacteries)
     {
-        if(doesCollideWithObstacle(*bacterie))
+        if(*obstacle & *bacterie or *obstacle > *bacterie)
         {
             delete bacterie;
             bacterie = nullptr;
@@ -130,7 +130,7 @@ void PetriDish::deleteUnderObstacle()
 
     for (auto& nutriment : nutriments)
     {
-        if(doesCollideWithObstacle(*nutriment))
+        if(*obstacle & *nutriment or *obstacle > *nutriment)
         {
             delete nutriment;
             nutriment = nullptr;
@@ -378,8 +378,7 @@ const Vec2d& PetriDish::getLastObstaclePos() const
 double PetriDish::getMeanBacteria(const std::string &s) const
 {
     double value(0.0);
-    int sum(0);
-
+    double sum(0);
     for (const auto& bacterie : bacteries)
     {
         auto pMutable = bacterie->getparamMutables();
@@ -389,7 +388,8 @@ double PetriDish::getMeanBacteria(const std::string &s) const
             value += bacterie->getparamMutables().at(s).get();
         }
     }
-    return sum != 0 ? value/sum : -1;
+
+    return sum != 0 ? ( value/sum) : -1.;
 }
 
 double PetriDish::getTotalNutriment() const
@@ -423,7 +423,7 @@ GraphData PetriDish::getPropertyNutrimentQuantity() const
 GraphData PetriDish::getPropertySimpleBacteria() const
 {
     return {{s::BETTER, getMeanBacteria(s::BETTER)},
-            {s::WORSE, getMeanBacteria(s::WORSE)}};
+            {s::WORSE, (double)getMeanBacteria(s::WORSE)}};
 }
 
 GraphData PetriDish::getPropertyTwitchingBacteria() const

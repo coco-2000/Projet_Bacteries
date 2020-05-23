@@ -9,7 +9,7 @@ Bacterium::Bacterium(const Vec2d& position, const Vec2d& direction, double radiu
                      bool abstinence)
 
     : CircularBody(position, radius), color(color), direction(direction), energy(energy),
-      paramMutables(paramMutables), abstinence(abstinence), lost(false)
+      paramMutables(paramMutables), abstinence(abstinence), lost(false), timeLost(sf::Time::Zero)
 {
     angle = direction.angle();
 }
@@ -129,11 +129,13 @@ void Bacterium::collision()
 {
     if (getAppEnv().doesCollideWithObstacle(*this))
     {
+        timeLost = sf::Time::Zero;
         lost = true;
         strategy2();
     }
     else if(getAppEnv().doesCollideWithDish(*this))
     {
+        timeLost = sf::Time::Zero;
         lost = true;
         direction = - direction;
     }
@@ -148,9 +150,7 @@ void Bacterium::consumeNutriment(sf::Time dt)
         consumeCounter = sf::Time::Zero;
         eat(*nutriment_ptr);
         nutriment_ptr = nullptr;
-
         lost = false;
-        timeLost = sf::Time::Zero;
     }
     else
     {
@@ -163,7 +163,6 @@ void Bacterium::manageLost(sf::Time dt)
     if (timeLost >= getMaxTimeLost())
     {
         lost = false;
-        timeLost = sf::Time::Zero;
     }
     else
         timeLost += dt;
@@ -250,6 +249,11 @@ void Bacterium::setDirection(const Vec2d& newDir)
 void Bacterium::setLost(bool islost)
 {
    lost = islost;
+}
+
+void Bacterium::setTimeLost(sf::Time dt)
+{
+    timeLost = dt;
 }
 
 double Bacterium::getOldScore() const
