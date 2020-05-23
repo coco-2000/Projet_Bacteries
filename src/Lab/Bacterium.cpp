@@ -4,12 +4,12 @@
 #include "CircularBody.hpp"
 #include "Nutriment.hpp"
 
-Bacterium::Bacterium(const Vec2d& position, const Vec2d& direction, double radius, Quantity energie,
-                     const MutableColor& couleur, const std::map<std::string, MutableNumber>& param_mutables,
+Bacterium::Bacterium(const Vec2d& position, const Vec2d& direction, double radius, Quantity energy,
+                     const MutableColor& color, const std::map<std::string, MutableNumber>& paramMutables,
                      bool abstinence)
 
-    : CircularBody(position, radius), color(couleur), direction(direction), energy(energie),
-      paramMutables(param_mutables), abstinence(abstinence), lost(false)
+    : CircularBody(position, radius), color(color), direction(direction), energy(energy),
+      paramMutables(paramMutables), abstinence(abstinence), lost(false)
 {
     angle = direction.angle();
 }
@@ -20,10 +20,10 @@ void Bacterium::divide()
     if(energy >= getEnergy())
     {
         energy /= 2;
-        Bacterium* copie(clone());
-        copie->mutate();
-        copie->shiftClone({10,-10}); //pour que l'on puisse tout de suite voir s'il y a eu division
-        getAppEnv().addAnnex(copie);
+        Bacterium* copy(clone());
+        copy->mutate();
+        copy->shiftClone({10,-10}); //pour que l'on puisse tout de suite voir s'il y a eu division
+        getAppEnv().addAnnex(copy);
         direction = Vec2d::fromAngle(getAngle() + M_PI/2);
     }
 }
@@ -72,10 +72,20 @@ void Bacterium::setTimeSwitch(sf::Time newTime)
     timeSwitch = newTime;
 }
 
+double Bacterium::getLostEnergyFactor() const
+{
+    return getConfig()["lost"]["energy factor"].toDouble();
+}
+
+double Bacterium::getLostLambdaSwitch() const
+{
+    return getConfig()["lost"]["lambda switch"].toDouble();
+}
+
 Quantity Bacterium::getStepEnergy() const
 {
     double stepEnergy(getConfig()["energy"]["consumption factor"].toDouble());
-    return lost ? 1/2*stepEnergy : stepEnergy;
+    return lost ? getLostEnergyFactor()*stepEnergy : stepEnergy;
 }
 
 Quantity Bacterium::getMaxEatableQuantity() const
@@ -96,7 +106,7 @@ void Bacterium::displayEnergy(sf::RenderTarget& target) const
     if(isDebugOn())
     {
         target.draw(buildText(std::to_string(static_cast<int>(energy)),
-                              decalage({10,10}),
+                              shift({10,10}),
                               getAppFont(),
                               TAILLE_FONTE,
                               sf::Color::Red, 0));
@@ -117,25 +127,21 @@ void Bacterium::update(sf::Time dt)
 
 void Bacterium::collision()
 {
-   // constexpr double EPSILON = 22;
+    lost = true;
     if (getAppEnv().doesCollideWithObstacle(*this))
-    {
-        lost = true;
         strategy2();
-    }
+
     else if(getAppEnv().doesCollideWithDish(*this))
-    {
         direction = - direction;
-    }
 }
 
 void Bacterium::consumeNutriment(sf::Time dt)
 {
     Nutriment* nutriment_ptr = getAppEnv().getNutrimentColliding(*this);
 
-    if(nutriment_ptr != nullptr and counter >= getDelay() and !abstinence)
+    if(nutriment_ptr != nullptr and consumeCounter >= getDelay() and !abstinence)
     {
-        counter = sf::Time::Zero;
+        consumeCounter = sf::Time::Zero;
         eat(*nutriment_ptr);
         nutriment_ptr = nullptr;
 
@@ -144,7 +150,7 @@ void Bacterium::consumeNutriment(sf::Time dt)
     }
     else
     {
-      counter += dt;
+      consumeCounter += dt;
     }
 }
 
@@ -172,7 +178,7 @@ void Bacterium::setScore(double score)
     }
 }
 
-void Bacterium::addProperty(const std::string& key, const MutableNumber& valeur)
+void Bacterium::addProperty(const std::string& key, const MutableNumber& value)
 {
     if(paramMutables.find(key) != paramMutables.end())
     {
@@ -180,7 +186,7 @@ void Bacterium::addProperty(const std::string& key, const MutableNumber& valeur)
     }
     else
     {
-        paramMutables.at(key) = valeur;
+        paramMutables.at(key) = value;
     }
 }
 
@@ -232,9 +238,9 @@ Vec2d Bacterium::getDirection() const
     return direction;
 }
 
-void Bacterium::setDirection(const Vec2d& new_dir)
+void Bacterium::setDirection(const Vec2d& newDir)
 {
-    direction = new_dir;
+    direction = newDir;
 }
 
 void Bacterium::setLost(bool islost)
@@ -261,14 +267,10 @@ void Bacterium::eat(Nutriment& nutriment)
 void Bacterium::lostTrySwitch(sf::Time dt)
 {
     timeSwitch += dt;
-    for (auto key : getConfig()["lost"].keys())
-    {
-        std::cout<< key << std::endl;
-
-    }
-    double lambda(getConfig()["lost"]["lambda basculement"].toDouble());
+    double lambda(getLostLambdaSwitch());
     const double proba_basculement = lambda != 0 ? 1 - exp(-timeSwitch.asSeconds() / lambda) : 1;
-     if(bernoulli(proba_basculement))
+
+    if(bernoulli(proba_basculement))
      {
          strategy1();
          timeSwitch = sf::Time::Zero;
@@ -286,12 +288,12 @@ void Bacterium::strategy2()
 
     for(int i(0); i < N; ++i)
     {
-        const Vec2d new_dir (Vec2d::fromRandomAngle());
-        double newScore = helperPositionScore (new_dir, *this);
+        const Vec2d newDir (Vec2d::fromRandomAngle());
+        double newScore = helperPositionScore (newDir, *this);
 
         if(newScore > helperPositionScore(getDirection(), *this))
         {
-            setDirection(new_dir);
+            setDirection(newDir);
         }
     }
 }

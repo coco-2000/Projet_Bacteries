@@ -31,7 +31,7 @@ public :
      * @param vector Vecteur de décalage
      * @return Les coordonnées décalées par rapport à la position de l'instance courante
      */
-    Vec2d decalage(const Vec2d& vector) const;
+    Vec2d shift(const Vec2d& vector) const;
 
     /**
      * @brief CircularBody::contains Vérifie les inclusions
@@ -39,15 +39,6 @@ public :
      * @return vrai si other est contenu dans l'instance courante
      */
     bool contains(const CircularBody& other) const;
-
-    /**
-     * @brief CircularBody::isColliding vérifier les collisions
-     * @param other est celui pour lequel on vérifie s'il entre en collision avec l'instance courante
-     * @return vrai s'ils sont en collision
-     */
-    bool isColliding(const CircularBody& other) const;
-
-    //bool isOverlapping(const CircularBody& other) const;
 
     /**
      * @brief CircularBody::contains verifier l'inclusion d'un point
@@ -68,10 +59,16 @@ public :
      * @param out : flux de sortie
      * @return le flux passé en paramètre
      */
-    std::ostream& affiche(std::ostream& out) const;
+    std::ostream& display(std::ostream& out) const;
+
+    /**
+     * @brief CircularBody::isColliding vérifier les collisions
+     * @param other est celui pour lequel on vérifie s'il entre en collision avec l'instance courante
+     * @return vrai s'ils sont en collision
+     */
+    bool isColliding(const CircularBody& other) const;
 
 protected :
-
     /**
      * @brief CircularBody::CircularBody Constructeur
      * @param position Coordonnées de la position du CircularBody
@@ -105,8 +102,7 @@ private :
      * @brief CircularBody::copie Effectue la copie des attributs d'un autre corps dans l'instance courante
      * @param body instance à copier
      */
-    void copie (const CircularBody& body);
-
+    void copy (const CircularBody& body);
 };
 
 /**
@@ -139,7 +135,7 @@ bool operator&(CircularBody const& body1, CircularBody const& body2);
  * @param point onverfifie s'il contient le body
  * @return vrai si le point est contenu dans le body
  */
-bool operator>(CircularBody  const& body, Vec2d const& point);
+bool operator>(CircularBody const& body, Vec2d const& point);
 
 
 

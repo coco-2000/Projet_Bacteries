@@ -15,12 +15,12 @@ public:
      * @param Max Borne supérieure
      */
     MutableNumber(double value,
-                  double mutate_proba,
-                  double ecart_type,
+                  double rate,
+                  double sigma,
                   bool hasMin = false,
+                  double min = 0,
                   bool hasMax = false,
-                  double Min = 0,
-                  double Max = 0);
+                  double max = 0);
 
     /**
      * @brief MutableNumber Constructeur
@@ -53,7 +53,7 @@ public:
      * @param sigma Ecart type permettant la modification aléatoire de la valeur du nombre
      * @return Le MutableNumber généré à partir des paramètres passés en argument
      */
-    static MutableNumber probability(double initialValue, double mutationProbability, double sigma);
+    static MutableNumber probability(double initialValue, double rate, double sigma);
 
     /**
      * @brief probability Génère un MutableNumber de type probabilité (valeurs plafonnées entre 0 et 1)
@@ -72,7 +72,7 @@ public:
      * @return Le MutableNumber généré à partir des paramètres passés en argument
      */
     static MutableNumber positive(double initialValue,
-                                  double mutationProbability,
+                                  double rate,
                                   double sigma,
                                   bool hasMax = false,
                                   double max = 0);
@@ -89,13 +89,13 @@ public:
                                   double max = 0);
 
 private :
-    double valeur;
-    double mutationProbability;
-    double EcartType;
+    double value;
+    double rate;
+    double sigma;
     bool hasMin;
-    double Min;
+    double min;
     bool hasMax;
-    double Max;
+    double max;
 };
 
 

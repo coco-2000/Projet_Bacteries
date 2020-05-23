@@ -6,11 +6,11 @@ Lab::Lab()
     : petri(getApp().getCentre(), (0.95/2)*getApp().getLabSize().x)
 {
     namesGraph = {
-        {s::GENERAL,                [&]() { return petri.getPropertyGeneral();}              },
+        {s::GENERAL,                [&]() { return petri.getPropertyGeneral();}             },
         {s::SIMPLE_BACTERIA,        [&]() { return petri.getPropertySimpleBacteria();}      },
         {s::TWITCHING_BACTERIA,     [&]() { return petri.getPropertyTwitchingBacteria();}   },
         {s::BACTERIA,               [&]() { return petri.getPropertyBacteria();}            },
-        {s::NUTRIMENT_QUANTITY,     [&]() { return petri.getPropertyNutrimentQuantity();}    }};
+        {s::NUTRIMENT_QUANTITY,     [&]() { return petri.getPropertyNutrimentQuantity();}   }};
 }
 
 bool Lab::contains(const CircularBody& corps) const
@@ -28,17 +28,12 @@ bool Lab::doesCollideWithDish(CircularBody const& body) const
     return !contains(body);
 }
 
-/*bool Lab::doesOverlapWithObstacle(CircularBody const& body) const
-{
-    return  petri.doesOverlapWithObstacle(body);
-}*/
-
 bool Lab::doesCollideWithObstacle(CircularBody const& body) const
 {
     return  petri.doesCollideWithObstacle(body);
 }
 
-double Lab::minimumDistToObstacle(const Vec2d &position) const
+double Lab::minimumDistToObstacle(const Vec2d& position) const
 {
     return petri.minimumDistToObstacle(position);
 }
@@ -65,7 +60,7 @@ void Lab::reset()
     nutrimentGenerator.reset();
 }
 
-void Lab::addNutriment(Nutriment *nutriment)
+void Lab::addNutriment(Nutriment* nutriment)
 {
     petri.addNutriment(nutriment);
 }
@@ -75,7 +70,7 @@ void Lab::addBacterium(Bacterium* bacterie)
     petri.addBacterium(bacterie);
 }
 
-void Lab::addObstacle(Obstacle *obstacle)
+void Lab::addObstacle(Obstacle* obstacle)
 {
     petri.addObstacle(obstacle);
 }
@@ -115,7 +110,7 @@ void Lab::decreaseGradientExponent()
     petri.decreaseGradientExponent();
 }
 
-double Lab::getGradientExponent()
+double Lab::getGradientExponent() const
 {
     return petri.getGradientExponent();
 }
@@ -145,17 +140,17 @@ std::unordered_map<std::string, double> Lab::fetchData(const std::string &graphN
     return namesGraph.at(graphName)(); //at jettera une exception si graphName n'est pas dans la map
 }
 
-void Lab::deleteObstacle(const Vec2d &position)
+void Lab::deleteObstacle(const Vec2d& position)
 {
     petri.deleteObstacle(position);
 }
 
-void Lab::createWall(const Vec2d& position1, const Vec2d &position2)
+void Lab::createWall(const Vec2d& position1, const Vec2d& position2)
 {
    petri.createWall(position1, position2);
 }
 
-Vec2d Lab::getLastObstaclePos()
+Vec2d Lab::getLastObstaclePos() const
 {
     return petri.getLastObstaclePos();
 }

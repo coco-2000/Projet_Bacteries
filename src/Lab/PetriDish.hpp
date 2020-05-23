@@ -24,16 +24,6 @@ public:
     PetriDish(Vec2d position, double radius);
 
     /**
-     * @brief PetriDish Empêche la copie
-     */
-    PetriDish(PetriDish const&) = delete;
-
-    /**
-     * @brief operator = pour empecher l'usage de l'opérateur d'affectation
-     */
-    PetriDish& operator=(PetriDish const&) = delete;
-
-    /**
      * @brief PetriDish::addBacterium peuple l'assiette
      * @param bacterie ajoutée à l'assiette
      * @return vrai si la bacterie a pu être placé dans l'assiette
@@ -102,7 +92,8 @@ public:
      * @brief getPositionScore Calcule le score associée à une position donnée dans
      *                         l'assiette de Petri
      * @param position Coordonnées de la position dont il faut calculer le score
-     * @return Score associée à la position
+     * @param bacterie Instance de bacterie dont on calcule le score associée à la position
+     * @return Score associée à la position de la bactérie
      */
     double getPositionScore(const Vec2d& position, const Bacterium& bacterie) const;
 
@@ -135,22 +126,22 @@ public:
     /**
      * @brief addAnnex Ajoute un pointeur sur une bactérie le vecteur annexe
      *                     de l'assiette de Petri
-     * @param clone Pointeur sur la bactérie à ajouter (créée par clonage en l'occurence)
+     * @param bacterie Pointeur sur la bactérie à ajouter (créée par clonage en l'occurence)
      */
-    void addAnnex(Bacterium*);
+    void addAnnex(Bacterium* bacterie);
 
     /**
      * @brief addSwarm Ajoute un groupe Swarm à la boîte de Petri
-     * @param groupe Swarm à ajouter
+     * @param swarm Groupe à ajouter
      */
-    void addSwarm(Swarm *groupe);
+    void addSwarm(Swarm* swarm);
 
     /**
      * @brief getSwarmWithId Accesseur pour le Swarm de la boite de Petri associé à un identificateur donné
      * @param id Identificateur du Swarm à retourner
      * @return Swarm dont l'identifiacteur est id
      */
-    Swarm* getSwarmWithId(std::string id) const;
+    Swarm* getSwarmWithId(const std::string& id) const;
 
     /**
      * @brief getPropertySimpleBacterium calcule les nouvelles valeurs associées
@@ -195,11 +186,10 @@ public:
 
     void deleteObstacle(const Vec2d& position);
     bool addObstacle(Obstacle* obstacle);
-    void createWall(const Vec2d &position1, const Vec2d &position2);
+    void createWall(const Vec2d& position1, const Vec2d& position2);
     double minimumDistToObstacle(const Vec2d& position) const;
     bool doesCollideWithObstacle(CircularBody const& body) const;
-    void deleteUnderObstacle();
-    Vec2d getLastObstaclePos();
+    const Vec2d& getLastObstaclePos() const;
 
 private :
     std::vector<Bacterium*> bacteries;
@@ -230,7 +220,7 @@ private :
      * des nutriments pour toutes les bacteries de l'assiette de petri
      * @param dt
      */
-    void updateBacteries (sf::Time dt);
+    void updateBacteries(sf::Time dt);
 
     /**
      * @brief update_nutriments Effectue la croissance de tous les nutriments de l'assiette de Petri
@@ -257,6 +247,17 @@ private :
      */
     void updateSwarms(sf::Time dt);
 
+    /**
+     * @brief PetriDish Empêche la copie
+     */
+    PetriDish(PetriDish const&) = delete;
+
+    /**
+     * @brief operator = pour empecher l'usage de l'opérateur d'affectation
+     */
+    PetriDish& operator=(PetriDish const&) = delete;
+
+    void deleteUnderObstacle();
 };
 
 

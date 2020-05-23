@@ -18,31 +18,31 @@ public :
      * @param bacterie dont on calcule la quantité de nutriment qu'elle consomme
      * @return la quantité de nutriment consommée
      */
-    Quantity eatenBy(Bacterium& bacterie) override;
+    Quantity eatenBy(const Bacterium& bacterie) override;
 
     /**
      * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie simple
      * @return la quantité de nutriment consommée
      */
-    Quantity eatenBy(SimpleBacterium& bacterie) override;
+    Quantity eatenBy(const SimpleBacterium& bacterie) override;
 
     /**
      * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à comportement de groupe
      * @return la quantité de nutriment consommée
      */
-    Quantity eatenBy(SwarmBacterium& bacterie) override;
+    Quantity eatenBy(const SwarmBacterium& bacterie) override;
 
     /**
      * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à tentacule
      * @return la quantité de nutriment consommée
      */
-    Quantity eatenBy(TwitchingBacterium& bacterie) override;
+    Quantity eatenBy(const TwitchingBacterium& bacterie) override;
 
     /**
      * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à poison
      * @return la quantité de nutriment consommée
      */
-    Quantity eatenBy(PoisonBacterium& bacterie) override;
+    Quantity eatenBy(const PoisonBacterium& bacterie) override;
 
     double getScoreCoefficient(const Bacterium& bacterie) const override;
 

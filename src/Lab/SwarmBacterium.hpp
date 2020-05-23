@@ -15,27 +15,22 @@ public:
      * @brief SwarmBacterium Constructeur
      * Incrémente le compteur d'instances
      * @param position Position de la nouvelle instance à créer
-     * @param groupe Groupe de Swarm auquel la nouvelle instance appartient
+     * @param group Groupe de Swarm auquel la nouvelle instance appartient
      */
     SwarmBacterium(const Vec2d& position, Swarm* group);
 
     /**
      * @brief SwarmBacterium Constructeur de copie
      * Incrémente le compteur d'instances
-     * @param autre Instance à copier
+     * @param other Instance à copier
      */
-    SwarmBacterium(SwarmBacterium const& autre);
-
-    /**
-     * @brief mutate Méthode de mutation (de la couleur)
-     */
-    //void mutate() override;
+    SwarmBacterium(SwarmBacterium const& other);
 
     /**
      * @brief drawOn Dessine une SwarmBacterium et l'anneau si l'instance est leader du groupe
      * @param target Fenetre dans laquelle le dessin se fait
      */
-    void drawOn(sf::RenderTarget &target) const override;
+    void drawOn(sf::RenderTarget& target) const override;
 
     /**
      * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
@@ -44,7 +39,7 @@ public:
      * @param nutriment de type A qui est consommé par la bactérie
      * @return La quantité de nutriment consommé
      */
-    Quantity eatableQuantity(NutrimentA& nutriment) override;
+    Quantity eatableQuantity(NutrimentA& nutriment) const override;
 
     /**
      * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
@@ -53,9 +48,9 @@ public:
      * @param nutriment de type B qui est consommé par la bactérie
      * @return La quantité de nutriment consommé
      */
-    Quantity eatableQuantity(NutrimentB& nutriment) override;
+    Quantity eatableQuantity(NutrimentB& nutriment) const override;
 
-    Quantity eatableQuantity(Poison& poison) override;
+    Quantity eatableQuantity(Poison& poison) const override;
 
     double getScoreCoefficient(const NutrimentA& nutriment) const override;
 
@@ -109,5 +104,4 @@ private:
     Vec2d getSpeedVector() const;
 
     Vec2d f(Vec2d position, Vec2d speed) const override;
-
 };

@@ -9,19 +9,17 @@ public:
 
     Poison(const Poison& other);
 
-    void drawOn(sf::RenderTarget& target) const override;
-
     static double getPoisonCounter();
 
-    Quantity eatenBy(Bacterium& bacterie) override;
+    Quantity eatenBy(const Bacterium& bacterie) override;
 
-    Quantity eatenBy(SwarmBacterium& bacterie) override;
+    Quantity eatenBy(const SwarmBacterium& bacterie) override;
 
-    Quantity eatenBy(SimpleBacterium& bacterie) override;
+    Quantity eatenBy(const SimpleBacterium& bacterie) override;
 
-    Quantity eatenBy(TwitchingBacterium& bacterie) override;
+    Quantity eatenBy(const TwitchingBacterium& bacterie) override;
 
-    Quantity eatenBy(PoisonBacterium& bacterie) override;
+    Quantity eatenBy(const PoisonBacterium& bacterie) override;
 
     double getScoreCoefficient(const Bacterium& bacterie) const override;
 

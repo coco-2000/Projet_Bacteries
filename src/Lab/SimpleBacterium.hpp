@@ -17,7 +17,6 @@ public:
                     const std::map<std::string, MutableNumber>& param_mutables = {},
                     bool abstinence = 0);
 
-
     /**
      * @brief SimpleBacterium constructeur de copie
      * Incrémente le compteur d'instances
@@ -26,21 +25,13 @@ public:
     SimpleBacterium(const SimpleBacterium& other);
 
     /**
-     * @brief getSpeedVector Permet d'accéder au vecteur de vitesse qui détermine
-     *                       le déplacement de la bactérie
-     * @return Le vecteur vitesse calculé en fonction de la direction et des
-     *         paramètres relatifs à la vitesse de la bactérie
-     */
-    Vec2d getSpeedVector() const;
-
-    /**
      * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
      *                        retire cette quantité au nutriment
      * (appelle la méthode eatenBy du nutrimentA qui prend pour argument une bactérie simple)
      * @param nutriment de type A qui est consommé par la bactérie
      * @return La quantité de nutriment consommé
      */
-    Quantity eatableQuantity(NutrimentA& nutriment) override;
+    Quantity eatableQuantity(NutrimentA& nutriment) const override;
 
     /**
      * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
@@ -49,10 +40,9 @@ public:
      * @param nutriment de type B qui est consommé par la bactérie
      * @return La quantité de nutriment consommé
      */
-    Quantity eatableQuantity(NutrimentB& nutriment) override;
+    Quantity eatableQuantity(NutrimentB& nutriment) const override;
 
-
-    Quantity eatableQuantity(Poison& poison) override;
+    Quantity eatableQuantity(Poison& poison) const override;
 
     double getScoreCoefficient(const NutrimentA& nutriment) const override;
 
@@ -64,7 +54,7 @@ public:
      * @brief ~SimpleBacterium Destructeur
      * Décrémente le compteur d'instances
      */
-    virtual ~SimpleBacterium() override;
+    ~SimpleBacterium() override;
 
     /**
      * @brief getSimpleCounter compte le nombre total d'instances de SimpleBacterium présentes
@@ -130,4 +120,11 @@ private :
      */
     Vec2d f(Vec2d position, Vec2d speed) const override;
 
+    /**
+     * @brief getSpeedVector Permet d'accéder au vecteur de vitesse qui détermine
+     *                       le déplacement de la bactérie
+     * @return Le vecteur vitesse calculé en fonction de la direction et des
+     *         paramètres relatifs à la vitesse de la bactérie
+     */
+    Vec2d getSpeedVector() const;
 };

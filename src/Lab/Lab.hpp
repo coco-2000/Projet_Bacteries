@@ -51,12 +51,6 @@ public:
      void decreaseTemperature();
 
      /**
-      * @brief initTemp Réinitialise la température de la boite de Petri du Lab d'après
-      *                 la valeur du fichier de configuration
-      */
-     void initTemp();
-
-     /**
       * @brief addNutriment Ajoute un nutriment à la boite de Petri du Lab
       * @param Nutriment qui est ajouté à la boite de Petri du Lab
       */
@@ -69,7 +63,9 @@ public:
      void addBacterium(Bacterium* bacterie);
 
      void addObstacle(Obstacle* obstacle);
+
      void deleteObstacle(const Vec2d& position);
+
      void createWall(const Vec2d& position1, const Vec2d &position2);
 
      /**
@@ -87,10 +83,9 @@ public:
 
      bool doesCollideWithObstacle(CircularBody const& body) const;
 
-     //bool doesOverlapWithObstacle(CircularBody const& body) const;
-
      double minimumDistToObstacle(const Vec2d& position) const;
-     Vec2d getLastObstaclePos();
+
+     Vec2d getLastObstaclePos() const;
 
      /**
       * @brief getNutrimentColliding obtenir le nutriment en collision avec le body
@@ -124,14 +119,7 @@ public:
       *        Petri qui est associée au paramètre "Gradient exponent"
       * @return la valeur du paramètre "Gradient exponent"
       */
-     double getGradientExponent();
-
-     /**
-      * @brief initGradient Initialise l'attribut puissance de l'assiette de
-      *        Petri qui est associée au paramètre "Gradient exponent" en fonction du
-      *        fichier de configuration
-      */
-     void initGradient();
+     double getGradientExponent() const;
 
      /**
       * @brief addAnnex Ajoute un pointeur sur une bactérie le vecteur annexe de l'assiette de Petri
@@ -174,10 +162,22 @@ private :
     NutrimentGenerator nutrimentGenerator;
     std::unordered_map<std::string, Result> namesGraph;
 
-
     /**
      * @brief contains Vérifie si un CircularBody est à l'intérieur de son assiette de Petri
      * @return true si le CircularBody est à l'interieur false sinon
      */
     bool contains(const CircularBody& corps) const;
+
+    /**
+     * @brief initGradient Initialise l'attribut puissance de l'assiette de
+     *        Petri qui est associée au paramètre "Gradient exponent" en fonction du
+     *        fichier de configuration
+     */
+    void initGradient();
+
+    /**
+     * @brief initTemp Réinitialise la température de la boite de Petri du Lab d'après
+     *                 la valeur du fichier de configuration
+     */
+    void initTemp();
 };

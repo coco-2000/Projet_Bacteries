@@ -19,15 +19,11 @@ TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
       grip(position, getRadius()/4),
       state(IDLE)
 
-{
-    ++twitchCounter;
-}
+{ ++twitchCounter; }
 
 TwitchingBacterium::TwitchingBacterium(const TwitchingBacterium& other)
     : Bacterium(other), grip(getPosition(), getRadius()/4), state(IDLE)
-{
-    ++twitchCounter;
-}
+{ ++twitchCounter; }
 
 j::Value const& TwitchingBacterium::getConfig() const
 {
@@ -59,7 +55,7 @@ Quantity TwitchingBacterium::getStepEnergy() const
 Quantity TwitchingBacterium::getTentacleEnergy() const
 {
     double tentacleEnergy(getShortConfig().twitchingbact_consumption_factor_tentacle);
-    return isLost() ? 1/5*tentacleEnergy : tentacleEnergy;
+    return isLost() ? getLostEnergyFactor()*tentacleEnergy : tentacleEnergy;
 }
 
 void TwitchingBacterium::moveGrip(const Vec2d& delta)
@@ -69,19 +65,19 @@ void TwitchingBacterium::moveGrip(const Vec2d& delta)
 
 void TwitchingBacterium::move(sf::Time dt)
 {
-    const Nutriment* nutriment_ptr = getAppEnv().getNutrimentColliding(grip);
+    const Nutriment* nutrimentPtr = getAppEnv().getNutrimentColliding(grip);
 
     switch(state)
     {
         case IDLE : state = WAIT_TO_DEPLOY; break;
         case WAIT_TO_DEPLOY : waitToDeployState(dt); break;
-        case DEPLOY : deployState(dt, nutriment_ptr); break;
-        case ATTRACT : attractState(dt, nutriment_ptr); break;
+        case DEPLOY : deployState(dt, nutrimentPtr); break;
+        case ATTRACT : attractState(dt, nutrimentPtr); break;
         case RETRACT : retractState (dt); break;
-        case EAT : eatState(nutriment_ptr); break;
+        case EAT : eatState(nutrimentPtr); break;
     }
 
-    nutriment_ptr = nullptr;
+    nutrimentPtr = nullptr;
 }
 
 void TwitchingBacterium::waitToDeployState(sf::Time dt)
@@ -93,13 +89,13 @@ void TwitchingBacterium::waitToDeployState(sf::Time dt)
     state = DEPLOY;
 }
 
-void TwitchingBacterium::deployState(sf::Time dt, const Nutriment* nutriment_ptr)
+void TwitchingBacterium::deployState(sf::Time dt, const Nutriment* nutrimentPtr)
 {
     gripToward(getDirection(), dt);
 
-    if(nutriment_ptr != nullptr)
+    if(nutrimentPtr != nullptr)
         state = ATTRACT;
-    else if ( (grip.getPosition() - getPosition()).length() >= getProperty("tentacle length").get()
+    else if((grip.getPosition() - getPosition()).length() >= getProperty("tentacle length").get()
               or getAppEnv().doesCollideWithDish(grip) or getAppEnv().doesCollideWithObstacle(grip))
     {
         state = RETRACT;
@@ -108,19 +104,18 @@ void TwitchingBacterium::deployState(sf::Time dt, const Nutriment* nutriment_ptr
     }
 }
 
-void TwitchingBacterium::attractState(sf::Time dt, const Nutriment *nutriment_ptr)
+void TwitchingBacterium::attractState(sf::Time dt, const Nutriment* nutrimentPtr)
 {
 
-     const double dist_tentacule = getProperty("tentacle speed").get()*dt.asSeconds();
-     const Vec2d deltaPos((grip.getPosition()-getPosition())*dist_tentacule*getConfig()["speed factor"].toDouble());
+     const double distTentacule = getProperty("tentacle speed").get()*dt.asSeconds();
+     const Vec2d deltaPos((grip.getPosition() - getPosition()) * distTentacule * getShortConfig().twitchingbact_speed_factor);
 
      CircularBody::move(deltaPos);
      consumeEnergy(deltaPos.length() * getStepEnergy());
 
-     if (nutriment_ptr == nullptr)
+     if (nutrimentPtr == nullptr)
          state = RETRACT;
-
-     else if (*nutriment_ptr & *this)
+     else if (*nutrimentPtr & *this)
          state = EAT;
 }
 
@@ -132,7 +127,7 @@ void TwitchingBacterium::tentacleInit()
 
 void TwitchingBacterium::retractState(sf::Time dt)
 {
-    (*this > grip) ? tentacleInit() : gripToward((getPosition()-grip.getPosition()).normalised(), dt);
+    (*this > grip) ? tentacleInit() : gripToward((getPosition() - grip.getPosition()).normalised(), dt);
 }
 
 void TwitchingBacterium::gripToward (const Vec2d& dir, sf::Time dt)
@@ -160,17 +155,17 @@ unsigned int TwitchingBacterium::getTwitchCounter()
     return twitchCounter;
 }
 
-Quantity TwitchingBacterium::eatableQuantity(NutrimentA& nutriment)
+Quantity TwitchingBacterium::eatableQuantity(NutrimentA& nutriment) const
 {
     return nutriment.eatenBy(*this);
 }
 
-Quantity TwitchingBacterium::eatableQuantity(NutrimentB& nutriment)
+Quantity TwitchingBacterium::eatableQuantity(NutrimentB& nutriment) const
 {
     return nutriment.eatenBy(*this);
 }
 
-Quantity TwitchingBacterium::eatableQuantity(Poison& poison)
+Quantity TwitchingBacterium::eatableQuantity(Poison& poison) const
 {
     return poison.eatenBy(*this);
 }

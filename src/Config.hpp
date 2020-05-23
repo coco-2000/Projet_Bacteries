@@ -127,7 +127,10 @@ public:
     const std::string poisonbact_tumble_algo;
     const sf::Time poisonbact_poison_delay;
 
-
+    //obstacle
+    const double obstacle_radius;
+    const double obstacle_gradient_factor;
+    const std::string obstacle_texture;
 };
 
 #endif // INFOSV_CONFIG_HPP

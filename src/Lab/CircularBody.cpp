@@ -12,7 +12,7 @@ CircularBody::CircularBody( Vec2d const& position, double radius)
 
 CircularBody::CircularBody(const CircularBody& other)
 {
-    copie(other);
+    copy(other);
 }
 
 const Vec2d& CircularBody::getPosition() const
@@ -30,14 +30,14 @@ void CircularBody::setPosition(const Vec2d& pos)
     position = pos;
 }
 
-void CircularBody::setRadius(double rayon)
+void CircularBody::setRadius(double rad)
 {
-    radius = rayon;
+    radius = rad;
 }
 
 CircularBody& CircularBody::operator=(CircularBody const& other)
 {
-    copie(other);
+    copy(other);
     return (*this);
 }
 
@@ -58,24 +58,19 @@ bool CircularBody::isColliding(const CircularBody& other) const
     return (distance(position, other.position) <= radius + other.radius);
 }
 
-/*bool CircularBody::isOverlapping(const CircularBody& other) const
-{
-    return (distance(position, other.position) < radius + other.radius);
-}*/
-
 bool CircularBody::contains(const Vec2d& point) const
 {
     return (distance(position, point) <= radius);
 }
 
-void CircularBody::copie(const CircularBody& body)
+void CircularBody::copy(const CircularBody& body)
 {
     position = body.position;
     radius = body.radius;
 }
 
 
-std::ostream& CircularBody::affiche(std::ostream& out) const
+std::ostream& CircularBody::display(std::ostream& out) const
 {
     out << "CircularBody: position = " << position
         << " ,radius = " << radius;
@@ -85,10 +80,10 @@ std::ostream& CircularBody::affiche(std::ostream& out) const
 
 std::ostream& operator<<(std::ostream& out, CircularBody const& body)
 {
-    return body.affiche(out);
+    return body.display(out);
 }
 
-Vec2d CircularBody::decalage(const Vec2d& vector) const
+Vec2d CircularBody::shift(const Vec2d& vector) const
 {
     return vector + position;
 }

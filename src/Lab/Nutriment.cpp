@@ -8,24 +8,24 @@
 Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
     : CircularBody(position, quantity),
       distPetri((0.95/2)*getApp().getLabSize().x - distance(getApp().getCentre(),position)),
-      quantity_(quantity)
+      quantity(quantity)
 {};
 
 Nutriment::Nutriment(const Nutriment& other)
-    : CircularBody(other), distPetri(other.distPetri), quantity_(other.quantity_)
+    : CircularBody(other), distPetri(other.distPetri), quantity(other.quantity)
 {}
 
-Quantity Nutriment::takeQuantity(Quantity prelevement)
+Quantity Nutriment::takeQuantity(Quantity taking)
 {
-        prelevement = std::min(quantity_, prelevement);
-        setQuantity(quantity_ - prelevement);
-        return prelevement;
+        taking = std::min(quantity, taking);
+        setQuantity(quantity - taking);
+        return taking;
 }
 
-void Nutriment::setQuantity(Quantity quantity)
+void Nutriment::setQuantity(Quantity qt)
 {
-    quantity_ = std::max(quantity,0.0);
-    setRadius(quantity_);
+    quantity = std::max(qt,0.0);
+    setRadius(qt);
 }
 
 void Nutriment::drawOn(sf::RenderTarget& target) const
@@ -47,8 +47,8 @@ void Nutriment::displayQuantity(sf::RenderTarget& target) const
 
     if(isDebugOn())
     {
-        auto const text = buildText(std::to_string(static_cast<int>(quantity_)),
-                                    decalage({10,10}),
+        auto const text = buildText(std::to_string(static_cast<int>(quantity)),
+                                    shift({10,10}),
                                     getAppFont(),
                                     TAILLE_FONTE,
                                     sf::Color::Black, 0);
@@ -59,10 +59,10 @@ void Nutriment::displayQuantity(sf::RenderTarget& target) const
 void Nutriment::update(sf::Time dt)
 {
     const double growth =  getGrowthSpeed()* static_cast<double>(dt.asSeconds());
-    if (quantity_ <= 2 * getMaxQuantity() and quantity_ + growth <= distPetri
-            and quantity_ + growth <= getAppEnv().minimumDistToObstacle(getPosition()))
+    if (quantity <= 2 * getMaxQuantity() and quantity + growth <= distPetri
+            and quantity + growth <= getAppEnv().minimumDistToObstacle(getPosition()))
     {
-        setQuantity(quantity_ + growth);
+        setQuantity(quantity + growth);
     }
 }
 
@@ -85,11 +85,11 @@ bool Nutriment::conditionTemperature(double temperature) const
 
 bool Nutriment::isEmpty() const
 {
-    return (quantity_ <= 0);
+    return (quantity <= 0);
 }
 
 Quantity Nutriment::getQuantity() const
 {
-    return quantity_;
+    return quantity;
 }
 

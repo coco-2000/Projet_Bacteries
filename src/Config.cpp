@@ -73,6 +73,10 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
 ,poisonbact_max_radius(mConfig["poison bacterium"]["radius"]["max"].toDouble())
 ,poisonbact_tumble_algo(mConfig["poison bacterium"]["tumble"]["algo"].toString())
 ,poisonbact_poison_delay(sf::seconds(mConfig["poison bacterium"]["poison delay"].toDouble()))
+
+,obstacle_radius(mConfig["obstacle"]["radius"].toDouble())
+,obstacle_gradient_factor(mConfig["obstacle"]["gradient factor"].toDouble())
+,obstacle_texture(mConfig["obstacle"]["texture"].toString())
 {}
 
 // TODO : getter for debug
