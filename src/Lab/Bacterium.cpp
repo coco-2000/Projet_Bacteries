@@ -59,7 +59,7 @@ sf::Time Bacterium::getDelay() const
 
 sf::Time Bacterium::getMaxTimeLost() const
 {
-    return sf::seconds(10.0);
+    return sf::seconds(getConfig()["lost"]["time"].toDouble());
 }
 
 sf::Time Bacterium::getTimeSwitch() const

@@ -72,8 +72,6 @@ public :
      */
     static unsigned int getTwitchCounter();
 
-
-
 protected :
     Grip grip;
     Etat state;
