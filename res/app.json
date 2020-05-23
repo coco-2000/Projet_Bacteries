@@ -385,7 +385,7 @@
         "lost" : {
             "time" : 7,
             "energy factor" : 0.5,
-            "lambda basculement" : 400
+            "lambda basculement" : 100
         }
     },
     "poison bacterium" : {
