@@ -74,7 +74,7 @@ public :
 
 
 
-protected :
+private :
     Grip grip;
     Etat state;
     static unsigned int twitchCounter;
