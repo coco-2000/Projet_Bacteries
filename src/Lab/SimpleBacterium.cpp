@@ -114,7 +114,6 @@ void SimpleBacterium::trySwitch(sf::Time dt)
 
 }
 
-
 void SimpleBacterium::switchDirection()
 {
     if(getShortConfig().simplebact_tumble_algo == "single random vector")
