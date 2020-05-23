@@ -82,10 +82,12 @@ protected :
      */
     void move(sf::Time dt) override;
 
+    void consumeNutriment(sf::Time dt) override;
+    void manageLost(sf::Time dt) override;
+
 
 private :
     double timeFlagellum;
-    sf::Time timeSwitching;
     static unsigned int simpleCounter;
 
     /**
@@ -98,7 +100,7 @@ private :
     /**
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
      */
-    void trySwitch();
+    void trySwitch(sf::Time dt);
 
     /**
      * @brief switchDirection effectue le basculement de l'instance courante
@@ -127,4 +129,5 @@ private :
      * @return Le vecteur force appliqué à la bactérie simple, le vecteur nul
      */
     Vec2d f(Vec2d position, Vec2d speed) const override;
+
 };

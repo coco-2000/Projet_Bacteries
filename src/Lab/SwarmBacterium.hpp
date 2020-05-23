@@ -81,7 +81,7 @@ private:
     Swarm* group;
     static unsigned int swarmCounter;
     double speed;
-    sf::Time timeSwitching;
+    sf::Time timeSwitch;
 
 
     /**

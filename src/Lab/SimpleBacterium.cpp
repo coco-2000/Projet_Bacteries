@@ -63,8 +63,7 @@ void SimpleBacterium::move(sf::Time dt)
     constexpr int COEFF_T = 3;
     timeFlagellum += COEFF_T * dt.asSeconds();
 
-    timeSwitching += dt;
-    trySwitch();
+    trySwitch(dt);
 }
 
 Vec2d SimpleBacterium::getSpeedVector() const
@@ -96,23 +95,30 @@ void SimpleBacterium::drawOn(sf::RenderTarget& target) const
      Bacterium::drawOn(target);
 }
 
-void SimpleBacterium::trySwitch()
+void SimpleBacterium::trySwitch(sf::Time dt)
 {
-    double lambda(getProperty("tumble worse prob").get());
-
-    if(getAppEnv().getPositionScore(getPosition(), *this) >= getOldScore())
+    if(isLost())
     {
-        lambda = getProperty("tumble better prob").get();
+        lostTrySwitch(dt);
     }
+    else
+    {
+        double lambda(getProperty("tumble worse prob").get());
 
-    const double proba_basculement = lambda != 0 ? 1 - exp(- timeSwitching.asSeconds() / lambda) : 1;
+        if(getAppEnv().getPositionScore(getPosition(), *this) >= getOldScore())
+            lambda = getProperty("tumble better prob").get();
 
-     if(bernoulli(proba_basculement) == 1)
-     {
-         switchDirection();
-         timeSwitching = sf::Time::Zero;
-     }
+        setTimeSwitch(getTimeSwitch() + dt);
+        const double proba_basculement = lambda != 0 ? 1 - exp(- getTimeSwitch().asSeconds() / lambda) : 1;
+
+         if(bernoulli(proba_basculement) == 1)
+         {
+             switchDirection();
+             setTimeSwitch(sf::Time::Zero);
+         }
+    }
 }
+
 
 void SimpleBacterium::switchDirection()
 {
@@ -124,6 +130,19 @@ void SimpleBacterium::switchDirection()
     {
         strategy2();
     }
+}
+
+void SimpleBacterium::consumeNutriment(sf::Time dt)
+{
+    Bacterium::consumeNutriment(dt);
+    if (isLost())
+        setTimeSwitch(sf::Time::Zero);
+}
+
+void SimpleBacterium::manageLost(sf::Time dt)
+{
+    Bacterium::manageLost(dt);
+    setTimeSwitch(sf::Time::Zero);
 }
 
 Vec2d SimpleBacterium::f(Vec2d position, Vec2d speed) const

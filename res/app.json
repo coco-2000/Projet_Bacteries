@@ -87,6 +87,9 @@
         }
     },
     "simple bacterium" : {
+        "lost"  : {
+            "lambda basculement" : 400
+        },
         "color" : {
             "a" : {
                 "clamp max" : true,
@@ -167,6 +170,9 @@
         "refresh rate" : 1
     },
     "swarm bacterium" : {
+        "lost"  : {
+            "lambda basculement" : 400
+        },
         "color" : {
             "a" : {
                 "clamp max" : true,
@@ -221,8 +227,7 @@
         },
         "speed" : {
             "initial" : 20
-        },
-        "lambda basculement" : 400
+        }
     },
     "swarms" : {
         "1" : {
@@ -309,6 +314,9 @@
         }
     },
     "twitching bacterium" : {
+        "lost"  : {
+            "lambda basculement" : 400
+        },
         "color" : {
             "a" : {
                 "clamp max" : true,
@@ -461,8 +469,8 @@
         "antialiasing level" : 4,
         "title" : "INFOSV Simulation",
         "simulation" : {
-            "width":1400,
-            "height":1400
+            "width":800,
+            "height":800
          },
         "stats" : { "width" : 200 }
     },
