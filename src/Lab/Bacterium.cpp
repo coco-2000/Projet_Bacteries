@@ -261,6 +261,11 @@ void Bacterium::eat(Nutriment& nutriment)
 void Bacterium::lostTrySwitch(sf::Time dt)
 {
     timeSwitch += dt;
+    for (auto key : getConfig()["lost"].keys())
+    {
+        std::cout<< key << std::endl;
+
+    }
     double lambda(getConfig()["lost"]["lambda basculement"].toDouble());
     const double proba_basculement = lambda != 0 ? 1 - exp(-timeSwitch.asSeconds() / lambda) : 1;
      if(bernoulli(proba_basculement))
