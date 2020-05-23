@@ -159,7 +159,7 @@
         },
         "lost" : {
             "time" : 7,
-            "energy factor" : 0.5,
+            "energy factor" : 0.05,
             "lambda switch" : 400
         }
     },
