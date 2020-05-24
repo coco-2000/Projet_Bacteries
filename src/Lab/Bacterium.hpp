@@ -21,10 +21,10 @@ public :
      * @param position Coordonnées de la position intiale de la bacterie
      * @param direction Direction du déplacement initiale de la bacterie
      * @param radius Rayon initiale de la bactérie
-     * @param energy niveau d'énergie intiale de la bacterie
+     * @param energy Niveau d'énergie intiale de la bacterie
      * @param color Couleur initiale de la bacterie
-     * @param paramMutables ensemble de paramètres numériques mutables
-     * @param abstinence indique si la bacterie consomme des nutriments ou non
+     * @param paramMutables Ensemble de paramètres numériques mutables
+     * @param abstinence Indique si la bacterie consomme des nutriments ou non
      */
     Bacterium(const Vec2d& position, const Vec2d& direction, double radius, Quantity energy,
               const MutableColor& color, const std::map<std::string, MutableNumber>& paramMutables = {},
@@ -49,14 +49,14 @@ public :
      * la division des bactéries
      * met à jour l'angle de rotation des bactéries
      * gère le mode perdu des bactéries
-     * @param dt Pas de temps après lequel lequel la simulation est mise à jour
+     * @param dt Pas de temps après lequel la simulation est mise à jour
      */
     void update(sf::Time dt) override;
 
     /**
      * @brief setScore Manipulateur du score
-     * @param score Score à assigner à l'attribut ancien_score
-     *              (score avant mise à jour) de l'instance courante
+     * @param  Score à assigner à l'attribut oldScore
+     *         (score avant mise à jour) de l'instance courante
      */
     void setScore(double score);
 
@@ -79,7 +79,7 @@ public :
      * (appelle la méthode eatenBy du nutrimentA qui prend pour argument une bactérie dont le type
      * correspond à celui de l'instance courante de bactérie)
      * @param nutriment de type A qui est consommé par la bactérie
-     * @return La quantité de nutriment consommé
+     * @return La quantité de nutriment consommée
      */
     virtual Quantity eatableQuantity(NutrimentA& nutriment) const = 0;
 
@@ -90,7 +90,7 @@ public :
      * (appelle la méthode eatenBy du nutrimentB qui prend pour argument une bactérie dont le type
      * correspond à celui de l'instance courante de bactérie)
      * @param nutriment de type B qui est consommé par la bactérie
-     * @return La quantité de nutriment consommé
+     * @return La quantité de nutriment consommée
      */
     virtual Quantity eatableQuantity(NutrimentB& nutriment) const = 0;
 
@@ -101,22 +101,27 @@ public :
      * (appelle la méthode eatenBy du poison qui prend pour argument une bactérie dont le type
      * correspond à celui de l'instance courante de bactérie)
      * @param nutriment de type poison qui est consommé par la bactérie
-     * @return La quantité de poison consommé
+     * @return La quantité de poison consommée
      */
     virtual Quantity eatableQuantity(Poison& poison) const = 0;
 
     /**
      * @brief isLost
-     * @return vrai si la bactérie et perdue, c'est à dire sonnée par un obstacle
+     * @return vrai si la bactérie et perdue, c'est-à-dire qu'elle a percuté un obstacle ou
+     * le bord il a peu de temps
      */
     bool isLost() const;
 
     /**
-     * @brief getEnergy
+     * @brief getDivideEnergy
      * @return l'énergie minimale nécessaire à la division
      */
     Quantity getDivideEnergy() const;
 
+    /**
+     * @brief getEnergy
+     * @return L'énergie de l'instance courante de bactérie
+     */
     Quantity getEnergy() const;
 
     /**
@@ -146,31 +151,30 @@ public :
 protected :
     /**
      * @brief getAngle
-     * @return l'angle de direction de la bactérie
+     * @return L'angle de direction de la bactérie
      */
     double getAngle() const;
 
     /**
      * @brief getColor
-     * @return la couleur de la bactérie
+     * @return La couleur de la bactérie
      */
     sf::Color getColor() const;
 
     /**
      * @brief getDirection
-     * @return la direction de la bactérie
+     * @return Le vecteur de direction de la bactérie
      */
     Vec2d getDirection() const;
 
     /**
      * @brief getOldScore
-     * @return le score de la bactérie lors du pas de simulation
-     * précédent
+     * @return le score que la bactérie avait lors du pas de simulation précédent
      */
     double getOldScore() const;
 
     /**
-     * @brief setDirection modifie la direction de la bactérie
+     * @brief setDirection modifie le vecteur de direction de la bactérie
      * @param newDir nouvelle direction que la bactérie doit prendre
      */
     void setDirection(const Vec2d& newDir);
@@ -178,26 +182,24 @@ protected :
     /**
      * @brief move Méthode virtuelle pure de déplacement des bactéries
      * (à redéfinir dans les sous-classes)
-     * @param dt Pas de temps depuis le dernier déplacement de
-     * l'instance courante
+     * @param dt Pas de temps depuis le dernier déplacement de l'instance courante
      */
     virtual void move(sf::Time dt) = 0;
 
     /**
      * @brief getStepEnergy
-     * @return l'énergie dépensée à chaque pas de déplacement
+     * @return L'énergie dépensée à chaque pas de déplacement
      */
     virtual Quantity getStepEnergy() const;
 
     /**
-     * @brief consumeEnergy décrémenter le niveau d'énergie
-     * @param qt la quantité pour laquelle l'énergie est décrémentée
+     * @brief consumeEnergy Décremente le niveau d'énergie
+     * @param qt Quantité d'énergie retirée à la bactérie
      */
     void consumeEnergy(Quantity qt);
 
     /**
-     * @brief shiftClone décale la bactérie clonée pour la différencier
-     * de la bactérie d'origine
+     * @brief shiftClone Décale la bactérie clonée pour la différencier de la bactérie d'origine
      * @param v vecteur avec lequel la bactérie est décalée
      */
     virtual void shiftClone(const Vec2d& v);
@@ -210,16 +212,14 @@ protected :
     MutableNumber getProperty(const std::string& key) const;
 
     /**
-     * @brief strategy1 Première façon d'effectuer le basculement :
-     * choisir au hasard une directionassocier à l'étiquette "single random vector"
-     * dans le fichier de configuration
+     * @brief strategy1 Première façon d'effectuer le basculement : choisir au hasard une direction 
+     * (associé à l'étiquette "single random vector" dans le fichier de configuration)
      */
     void strategy1();
 
     /**
-     * @brief strategy2 Deuxième façon d'effectuer le basculement :
-     * Générer N direction et retenir celle qui a le meilleur score
-     * associer à l'helperétiquette "best of N" dans le fichier de configuration
+     * @brief strategy2 Deuxième façon d'effectuer le basculement : Générer N direction et retenir celle qui a le meilleur score
+     * (associé à l'étiquette "best of N" dans le fichier de configuration)
      */
     void strategy2();
 
@@ -229,35 +229,42 @@ protected :
      */
     virtual void consumeNutriment(sf::Time dt);
 
+    /**
+     * @brief getLostLambdaSwitch
+     * @return Le facteur lambda du fichier de configuration qui paramètrise la probabilité
+     *         pour la bactérie de basculer quand elle est perdue
+     */
     double getLostLambdaSwitch() const;
 
+    /**
+     * @brief getTimeSwitch
+     * @return Le temps depuis lequel la bactérie n'a pas basculé
+     */
     sf::Time getTimeSwitch() const;
 
+    /**
+     * @brief setTimeSwitch
+     * @param newTime Temps a assigner à l'attribut timeSwitch
+     */
     void setTimeSwitch(sf::Time newTime);
-
-    virtual void manageLost(sf::Time dt); //à mettre en private
 
     /**
      * @brief getLostEnergyFactor
-     * @return l'énergie dépensée à chaque pas de déplacement lorsque la bactérie est
-     * lost, c'est à dire sonnée par un obstacle
+     * @return L'énergie dépensée à chaque pas de déplacement lorsque la bactérie est
+     * lost (perdue), c'est-à-dire qu'elle a percuté un obstacle ou le bord il a peu de temps
      */
     double getLostEnergyFactor() const;
 
     /**
-     * @brief setLost
+     * @brief setLost Modifie l'attribut lost et initialise l'attribut timeLost à 0
      * @param islost la nouvelle valeur de lost
      */
     void setLost(bool islost);
 
     /**
-     * @brief resetTimeLost initialise timeLost à zero
-     */
-    void resetTimeLost();
-
-    /**
-     * @brief lostTrySwitch
-     * @param dt
+     * @brief lostTrySwitch Calcul la probabilité pour l'instance courante de bactérie de basculer
+     * si elle est perdue et effectue le basculement
+     * @param dt Pas de temps après lequel la simulation est mise à jour
      */
     void lostTrySwitch(sf::Time dt);
 
@@ -277,8 +284,8 @@ private :
 
     /**
      * @brief getMaxTimeLost
-     * @return le temps maximal pendant lequel une bactérie est perdue,
-     * c'est à dire sonnée par un obstacle
+     * @return Le temps maximal pendant lequel une bactérie est perdue,
+     * c'est-à-dire qu'elle a percuté un obstacle ou le bord il a peu de temps
      */
     sf::Time getMaxTimeLost() const;
 
@@ -289,8 +296,7 @@ private :
     void displayEnergy(sf::RenderTarget& target) const;
 
     /**
-     * @brief collision gère les collisions des bacteries
-     * avec l'assiette de petri et avec les obstacles
+     * @brief collision Gère les collisions des bacteries avec le bord de l'assiette et les obstacles
      */
     void collision();
 
@@ -298,32 +304,33 @@ private :
      * @brief divide Méthode de division commune à toutes les bactéries
      * Si les conditions de division sont remplies, créé une nouvelle bactérie clonée,
      * divise par 2 l'énergie de la bactérie d'origine et de celle clonée,
-     * inverse la direction de déplacement de la bactérie d'origine et effectue des mutations
-     * sur la bacterie clonée
+     * modifie la direction de déplacement de la bactérie d'origine
+     * et effectue des mutations sur la bacterie clonée
      */
     void divide();
 
     /**
-     * @brief clone réalise une copie polymorphique de la bacterie. Méthode virtuelle pure
+     * (Méthode virtuelle pure)
+     *  @brief clone Réalise une copie polymorphique de la bacterie.
      * @return Un pointeur sur la nouvelle bactérie issue de l'instance courante
      */
     virtual Bacterium* clone() const = 0;
 
     /**
      * @brief getDelay
-     * @return le temps d'attente entre deux consommations de nutriments pour la bactérie
+     * @return Le temps d'attente entre deux consommations de nutriments pour la bactérie
      */
     sf::Time getDelay() const;
 
     /**
+     * (Méthode virtuelle pure)
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries
-     * Il s'agit d'une méthode virtuelle pure
-     * @return la valeur associée à getAppConfig()["bacterium"] du fichier json
+     * @return L'ensemble des paramètres du fichier app.json associé au type de l'instance courante
      */
     virtual j::Value const& getConfig() const = 0;
 
     /**
-     * @brief rotationAngle mise à jour de l'angle de rotation
+     * @brief rotationAngle Mise à jour de l'angle de rotation
      * @param dt Pas de temps après lequel la simulation est mise à jour
      */
     void rotationAngle(sf::Time dt);
@@ -362,7 +369,18 @@ private :
      */
     Bacterium& operator=(Bacterium const&) = delete;
 
+    /**
+     * @brief manageGap Gère les cas où la bactérie qui percute le bord de l'assiette va un peu
+     * trop loin et chavauche le bord
+     */
     void manageGap();
+
+    /**
+     * @brief manageLost Vérifie si le délai pour être perdue est dépassé, met l'attribut lost à false
+     * (la bactérie n'est plus perdue) et met à jour timeLost
+     * @param dt Pas de temps après lequel la simulation est mise à jour
+     */
+    virtual void manageLost(sf::Time dt);
 };
 
 

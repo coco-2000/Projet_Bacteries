@@ -214,7 +214,7 @@ void PetriDish::updateNutriments (sf::Time dt)
     {
         if (!nutriment->isEmpty())
         {
-            if(nutriment->conditionTemperature(temperature))
+            if(nutriment->temperatureCondition(temperature))
             {
                 nutriment->update(dt);
             }

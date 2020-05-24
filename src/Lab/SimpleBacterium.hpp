@@ -42,6 +42,7 @@ public:
      */
     Quantity eatableQuantity(NutrimentB& nutriment) const override;
 
+
     Quantity eatableQuantity(Poison& poison) const override;
 
     double getScoreCoefficient(const NutrimentA& nutriment) const override;

@@ -11,7 +11,7 @@ Lab::Lab()
         {s::SIMPLE_BACTERIA,        [&]() { return petri.getPropertySimpleBacteria();}      },
         {s::TWITCHING_BACTERIA,     [&]() { return petri.getPropertyTwitchingBacteria();}   },
         {s::BACTERIA,               [&]() { return petri.getPropertyBacteria();}            },
-        {s::VIGOROUS_BACTERIA,      [&]() { return petri.getPropertyVigorousBacteria();}       },
+        {s::VIGOROUS_BACTERIA,      [&]() { return petri.getPropertyVigorousBacteria();}    },
         {s::NUTRIMENT_QUANTITY,     [&]() { return petri.getPropertyNutrimentQuantity();}   },
         {s::NUTRIMENT,              [&]() { return petri.getPropertyNutriment();}           },
     };
@@ -160,7 +160,6 @@ const Vec2d &Lab::getLastObstaclePos() const
 
 double Lab::getDistToPetri(const Vec2d& position) const
 {
-   // return distance(petri.getPosition(), position) - petri.getRadius();
     return (petri.getRadius() - distance(petri.getPosition(), position));
 }
 
