@@ -263,9 +263,12 @@ protected :
      */
     void lostTrySwitch(sf::Time dt);
 
-
-
-
+    /**
+     * @brief manageLost Vérifie si le délai pour être perdue est dépassé, met l'attribut lost à false
+     * (la bactérie n'est plus perdue) et met à jour timeLost
+     * @param dt Pas de temps après lequel la simulation est mise à jour
+     */
+    virtual void manageLost(sf::Time dt);
 
 private :
 
@@ -381,13 +384,6 @@ private :
      * trop loin et chavauche le bord
      */
     void manageGap();
-
-    /**
-     * @brief manageLost Vérifie si le délai pour être perdue est dépassé, met l'attribut lost à false
-     * (la bactérie n'est plus perdue) et met à jour timeLost
-     * @param dt Pas de temps après lequel la simulation est mise à jour
-     */
-    virtual void manageLost(sf::Time dt);
 };
 
 

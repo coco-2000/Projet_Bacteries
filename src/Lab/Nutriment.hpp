@@ -162,12 +162,30 @@ private :
      */
      virtual j::Value const& getConfig() const = 0;
 
+    /**
+     * @brief Suppression du constructeur de copie pour empêcher son utilisation car il n'est
+     * pas utilisé et afin d'éviter d'avoir à le redéfinir dans les sous classes de nutriment
+     */
     Nutriment(const Nutriment& other) = delete;
 
+    /**
+     * @brief Suppression de l'operator= pour empecher l'usage de l'opérateur d'affectation car
+     * il n'est pas utilisé et afin d'éviter d'avoir à le redéfinir dans les sous classes de nutriment
+     * lorsque le constructeur de copie est redéfini pour incrémenter les compteurs par exemple
+     */
     Nutriment& operator=(Nutriment const&) = delete;
 
+    /**
+     * @brief getGrowthSpeed Raccourci pour le paramètre de vitesse de croissance du fichier de configuration
+     * en fonction du type de nutriment
+     * @return la valeur associée à growth speed du fichier de configuration
+     */
     double getGrowthSpeed() const;
 
+    /**
+     * @brief getMaxQuantity Raccourci pour le paramètre quantité maximale du fichier de configuration en
+     * fonction du type de nutriment
+     * @return la valeur associée à quantity max du fichier de configuration
+     */
     double getMaxQuantity() const;
-
 };

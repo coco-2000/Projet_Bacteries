@@ -6,7 +6,7 @@ class NutrimentA: public Nutriment
 public :
 
     /**
-     * @brief NutrimentA constructeur, le construit comme un Nutriment
+     * @brief NutrimentA Constructeur
      * @param quantity Quantité intiale de l'instance courante
      * @param position Coordonnées de la position intiale de l'instance courante
      */
@@ -22,24 +22,28 @@ public :
 
     /**
      * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie simple
+     * @param bacterie dont on calcule la quantité de nutriment qu'elle consomme
      * @return la quantité de nutriment consommée
      */
     Quantity eatenBy(const SimpleBacterium& bacterie) override;
 
     /**
      * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à comportement de groupe
+     * @param bacterie dont on calcule la quantité de nutriment qu'elle consomme
      * @return la quantité de nutriment consommée
      */
     Quantity eatenBy(const SwarmBacterium& bacterie) override;
 
     /**
      * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à tentacule
+     * @param bacterie dont on calcule la quantité de nutriment qu'elle consomme
      * @return la quantité de nutriment consommée
      */
     Quantity eatenBy(const TwitchingBacterium& bacterie) override;
 
     /**
      * @brief eatenBy Calcul la quantité cédée par la source de nutriments à la bactérie à poison
+     * @param bacterie dont on calcule la quantité de nutriment qu'elle consomme
      * @return la quantité de nutriment consommée
      */
     Quantity eatenBy(const PoisonBacterium& bacterie) override;
