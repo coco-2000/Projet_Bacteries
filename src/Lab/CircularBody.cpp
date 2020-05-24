@@ -35,7 +35,7 @@ void CircularBody::setRadius(double rad)
     radius = rad;
 }
 
-CircularBody& CircularBody::operator=(CircularBody const& other)
+const CircularBody& CircularBody::operator=(CircularBody const& other)
 {
     copy(other);
     return (*this);

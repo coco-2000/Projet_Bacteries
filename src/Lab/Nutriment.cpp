@@ -72,7 +72,7 @@ double Nutriment::getMaxQuantity() const
 }
 
 
-bool Nutriment::conditionTemperature(double temperature) const
+bool Nutriment::temperatureCondition(double temperature) const
 {
     return (getConfig()["growth"]["min temperature"].toDouble() <= temperature) and
             (getConfig()["growth"]["max temperature"].toDouble() >= temperature);

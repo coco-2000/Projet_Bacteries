@@ -160,7 +160,6 @@ Vec2d Lab::getLastObstaclePos() const
 
 double Lab::getDistToPetri(const Vec2d& position) const
 {
-   // return distance(petri.getPosition(), position) - petri.getRadius();
     return (petri.getRadius() - distance(petri.getPosition(), position));
 }
 

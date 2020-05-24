@@ -13,7 +13,6 @@ Bacterium::Bacterium(const Vec2d& position, const Vec2d& direction, double radiu
 {
     angle = direction.angle();
     setLost(false);
-    resetTimeLost();
 }
 
 
@@ -133,13 +132,11 @@ void Bacterium::collision()
     if (getAppEnv().doesCollideWithObstacle(*this))
     {
         setLost(true);
-        resetTimeLost();
         strategy2();
     }
     else if(getAppEnv().doesCollideWithDish(*this))
     {
         setLost(true);
-        resetTimeLost();
         direction = - direction;
         manageGap();
     }
@@ -260,11 +257,7 @@ void Bacterium::setDirection(const Vec2d& newDir)
 void Bacterium::setLost(bool islost)
 {
    lost = islost;
-}
-
-void Bacterium::resetTimeLost()
-{
-    timeLost = sf::Time::Zero;
+   timeLost = sf::Time::Zero;
 }
 
 double Bacterium::getOldScore() const

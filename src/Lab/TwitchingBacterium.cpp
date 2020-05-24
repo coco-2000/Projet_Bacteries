@@ -110,7 +110,6 @@ void TwitchingBacterium::deploy(sf::Time dt, const Nutriment* nutrimentPtr)
         state = RETRACT;
         if(getAppEnv().doesCollideWithObstacle(grip))
         {
-            resetTimeLost();
             setLost(true);
          }
     }
