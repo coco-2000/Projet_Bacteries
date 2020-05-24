@@ -8,11 +8,7 @@
 #include "NutrimentB.hpp"
 #include "../Utility/Utility.hpp"
 #include "CircularBody.hpp"
-#include <vector>
 #include "Application.hpp"
-#include <algorithm>
-#include <cmath>
-#include<limits>
 
 typedef std::unordered_map<std::string, double> GraphData;
 
@@ -265,17 +261,17 @@ const j::Value& PetriDish::getConfig() const
 
 void PetriDish::increaseTemperature()
 {
-    temperature += getConfig()["temperature"]["delta"].toDouble();
+    temperature += getShortConfig().petridish_delta_temperature;
 }
 
 void PetriDish::decreaseTemperature()
 {
-    temperature -= getConfig()["temperature"]["delta"].toDouble();
+    temperature -= getShortConfig().petridish_delta_temperature;
 }
 
 void PetriDish::initTemperature()
 {
-    temperature = getConfig()["temperature"]["default"].toDouble();
+    temperature = getShortConfig().petridish_default_temperature;
 }
 
 Nutriment* PetriDish::getNutrimentColliding(CircularBody const& body) const
@@ -313,12 +309,12 @@ double PetriDish::getPositionScore(const Vec2d& position, const Bacterium& bacte
 
 void PetriDish::increaseGradientExponent()
 {
-    power += getConfig()["gradient"]["exponent"]["delta"].toDouble();
+    power += getShortConfig().petridish_delta_gradient;
 }
 
 void PetriDish::decreaseGradientExponent()
 {
-    power -= getConfig()["gradient"]["exponent"]["delta"].toDouble();
+    power -= getShortConfig().petridish_delta_gradient;
 }
 
 double PetriDish::getGradientExponent() const
@@ -328,8 +324,8 @@ double PetriDish::getGradientExponent() const
 
 void PetriDish::initGradient()
 {
-    power = (getConfig()["gradient"]["exponent"]["max"].toDouble()
-               + getConfig()["gradient"]["exponent"]["min"].toDouble())
+    power = (getShortConfig().petridish_max_gradient
+               + getShortConfig().petridish_min_gradient)
               / 2;
 }
 

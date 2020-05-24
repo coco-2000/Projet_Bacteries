@@ -1,9 +1,6 @@
 #include "Nutriment.hpp"
 #include "Application.hpp"
 #include "Utility/Utility.hpp"
-#include "Config.hpp"
-#include "../Utility/Vec2d.hpp"
-#include<algorithm>
 
 Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
     : CircularBody(position, quantity),

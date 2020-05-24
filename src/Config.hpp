@@ -63,13 +63,22 @@ public:
 
 
     //simulation
-
     const double  simulation_time_factor;
     const double  simulation_fixed_step;
     const sf::Time  simulation_time_max_dt;
     const std::string simulation_background;
     const std::string simulation_debug_background;
     const int simulation_size;
+
+    // petri dish
+    const double petridish_min_gradient;
+    const double petridish_max_gradient;
+    const double petridish_delta_gradient;
+
+    const double petridish_min_temperature;
+    const double petridish_max_temperature;
+    const double petridish_default_temperature;
+    const double petridish_delta_temperature;
 
     // generator
     const double generator_nutriment_delay;

@@ -3,10 +3,7 @@
 #include "../Interface/Drawable.hpp"
 #include "../Interface/Updatable.hpp"
 #include "../Utility/MutableColor.hpp"
-#include <SFML/Graphics.hpp>
 #include "Utility/Types.hpp"
-#include <string>
-#include <functional>
 
 class Nutriment;
 class NutrimentA;
