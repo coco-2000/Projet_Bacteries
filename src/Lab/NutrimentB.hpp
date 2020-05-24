@@ -54,8 +54,15 @@ public :
 
     double getScoreCoefficient(const PoisonBacterium& bacterie) const override;
 
+    static unsigned int getnutBCounter();
+
+    ~NutrimentB() override;
+
 
 private :
+
+    static unsigned int nutBCounter;
+
     /**
      * @brief getConfig redéfinition de la méthode virtuelle héritée de Nutriment
      * Raccourci pour accéder aux paramètres relatifs aux nutriments B

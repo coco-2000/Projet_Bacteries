@@ -62,9 +62,6 @@ PoisonBacterium* PoisonBacterium::clone() const
     return new PoisonBacterium(*this);
 }
 
-PoisonBacterium::~PoisonBacterium()
-{ --poisonCounter; }
-
 void PoisonBacterium::dropPoison() const
 {
     getAppEnv().addNutriment(new Poison(getPosition()));
@@ -85,12 +82,13 @@ void PoisonBacterium::move(sf::Time dt)
         resetDelay();
     }
     else
-    {
         delayPoison += dt;
-    }
 }
 
 void PoisonBacterium::resetDelay()
 {
     delayPoison = sf::Time::Zero;
 }
+
+PoisonBacterium::~PoisonBacterium()
+{ --poisonCounter; }

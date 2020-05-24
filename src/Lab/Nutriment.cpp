@@ -7,13 +7,8 @@
 
 Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
     : CircularBody(position, quantity),
-      distPetri((0.95/2)*getApp().getLabSize().x - distance(getApp().getCentre(),position)),
       quantity(quantity)
 {};
-
-Nutriment::Nutriment(const Nutriment& other)
-    : CircularBody(other), distPetri(other.distPetri), quantity(other.quantity)
-{}
 
 Quantity Nutriment::takeQuantity(Quantity taking)
 {
@@ -59,7 +54,7 @@ void Nutriment::displayQuantity(sf::RenderTarget& target) const
 void Nutriment::update(sf::Time dt)
 {
     const double growth =  getGrowthSpeed()* static_cast<double>(dt.asSeconds());
-    if (quantity <= 2 * getMaxQuantity() and quantity + growth <= distPetri
+    if (quantity <= 2 * getMaxQuantity() and quantity + growth <= getAppEnv().getDistToPetri(getPosition())
             and quantity + growth <= getAppEnv().minimumDistToObstacle(getPosition()))
     {
         setQuantity(quantity + growth);

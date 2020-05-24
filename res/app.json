@@ -126,7 +126,7 @@
             }
         },
         "energy" : {
-            "consumption factor" : 0.2,
+            "consumption factor" : 0.1,
             "division" : 120,
             "max" : 100,
             "min" : 50
@@ -203,7 +203,7 @@
             }
         },
         "energy" : {
-            "consumption factor" : 0.2,
+            "consumption factor" : 0.15,
             "division" : 120,
             "max" : 100,
             "min" : 50
@@ -234,9 +234,13 @@
                 "sigma" : 0.1
             }
         },
+        "lost" : {
+            "time" : 7,
+            "energy factor" : 0.05,
+            "lambda switch" : 400
+        },
         "poison delay" : 8
     },
-
     "stats" : {
         "refresh rate" : 1
     },
@@ -428,7 +432,7 @@
         "energy" : {
             "consumption factor" : {
                 "move" : 0.4,
-                "tentacle" : 0.3
+                "tentacle" : 0.2
             },
             "division" : 140,
             "max" : 100,
@@ -452,7 +456,7 @@
             "speed" : {
                 "initial" : 30,
                 "rate" : 0.8,
-                "sigma" : 10
+                "sigma" : 8
             }
         },
         "lost" : {

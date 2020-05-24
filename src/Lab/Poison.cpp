@@ -11,10 +11,6 @@ Poison::Poison(Vec2d const& position)
                 position)
 { ++poisonCounter; }
 
-Poison::Poison(const Poison& other)
-    : Nutriment(other)
-{ ++poisonCounter; }
-
 j::Value const& Poison::getConfig() const
 {
     return getAppConfig()["nutriments"]["poison"];

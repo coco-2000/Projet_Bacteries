@@ -21,7 +21,7 @@ public:
      * @param position
      * @param radius
      */
-    PetriDish(Vec2d position, double radius);
+    PetriDish(const Vec2d& position, double radius);
 
     /**
      * @brief addBacterium ajoute bactérie à l'assiette
@@ -65,7 +65,7 @@ public:
     double minimumDistToObstacle(const Vec2d& position) const;
 
     /**
-     * @brief doesCollideWithDish regarde si le body rentre en collision avec un obstacle
+     * @brief doesCollideWithObstacle regarde si le body rentre en collision avec un obstacle
      * @param body le corps qui peut rentrer en collision
      * @return vrai s'il est en collision
      */
@@ -88,11 +88,12 @@ public:
      * @param id Identificateur du Swarm à retourner
      * @return Swarm dont l'identifiacteur est id
      */
-    Swarm* getSwarmWithId(const std::string& id) const;
+    Swarm *getSwarmWithId(const std::string& id) const;
 
     /**
      * @brief update Effectue la croissance des nutriments de l'assiette de Petri en mettant à jour leur quantité et leur rayon
      * Suprime les nutriments et les bacteries si besoin
+     * Met à jour le leader des groupes swarm
      * @param dt Pas de temps après lequel lequel la simulation est mise à jour
      */
     void update(sf::Time dt) override;
@@ -129,7 +130,7 @@ public:
     void decreaseTemperature();
 
     /**
-     * @brief init_temperature Initialise la température de l'assiette de Petri à sa valeur par défaut
+     * @brief initTemperature Initialise la température de l'assiette de Petri à sa valeur par défaut
      */
     void initTemperature();
 
@@ -204,6 +205,8 @@ public:
      */
     GraphData getPropertyBacteria() const;
 
+    GraphData getPropertyVigorousBacteria() const;
+
     /**
      * @brief getPropertyNutrimentQuantity calcule les nouvelles valeurs
      * associées à chacune des series du graphe NutrimentQuantity
@@ -217,6 +220,8 @@ public:
      * @return l'ensemble des nouvelles valeurs calculées
      */
     GraphData getPropertyGeneral() const;
+
+    GraphData getPropertyNutriment() const;
 
     /**
      * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
@@ -234,6 +239,16 @@ private :
     std::vector<Bacterium*> annex;
 
     /**
+     * @brief PetriDish Empêche la copie
+     */
+    PetriDish(PetriDish const&) = delete;
+
+    /**
+     * @brief operator = pour empecher l'usage de l'opérateur d'affectation
+     */
+    PetriDish& operator=(PetriDish const&) = delete;
+
+    /**
      * @brief getMeanBacteria calcule la moyenne des valeurs d'un paramètre mutable
      * sur toutes les bactéries possédant ce paramètre mutable
      * @param s le nom du paramètre mutable
@@ -247,6 +262,8 @@ private :
      * @return la somme totale
      */
     double getTotalNutriment() const;
+
+    double getTotalVigorousBacteria() const;
 
     /**
      * @brief update_bacteries assure le déplacement, les collisions et la consommation
@@ -279,16 +296,6 @@ private :
      * @param dt Pas de temps après lequel lequel la simulation est mise à jour
      */
     void updateSwarms(sf::Time dt);
-
-    /**
-     * @brief PetriDish Empêche la copie
-     */
-    PetriDish(PetriDish const&) = delete;
-
-    /**
-     * @brief operator = pour empecher l'usage de l'opérateur d'affectation
-     */
-    PetriDish& operator=(PetriDish const&) = delete;
 
     /**
      * @brief deleteUnderObstacle supprime toutes les bacteries et tous les nutriments se trouvant

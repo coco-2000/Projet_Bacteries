@@ -1,6 +1,7 @@
 #include "Lab.hpp"
 #include "CircularBody.hpp"
 #include "Application.hpp"
+#include "../Utility/Vec2d.hpp"
 
 Lab::Lab()
     : petri(getApp().getCentre(), (0.95/2)*getApp().getLabSize().x)
@@ -10,7 +11,10 @@ Lab::Lab()
         {s::SIMPLE_BACTERIA,        [&]() { return petri.getPropertySimpleBacteria();}      },
         {s::TWITCHING_BACTERIA,     [&]() { return petri.getPropertyTwitchingBacteria();}   },
         {s::BACTERIA,               [&]() { return petri.getPropertyBacteria();}            },
-        {s::NUTRIMENT_QUANTITY,     [&]() { return petri.getPropertyNutrimentQuantity();}   }};
+        {s::VIGOROUS_BACTERIA,      [&]() { return petri.getPropertyVigorousBacteria();}       },
+        {s::NUTRIMENT_QUANTITY,     [&]() { return petri.getPropertyNutrimentQuantity();}   },
+        {s::NUTRIMENT,              [&]() { return petri.getPropertyNutriment();}           },
+    };
 }
 
 bool Lab::contains(const CircularBody& body) const
@@ -61,17 +65,17 @@ void Lab::reset()
 
 bool Lab::addNutriment(Nutriment* nutriment)
 {
-    petri.addNutriment(nutriment);
+    return petri.addNutriment(nutriment);
 }
 
 bool Lab::addBacterium(Bacterium* bacterie)
 {
-    petri.addBacterium(bacterie);
+    return petri.addBacterium(bacterie);
 }
 
 bool Lab::addObstacle(Obstacle* obstacle)
 {
-    petri.addObstacle(obstacle);
+    return petri.addObstacle(obstacle);
 }
 
 void Lab::increaseTemperature()
@@ -149,9 +153,20 @@ void Lab::createWall(const Vec2d& position1, const Vec2d& position2)
    petri.createWall(position1, position2);
 }
 
-Vec2d Lab::getLastObstaclePos() const
+const Vec2d &Lab::getLastObstaclePos() const
 {
     return petri.getLastObstaclePos();
+}
+
+double Lab::getDistToPetri(const Vec2d& position) const
+{
+   // return distance(petri.getPosition(), position) - petri.getRadius();
+    return (petri.getRadius() - distance(petri.getPosition(), position));
+}
+
+Vec2d Lab::getMiddleDirectionVector(const Vec2d& position) const
+{
+    return (petri.getPosition() - position).normalised();
 }
 
 Lab::~Lab()

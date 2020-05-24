@@ -17,7 +17,7 @@ public :
      * @brief getCurrentTitle permet d'obtenir le titre du graphe courant
      * @return le titre du graphe courant
      */
-    std::string getCurrentTitle() const;
+    const std::string& getCurrentTitle() const;
 
     /**
      * @brief next incrémente l'identifiant actif
@@ -67,7 +67,6 @@ public :
     void setActive(int id);
 
 private:
-
     int currentId;
     std::map<int, Graph_labelled> graphSet;
     sf::Time counter;

@@ -4,6 +4,8 @@
 #include "SwarmBacterium.hpp"
 #include "PoisonBacterium.hpp"
 #include "Poison.hpp"
+#include "NutrimentA.hpp"
+#include "NutrimentB.hpp"
 #include "../Utility/Utility.hpp"
 #include "CircularBody.hpp"
 #include <vector>
@@ -14,7 +16,7 @@
 
 typedef std::unordered_map<std::string, double> GraphData;
 
-PetriDish::PetriDish(Vec2d position, double radius)
+PetriDish::PetriDish(const Vec2d &position, double radius)
     : CircularBody (position, radius)
 {
     initTemperature();
@@ -346,7 +348,7 @@ void PetriDish::addSwarm(Swarm* swarm)
     swarms.push_back(swarm);
 }
 
-Swarm* PetriDish::getSwarmWithId(const std::string& id) const
+Swarm *PetriDish::getSwarmWithId(const std::string& id) const
 {
     for(const auto& swarm : swarms)
     {
@@ -388,7 +390,6 @@ double PetriDish::getMeanBacteria(const std::string &s) const
             value += bacterie->getparamMutables().at(s).get();
         }
     }
-
     return sum != 0 ? ( value/sum) : -1.;
 }
 
@@ -403,6 +404,16 @@ double PetriDish::getTotalNutriment() const
     return value;
 }
 
+double PetriDish::getTotalVigorousBacteria() const
+{
+    int sum(0);
+    for(const auto& bacteria : bacteries)
+    {
+        sum += (bacteria->getEnergy()>bacteria->getDivideEnergy()-10);
+    }
+    return sum;
+}
+
 GraphData PetriDish::getPropertyGeneral() const
 {
     return {
@@ -410,7 +421,7 @@ GraphData PetriDish::getPropertyGeneral() const
         {s::TWITCHING_BACTERIA, TwitchingBacterium::getTwitchCounter()},
         {s::SWARM_BACTERIA, SwarmBacterium::getSwarmCounter()},
         {s::POISON_BACTERIA, PoisonBacterium::getPoisonCounter()},
-        {s::NUTRIMENT_SOURCES, nutriments.size() - Poison::getPoisonCounter()},
+        {s::NUTRIMENT_SOURCES, nutriments.size()},
         {s::DISH_TEMPERATURE, getTemperature()}
         };
 }
@@ -436,6 +447,24 @@ GraphData PetriDish::getPropertyTwitchingBacteria() const
 GraphData PetriDish::getPropertyBacteria() const
 {
     return {{s::SPEED, getMeanBacteria(s::SPEED)}};
+}
+
+GraphData PetriDish::getPropertyVigorousBacteria() const
+{
+    return {
+        {s::BACTERIA, bacteries.size()},
+        {s::VIGOROUS_BACTERIA, getTotalVigorousBacteria()}
+    };
+}
+
+GraphData PetriDish::getPropertyNutriment() const
+{
+    return {
+        {s::NUTRIMENT_SOURCES, nutriments.size()},
+        {s::NUTRIMENT_A, NutrimentA::getnutACounter()},
+        {s::NUTRIMENT_B, NutrimentB::getnutBCounter()},
+        {s::POISON, Poison::getPoisonCounter()}
+    };
 }
 
 PetriDish::~PetriDish()

@@ -46,6 +46,9 @@ public :
      * @brief update gère le déplacement des bacteries,
      * les collisions avec le bord de l'assiette de petri
      * la consommation des nutriments par les bacteries
+     * la division des bactéries
+     * met à jour l'angle de rotation des bactéries
+     * gère le mode perdu des bactéries
      * @param dt Pas de temps après lequel lequel la simulation est mise à jour
      */
     void update(sf::Time dt) override;
@@ -65,7 +68,7 @@ public :
 
     /**
      * @brief getMaxEatableQuantity
-     * @return la quantité maximale pouvant être prélevé par la bactérie sur le source de nutriment
+     * @return la quantité maximale pouvant être prélevé par la bactérie sur la source de nutriment
      */
     Quantity getMaxEatableQuantity() const;
 
@@ -108,18 +111,17 @@ public :
      */
     bool isLost() const;
 
-   /* virtual double getMaxpHviable() const = 0;
-    virtual double getMinpHviable() const = 0;
-    virtual double getMaxTemperatureViable() const =0;
-    virtual double getMinTemperatureViable() const =0;
-    virtual double getHeatResistanceEnergy() const = 0;
-    virtual double getpHResistanceEnergy() const = 0;
-    bool TemperatureViable() const;
-    bool pHviable() const; */
+    /**
+     * @brief getEnergy
+     * @return l'énergie minimale nécessaire à la division
+     */
+    Quantity getDivideEnergy() const;
+
+    Quantity getEnergy() const;
 
     /**
      * Méthode virtuelle pure
-     * @brief getPositionScore Calcul le coefficient associé à un nutriment (ici de type A) pour le calcul du
+     * @brief getScoreCoefficient Calcul le coefficient associé à un nutriment (ici de type A) pour le calcul du
      * score de la position en fonction du type de la bactérie
      * @return le coefficient par lequel est multiplié le score par rapport à une source de nutriments
      */
@@ -127,7 +129,7 @@ public :
 
     /**
      * Méthode virtuelle pure
-     * @brief getPositionScore Calcul le coefficient associé à un nutriment (ici de type B) pour le calcul du
+     * @brief getScoreCoefficient Calcul le coefficient associé à un nutriment (ici de type B) pour le calcul du
      * score de la position en fonction du type de la bactérie
      * @return le coefficient par lequel est multiplié le score par rapport à une source de nutriments
      */
@@ -135,7 +137,7 @@ public :
 
     /**
      * Méthode virtuelle pure
-     * @brief getPositionScore Calcul le coefficient associé à un nutriment (ici de type poison) pour le calcul du
+     * @brief getScoreCoefficient Calcul le coefficient associé à un nutriment (ici de type poison) pour le calcul du
      * score de la position en fonction du type de la bactérie
      * @return le coefficient par lequel est multiplié le score par rapport à une source de nutriments
      */
@@ -194,7 +196,7 @@ protected :
     void consumeEnergy(Quantity qt);
 
     /**
-     * @brief shift_clone décale la bactérie clonée pour la différencier
+     * @brief shiftClone décale la bactérie clonée pour la différencier
      * de la bactérie d'origine
      * @param v vecteur avec lequel la bactérie est décalée
      */
@@ -249,10 +251,9 @@ protected :
     void setLost(bool islost);
 
     /**
-     * @brief setTimeLost
-     * @param dt la nouvelle valeur de timeLost
+     * @brief resetTimeLost initialise timeLost à zero
      */
-    void setTimeLost(sf::Time dt);
+    void resetTimeLost();
 
     /**
      * @brief lostTrySwitch
@@ -268,9 +269,9 @@ private :
     Quantity energy;
     std::map<std::string, MutableNumber> paramMutables;
     bool abstinence;
-    sf::Time consumeCounter;
     double oldScore;
     bool lost;
+    sf::Time consumeCounter;
     sf::Time timeLost;
     sf::Time timeSwitch;
 
@@ -289,7 +290,7 @@ private :
 
     /**
      * @brief collision gère les collisions des bacteries
-     * avec l'assiette de petri
+     * avec l'assiette de petri et avec les obstacles
      */
     void collision();
 
@@ -307,12 +308,6 @@ private :
      * @return Un pointeur sur la nouvelle bactérie issue de l'instance courante
      */
     virtual Bacterium* clone() const = 0;
-
-    /**
-     * @brief getEnergy
-     * @return l'énergie minimale nécessaire à la division
-     */
-    Quantity getEnergy() const;
 
     /**
      * @brief getDelay
@@ -366,6 +361,8 @@ private :
      * constructeur de copie est redéfini pour incrémenter les compteurs par exemple
      */
     Bacterium& operator=(Bacterium const&) = delete;
+
+    void manageGap();
 };
 
 

@@ -7,8 +7,6 @@ class Poison : public Nutriment
 public:
     Poison(Vec2d const& position);
 
-    Poison(const Poison& other);
-
     static double getPoisonCounter();
 
     Quantity eatenBy(const Bacterium& bacterie) override;
