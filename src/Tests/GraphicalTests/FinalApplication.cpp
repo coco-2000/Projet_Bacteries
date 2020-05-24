@@ -26,7 +26,9 @@ void FinalApplication::onRun()
     addGraph(s::NUTRIMENT_QUANTITY, {s::NUTRIMENT_QUANTITY}, 0, 2000);
     addGraph(s::SIMPLE_BACTERIA, { s::BETTER, s::WORSE}, 0, 10);
     addGraph(s::TWITCHING_BACTERIA, { s::TENTACLE_LENGTH, s::TENTACLE_SPEED}, 0, 150);
+    addGraph(s::VIGOROUS_BACTERIA, {s::BACTERIA, s::VIGOROUS_BACTERIA}, 0, 150);
     addGraph(s::BACTERIA, { s::SPEED}, 20, 50);
+    addGraph(s::NUTRIMENT,{s::NUTRIMENT_SOURCES, s::NUTRIMENT_A, s::NUTRIMENT_B}, 0, 150);
 	setActiveGraph(0);
 }
 

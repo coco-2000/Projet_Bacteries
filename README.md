@@ -7,12 +7,12 @@ Debut du projet : 09/03/2020
 
 .at pour les maps jette une exception si la clé n'existe pas contrairement à []
 - faut il controler la valeur dans Stats::setActive ?
-- opérateur d'affectation supprimé dans bactérium ok ?
-- SwarmBacterium mutate
 - ou mettre les typedefs
 - Pensez à utiliser des variables temporaires pour stocker les résultats de long calculs.
 - Pensez à utiliser des méthodes vous donnant les informations (constantes) provenant des fichiers JSON.
 - Améliorez les commentaires de `Lab/TwitchingBacterium.hpp` pour les méthodes gérant la transition d'états.
+
+constructeur bacterium param mutable
 
 Rendu de : Groupe 1
 

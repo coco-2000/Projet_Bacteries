@@ -89,6 +89,7 @@ private :
 
     /**
      * @brief tentative_basculement Décide si la bactérie doit basculer ou non
+     * @param dt Pas de temps au bout duquel la simulation est mise à jour
      */
     void trySwitch(sf::Time dt);
 

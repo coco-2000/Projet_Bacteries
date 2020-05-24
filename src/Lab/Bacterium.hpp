@@ -46,6 +46,9 @@ public :
      * @brief update gère le déplacement des bacteries,
      * les collisions avec le bord de l'assiette de petri
      * la consommation des nutriments par les bacteries
+     * la division des bactéries
+     * met à jour l'angle de rotation des bactéries
+     * gère le mode perdu des bactéries
      * @param dt Pas de temps après lequel lequel la simulation est mise à jour
      */
     void update(sf::Time dt) override;
@@ -65,7 +68,7 @@ public :
 
     /**
      * @brief getMaxEatableQuantity
-     * @return la quantité maximale pouvant être prélevé par la bactérie sur le source de nutriment
+     * @return la quantité maximale pouvant être prélevé par la bactérie sur la source de nutriment
      */
     Quantity getMaxEatableQuantity() const;
 
@@ -102,20 +105,23 @@ public :
      */
     virtual Quantity eatableQuantity(Poison& poison) const = 0;
 
+    /**
+     * @brief isLost
+     * @return vrai si la bactérie et perdue, c'est à dire sonnée par un obstacle
+     */
     bool isLost() const;
 
-   /* virtual double getMaxpHviable() const = 0;
-    virtual double getMinpHviable() const = 0;
-    virtual double getMaxTemperatureViable() const =0;
-    virtual double getMinTemperatureViable() const =0;
-    virtual double getHeatResistanceEnergy() const = 0;
-    virtual double getpHResistanceEnergy() const = 0;
-    bool TemperatureViable() const;
-    bool pHviable() const; */
+    /**
+     * @brief getEnergy
+     * @return l'énergie minimale nécessaire à la division
+     */
+    Quantity getDivideEnergy() const;
+
+    Quantity getEnergy() const;
 
     /**
      * Méthode virtuelle pure
-     * @brief getPositionScore Calcul le coefficient associé à un nutriment (ici de type A) pour le calcul du
+     * @brief getScoreCoefficient Calcul le coefficient associé à un nutriment (ici de type A) pour le calcul du
      * score de la position en fonction du type de la bactérie
      * @return le coefficient par lequel est multiplié le score par rapport à une source de nutriments
      */
@@ -123,7 +129,7 @@ public :
 
     /**
      * Méthode virtuelle pure
-     * @brief getPositionScore Calcul le coefficient associé à un nutriment (ici de type B) pour le calcul du
+     * @brief getScoreCoefficient Calcul le coefficient associé à un nutriment (ici de type B) pour le calcul du
      * score de la position en fonction du type de la bactérie
      * @return le coefficient par lequel est multiplié le score par rapport à une source de nutriments
      */
@@ -131,7 +137,7 @@ public :
 
     /**
      * Méthode virtuelle pure
-     * @brief getPositionScore Calcul le coefficient associé à un nutriment (ici de type poison) pour le calcul du
+     * @brief getScoreCoefficient Calcul le coefficient associé à un nutriment (ici de type poison) pour le calcul du
      * score de la position en fonction du type de la bactérie
      * @return le coefficient par lequel est multiplié le score par rapport à une source de nutriments
      */
@@ -190,7 +196,8 @@ protected :
     void consumeEnergy(Quantity qt);
 
     /**
-     * @brief shift_clone décale la bactérie clonée pour la différencier de la bactérie d'origine
+     * @brief shiftClone décale la bactérie clonée pour la différencier
+     * de la bactérie d'origine
      * @param v vecteur avec lequel la bactérie est décalée
      */
     virtual void shiftClone(const Vec2d& v);
@@ -203,8 +210,9 @@ protected :
     MutableNumber getProperty(const std::string& key) const;
 
     /**
-     * @brief strategy1 Première façon d'effectuer le basculement : choisir au hasard une direction
-     * associer à l'étiquette "single random vector" dans le fichier de configuration
+     * @brief strategy1 Première façon d'effectuer le basculement :
+     * choisir au hasard une directionassocier à l'étiquette "single random vector"
+     * dans le fichier de configuration
      */
     void strategy1();
 
@@ -221,27 +229,40 @@ protected :
      */
     virtual void consumeNutriment(sf::Time dt);
 
-    double getLostEnergyFactor() const;
-
     double getLostLambdaSwitch() const;
-
-    sf::Time getMaxTimeLost() const;
 
     sf::Time getTimeSwitch() const;
 
     void setTimeSwitch(sf::Time newTime);
 
-    virtual void manageLost(sf::Time dt);
+    virtual void manageLost(sf::Time dt); //à mettre en private
 
+    /**
+     * @brief getLostEnergyFactor
+     * @return l'énergie dépensée à chaque pas de déplacement lorsque la bactérie est
+     * lost, c'est à dire sonnée par un obstacle
+     */
+    double getLostEnergyFactor() const;
+
+    /**
+     * @brief setLost
+     * @param islost la nouvelle valeur de lost
+     */
     void setLost(bool islost);
 
-    void setTimeLost(sf::Time dt);
+    /**
+     * @brief resetTimeLost initialise timeLost à zero
+     */
+    void resetTimeLost();
 
+    /**
+     * @brief lostTrySwitch
+     * @param dt
+     */
     void lostTrySwitch(sf::Time dt);
 
-
-
 private :
+
     MutableColor color;
     double angle;
     Vec2d direction;
@@ -255,6 +276,13 @@ private :
     sf::Time timeSwitch;
 
     /**
+     * @brief getMaxTimeLost
+     * @return le temps maximal pendant lequel une bactérie est perdue,
+     * c'est à dire sonnée par un obstacle
+     */
+    sf::Time getMaxTimeLost() const;
+
+    /**
      * @brief displayEnergy Affiche la quantité d'énergie de la bacterie (si mode debugging activé)
      * @param target Cible pour l'affichage
      */
@@ -262,7 +290,7 @@ private :
 
     /**
      * @brief collision gère les collisions des bacteries
-     * avec l'assiette de petri
+     * avec l'assiette de petri et avec les obstacles
      */
     void collision();
 
@@ -280,12 +308,6 @@ private :
      * @return Un pointeur sur la nouvelle bactérie issue de l'instance courante
      */
     virtual Bacterium* clone() const = 0;
-
-    /**
-     * @brief getEnergy
-     * @return l'énergie minimale nécessaire à la division
-     */
-    Quantity getEnergy() const;
 
     /**
      * @brief getDelay

@@ -21,14 +21,14 @@ public:
 
      /**
       * @brief update faire évoluer un Lab
-      * pour le moment fait seulement évoluer l'assiette de Petri
+      * fait évoluer l'assiette de Petri et le générateur de nutriment
       * @param dt l'intervalle de temps écoulé depuis le dernier update
       */
      void update(sf::Time dt) override;
 
      /**
       * @brief drawOn dessiner un lab
-      * pour le moment dessine seulement une assiette de Petri
+      * dessine une assiette de Petri
       * @param targetWindow la fenetre dans laquelle le Lab est affiché
       */
      void drawOn(sf::RenderTarget& targetWindow) const override;
@@ -95,7 +95,7 @@ public:
       * @brief getLastObstaclePos
       * @return la position du dernier obstacle créé et non supprimé
       */
-     Vec2d getLastObstaclePos() const;
+     Vec2d const& getLastObstaclePos() const;
 
      /**
       * @brief getTemperature obtenir la temperature de l'assiette de petri du lab
@@ -125,9 +125,10 @@ public:
      Nutriment* getNutrimentColliding(CircularBody const& body) const;
 
      /**
-      * @brief getPositionScore Calcule le score associée à une position donnée dans
-      *                         l'assiette de Petri
+      * @brief getPositionScore Calcule le score associée à la nouvelle position hypothétique
+      *  d'une bactérie dans la petri
       * @param position Coordonnées de la position dont il faut calculer le score
+      * @param bacterie bactérie pour laquelle on calcule le score
       * @return Score associée à la position
       */
      double getPositionScore(const Vec2d& position, const Bacterium& bacterie) const;
@@ -182,6 +183,11 @@ public:
       */
      void resetControls();
 
+     /**
+      * @brief getDistToPetri
+      * @param position coordonnées de la position avec laquelle on calcule la distance
+      * @return la distance entre la position donnée et le bord de l'assiete de petri
+      */
      double getDistToPetri(const Vec2d& position) const;
 
      Vec2d getMiddleDirectionVector(const Vec2d& position) const;
@@ -198,9 +204,10 @@ private :
 
     /**
      * @brief contains Vérifie si un CircularBody est à l'intérieur de son assiette de Petri
+     * @param body celui pour lequel on vérifie s'il se trouve à l'interieur
      * @return true si le CircularBody est à l'interieur false sinon
      */
-    bool contains(const CircularBody& corps) const;
+    bool contains(const CircularBody& body) const;
 
     /**
      * @brief initGradient Initialise l'attribut puissance de l'assiette de

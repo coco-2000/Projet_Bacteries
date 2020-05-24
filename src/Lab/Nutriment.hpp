@@ -27,11 +27,9 @@ public :
      */
     Nutriment(Quantity quantity, const Vec2d& position);
 
-    Nutriment(const Nutriment& other);
-
     /**
      * @brief drawOn Dessine un nutriment
-     * @param target
+     * @param target la fenêtre dans laquelle le nutriment est dessiné
      */
     void drawOn(sf::RenderTarget& target) const override;
 
@@ -43,7 +41,7 @@ public :
 
     /**
      * @brief conditionTemperature Vérifie les conditions portant sur la température pour la croissance des nutriments
-     * @param temperature Température courante
+     * @param temperature TempdistPetriérature courante
      * @return true si les conditions sont respectées false sinon
      */
     bool conditionTemperature(double temperature) const;
@@ -55,7 +53,7 @@ public :
     bool isEmpty() const;
 
     /**
-     * @brief Nutriment::takeQuantity Prélève une quantité donnée de nutriments de l'instance courante
+     * @brief takeQuantity Prélève une quantité donnée de nutriments de l'instance courante
      * @param taking Quantité de nutriments à prélever
      * @return Quantité de nutriments qui a pu être prélevée
      */
@@ -124,7 +122,6 @@ protected :
 
 private :
 
-    const double distPetri;
     Quantity quantity;
 
     /**
@@ -138,6 +135,10 @@ private :
      * Il s'agit d'une méthode virtuelle pure
      */
      virtual j::Value const& getConfig() const = 0;
+
+    Nutriment(const Nutriment& other) = delete;
+
+    Nutriment& operator=(Nutriment const&) = delete;
 
     double getGrowthSpeed() const;
 

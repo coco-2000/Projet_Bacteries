@@ -13,19 +13,20 @@ Bacterium::Bacterium(const Vec2d& position, const Vec2d& direction, double radiu
 {
     angle = direction.angle();
     setLost(false);
+    resetTimeLost();
 }
 
 
 void Bacterium::divide()
 {
-    if(energy >= getEnergy())
+    if(energy >= getDivideEnergy())
     {
         energy /= 2;
         Bacterium* copy(clone());
         copy->mutate();
         copy->shiftClone({10,-10}); //pour que l'on puisse tout de suite voir s'il y a eu division
         getAppEnv().addAnnex(copy);
-        direction = Vec2d::fromAngle(getAngle() + M_PI/2);
+        direction = Vec2d::fromAngle(angle + M_PI/2);
     }
 }
 void Bacterium::shiftClone(const Vec2d& v)
@@ -48,7 +49,7 @@ bool Bacterium::alive() const
     return energy > 0;
 }
 
-Quantity Bacterium::getEnergy() const
+Quantity Bacterium::getDivideEnergy() const
 {
     return getConfig()["energy"]["division"].toDouble();
 }
@@ -131,11 +132,13 @@ void Bacterium::collision()
     if (getAppEnv().doesCollideWithObstacle(*this))
     {
         setLost(true);
+        resetTimeLost();
         strategy2();
     }
     else if(getAppEnv().doesCollideWithDish(*this))
     {
         setLost(true);
+        resetTimeLost();
         direction = - direction;
         manageGap();
     }
@@ -143,12 +146,10 @@ void Bacterium::collision()
 
 void Bacterium::manageGap()
 {
-    double dist(getAppEnv().getDistToPetri(getPosition()) + getRadius());
+   double dist(-getAppEnv().getDistToPetri(getPosition()) + getRadius());
 
     if(dist > 0)
-    {
         CircularBody::move(dist * getAppEnv().getMiddleDirectionVector(getPosition()));
-    }
 }
 
 void Bacterium::consumeNutriment(sf::Time dt)
@@ -230,6 +231,11 @@ double Bacterium::getAngle() const
     return angle;
 }
 
+double Bacterium::getEnergy() const
+{
+    return energy;
+}
+
 sf::Color Bacterium::getColor() const
 {
     return color.get();
@@ -248,12 +254,11 @@ void Bacterium::setDirection(const Vec2d& newDir)
 void Bacterium::setLost(bool islost)
 {
    lost = islost;
-   timeLost = sf::Time::Zero;
 }
 
-void Bacterium::setTimeLost(sf::Time dt)
+void Bacterium::resetTimeLost()
 {
-    timeLost = dt;
+    timeLost = sf::Time::Zero;
 }
 
 double Bacterium::getOldScore() const
@@ -288,7 +293,7 @@ void Bacterium::lostTrySwitch(sf::Time dt)
 
 void Bacterium::strategy1()
 {
-    setDirection(Vec2d::fromRandomAngle());
+    direction = Vec2d::fromRandomAngle();
 }
 
 void Bacterium::strategy2()
@@ -300,7 +305,7 @@ void Bacterium::strategy2()
         const Vec2d newDir (Vec2d::fromRandomAngle());
         double newScore = helperPositionScore (newDir, *this);
 
-        if(newScore > helperPositionScore(getDirection(), *this))
-            setDirection(newDir);
+        if(newScore > helperPositionScore(direction, *this))
+            direction = newDir;
     }
 }

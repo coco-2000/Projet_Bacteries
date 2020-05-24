@@ -11,12 +11,15 @@ Lab::Lab()
         {s::SIMPLE_BACTERIA,        [&]() { return petri.getPropertySimpleBacteria();}      },
         {s::TWITCHING_BACTERIA,     [&]() { return petri.getPropertyTwitchingBacteria();}   },
         {s::BACTERIA,               [&]() { return petri.getPropertyBacteria();}            },
-        {s::NUTRIMENT_QUANTITY,     [&]() { return petri.getPropertyNutrimentQuantity();}   }};
+        {s::VIGOROUS_BACTERIA,      [&]() { return petri.getPropertyVigorousBacteria();}       },
+        {s::NUTRIMENT_QUANTITY,     [&]() { return petri.getPropertyNutrimentQuantity();}   },
+        {s::NUTRIMENT,              [&]() { return petri.getPropertyNutriment();}           },
+    };
 }
 
-bool Lab::contains(const CircularBody& corps) const
+bool Lab::contains(const CircularBody& body) const
 {
-    return (petri > corps);
+    return (petri > body);
 }
 
 bool Lab::doesCollideWithDish(CircularBody const& body) const
@@ -25,7 +28,6 @@ bool Lab::doesCollideWithDish(CircularBody const& body) const
      * Comme l'assiete de petri constitue la limite de l'espace dans lequel se deplacent les
      * CircularBody, le fait de ne plus etre contenu dans une PetriDish équivaut à en sortir
      */
-
     return !contains(body);
 }
 
@@ -151,14 +153,15 @@ void Lab::createWall(const Vec2d& position1, const Vec2d& position2)
    petri.createWall(position1, position2);
 }
 
-Vec2d Lab::getLastObstaclePos() const
+const Vec2d &Lab::getLastObstaclePos() const
 {
     return petri.getLastObstaclePos();
 }
 
 double Lab::getDistToPetri(const Vec2d& position) const
 {
-    return distance(petri.getPosition(), position) - petri.getRadius();
+   // return distance(petri.getPosition(), position) - petri.getRadius();
+    return (petri.getRadius() - distance(petri.getPosition(), position));
 }
 
 Vec2d Lab::getMiddleDirectionVector(const Vec2d& position) const
