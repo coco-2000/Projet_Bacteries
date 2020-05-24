@@ -170,6 +170,7 @@ void Bacterium::manageLost(sf::Time dt)
 {
     if (timeLost >= getMaxTimeLost())
         setLost(false);
+
     else
         timeLost += dt;
 }

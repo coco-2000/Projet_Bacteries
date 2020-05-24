@@ -24,21 +24,21 @@ public :
      * @param energy niveau d'énergie intiale de la bacterie
      * @param color Couleur initiale de la bacterie
      * @param paramMutables ensemble de paramètres numériques mutables
-     * @param abstinence si la bacterie consomme des nutriments ou non
+     * @param abstinence indique si la bacterie consomme des nutriments ou non
      */
     Bacterium(const Vec2d& position, const Vec2d& direction, double radius, Quantity energy,
               const MutableColor& color, const std::map<std::string, MutableNumber>& paramMutables = {},
               bool abstinence = 0);
 
     /**
-     * @brief alive savoir si la bacterie a suffisamment d'energie pour etre en vie
-     * @return vrai si l'energie est suffisante
+     * @brief alive Permet de savoir si la bacterie a suffisamment d'energie pour être en vie
+     * @return vrai si l'énergie est strictement supérieur à 0
      */
     bool alive() const;
 
     /**
-     * @brief drawOn dessiner la bacterie
-     * @param target la fenetre dans laquelle on affiche la bacterie
+     * @brief drawOn Dessine la bacterie
+     * @param target Fenêtre dans laquelle la bacterie est affichée
      */
     void drawOn(sf::RenderTarget& target) const override;
 
