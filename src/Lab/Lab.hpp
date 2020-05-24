@@ -95,7 +95,7 @@ public:
       * @brief getLastObstaclePos
       * @return la position du dernier obstacle créé et non supprimé
       */
-     Vec2d const& getLastObstaclePos() const;
+     Vec2d getLastObstaclePos() const;
 
      /**
       * @brief getTemperature obtenir la temperature de l'assiette de petri du lab

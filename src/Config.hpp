@@ -119,6 +119,7 @@ public:
     const double twitchingbact_speed_factor;
     const double twitchingbact_consumption_factor_move;
     const double twitchingbact_consumption_factor_tentacle;
+    const double twitchingbact_consumption_factor_fatigue;
 
     const double poisonbact_min_energy;
     const double poisonbact_max_energy;
