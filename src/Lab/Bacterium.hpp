@@ -148,6 +148,8 @@ public :
      */
     virtual double getScoreCoefficient(const Poison& poison) const = 0;
 
+    unsigned int getDivideCounter() const;
+
 protected :
     /**
      * @brief getAngle
@@ -225,16 +227,9 @@ protected :
 
     /**
      * @brief consumeNutriment gère la consommation des bacteries
-     * @param dt Pas de temps après lequel la simulation est mise à jour
+     * @param dt Pas de temps après lequel la bactérie est mise à jour
      */
     virtual void consumeNutriment(sf::Time dt);
-
-    /**
-     * @brief getLostLambdaSwitch
-     * @return Le facteur lambda du fichier de configuration qui paramètrise la probabilité
-     *         pour la bactérie de basculer quand elle est perdue
-     */
-    double getLostLambdaSwitch() const;
 
     /**
      * @brief getTimeSwitch
@@ -268,6 +263,10 @@ protected :
      */
     void lostTrySwitch(sf::Time dt);
 
+
+
+
+
 private :
 
     MutableColor color;
@@ -278,6 +277,7 @@ private :
     bool abstinence;
     double oldScore;
     bool lost;
+    unsigned int divideCounter;
     sf::Time consumeCounter;
     sf::Time timeLost;
     sf::Time timeSwitch;
@@ -368,6 +368,13 @@ private :
      * constructeur de copie est redéfini pour incrémenter les compteurs par exemple
      */
     Bacterium& operator=(Bacterium const&) = delete;
+
+    /**
+     * @brief getLostLambdaSwitch
+     * @return Le facteur lambda du fichier de configuration qui paramètrise la probabilité
+     *         pour la bactérie de basculer quand elle est perdue
+     */
+    double getLostLambdaSwitch() const;
 
     /**
      * @brief manageGap Gère les cas où la bactérie qui percute le bord de l'assiette va un peu
