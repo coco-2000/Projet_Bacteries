@@ -286,6 +286,13 @@ private :
     sf::Time timeSwitch;
 
     /**
+     * (Méthode virtuelle pure)
+     * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries
+     * @return L'ensemble des paramètres du fichier app.json associé au type de l'instance courante
+     */
+    virtual j::Value const& getConfig() const = 0;
+
+    /**
      * @brief getMaxTimeLost
      * @return Le temps maximal pendant lequel une bactérie est perdue,
      * c'est-à-dire qu'elle a percuté un obstacle ou le bord il a peu de temps
@@ -324,13 +331,6 @@ private :
      * @return Le temps d'attente entre deux consommations de nutriments pour la bactérie
      */
     sf::Time getDelay() const;
-
-    /**
-     * (Méthode virtuelle pure)
-     * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux bacteries
-     * @return L'ensemble des paramètres du fichier app.json associé au type de l'instance courante
-     */
-    virtual j::Value const& getConfig() const = 0;
 
     /**
      * @brief rotationAngle Mise à jour de l'angle de rotation

@@ -4,7 +4,7 @@
 #include "SimpleBacterium.hpp"
 #include "TwitchingBacterium.hpp"
 
-double Poison::poisonCounter(0);
+unsigned int Poison::poisonCounter(0);
 
 Poison::Poison(Vec2d const& position)
     : Nutriment(uniform(getShortConfig().poison_min_qty, getShortConfig().poison_max_qty),
@@ -16,7 +16,7 @@ j::Value const& Poison::getConfig() const
     return getAppConfig()["nutriments"]["poison"];
 }
 
-double Poison::getPoisonCounter()
+unsigned int Poison::getPoisonCounter()
 {
     return poisonCounter;
 }

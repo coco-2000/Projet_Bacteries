@@ -4,22 +4,20 @@
 #include "Poison.hpp"
 #include "Application.hpp"
 
-double PoisonBacterium::poisonCounter(0);
+unsigned int PoisonBacterium::poisonCounter(0);
 
 PoisonBacterium::PoisonBacterium(const Vec2d& position)
-    : SimpleBacterium(position, Vec2d::fromRandomAngle(), uniform(getShortConfig().poisonbact_min_radius, getShortConfig().poisonbact_max_radius),
-                      uniform(getShortConfig().poisonbact_min_energy, getShortConfig().poisonbact_max_energy),
-                      getConfig()["color"],
-                      {{"speed", MutableNumber::positive(getConfig()["speed"])},
-                       {"tumble better prob", MutableNumber::positive(getConfig()["tumble"]["better"])},
-                       {"tumble worse prob", MutableNumber::positive(getConfig()["tumble"]["worse"])}})
+    : SwimmingBacterium(position, Vec2d::fromRandomAngle(), uniform(getShortConfig().poisonbact_min_radius, getShortConfig().poisonbact_max_radius),
+                         uniform(getShortConfig().poisonbact_min_energy, getShortConfig().poisonbact_max_energy), getConfig()["color"],
+                        {{"speed", MutableNumber::positive(getConfig()["speed"])},
+                         {"tumble better prob", MutableNumber::positive(getConfig()["tumble"]["better"])},
+                         {"tumble worse prob", MutableNumber::positive(getConfig()["tumble"]["worse"])}}), delayPoison(sf::Time::Zero)
 {
     ++poisonCounter;
-    resetDelay();
 }
 
 PoisonBacterium::PoisonBacterium(const PoisonBacterium& other)
-    : SimpleBacterium(other)
+    : SwimmingBacterium(other)
 { ++poisonCounter; }
 
 Quantity PoisonBacterium::eatableQuantity(NutrimentA& nutriment) const
@@ -67,27 +65,22 @@ void PoisonBacterium::dropPoison() const
     getAppEnv().addNutriment(new Poison(getPosition()));
 }
 
-double PoisonBacterium::getPoisonCounter()
+unsigned int PoisonBacterium::getPoisonCounter()
 {
     return poisonCounter;
 }
 
 void PoisonBacterium::move(sf::Time dt)
 {
-    SimpleBacterium::move(dt);
+    SwimmingBacterium::move(dt);
 
     if(delayPoison >= getShortConfig().poisonbact_poison_delay)
     {
         dropPoison();
-        resetDelay();
+        delayPoison = sf::Time::Zero;
     }
     else
         delayPoison += dt;
-}
-
-void PoisonBacterium::resetDelay()
-{
-    delayPoison = sf::Time::Zero;
 }
 
 PoisonBacterium::~PoisonBacterium()
