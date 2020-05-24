@@ -1,4 +1,4 @@
-#Programmation II (SV)
+Programmation II (SV)
 
 ##JOURNAL du groupe 1 (Emma Boehly, Constance de Trogoff)
 
@@ -63,13 +63,9 @@
 *************************************************
 ## Semaine 4 - Partie 3
 
-- *Constance* : Création et implémentation de la classe Bacterium (Partie 3.3)
-                relecture générale du code des parties précedentes, apport de petites modifications (pour une meilleure lisibilité du code)
-- *Emma* : Création et implémentation de la classe SimpleBacterium (Partie 3.4)
-- *ensemble* : correction bugs (dessin de la flagelle, test de collision des bactéries, crash du programme lors de
-               la construction des paramètres mutables) et implémentation division des bacteries (Partie 3.4)
-               ajout des override, const, etc
-
+- *ensemble* : Création et implémentation de la classe Bacterium (Partie 3.3)
+               Création et implémentation de la classe SimpleBacterium (Partie 3.4)
+               relecture générale du code des parties précedentes, apport de petites modifications (pour une meilleure lisibilité du code)
 - Problèmes : Bactérie qui ne se déplace pas (inversion de la direction à chaque pas)
 
 *************************************************
@@ -101,8 +97,3 @@
 
 Point où nous en sommes : Partie 4 terminée
 Toutes les parties antérieures sont fonctionelles
-
-*************************************************
-##Semaine 7 - Partie 5
-
-
