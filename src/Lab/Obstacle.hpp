@@ -7,14 +7,14 @@ class Obstacle : public CircularBody, public Drawable
 {
 public :
     /**
-     * @brief Obstacle constructeur
-     * @param position coordonnées de la position du nouvel obstacle
+     * @brief Obstacle Constructeur
+     * @param position Coordonnées de la position de l'obstacle à créer
      */
     Obstacle( Vec2d const& position);
 
     /**
-     * @brief drawOn dessiner l'obstacle
-     * @param target la fenetre dans laquelle on affiche l'obstacle
+     * @brief drawOn Dessine l'obstacle
+     * @param target Fenetre dans laquelle on affiche l'obstacle
      */
     void drawOn(sf::RenderTarget& target) const override;
 };

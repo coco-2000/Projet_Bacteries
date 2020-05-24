@@ -7,14 +7,13 @@ class NutrimentGenerator : public Updatable
 public:
 
     /**
-     * @brief NutrimentGenerator constructeur initialise le compteur à 0
+     * @brief NutrimentGenerator Constructeur : initialise le compteur à 0
      */
     NutrimentGenerator();
 
     /**
-     * @brief update faitévoluer le compteur à chaque écoulement de pas de temps,
-     * permet la créatio alétoire de sources de nutriment
-     * @param dt : pas de temps
+     * @brief update Met à jour le compteur à chaque écoulement de pas de temps et permet la création alétoire de sources de nutriment
+     * @param dt Pas de temps après lequel la bactérie est mise à jour
      */
     void update(sf::Time dt);
 

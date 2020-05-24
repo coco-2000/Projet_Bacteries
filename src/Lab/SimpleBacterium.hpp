@@ -65,7 +65,6 @@ public:
     static unsigned int getSimpleCounter();
 
 protected :
-
     /**
      * Redéfinition d'une méthode virtuelle pure
      * @brief move Déplace une bactérie

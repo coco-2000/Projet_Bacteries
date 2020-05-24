@@ -459,8 +459,8 @@ GraphData PetriDish::getPropertyNutriment() const
 {
     return {
         {s::NUTRIMENT_SOURCES, nutriments.size()},
-        {s::NUTRIMENT_A, NutrimentA::getnutACounter()},
-        {s::NUTRIMENT_B, NutrimentB::getnutBCounter()},
+        {s::NUTRIMENT_A, NutrimentA::getNutriACounter()},
+        {s::NUTRIMENT_B, NutrimentB::getNutriBCounter()},
         {s::POISON, Poison::getPoisonCounter()}
     };
 }
