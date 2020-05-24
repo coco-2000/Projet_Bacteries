@@ -9,7 +9,7 @@ Bacterium::Bacterium(const Vec2d& position, const Vec2d& direction, double radiu
                      bool abstinence)
 
     : CircularBody(position, radius), color(color), direction(direction), energy(energy),
-      paramMutables(paramMutables), abstinence(abstinence)
+      paramMutables(paramMutables), abstinence(abstinence), divideCounter(0)
 {
     angle = direction.angle();
     setLost(false);
@@ -27,6 +27,7 @@ void Bacterium::divide()
         copy->shiftClone({10,-10}); //pour que l'on puisse tout de suite voir s'il y a eu division
         getAppEnv().addAnnex(copy);
         direction = Vec2d::fromAngle(angle + M_PI/2);
+        ++ divideCounter;
     }
 }
 void Bacterium::shiftClone(const Vec2d& v)
@@ -243,6 +244,11 @@ sf::Color Bacterium::getColor() const
 Vec2d Bacterium::getDirection() const
 {
     return direction;
+}
+
+unsigned int Bacterium::getDivideCounter() const
+{
+    return divideCounter;
 }
 
 void Bacterium::setDirection(const Vec2d& newDir)

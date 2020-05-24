@@ -11,7 +11,7 @@ Lab::Lab()
         {s::SIMPLE_BACTERIA,        [&]() { return petri.getPropertySimpleBacteria();}      },
         {s::TWITCHING_BACTERIA,     [&]() { return petri.getPropertyTwitchingBacteria();}   },
         {s::BACTERIA,               [&]() { return petri.getPropertyBacteria();}            },
-        {s::VIGOROUS_BACTERIA,      [&]() { return petri.getPropertyVigorousBacteria();}       },
+        {s::BACTERIA_DIVISION,      [&]() { return petri.getPropertyBacteriaDivision();}    },
         {s::NUTRIMENT_QUANTITY,     [&]() { return petri.getPropertyNutrimentQuantity();}   },
         {s::NUTRIMENT,              [&]() { return petri.getPropertyNutriment();}           },
     };

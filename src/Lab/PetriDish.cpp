@@ -377,7 +377,7 @@ const Vec2d& PetriDish::getLastObstaclePos() const
     return obstacles.back()->getPosition();
 }
 
-double PetriDish::getMeanBacteria(const std::string &s) const
+double PetriDish::getMeanMutableParam(const std::string &s) const
 {
     double value(0.0);
     double sum(0);
@@ -404,14 +404,15 @@ double PetriDish::getTotalNutriment() const
     return value;
 }
 
-double PetriDish::getTotalVigorousBacteria() const
+double PetriDish::getMeanDivisionBacteria() const
 {
-    int sum(0);
+    double mean(0);
     for(const auto& bacteria : bacteries)
     {
-        sum += (bacteria->getEnergy()>bacteria->getDivideEnergy()-10);
+        mean += bacteria->getDivideCounter();
     }
-    return sum;
+    int size(bacteries.size());
+    return size !=0 ? mean /= bacteries.size() : -1;
 }
 
 GraphData PetriDish::getPropertyGeneral() const
@@ -433,28 +434,25 @@ GraphData PetriDish::getPropertyNutrimentQuantity() const
 
 GraphData PetriDish::getPropertySimpleBacteria() const
 {
-    return {{s::BETTER, getMeanBacteria(s::BETTER)},
-            {s::WORSE, (double)getMeanBacteria(s::WORSE)}};
+    return {{s::BETTER, getMeanMutableParam(s::BETTER)},
+            {s::WORSE, (double)getMeanMutableParam(s::WORSE)}};
 }
 
 GraphData PetriDish::getPropertyTwitchingBacteria() const
 {
     return {
-        {s::TENTACLE_LENGTH, getMeanBacteria(s::TENTACLE_LENGTH)},
-        {s::TENTACLE_SPEED, getMeanBacteria(s::TENTACLE_SPEED)}};
+        {s::TENTACLE_LENGTH, getMeanMutableParam(s::TENTACLE_LENGTH)},
+        {s::TENTACLE_SPEED, getMeanMutableParam(s::TENTACLE_SPEED)}};
 }
 
 GraphData PetriDish::getPropertyBacteria() const
 {
-    return {{s::SPEED, getMeanBacteria(s::SPEED)}};
+    return {{s::SPEED, getMeanMutableParam(s::SPEED)}};
 }
 
-GraphData PetriDish::getPropertyVigorousBacteria() const
+GraphData PetriDish::getPropertyBacteriaDivision() const
 {
-    return {
-        {s::BACTERIA, bacteries.size()},
-        {s::VIGOROUS_BACTERIA, getTotalVigorousBacteria()}
-    };
+    return {{s::BACTERIA_DIVISION, getMeanDivisionBacteria()}};
 }
 
 GraphData PetriDish::getPropertyNutriment() const

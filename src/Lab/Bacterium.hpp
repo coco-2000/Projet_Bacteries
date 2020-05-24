@@ -143,6 +143,8 @@ public :
      */
     virtual double getScoreCoefficient(const Poison& poison) const = 0;
 
+    unsigned int getDivideCounter() const;
+
 protected :
     /**
      * @brief getAngle
@@ -225,17 +227,21 @@ protected :
 
     /**
      * @brief consumeNutriment gère la consommation des bacteries
-     * @param dt Pas de temps après lequel la simulation est mise à jour
+     * @param dt Pas de temps après lequel la bactérie est mise à jour
      */
     virtual void consumeNutriment(sf::Time dt);
 
-    double getLostLambdaSwitch() const;
-
+    /**
+     * @brief getTimeSwitch
+     * @return la valeur de timeSwitch
+     */
     sf::Time getTimeSwitch() const;
 
+    /**
+     * @brief setTimeSwitch
+     * @param newTime la nouvelle valeur de TimeSwitch
+     */
     void setTimeSwitch(sf::Time newTime);
-
-    virtual void manageLost(sf::Time dt); //à mettre en private
 
     /**
      * @brief getLostEnergyFactor
@@ -261,6 +267,14 @@ protected :
      */
     void lostTrySwitch(sf::Time dt);
 
+    /**
+     * @brief manageLost vérifie si la bactérie doit rester en mode perdu
+     * @param dt pas de temps apres lequel la bactérie est mise à jour
+     */
+    virtual void manageLost(sf::Time dt);
+
+
+
 private :
 
     MutableColor color;
@@ -271,6 +285,7 @@ private :
     bool abstinence;
     double oldScore;
     bool lost;
+    unsigned int divideCounter;
     sf::Time consumeCounter;
     sf::Time timeLost;
     sf::Time timeSwitch;
@@ -361,6 +376,14 @@ private :
      * constructeur de copie est redéfini pour incrémenter les compteurs par exemple
      */
     Bacterium& operator=(Bacterium const&) = delete;
+
+    /**
+     * @brief getLostLambdaSwitch récupère le facteur lambda qui permet de calculer
+     * la probabilité pour qu'une bactérie change de direction lorsqu'elle est perdue
+     * @return
+     */
+    double getLostLambdaSwitch() const;
+
 
     void manageGap();
 };

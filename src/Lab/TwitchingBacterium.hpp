@@ -3,6 +3,9 @@
 #include "Bacterium.hpp"
 #include "Grip.hpp"
 
+/**
+ * @brief The Etat enum
+ */
 enum Etat {IDLE, WAIT_TO_DEPLOY, DEPLOY, ATTRACT, RETRACT, EAT};
 
 class TwitchingBacterium : public Bacterium
@@ -10,12 +13,14 @@ class TwitchingBacterium : public Bacterium
 public :
     /**
      * @brief TwitchingBacterium Constructeur
+     * Incrémente le compteur d'instances de twitching bacterium
      * @param position Coordonnées de la position de l'instance à créer
      */
     TwitchingBacterium(const Vec2d& position);
 
     /**
      * @brief TwitchingBacterium Constructeur de copie
+     * incrémente le compteur d'instances de twitching bacterium
      * @param other TwitchingBacterium à copier
      */
     TwitchingBacterium(const TwitchingBacterium& other);
@@ -113,13 +118,13 @@ private :
     void tentacleInit();
 
     /**
-     * @brief Wait_to_deploy_state etat dans lequel le tentacule de la bactérie se prépare au déploiement.
+     * @brief WaitToDeployState etat dans lequel le tentacule de la bactérie se prépare au déploiement.
      * Choix de la direction
      */
     void waitToDeployState(sf::Time dt);
 
     /**
-     * @brief deploy_state etat dans lequel le tentacule se déploie.
+     * @brief deployState etat dans lequel le tentacule se déploie.
      * Changement d'état de la bactérie si le tentacule rencontre une source de nutriment,
      * si il rencontre un obstacle, le bord de la pétri ou si la tentacule à atteint sa taille maximale
      * @param dt Pas de temps apres lequel la simulation est mise à jour
@@ -135,13 +140,13 @@ private :
     void attractState(sf::Time dt, const Nutriment* nutrimentPtr);
 
     /**
-     * @brief retract_state État dans lequel la bactérie rétracte le tentacule
+     * @brief retractState État dans lequel la bactérie rétracte le tentacule
      * @param dt Pas de temps apres lequel la simulation est mise à jour
      */
     void retractState(sf::Time dt);
 
     /**
-     * @brief eat_state état durant lequel la bactérie est entrain de consommer des nutriments
+     * @brief eatState état durant lequel la bactérie est entrain de consommer des nutriments
      * Gère le changement d'état si la bactérie ne peut plus consommer de nutriment
      * @param nutrimentPtr la source de nutriment que la bactérie est entrain de consommer
      */

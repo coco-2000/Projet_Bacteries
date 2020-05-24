@@ -94,7 +94,7 @@ public:
      * @brief update Effectue la croissance des nutriments de l'assiette de Petri en mettant à jour leur quantité et leur rayon
      * Suprime les nutriments et les bacteries si besoin
      * Met à jour le leader des groupes swarm
-     * @param dt Pas de temps après lequel lequel la simulation est mise à jour
+     * @param dt Pas de temps après lequel la petri est mise à jour
      */
     void update(sf::Time dt) override;
 
@@ -222,6 +222,7 @@ public:
     GraphData getPropertyGeneral() const;
 
     GraphData getPropertyNutriment() const;
+    GraphData getPropertyBacteriaDivision() const;
 
     /**
      * @brief PetriDish::~PetriDish destructeur, detruit l'assiette de petri
@@ -254,7 +255,7 @@ private :
      * @param s le nom du paramètre mutable
      * @return la moyenne
      */
-    double getMeanBacteria(const std::string& s) const;
+    double getMeanMutableParam(const std::string& s) const;
 
     /**
      * @brief getTotalNutriment calcule la somme de toutes les quantités de nutriments
@@ -263,7 +264,7 @@ private :
      */
     double getTotalNutriment() const;
 
-    double getTotalVigorousBacteria() const;
+    double getMeanDivisionBacteria() const;
 
     /**
      * @brief update_bacteries assure le déplacement, les collisions et la consommation
