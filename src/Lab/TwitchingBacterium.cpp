@@ -111,7 +111,7 @@ void TwitchingBacterium::deploy(sf::Time dt, const Nutriment* nutrimentPtr)
         if(getAppEnv().doesCollideWithObstacle(grip))
         {
             setLost(true);
-         }
+        }
     }
 }
 
