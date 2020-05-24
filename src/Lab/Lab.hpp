@@ -196,7 +196,7 @@ private :
      * @brief contains Vérifie si un CircularBody est à l'intérieur de son assiette de Petri
      * @return true si le CircularBody est à l'interieur false sinon
      */
-    bool contains(const CircularBody& corps) const;
+    bool contains(const CircularBody& body) const;
 
     /**
      * @brief initGradient Initialise l'attribut puissance de l'assiette de

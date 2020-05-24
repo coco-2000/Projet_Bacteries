@@ -13,9 +13,9 @@ Lab::Lab()
         {s::NUTRIMENT_QUANTITY,     [&]() { return petri.getPropertyNutrimentQuantity();}   }};
 }
 
-bool Lab::contains(const CircularBody& corps) const
+bool Lab::contains(const CircularBody& body) const
 {
-    return (petri > corps);
+    return (petri > body);
 }
 
 bool Lab::doesCollideWithDish(CircularBody const& body) const
@@ -24,7 +24,6 @@ bool Lab::doesCollideWithDish(CircularBody const& body) const
      * Comme l'assiete de petri constitue la limite de l'espace dans lequel se deplacent les
      * CircularBody, le fait de ne plus etre contenu dans une PetriDish équivaut à en sortir
      */
-
     return !contains(body);
 }
 

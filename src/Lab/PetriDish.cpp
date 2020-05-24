@@ -119,7 +119,7 @@ void PetriDish::deleteUnderObstacle(Obstacle *obstacle)
 {
     for (auto& bacterie : bacteries)
     {
-        if(*obstacle & *bacterie or *obstacle > *bacterie)
+        if(*obstacle & *bacterie)
         {
             delete bacterie;
             bacterie = nullptr;
@@ -130,7 +130,7 @@ void PetriDish::deleteUnderObstacle(Obstacle *obstacle)
 
     for (auto& nutriment : nutriments)
     {
-        if(*obstacle & *nutriment or *obstacle > *nutriment)
+        if(*obstacle & *nutriment)
         {
             delete nutriment;
             nutriment = nullptr;
@@ -362,7 +362,7 @@ bool PetriDish::doesCollideWithObstacle(const CircularBody& body) const
 {
     for (const auto& obstacle : obstacles)
     {
-        if(*obstacle & body or *obstacle>body)
+        if(*obstacle & body)
         {
             return true;
         }

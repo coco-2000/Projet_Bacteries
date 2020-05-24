@@ -17,6 +17,7 @@ Tab	: switch to next
 	control
 PageUp	: increase CC
 PageDown  : decrease CC
+P       : add poison Bacterium
 S	  : add simple bacterium
 T	: add TwitchingMotility
 	bacterium at MP
