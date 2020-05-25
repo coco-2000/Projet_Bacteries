@@ -120,7 +120,7 @@ Toutes les parties antérieures sont fonctionelles
 
 - *Constance* : Création et implémentation de la classe Obstacle, ainsi que le mécanisme de répulsion qui leur est associé, suppression des bactéries
                 nutriments se trouvant sous les obstacles, croissance des nutriments bloquées par les obstacles.
-- *Emma* : Création et implémentation de la classe Poison et PoisonBacterium
+- *Emma* : Création et implémentation de la classe Poison et PoisonBacterium, gestion de l'impact des poisons sur le déplacement des bactéries
 
 - Problèmes : Comment gérer la perception du gradient avec des nutriments cachés par un obstacle ? Prise en compte des obstacles dans la perception du
                 gradient avec impact négatif (répusion)
@@ -134,7 +134,8 @@ Toutes les parties antérieures sont fonctionelles
 - *ensemble* : implémentation de la classe Obstacle
 - *Constance* : création des murs pour que les bactéries puissent vivre en autonomie, implémentation du mode perdu pour les obstacles
                 et pour la petri, ajout de la texture de l'obstacle
-- *Emma*      : correction d'un bug du mode perdu, gestion des bactéries sortant de la pétri, implémentation du mode perdu SwarmBacterium
+- *Emma*      : correction bug du mode perdu, gestion des bactéries sortant de la pétri, implémentation du mode perdu SwarmBacterium,
+                ajout graph pour PoisonBacterium
 
 - Problèmes : Bactéries bloquées au bord de la PetriDish : rebond sur bord de l'assiette et mode perdue
               Bactéries sortent parfois de la PetriDish : décalage au niveau du test de collision (pas trop grand et bactéries rebondissent alors

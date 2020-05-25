@@ -2,7 +2,7 @@
     "debug" : true,
     "simulation":{
       "time":{
-         "factor":2,
+         "factor":1,
          "max dt":0.05,
           "fixed step" : 0.01
       },
@@ -300,7 +300,7 @@
             "initial" : 20
         },
         "lost" : {
-            "time" : 7,
+            "time" : 10,
             "energy factor" : 0.5,
             "lambda switch" : 400
         }
@@ -386,7 +386,7 @@
                     "sigma" : 0.1
                 }
             },
-            "force factor" : 8
+            "force factor" : 10
         }
     },
     "twitching bacterium" : {
