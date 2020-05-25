@@ -38,14 +38,14 @@ protected :
      * @brief consumeNutriment gère la consommation des bacteries
      * @param dt Pas de temps après lequel la bactérie est mise à jour
      */
-    //void consumeNutriment(sf::Time dt) override;
+    void consumeNutriment(sf::Time dt) override;
 
     /**
      * @brief manageLost Vérifie si le délai pour être perdue est dépassé, met l'attribut lost à false
      * (la bactérie n'est plus perdue) et met à jour timeLost
      * @param dt Pas de temps après lequel la simulation est mise à jour
      */
-    //void manageLost(sf::Time dt) override;
+    void manageLost(sf::Time dt) override;
 
 private :
     double timeFlagellum;

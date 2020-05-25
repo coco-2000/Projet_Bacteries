@@ -94,17 +94,25 @@ void SwimmingBacterium::switchDirection()
     }
 }
 
-/*void SwimmingBacterium::consumeNutriment(sf::Time dt)
+void SwimmingBacterium::consumeNutriment(sf::Time dt)
 {
-    Bacterium::consumeNutriment(dt);
     if (isLost())
         setTimeSwitch(sf::Time::Zero);
+
+    Bacterium::consumeNutriment(dt);
 }
 
 void SwimmingBacterium::manageLost(sf::Time dt)
 {
-    Bacterium::manageLost(dt);
-}*/
+    if (timeLost >= getMaxTimeLost())
+    {
+        setLost(false);
+        setTimeSwitch(sf::Time::Zero);
+    }
+
+    else
+        timeLost += dt;
+}
 
 Vec2d SwimmingBacterium::f(Vec2d position, Vec2d speed) const
 {

@@ -450,7 +450,7 @@ GraphData PetriDish::getPropertyBacteria() const
 
 GraphData PetriDish::getPropertyBacteriaDivision() const
 {
-    return {{s::BACTERIA_DIVISION, getMeanDivisionBacteria()}};
+    return {{s::MEAN_DIVISION, getMeanDivisionBacteria()}};
 }
 
 GraphData PetriDish::getPropertyNutriment() const

@@ -56,9 +56,6 @@ Ce projet utilise  [Cmake](https://cmake.org/) pour compiler
 * twitchingTest -> permet de tester graphiquement le comportement des bactéries à tentacule
 * swarmTest -> permet de tester graphiquement le comportement des bactéries à comportement de groupe
 
-* vec2dTest ->
-
-
 ## FICHIERS DE CONFIGURATION
 
 Les fichiers de configuration à utiliser pour application sont app5.json et
@@ -113,7 +110,6 @@ De plus, nous avons ajouté/modifié des graphes.
 Nous avons tout d'abord rajouté au graphe général le décompte des bactéries à poison.
 puis, afin de mieux pouvoir se rendre compte de l'impact des nutriments selon leur type,
 nous avons décidé créer un graphe qui compte séparément chacune des instances des sous classes des nutriments.
-De plus, il est difficile de s'apercevoir en regardant simplement la simulation du nombre de fois qu'une bactérie se divise.
+De plus, il est difficile de s'apercevoir, en regardant simplement la simulation, du nombre de fois qu'une bactérie se divise.
 Nous avons donc créé un graphe qui comptabilise le nombre de divisions moyennes d'une bactérie à un instant donné de la simulation.
 
-*[Description des extensions ajoutées et de comment les observer lors de l'exécution du programme]*
