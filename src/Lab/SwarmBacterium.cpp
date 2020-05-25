@@ -84,9 +84,9 @@ void SwarmBacterium::drawOn(sf::RenderTarget& target) const
 
 Vec2d SwarmBacterium::getSpeedVector() const
 {
-    if(isLost())
+   /* if(isLost())
         return getDirection() * (speed + getShortConfig().swarmbact_speed)/2;
-    else
+    else*/
         return getDirection() * getShortConfig().swarmbact_speed;
 }
 
