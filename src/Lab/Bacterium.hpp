@@ -257,7 +257,7 @@ protected :
 
     /**
      * @brief setLost Modifie l'attribut lost
-     * @param islost la nouvelle valeur de lost
+     * @param islost la nouvelle valeur de lost et initialise timeLost à 0
      */
     void setLost(bool islost);
 
@@ -330,11 +330,6 @@ private :
      * @return Le temps d'attente entre deux consommations de nutriments pour la bactérie
      */
     sf::Time getDelay() const;
-
-    /**
-    * @brief resetTimeLost initialise timeLost à zero
-    */
-    void resetTimeLost();
 
     /**
      * (Méthode virtuelle pure)

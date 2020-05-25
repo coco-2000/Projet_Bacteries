@@ -13,7 +13,6 @@ Bacterium::Bacterium(const Vec2d& position, const Vec2d& direction, double radiu
 {
     angle = direction.angle();
     setLost(false);
-    resetTimeLost();
 }
 
 
@@ -161,7 +160,6 @@ void Bacterium::consumeNutriment(sf::Time dt)
         eat(*nutrimentPtr);
         nutrimentPtr = nullptr;
         setLost(false);
-        resetTimeLost();
     }
     else
       consumeCounter += dt;
@@ -172,7 +170,6 @@ void Bacterium::manageLost(sf::Time dt)
     if (timeLost >= getMaxTimeLost())
     {
         setLost(false);
-        resetTimeLost();
     }
 
     else
@@ -262,6 +259,7 @@ void Bacterium::setDirection(const Vec2d& newDir)
 void Bacterium::setLost(bool islost)
 {
    lost = islost;
+   timeLost = sf::Time::Zero;
 }
 
 double Bacterium::getOldScore() const
