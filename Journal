@@ -102,8 +102,8 @@ Toutes les parties antérieures sont fonctionelles
 *************************************************
 ##Semaine 7 - Partie 5
 
-- *Constance* : Création et implémentation de classe Stats
-- *Emma* : Implémentation de l'impact différencié des nutriments
+- *Constance* : Création et implémentation de la classe Stats
+- *Emma* : Implémentation de l'impact différencié des nutriments, résolution de la disparition inattendu des SwarmBacterium
 
 
 *************************************************
@@ -112,6 +112,8 @@ Toutes les parties antérieures sont fonctionelles
 - *Constance* : Implémentation de la classe Stats
 - *Emma* : Correction suite au rendu intermédiaire,
            modification de la perception du gradient par les bactéries (peuvent être répulsées par les nutriments toxiques)
+
+- Problème : Parfois toutes les SwarmBacterium meurent d'un coup : gestion de la mise à jour du leader en faute
 
 
 *************************************************
@@ -139,5 +141,8 @@ Toutes les parties antérieures sont fonctionelles
 *************************************************
 ##Semaine 11 - Partie 5
 
-- *Constance* : Ecriture ReadMe, résolution immortalité des twitching bacterium
-- *Emma* : Création de la classe SwimmingBacterium, superclasse de PoisonBacterium et SimpleBacterium pour rassembler les méthodes communes
+- *Constance* : Ecriture ReadMe, résolution immortalité des twitching bacterium, création de nouveau fichier de configuration
+- *Emma* : Création de la classe SwimmingBacterium, superclasse de Poison et SimpleBacterium pour rassembler les méthodes communes,
+           création des raccourcis dans la classe Config,
+
+- *ensemble* : relecture du code, commentaires, modifications + corrections des bugs,
