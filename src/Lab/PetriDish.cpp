@@ -396,19 +396,18 @@ double PetriDish::getTotalNutriment() const
     {
         value += nutriment->getQuantity();
     }
-
     return value;
 }
 
 double PetriDish::getAverageDivisionBacteria() const
 {
-    double mean(0);
+    double average(0);
     for(const auto& bacteria : bacteries)
     {
-        mean += bacteria->getDivideCounter();
+        average += bacteria->getDivideCounter();
     }
     int size(bacteries.size());
-    return size !=0 ? mean /= bacteries.size() : -1;
+    return size !=0 ? average /= bacteries.size() : -1;
 }
 
 GraphData PetriDish::getPropertyGeneral() const
