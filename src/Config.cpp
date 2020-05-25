@@ -67,7 +67,7 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
 ,swarmbact_max_energy(mConfig["swarm bacterium"]["energy"]["max"].toDouble())
 ,swarmbact_min_radius(mConfig["swarm bacterium"]["radius"]["min"].toDouble())
 ,swarmbact_max_radius(mConfig["swarm bacterium"]["radius"]["max"].toDouble())
-,swarmbact_speed(mConfig["swarm bacterium"]["speed"]["initial"].toInt())
+,swarmbact_speed(mConfig["swarm bacterium"]["speed"]["initial"].toDouble())
 
 ,twitchingbact_min_energy(mConfig["twitching bacterium"]["energy"]["min"].toDouble())
 ,twitchingbact_max_energy(mConfig["twitching bacterium"]["energy"]["max"].toDouble())

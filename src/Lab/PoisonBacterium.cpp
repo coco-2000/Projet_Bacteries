@@ -12,9 +12,7 @@ PoisonBacterium::PoisonBacterium(const Vec2d& position)
                         {{"speed", MutableNumber::positive(getConfig()["speed"])},
                          {"tumble better prob", MutableNumber::positive(getConfig()["tumble"]["better"])},
                          {"tumble worse prob", MutableNumber::positive(getConfig()["tumble"]["worse"])}}), delayPoison(sf::Time::Zero)
-{
-    ++poisonCounter;
-}
+{ ++poisonCounter; }
 
 PoisonBacterium::PoisonBacterium(const PoisonBacterium& other)
     : SwimmingBacterium(other)

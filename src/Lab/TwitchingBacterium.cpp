@@ -104,14 +104,13 @@ void TwitchingBacterium::deploy(sf::Time dt, const Nutriment* nutrimentPtr)
 
     if(nutrimentPtr != nullptr)
         state = ATTRACT;
+
     else if((grip.getPosition() - getPosition()).length() >= getProperty("tentacle length").get()
             or getAppEnv().doesCollideWithDish(grip) or getAppEnv().doesCollideWithObstacle(grip))
     {
         state = RETRACT;
         if(getAppEnv().doesCollideWithObstacle(grip))
-        {
             setLost(true);
-        }
     }
 }
 

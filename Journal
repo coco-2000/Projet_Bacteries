@@ -105,16 +105,15 @@ Toutes les parties antérieures sont fonctionelles
 - *Constance* : Création et implémentation de la classe Stats
 - *Emma* : Implémentation de l'impact différencié des nutriments, résolution de la disparition inattendu des SwarmBacterium
 
+- Problème : Parfois toutes les SwarmBacterium meurent d'un coup : gestion de la mise à jour du leader en faute
+
 
 *************************************************
 ##Semaine 8 - Partie 5
 
-- *Constance* : Mise en place du système d'affichage modulaire des graphes des paramètres mutables, correction suite au rendu intermédiare
+- *Constance* : Nouvelle conception de l'implementation des stats en accords avec les attentes de l'assistant, correction suite au rendu intermédiaire
 - *Emma* : Correction suite au rendu intermédiaire,
            modification de la perception du gradient par les bactéries (peuvent être répulsées par les nutriments toxiques)
-
-- Problème : Parfois toutes les SwarmBacterium meurent d'un coup : gestion de la mise à jour du leader en faute
-
 
 *************************************************
 ##Semaine 9 - Partie 6
@@ -127,26 +126,28 @@ Toutes les parties antérieures sont fonctionelles
                 gradient avec impact négatif (répusion)
               Présence de point fixe du gradient qui attire les bactéries et les bloquent -> Conséquence des choix d'implémentation
               Implémentation d'un mécanisme au cours duquel la bactérie ne "voyait" plus les obstacles par un système d'intersections mais ceci diminuait
-              considérablement les performances du programme.
+                considérablement les performances du programme.
 
 *************************************************
 ##Semaine 10 - Partie 6
 
--*Constance* : création des murs pour que les bactéries puissent vivre en autonomie, implémentation du mode perdu pour les obstacles
+- *Constance* : création des murs pour que les bactéries puissent vivre en autonomie, implémentation du mode perdu pour les obstacles
                 et pour la petri, ajout de la texture de l'obstacle
--*Emma*      : correction d'un bug du mode perdu, gestion des bactéries sortant de la pétri
--*ensemble* : implémentation du mode perdu SwarmBacterium
+-*Emma*      : correction d'un bug du mode perdu, résolution des bactéries sortant de la pétri, implémentation du mode perdu SwarmBacterium
+-*ensemble*  : conception du mode perdu SwarmBacterium
 
-- Problèmes : Bactéries sortent parfois de la PetriDish : décalage au niveau du test de collision (pas trop grand et bactérie rebondissent
+- Problèmes : Bactéries se collent parfois sur le bord de la petri ->  mode perdu lors des collisions sur la petri pour un comportement
+              similaire à celui des obstacles
+              Bactéries sortent parfois de la PetriDish : décalage au niveau du test de collision (pas trop grand et bactéries rebondissent alors
               qu'elles chevauchent le bord de la Petri
 
 *************************************************
-##Semaine 11 - Partie 5
+##Semaine 11 - Partie 6
 
-- *Constance* : Ecriture ReadMe, résolution immortalité des twitching bacterium, résolution tumble worse nul, création de nouveau
+- *Constance* : Ecriture ReadMe, résolution immortalité des twitching bacterium, résolution tumble worse nul, création de nouveaux
                 fichier de configuration,
                 Rajout stats : nb moyen de division par bactérie et décompte des sous classes de nutriment
 - *Emma* : Création de la classe SwimmingBacterium, superclasse de Poison et SimpleBacterium pour rassembler les méthodes communes,
-           création des raccourcis dans la classe Config,
+           création des raccourcis dans la classe Config
 
-- *ensemble* : relecture du code, commentaires, modifications + corrections des bugs, rajout
+- *ensemble* : relecture générale du code, commentaires, modifications + corrections des bugs

@@ -247,12 +247,12 @@ private :
     PetriDish& operator=(PetriDish const&) = delete;
 
     /**
-     * @brief getMeanBacteria Calcule la moyenne des valeurs d'un paramètre mutable sur toutes les bactéries
+     * @brief getAverageMutableParam Calcule la moyenne des valeurs d'un paramètre mutable sur toutes les bactéries
      * possédant ce paramètre mutable
      * @param s Nom du paramètre mutable
      * @return La moyenne calculée
      */
-    double getMeanMutableParam(const std::string& s) const;
+    double getAverageMutableParam(const std::string& s) const;
 
     /**
      * @brief getTotalNutriment Calcule la somme de toutes les quantités de nutriments présents dans l'assiette de Petri
@@ -261,10 +261,10 @@ private :
     double getTotalNutriment() const;
 
     /**
-     * @brief getMeanDivisionBacteria Calcule la proportion de bactérie issues d'une division parmi l'ensemble des bactéries
-     * @return Le rapport calculé
+     * @brief getAverageDivisionBacteria Calcule le nombre moyen de division effectuée par bactérie
+     * @return La moyenne calculée
      */
-    double getMeanDivisionBacteria() const;
+    double getAverageDivisionBacteria() const;
 
     /**
      * @brief updateBacteries Assure le déplacement, les collisions et la consommation des nutriments pour toutes les

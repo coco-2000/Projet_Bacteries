@@ -5,9 +5,6 @@ auteur : Emma Boehly Constance de Trogoff
 
 Debut du projet : 09/03/2020
 
-constructeur bacterium param mutable
-décrémenter graphes/ changer nom
-
 =====================================================================
 ## DESCRIPTION DU PROJET
 Le programme permet de visualiser par des techniques de simulation, l'évolution de population de bactéries de différent types.
@@ -50,21 +47,16 @@ Ce projet utilise  [Cmake](https://cmake.org/) pour compiler
 * application -> correspond à l'application finale.
 * CircularBodyTest -> permet de tester les fonctionnalités liées à la détection de collision
 * nutrimentTest -> permet de tester graphiquement la génération automatiques des nutriments dans l'assiette de Petri
-* mutableTest ->
+* mutableTest -> Vérifie si les méthodes permettant la création de MutableNumber respecte bien les conditions demandées
 * simpleBactTest -> permet de tester graphiquement le comportement des bactéries simples
 * gripTest -> permet de tester l'affichege des tentacules des twitchingbacterium
 * twitchingTest -> permet de tester graphiquement le comportement des bactéries à tentacule
 * swarmTest -> permet de tester graphiquement le comportement des bactéries à comportement de groupe
+* vec2dTest -> Vérifie si les méthodes de Vec2d réalise bien les bonnes tâches
 
 ## FICHIERS DE CONFIGURATION
 
-Les fichiers de configuration à utiliser pour application sont app5.json et
-app7.json. Le premier donne des chances de survies optimales à la population
-bleue, le second stabilise l'ensemble des populations et permet
-d'atteindre un équilibre.
-Pour FightTest, il existe un ficher appFight.json qui facilite l'observation
-des comportements souhaités.
-...
+Le fichier de configuration à utiliser pour application est app.json
 
 ## COMMANDES
 
@@ -73,12 +65,10 @@ dans un panneau d'aide à droite de la fenêtre de simulation
 
 ### MODIFICATION DE CONCEPTION
 
-Le codage du projet a été réalisé en adéquation avec l'énoncé (pas de modifications personnelles d'éléments de conception suggérés).
-ou
-[Description des modifications de comportement et/ou de mises en oeuvre sciemment introduites
-dans le programme]
-
-modifications du score
+Nous avons modifié le calcul du gradient sur l'assiette de Petri en ajoutant un coefficient au score calculé pour chaque nutriment.
+Pour cela nous avons reproduit l'implémentation de l'impact différencié des nutriments ce qui fait que selon son type et celui du nutriment
+considéré, le comportement de la bactérie sera différent. Ainsi les bactéries auront tendance à être repoussées par les nutriments toxiques pour elles
+et attirées par les nutriments nutritifs (hormis les poisons pour lesquelles nous avons fait le choix de ne pas les prendre ne compte dans les calculs)
 
 ### EXTENSIONS
 
@@ -89,7 +79,7 @@ Pour faciliter la manipulation de ces obstacles, nous avons également implémen
 Lorsqu'un obstacle est ajouté, les bactéries et les nutriments se trouvant dans son rayon meurent immédiatement
 car elles sont écrasées. De plus les nutriments ne peuvent pas croitre au dela d'un obstacle.
 
-Afin de permettre la création de zones autonomes dans l'assiette où des bactéries pourraient vivre en autonomie, nous avons également permi l'ajout
+Afin de permettre la création de zones autonomes dans l'assiette où des bactéries pourraient vivre en autonomie, nous avons également permis l'ajout
 de murs constitués d'une droite d'obstacles. Ceci est observable lors de l'execution avec la touche W.
 Un mur est créé entre la position du dernier obstacle ajouté et la position indiquée par le curseur. Pour qu'un mur puisse être créé,
 il faut qu'un 1er obstacle le soit.
@@ -99,12 +89,12 @@ De plus, lorsqu'une bactérie touche un obstacle ou un mur, cette dernière se t
 puis prend des positions aléatoires le temps de retrouver ses esprits. Nous avons également implémenté le même comportement pour une collision avec le
 bord de l'assiette pour plus de cohérence.
 
-Deuxièmement, nous avons introduit un autre type de bactérie : des bactéries à poison. Etant très similaires aux bactéries simples par leur dessin et
-leur mode de déplacement, nous avons fait hériter les bactéries simples et les bactéries à poison d'une même super classe : les Swimming Bacterium
-ayant les caractéristiques communes des 2 sous classes.
-Les bactéries à poison déposent de petits nutriments empoisonnés pouvant etre consommés par les autres bactéries, ce qui diminuent considérablement
-leur énergie. La bactérie à poison espère ainsi éliminier toute concurrence pour l'accès aux nutriments.
-La cible finalApplication a également été modifiée pour permettre l'ajout d'une bactérie à poison si l'on appui sur la touche P.
+Deuxièmement, nous avons introduit un autre type de bactérie : des bactéries à poison. Leurs dessin et mode de déplacement étant similaires à ceux des bactéries simple
+nous avons fait crée un superclasse SwimmingBacterium dont hérite les bactéries simples et les bactéries à poison et qui rassemble les méthodes communes aux 2 sous-classes.
+Les bactéries à poison déposent de petits nutriments de type poison pouvant etre consommés par les autres bactéries, ce qui diminuent considérablement
+leur énergie. La bactérie à poison dispose donc d'une attaque qui lui permet d'interagir indirectement avec les autres bactéries.
+Nous avons fais le choix de ne pas comptabiliser les poisons dans le calcul du gradient ce qui fait que les bactéries ne sont ni attirées ni repoussées par celui-ci.
+La cible finalApplication a également été modifiée pour permettre l'ajout d'une bactérie à poison si l'on appuie sur la touche P.
 
 De plus, nous avons ajouté/modifié des graphes.
 Nous avons tout d'abord rajouté au graphe général le décompte des bactéries à poison.

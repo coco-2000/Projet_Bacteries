@@ -93,7 +93,7 @@ public:
 
     /**
      * @brief getSwarmCounter
-     * @return Le nombre d'instance de SwarmBacterium présent dans la boîte de Petri
+     * @return Le nombre d'instance de SwarmBacterium présente dans l'assiette de Pétri
      */
     static unsigned int getSwarmCounter();
 

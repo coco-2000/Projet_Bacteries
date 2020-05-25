@@ -27,25 +27,25 @@ public :
 
     /**
      * @brief TwitchingBacterium Constructeur de copie
-     * incrémente le compteur d'instances de twitching bacterium
+     * incrémente le compteur d'instances de TwitchingBacterium
      * @param other TwitchingBacterium à copier
      */
     TwitchingBacterium(const TwitchingBacterium& other);
 
     /**
-     * @brief drawOn dessiner la bactérie avec son grapin
+     * @brief drawOn Dessine la bactérie avec son grapin
      * @param target Cible pour l'affichage
      */
     void drawOn(sf::RenderTarget& target) const override;
 
     /**
-     * @brief moveGrip déplacement du grapin
-     * @param delta vecteur avec lequel le grapin est déplacé
+     * @brief moveGrip Déplace le grapin
+     * @param delta Vecteur de déplacement du grapin
      */
     void moveGrip(const Vec2d& delta);
 
     /**
-     * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
+     * @brief eatableQuantity Calcule la quantité de nutriment consommé par la bactérie et
      *                        retire cette quantité au nutriment
      * (appelle la méthode eatenBy du nutrimentA qui prend pour argument une bactérie à tentacule)
      * @param nutriment de type A qui est consommé par la bactérie
@@ -63,17 +63,34 @@ public :
     Quantity eatableQuantity(NutrimentB& nutriment) const override;
 
     /**
-     * @brief eatableQuantity Calcul la quantité de poison consommé par la bactérie et
-     *                        retire cette quantité au poison
-     * @param poison nutriment consomme par la bactérie
-     * @return  la quantité de poison consommée
+     * @brief eatableQuantity Calcule l'énergie oté à la bactérie par le poison et consomme le poison
+     * (appelle la méthode eatenBy de poison qui prend pour argument une bactérie à tentacule)
+     *  @param poison qui est consommé par la bactérie
+     * @return L'énergie otée à la bactérie
      */
     Quantity eatableQuantity(Poison& poison) const override;
 
+    /**
+     * @brief getScoreCoefficient Calcule le coefficient associée au score du nutriment de type A pour une bactérie à tentacule
+     * (appelle la méthode getScoreCoefficient du nutrimentA qui prend pour argument une bactérie à tentacule)
+     * @param nutriment de type A qui est consommé par la bactérie
+     * @return Le coefficient calculé
+     */
     double getScoreCoefficient(const NutrimentA& nutriment) const override;
 
+    /**
+     * @brief getScoreCoefficient Calcule le coefficient associée au score du nutriment de type B pour une bactérie à tentacule
+     * (appelle la méthode getScoreCoefficient du nutrimentB qui prend pour argument une bactérie à tentacule)
+     * @param nutriment de type B qui est consommé par la bactérie
+     * @return Le coefficient calculé
+     */
     double getScoreCoefficient(const NutrimentB& nutriment) const override;
 
+    /**
+     * @brief getScoreCoefficient Calcule le coefficient associée au score du poison pour une bactérie à tentacule
+     * @param poison qui est consommé par la bactérie
+     * @return Le coefficient calculé
+     */
     double getScoreCoefficient(const Poison& poison) const override;
 
     /**
@@ -83,9 +100,8 @@ public :
     virtual ~TwitchingBacterium() override;
 
     /**
-     * @brief getTwitchCounter compte le nombre total de Twitching Bacterium présentes dans l'assiette
-     * de Pétri
-     * @return le nombre total d'instances
+     * @brief getTwitchCounter
+     * @return Le nombre d'instance de TwitchingBacterium présente dans l'assiette de Pétri
      */
     static unsigned int getTwitchCounter();
 
