@@ -137,7 +137,7 @@ Toutes les parties antérieures sont fonctionelles
 - *ensemble* : implémentation de la classe Obstacle, implémentation du mode perdu
 
 - Problèmes : Bactéries bloquées au bord de la PetriDish : rebond sur bord de l'assiette et mode perdue
-              Bactéries sortent parfois de la PetriDish : décalage au moins du test de collision (pas trop grand et bactérie rebondissent alors
+              Bactéries sortent parfois de la PetriDish : décalage au niveau du test de collision (pas trop grand et bactérie rebondissent alors
               qu'elles chevauchent le bord de la Petri
 
 *************************************************
