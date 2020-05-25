@@ -297,7 +297,7 @@
             "min" : 5
         },
         "speed" : {
-            "initial" : 10
+            "initial" : 20
         },
         "lost" : {
             "time" : 7,
