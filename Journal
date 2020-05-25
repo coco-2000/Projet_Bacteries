@@ -99,9 +99,6 @@ Programmation II (SV)
 Point où nous en sommes : Partie 4 terminée
 Toutes les parties antérieures sont fonctionelles
 
-<<<<<<< HEAD
-
-=======
 *************************************************
 ##Semaine 7 - Partie 5
 
@@ -112,7 +109,7 @@ Toutes les parties antérieures sont fonctionelles
 *************************************************
 ##Semaine 8 - Partie 5
 
-- *Constance* : Implémentation de la classe Stats
+- *Constance* : Mise en place du système d'affichage modulaire des graphes des paramètres mutables, correction suite au rendu intermédiare
 - *Emma* : Correction suite au rendu intermédiaire,
            modification de la perception du gradient par les bactéries (peuvent être répulsées par les nutriments toxiques)
 
@@ -122,34 +119,34 @@ Toutes les parties antérieures sont fonctionelles
 *************************************************
 ##Semaine 9 - Partie 6
 
-- *Constance* : Création et implémentation de la classe Obstacle + ajout de
+- *Constance* : Création et implémentation de la classe Obstacle, ainsi que le mécanisme de répulsion qui leur est associé, suppression des bactéries
+                nutriments se trouvant sous les obstacles, croissance des nutriments bloquées par les obstacles.
 - *Emma* : Création et implémentation de la classe Poison et PoisonBacterium
 
 - Problèmes : Comment gérer la perception du gradient avec des nutriments cachés par un obstacle ? Prise en compte des obstacles dans la perception du
                 gradient avec impact négatif (répusion)
-              Présence de point fixe (maxima du gradient) qui attire les bactéries et les bloquent -> Conséquence minime des choix d'implémentation
-              Faire en sorte de pouvoir créer des espaces indépendants sur la boite de Petri où les bactéries évoluent en autarcie :
-                        - possibilité de pouvoir créer des murs d'obstacles
-                        - implémentation du mode perdu : quand les bactéries tapent les obstacles ou le bord de la Petri elles s'éloignent de l'obstacle
-                            sans prise en compte des nutriments et évoluent aléatoirement pendant un certain temps
-                        -
+              Présence de point fixe du gradient qui attire les bactéries et les bloquent -> Conséquence des choix d'implémentation
+              Implémentation d'un mécanisme au cours duquel la bactérie ne "voyait" plus les obstacles par un système d'intersections mais ceci diminuait
+              considérablement les performances du programme.
 
 *************************************************
 ##Semaine 10 - Partie 6
 
-- *ensemble* : implémentation de la classe Obstacle, implémentation du mode perdu
+-*Constance* : création des murs pour que les bactéries puissent vivre en autonomie, implémentation du mode perdu pour les obstacles
+                et pour la petri, ajout de la texture de l'obstacle
+-*Emma*      : correction d'un bug du mode perdu, gestion des bactéries sortant de la pétri
+-*ensemble* : implémentation du mode perdu SwarmBacterium
 
-- Problèmes : Bactéries bloquées au bord de la PetriDish : rebond sur bord de l'assiette et mode perdue
-              Bactéries sortent parfois de la PetriDish : décalage au moins du test de collision (pas trop grand et bactérie rebondissent alors
+- Problèmes : Bactéries sortent parfois de la PetriDish : décalage au moins du test de collision (pas trop grand et bactérie rebondissent alors
               qu'elles chevauchent le bord de la Petri
 
 *************************************************
 ##Semaine 11 - Partie 5
 
-- *Constance* : Ecriture ReadMe, résolution immortalité des twitching bacterium, création de nouveau fichier de configuration,
-                Rajout stats : nb moyen de division par bactérie
+- *Constance* : Ecriture ReadMe, résolution immortalité des twitching bacterium, résolution tumble worse nul, création de nouveau
+                fichier de configuration,
+                Rajout stats : nb moyen de division par bactérie et décompte des sous classes de nutriment
 - *Emma* : Création de la classe SwimmingBacterium, superclasse de Poison et SimpleBacterium pour rassembler les méthodes communes,
            création des raccourcis dans la classe Config,
 
 - *ensemble* : relecture du code, commentaires, modifications + corrections des bugs, rajout
->>>>>>> 6db461d8812b42ec17a006d8e784abeb1f7d84e2
