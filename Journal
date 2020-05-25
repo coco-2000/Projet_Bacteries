@@ -136,13 +136,16 @@ Toutes les parties antérieures sont fonctionelles
 
 - *ensemble* : implémentation de la classe Obstacle, implémentation du mode perdu
 
-- Problèmes : Bactéries bloquées au bord de la PetriDish :
+- Problèmes : Bactéries bloquées au bord de la PetriDish : rebond sur bord de l'assiette et mode perdue
+              Bactéries sortent parfois de la PetriDish : décalage au moins du test de collision (pas trop grand et bactérie rebondissent alors
+              qu'elles chevauchent le bord de la Petri
 
 *************************************************
 ##Semaine 11 - Partie 5
 
-- *Constance* : Ecriture ReadMe, résolution immortalité des twitching bacterium, création de nouveau fichier de configuration
+- *Constance* : Ecriture ReadMe, résolution immortalité des twitching bacterium, création de nouveau fichier de configuration,
+                Rajout stats : nb moyen de division par bactérie
 - *Emma* : Création de la classe SwimmingBacterium, superclasse de Poison et SimpleBacterium pour rassembler les méthodes communes,
            création des raccourcis dans la classe Config,
 
-- *ensemble* : relecture du code, commentaires, modifications + corrections des bugs,
+- *ensemble* : relecture du code, commentaires, modifications + corrections des bugs, rajout
