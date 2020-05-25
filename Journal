@@ -136,8 +136,7 @@ Toutes les parties antérieures sont fonctionelles
                 et pour la petri, ajout de la texture de l'obstacle
 -*Emma*      : correction d'un bug du mode perdu, gestion des bactéries sortant de la pétri
 -*ensemble* : implémentation du mode perdu SwarmBacterium
-
-- Problèmes : Bactéries sortent parfois de la PetriDish : décalage au moins du test de collision (pas trop grand et bactérie rebondissent alors
+- Problèmes : Bactéries sortent parfois de la PetriDish : décalage au niveau du test de collision (pas trop grand et bactérie rebondissent
               qu'elles chevauchent le bord de la Petri
 
 *************************************************
