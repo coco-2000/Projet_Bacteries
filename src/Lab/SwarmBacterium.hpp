@@ -14,27 +14,27 @@ public:
     /**
      * @brief SwarmBacterium Constructeur
      * Incrémente le compteur d'instances
-     * @param position Position de la nouvelle instance à créer
-     * @param group Groupe de Swarm auquel la nouvelle instance appartient
+     * @param position Coordonnées de la position l'instance à créer
+     * @param group Swarm auquel la nouvelle instance appartient
      */
     SwarmBacterium(const Vec2d& position, Swarm* group);
 
     /**
      * @brief SwarmBacterium Constructeur de copie
      * Incrémente le compteur d'instances
-     * @param other Instance à copier
+     * @param other Instance de bactérie à copier
      */
     SwarmBacterium(SwarmBacterium const& other);
 
     /**
-     * @brief drawOn Dessine une SwarmBacterium et l'anneau si l'instance est leader du groupe
-     * @param target Fenetre dans laquelle le dessin se fait
+     * @brief drawOn Dessine une SwarmBacterium et l'anneau si l'instance courante est leader du groupe
+     * @param target Fenêtre dans laquelle le dessin se fait
      */
     void drawOn(sf::RenderTarget& target) const override;
 
     /**
-     * @brief eatableQuantity Calcul la quantité de nutriment consommé par la bactérie et
-     *                        retire cette quantité au nutriment
+     * @brief eatableQuantity Calcul la quantité de nutriment consommée par la bactérie et retire cette
+     *                        quantité au nutriment
      * (appelle la méthode eatenBy du nutrimentA qui prend pour argument une bactérie à comportement de groupe)
      * @param nutriment de type A qui est consommé par la bactérie
      * @return La quantité de nutriment consommé
@@ -50,12 +50,38 @@ public:
      */
     Quantity eatableQuantity(NutrimentB& nutriment) const override;
 
+    /**
+     * @brief eatableQuantity Calcule l'énergie oté à la bactérie par le poison et consomme le poison
+     * (appelle la méthode eatenBy de poison qui prend pour argument une bactérie à comportement de groupe)
+     *  @param poison qui est consommé par la bactérie
+     * @return L'énergie otée à la bactérie
+     */
     Quantity eatableQuantity(Poison& poison) const override;
 
+    /**
+     * @brief getScoreCoefficient Calcule le coefficient associée au score du nutriment de type A pour une bactérie
+     *                            à comportement de groupe
+     * (appelle la méthode getScoreCoefficient du nutrimentA qui prend pour argument une bactérie à comportement de groupe)
+     * @param nutriment de type A qui est consommé par la bactérie
+     * @return Le coefficient calculé
+     */
     double getScoreCoefficient(const NutrimentA& nutriment) const override;
 
+    /**
+     * @brief getScoreCoefficient Calcule le coefficient associée au score du nutriment de type B pour une bactérie
+     *                            à comportement de groupe
+     * (appelle la méthode getScoreCoefficient du nutrimentB qui prend pour argument une bactérie à comportement de groupe)
+     * @param nutriment de type B qui est consommé par la bactérie
+     * @return Le coefficient calculé
+     */
     double getScoreCoefficient(const NutrimentB& nutriment) const override;
 
+    /**
+     * @brief getScoreCoefficient Calcule le coefficient associée au score du poison pour une bactérie à comportement
+     *                            de groupe
+     * @param poison qui est consommé par la bactérie
+     * @return Le coefficient calculé
+     */
     double getScoreCoefficient(const Poison& poison) const override;
 
     /**
@@ -66,9 +92,8 @@ public:
     ~SwarmBacterium() override;
 
     /**
-     * @brief getSwarmCounter compte le nombre total d'instances de SwarmBacterium présentes dans
-     * l'assiette de Pétri
-     * @return le nombre total d'instances
+     * @brief getSwarmCounter
+     * @return Le nombre d'instance de SwarmBacterium présent dans la boîte de Petri
      */
     static unsigned int getSwarmCounter();
 
@@ -76,7 +101,6 @@ private:
     Swarm* group;
     static unsigned int swarmCounter;
     double speed;
-
 
     /**
      * @brief move Déplace une bactérie
@@ -97,10 +121,17 @@ private:
     j::Value const& getConfig() const override;
 
     /**
-     * @brief getSpeedVector Calcul le vecteur de vitesse de l'instance courante
+     * @brief getSpeedVector Calcule le vecteur de vitesse de l'instance courante
      * @return La vitesse courante de l'instance
      */
     Vec2d getSpeedVector() const;
 
+    /**
+     * @brief f Calcule le vecteur force déterminant le déplacement des SwarmBacterium lorsqu'elles sont perdues
+     * Ici les bactéries ont un déplacement rectiligne uniforme
+     * @param position Position de la bactérie sur laquelle s'applique la force calculée //inutilisé
+     * @param speed Vitesse de la bactérie sur laquelle s'applique la force calculée //inutilisé
+     * @return Le vecteur force appliqué sur la bactérie (ici un vecteur nul)
+     */
     Vec2d f(Vec2d position, Vec2d speed) const override;
 };

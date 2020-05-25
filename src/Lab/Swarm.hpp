@@ -17,24 +17,24 @@ public:
 
     /**
      * @brief getColor Cherche la couleur du Swarm dans le fichier de configuration
-     * @return La couleur de associée à l'instance courante
+     * @return La couleur du swarm dont fait parti l'instance courante
      */
     MutableColor getColor() const;
 
     /**
-     * @brief addBacterium Ajoute une bactérie au groupe et met à jour le leader du groupe
-     * @param bacterie Bactérie swarm à ajouter
+     * @brief addBacterium Ajoute une bactérie au groupe et met à jour le leader du groupe s'il n'y en a pas
+     * @param bacterie Instance de bactérie à ajouter au Swarm
      */
     void addBacterium(SwarmBacterium* bacterie);
 
     /**
-     * @brief supprBacterium Supprime une bactérie au groupe et met à jour le leader du groupe
-     * @param bacterie Bactérie swarm à supprimer
+     * @brief supprBacterium Supprime une bactérie du groupe et met à jour le leader du groupe
+     * @param bacterie Instance de bactérie à supprimer du swarm
      */
     void supprBacterium(SwarmBacterium* bacterie);
 
     /**
-     * @brief getId Accesseur pour l'identificateur du Swarm
+     * @brief getId
      * @return l'identificateur du Swarm
      */
     const std::string& getId() const;
@@ -47,7 +47,7 @@ public:
 
     /**
      * @brief IsLeader Vérifie si une bactérie est leader du groupe
-     * @param bacterie Instance dont on vérifie la condition
+     * @param bacterie
      * @return true si la bactérie est leader, false sinon
      */
     bool IsLeader(const SwarmBacterium* bacterie) const;
@@ -70,11 +70,11 @@ private:
     void setLeader();
 
     /**
-     * @brief f Calcul le vecteur force déterminant le déplacement des bactéries du Swarm
+     * @brief f Calcule le vecteur force déterminant le déplacement des bactéries du Swarm
      * Ici les bactéries du groupe ont un déplacement de groupe qui dépend de la position du leader
      * @param position Position de la bactérie sur laquelle s'applique la force calculée
-     * @param speed Vitesse de la bactérie sur laquelle s'applique la force calculée /inutilisé
-     * @return Le vecteur force appliqué sur la bactérie swarm
+     * @param speed Vitesse de la bactérie sur laquelle s'applique la force calculée //inutilisé
+     * @return Le vecteur force appliqué sur la bactérie à comportement de groupe
      */
     Vec2d f(Vec2d position, Vec2d speed) const override;
 
@@ -85,8 +85,8 @@ private:
     const j::Value& getConfig() const;
 
     /**
-     * @brief getLeaderPosition Calcul la position du leader
-     * @return la position du leader
+     * @brief getLeaderPosition
+     * @return La position du leader
      */
     const Vec2d& getLeaderPosition() const;
 };

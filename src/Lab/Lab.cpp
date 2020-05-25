@@ -1,7 +1,6 @@
 #include "Lab.hpp"
 #include "CircularBody.hpp"
 #include "Application.hpp"
-#include "../Utility/Vec2d.hpp"
 
 Lab::Lab()
     : petri(getApp().getCentre(), (0.95/2)*getApp().getLabSize().x)

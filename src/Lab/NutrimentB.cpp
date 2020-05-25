@@ -5,11 +5,11 @@
 #include "TwitchingBacterium.hpp"
 #include "PoisonBacterium.hpp"
 
-unsigned int NutrimentB::nutBCounter(0);
+unsigned int NutrimentB::nutriBCounter(0);
 
 NutrimentB::NutrimentB(Quantity quantity, const Vec2d& position)
     : Nutriment(quantity, position)
-{ ++ nutBCounter; }
+{ ++ nutriBCounter; }
 
 j::Value const& NutrimentB::getConfig() const
 {
@@ -66,12 +66,12 @@ double NutrimentB::getScoreCoefficient(const PoisonBacterium& bacterie) const
    return 1 / getShortConfig().nutrimentB_resistance_factor;
 }
 
-unsigned int NutrimentB::getnutBCounter()
+unsigned int NutrimentB::getNutriBCounter()
 {
-    return nutBCounter;
+    return nutriBCounter;
 }
 
 NutrimentB::~NutrimentB()
 {
-    -- nutBCounter;
+    -- nutriBCounter;
 }

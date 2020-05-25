@@ -20,6 +20,17 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
 , simulation_background(mConfig["simulation"]["background"].toString())
 , simulation_debug_background(mConfig["simulation"]["debug background"].toString())
 , simulation_size(mConfig["simulation"]["size"].toInt())
+
+// petri dish
+,petridish_min_gradient(mConfig["petri dish"]["gradient"]["exponent"]["min"].toDouble())
+,petridish_max_gradient(mConfig["petri dish"]["gradient"]["exponent"]["max"].toDouble())
+,petridish_delta_gradient(mConfig["petri dish"]["gradient"]["exponent"]["delta"].toDouble())
+
+,petridish_min_temperature(mConfig["petri dish"]["gradient"]["exponent"]["min"].toDouble())
+,petridish_max_temperature(mConfig["petri dish"]["gradient"]["exponent"]["min"].toDouble())
+,petridish_default_temperature(mConfig["petri dish"]["temperature"]["default"].toDouble())
+,petridish_delta_temperature(mConfig["petri dish"]["temperature"]["delta"].toDouble())
+
 // generator
 , generator_nutriment_delay(mConfig["generator"]["nutriment"]["delay"].toDouble())
 , generator_nutriment_prob(mConfig["generator"]["nutriment"]["prob"].toDouble())

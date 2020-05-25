@@ -7,12 +7,12 @@ public:
     /**
      * @brief MutableNumber Constructeur
      * @param value valeur du MutableNumber (qui est un nombre)
-     * @param mutationProbability Probabilité de mutation
-     * @param ecart_type Ecart type permettant la modification aléatoire de la valeur du nombre
+     * @param rate Probabilité de mutation
+     * @param sigma Ecart type permettant la modification aléatoire de la valeur du nombre
      * @param hasMin Indique si le nombre a une borne inférieure
-     * @param Min Borne inférieure
+     * @param min Borne inférieure
      * @param hasMax Indique si le nombre a une borne superieure
-     * @param Max Borne supérieure
+     * @param max Borne supérieure
      */
     MutableNumber(double value,
                   double rate,
@@ -49,7 +49,7 @@ public:
     /**
      * @brief probability Génère un MutableNumber de type probabilité (valeurs plafonnées entre 0 et 1)
      * @param initialValue Valeur du MutableNumber (qui est un nombre)
-     * @param mutationProbability Probabilité de mutation
+     * @param rate Probabilité de mutation
      * @param sigma Ecart type permettant la modification aléatoire de la valeur du nombre
      * @return Le MutableNumber généré à partir des paramètres passés en argument
      */
@@ -65,7 +65,7 @@ public:
     /**
      * @brief positive Génère un MutableNumber de type positif (valeurs minimale plafonnée à zéro)
      * @param initialValue Valeur du MutableNumber (qui est un nombre)
-     * @param mutationProbability Probabilité de mutation
+     * @param rate Probabilité de mutation
      * @param sigma Ecart type permettant la modification aléatoire de la valeur du nombre
      * @param hasMax Indique si le nombre a une borne superieure
      * @param max Borne supérieure

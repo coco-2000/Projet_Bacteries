@@ -1,9 +1,7 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include "PetriDish.hpp"
 #include "Swarm.hpp"
-#include "Interface/Drawable.hpp"
 #include "Interface/Updatable.hpp"
 #include "NutrimentGenerator.hpp"
 

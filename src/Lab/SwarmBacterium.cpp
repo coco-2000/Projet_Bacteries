@@ -2,7 +2,6 @@
 #include "Application.hpp"
 #include "Swarm.hpp"
 #include "../Utility/Utility.hpp"
-#include <SFML/Graphics.hpp>
 #include "NutrimentA.hpp"
 #include "NutrimentB.hpp"
 #include "Poison.hpp"
