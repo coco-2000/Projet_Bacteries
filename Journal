@@ -80,6 +80,7 @@ Programmation II (SV)
 - Problèmes : Utilisation de la fonction de move de CircularBody dans les fonctions move des bactéries ? Oui
               Avant la modification de l'énoncé, bug généré par la classe Grip codée dans Utility,
               SimpleBacterium et Swarm hérite de DiffEqFuntion (pas de composition)
+              Après un certain temps de simulation les TwitchingBacterium ne déploient plus leur tentacule (vitesse = 0) et deviennent immortelles
 
 - La partie 3 a été modifié après son archivage :
     - changements sur la methode move de SimpleBacterium, supression de setDirection de SimpleBacterium, ajout de rotationAngle dans Bacterium
@@ -97,3 +98,46 @@ Programmation II (SV)
 
 Point où nous en sommes : Partie 4 terminée
 Toutes les parties antérieures sont fonctionelles
+
+*************************************************
+##Semaine 7 - Partie 5
+
+- *Constance* : Création et implémentation de classe Stats
+- *Emma* : Implémentation de l'impact différencié des nutriments
+
+
+*************************************************
+##Semaine 8 - Partie 5
+
+- *Constance* : Implémentation de la classe Stats
+- *Emma* : Correction suite au rendu intermédiaire,
+           modification de la perception du gradient par les bactéries (peuvent être répulsées par les nutriments toxiques)
+
+
+*************************************************
+##Semaine 9 - Partie 6
+
+- *Constance* : Création et implémentation de la classe Obstacle
+- *Emma* : Création et implémentation de la classe Poison et PoisonBacterium
+
+- Problèmes : Comment gérer la perception du gradient avec des nutriments cachés par un obstacle ? Prise en compte des obstacles dans la perception du
+                gradient avec impact négatif (répusion)
+              Présence de point fixe (maxima du gradient) qui attire les bactéries et les bloquent -> Conséquence minime des choix d'implémentation
+              Faire en sorte de pouvoir créer des espaces indépendants sur la boite de Petri où les bactéries évoluent en autarcie :
+                        - possibilité de pouvoir créer des murs d'obstacles
+                        - implémentation du mode perdu : quand les bactéries tapent les obstacles ou le bord de la Petri elles s'éloignent de l'obstacle
+                            sans prise en compte des nutriments et évoluent aléatoirement pendant un certain temps
+                        -
+
+*************************************************
+##Semaine 10 - Partie 6
+
+- *ensemble* : implémentation de la classe Obstacle, implémentation du mode perdu
+
+- Problèmes : Bactéries bloquées au bord de la PetriDish :
+
+*************************************************
+##Semaine 11 - Partie 5
+
+- *Constance* : Ecriture ReadMe, résolution immortalité des twitching bacterium
+- *Emma* : Création de la classe SwimmingBacterium, superclasse de PoisonBacterium et SimpleBacterium pour rassembler les méthodes communes
