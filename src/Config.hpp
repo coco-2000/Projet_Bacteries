@@ -119,7 +119,7 @@ public:
     const double swarmbact_max_energy;
     const double swarmbact_min_radius;
     const double swarmbact_max_radius;
-    const int swarmbact_speed;
+    const double swarmbact_speed;
 
     const double twitchingbact_min_energy;
     const double twitchingbact_max_energy;
