@@ -76,7 +76,7 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
 ,twitchingbact_speed_factor(mConfig["twitching bacterium"]["speed factor"].toDouble())
 ,twitchingbact_consumption_factor_move(mConfig["twitching bacterium"]["energy"]["consumption factor"]["move"].toDouble())
 ,twitchingbact_consumption_factor_tentacle(mConfig["twitching bacterium"]["energy"]["consumption factor"]["tentacle"].toDouble())
-
+,twitchingbact_consumption_factor_fatigue(mConfig["twitching bacterium"]["energy"]["consumption factor"]["fatigue"].toDouble())
 
 ,poisonbact_min_energy(mConfig["poison bacterium"]["energy"]["min"].toDouble())
 ,poisonbact_max_energy(mConfig["poison bacterium"]["energy"]["max"].toDouble())

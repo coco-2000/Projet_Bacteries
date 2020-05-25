@@ -105,7 +105,7 @@ public :
     /**
      * @brief isLost
      * @return vrai si la bactérie et perdue, c'est-à-dire qu'elle a percuté un obstacle ou
-     * le bord il a peu de temps
+     * le bord il a peu de temps et est ainsi étourdie par le choc
      */
     bool isLost() const;
 
@@ -145,6 +145,10 @@ public :
      */
     virtual double getScoreCoefficient(const Poison& poison) const = 0;
 
+    /**
+     * @brief getDivideCounter
+     * @return le nombre de divisions effectuées par la bactérie
+     */
     unsigned int getDivideCounter() const;
 
 protected :
@@ -243,13 +247,14 @@ protected :
     /**
      * @brief getLostEnergyFactor
      * @return L'énergie dépensée à chaque pas de déplacement lorsque la bactérie est
-     * lost (perdue), c'est-à-dire qu'elle a percuté un obstacle ou le bord il a peu de temps
+     * lost (perdue), c'est-à-dire qu'elle a percuté un obstacle ou le bord il y a peu de temps
+     * et est ainsi étourdie par le choc
      */
     double getLostEnergyFactor() const;
 
     /**
-     * @brief setLost Modifie l'attribut lost et initialise l'attribut timeLost à 0
-     * @param islost la nouvelle valeur de lost
+     * @brief setLost Modifie l'attribut lost
+     * @param islost la nouvelle valeur de lost et initialise timeLost à 0
      */
     void setLost(bool islost);
 
@@ -293,6 +298,7 @@ private :
      * @brief getMaxTimeLost
      * @return Le temps maximal pendant lequel une bactérie est perdue,
      * c'est-à-dire qu'elle a percuté un obstacle ou le bord il a peu de temps
+     * et est ainsi étourdie par le choc
      */
     sf::Time getMaxTimeLost() const;
 

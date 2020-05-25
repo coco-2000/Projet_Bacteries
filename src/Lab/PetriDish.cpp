@@ -368,9 +368,9 @@ bool PetriDish::doesCollideWithObstacle(const CircularBody& body) const
    return false;
 }
 
-const Vec2d& PetriDish::getLastObstaclePos() const
+Vec2d PetriDish::getLastObstaclePos() const
 {
-    return obstacles.back()->getPosition();
+    return obstacles.empty() ? Vec2d(0, 0) : obstacles.back()->getPosition();
 }
 
 double PetriDish::getAverageMutableParam(const std::string &s) const

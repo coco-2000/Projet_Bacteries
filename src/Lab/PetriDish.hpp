@@ -73,7 +73,7 @@ public:
      * @brief getLastObstaclePos
      * @return La position du dernier obstacle créé et non supprimé
      */
-    const Vec2d& getLastObstaclePos() const;
+    Vec2d getLastObstaclePos() const;
 
     /**
      * @brief addSwarm Ajoute un groupe Swarm à la boîte de Petri

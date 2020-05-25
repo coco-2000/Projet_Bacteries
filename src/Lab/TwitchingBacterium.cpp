@@ -48,13 +48,19 @@ void TwitchingBacterium::drawOn(sf::RenderTarget& target) const
 
 Quantity TwitchingBacterium::getStepEnergy() const
 {
-    return getShortConfig().twitchingbact_consumption_factor_move;
+    double stepEnergy(getShortConfig().twitchingbact_consumption_factor_move);
+    return isLost() ? getLostEnergyFactor()*stepEnergy : stepEnergy;
 }
 
 Quantity TwitchingBacterium::getTentacleEnergy() const
 {
     double tentacleEnergy(getShortConfig().twitchingbact_consumption_factor_tentacle);
     return isLost() ? getLostEnergyFactor()*tentacleEnergy : tentacleEnergy;
+}
+
+Quantity TwitchingBacterium::getFatigueEnergy() const
+{
+    return getShortConfig().twitchingbact_consumption_factor_fatigue ;
 }
 
 void TwitchingBacterium::moveGrip(const Vec2d& delta)
@@ -69,28 +75,32 @@ void TwitchingBacterium::move(sf::Time dt)
     switch(state)
     {
         case IDLE : state = WAIT_TO_DEPLOY; break;
-        case WAIT_TO_DEPLOY : waitToDeployState(dt); break;
-        case DEPLOY : deployState(dt, nutrimentPtr); break;
-        case ATTRACT : attractState(dt, nutrimentPtr); break;
-        case RETRACT : retractState (dt); break;
-        case EAT : eatState(nutrimentPtr); break;
+        case WAIT_TO_DEPLOY : waitToDeploy(dt); break;
+        case DEPLOY : deploy(dt, nutrimentPtr); break;
+        case ATTRACT : attract(dt, nutrimentPtr); break;
+        case RETRACT : retract (dt); break;
+        case EAT : eat(nutrimentPtr); break;
     }
 
     nutrimentPtr = nullptr;
 }
 
-void TwitchingBacterium::waitToDeployState(sf::Time dt)
+void TwitchingBacterium::waitToDeploy(sf::Time dt)
 {
     if(isLost())
         lostTrySwitch(dt);
+    else
+        strategy2();
 
-    strategy2();
     state = DEPLOY;
 }
 
-void TwitchingBacterium::deployState(sf::Time dt, const Nutriment* nutrimentPtr)
+void TwitchingBacterium::deploy(sf::Time dt, const Nutriment* nutrimentPtr)
 {
     gripToward(getDirection(), dt);
+
+    //pour empêcher que les bactéries avec une vitesse de tentacule nulle restent immortelles
+    consumeEnergy(getFatigueEnergy());
 
     if(nutrimentPtr != nullptr)
         state = ATTRACT;
@@ -101,11 +111,11 @@ void TwitchingBacterium::deployState(sf::Time dt, const Nutriment* nutrimentPtr)
         if(getAppEnv().doesCollideWithObstacle(grip))
         {
             setLost(true);
-         }
+        }
     }
 }
 
-void TwitchingBacterium::attractState(sf::Time dt, const Nutriment* nutrimentPtr)
+void TwitchingBacterium::attract(sf::Time dt, const Nutriment* nutrimentPtr)
 {
 
      const double distTentacule = getProperty("tentacle speed").get()*dt.asSeconds();
@@ -126,9 +136,12 @@ void TwitchingBacterium::tentacleInit()
     state = IDLE;
 }
 
-void TwitchingBacterium::retractState(sf::Time dt)
+void TwitchingBacterium::retract(sf::Time dt)
 {
-    (*this > grip) ? tentacleInit() : gripToward((getPosition() - grip.getPosition()).normalised(), dt);
+    if(*this > grip)
+        tentacleInit();
+    else
+        gripToward((getPosition() - grip.getPosition()).normalised(), dt);
 }
 
 void TwitchingBacterium::gripToward(const Vec2d& direction, sf::Time dt)
@@ -139,7 +152,7 @@ void TwitchingBacterium::gripToward(const Vec2d& direction, sf::Time dt)
     consumeEnergy(getTentacleEnergy() * distTentacle);
 }
 
-void TwitchingBacterium::eatState(const Nutriment* nutrimentPtr)
+void TwitchingBacterium::eat(const Nutriment* nutrimentPtr)
 {
     if ((nutrimentPtr == nullptr) or (!(*nutrimentPtr & *this)))
         state = IDLE;
@@ -149,11 +162,6 @@ void TwitchingBacterium::shiftClone(const Vec2d& v)
 {
     Bacterium::shiftClone(v);
     moveGrip(v);
-}
-
-unsigned int TwitchingBacterium::getTwitchCounter()
-{
-    return twitchCounter;
 }
 
 Quantity TwitchingBacterium::eatableQuantity(NutrimentA& nutriment) const
@@ -184,6 +192,11 @@ double TwitchingBacterium::getScoreCoefficient(const NutrimentB& nutriment) cons
 double TwitchingBacterium::getScoreCoefficient(const Poison& poison) const
 {
     return poison.getScoreCoefficient(*this);
+}
+
+unsigned int TwitchingBacterium::getTwitchCounter()
+{
+    return twitchCounter;
 }
 
 TwitchingBacterium::~TwitchingBacterium()

@@ -82,8 +82,8 @@ public:
     PoisonBacterium* clone() const override;
 
     /**
-     * @brief getPoisonCounter compte le nombre total d'instances de PoisonBacterium présentes dans l'assiette de Pétri
-     * @return le nombre total d'instances
+     * @brief getPoisonCounter
+     * @return Le nombre d'instance de PoisonBacterium présente dans l'assiette de Pétri
      */
     static unsigned int getPoisonCounter();
 

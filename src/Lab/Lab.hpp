@@ -89,7 +89,7 @@ public:
       * @brief getLastObstaclePos
       * @return La position du dernier obstacle créé et non supprimé
       */
-     Vec2d const& getLastObstaclePos() const;
+     Vec2d getLastObstaclePos() const;
 
      /**
       * @brief getTemperature

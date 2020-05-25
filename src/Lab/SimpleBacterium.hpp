@@ -80,8 +80,8 @@ public:
     ~SimpleBacterium() override;
 
     /**
-     * @brief getSimpleCounter compte le nombre total d'instances de SimpleBacterium présentes dans l'assiette de Pétri
-     * @return le nombre total d'instances
+     * @brief getSimpleCounter
+     * @return Le nombre d'instance de SimpleBacterium présente dans l'assiette de Pétri
      */
     static unsigned int getSimpleCounter();
 

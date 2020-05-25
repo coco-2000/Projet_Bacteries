@@ -94,18 +94,6 @@ void SwimmingBacterium::switchDirection()
     }
 }
 
-/*void SwimmingBacterium::consumeNutriment(sf::Time dt)
-{
-    Bacterium::consumeNutriment(dt);
-    if (isLost())
-        setTimeSwitch(sf::Time::Zero);
-}
-
-void SwimmingBacterium::manageLost(sf::Time dt)
-{
-    Bacterium::manageLost(dt);
-}*/
-
 Vec2d SwimmingBacterium::f(Vec2d position, Vec2d speed) const
 {
     return {0, 0};

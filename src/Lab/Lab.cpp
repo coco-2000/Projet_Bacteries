@@ -152,7 +152,7 @@ void Lab::createWall(const Vec2d& position1, const Vec2d& position2)
    petri.createWall(position1, position2);
 }
 
-const Vec2d &Lab::getLastObstaclePos() const
+Vec2d Lab::getLastObstaclePos() const
 {
     return petri.getLastObstaclePos();
 }
