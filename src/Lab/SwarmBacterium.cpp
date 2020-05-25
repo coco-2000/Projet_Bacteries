@@ -39,13 +39,10 @@ void SwarmBacterium::move(sf::Time dt)
 {
     Vec2d newPosition(getPosition());
 
-    if(isLost())
-    {
+    if(isLost()) {
         newPosition = stepDiffEq(getPosition(), getSpeedVector(), dt, *this).position;
         lostTrySwitch(dt);
-    }
-    else
-    {
+    } else {
         const DiffEqResult shifting(stepDiffEq(getPosition(), getSpeedVector(), dt, *group));
         newPosition = shifting.position;
         speed = shifting.speed.length();
@@ -54,8 +51,7 @@ void SwarmBacterium::move(sf::Time dt)
 
     const auto deltaPos = newPosition - getPosition();
 
-    if(deltaPos.lengthSquared() >= 0.001)
-    {
+    if(deltaPos.lengthSquared() >= 0.001) {
         consumeEnergy(deltaPos.length() * getStepEnergy());
         CircularBody::move(deltaPos);
     }
@@ -73,8 +69,7 @@ void SwarmBacterium::drawOn(sf::RenderTarget& target) const
 {
     Bacterium::drawOn(target);
 
-    if(isDebugOn() and group->IsLeader(this))
-    {
+    if(isDebugOn() and group->IsLeader(this)) {
         //on a ici décidé que l'epaisseur de l'anneau serait 5
         const auto anneau = buildAnnulus(getPosition(), getRadius(),
                                          sf::Color::Red, 5);
@@ -84,7 +79,7 @@ void SwarmBacterium::drawOn(sf::RenderTarget& target) const
 
 Vec2d SwarmBacterium::getSpeedVector() const
 {
-   if(isLost())
+    if(isLost())
         return getDirection() * (speed + getShortConfig().swarmbact_speed) / 2;
     else
         return getDirection() * getShortConfig().swarmbact_speed;

@@ -24,8 +24,7 @@ void Stats::previous()
 
 void Stats::reset()
 {
-    for(auto& value : graphSet)
-    {
+    for(auto& value : graphSet) {
         value.second.first->reset();
     }
     initCounter();
@@ -33,16 +32,13 @@ void Stats::reset()
 
 void Stats::addGraph(int id, const std::string& title, const std::vector<std::string>& titles, double min, double max, const Vec2d& size)
 {
-   if(graphSet.find(id) == graphSet.end()) // dans le cas où l'id existerait déjà
-   {
-       graphSet[id].first.reset(new Graph(titles, size, min, max));
-       graphSet[id].second = title;
-       setActive(id);
-   }
-   else
-   {
-       throw std::invalid_argument("id de graphe déjà existant");
-   }
+    if(graphSet.find(id) == graphSet.end()) { // dans le cas où l'id existerait déjà
+        graphSet[id].first.reset(new Graph(titles, size, min, max));
+        graphSet[id].second = title;
+        setActive(id);
+    } else {
+        throw std::invalid_argument("id de graphe déjà existant");
+    }
 }
 
 void Stats::drawOn(sf::RenderTarget& target) const
@@ -63,16 +59,12 @@ void Stats::setActive(int id)
 
 void Stats::update(sf::Time dt)
 {
-    if(counter>= sf::seconds(getShortConfig().stats_refresh_rate))
-    {
-        for(auto& graph : graphSet)
-        {
+    if(counter>= sf::seconds(getShortConfig().stats_refresh_rate)) {
+        for(auto& graph : graphSet) {
             graph.second.first->updateData(counter, getAppEnv().fetchData(graph.second.second));
         }
         initCounter();
-    }
-    else
-    {
+    } else {
         counter += dt;
     }
 }

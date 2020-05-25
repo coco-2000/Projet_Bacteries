@@ -9,12 +9,12 @@ MutableNumber::MutableNumber(double value, double rate, double sigma,
 
 MutableNumber::MutableNumber(j::Value const& config)
     : MutableNumber(config["initial"].toDouble(),
-      config["rate"].toDouble(),
-      config["sigma"].toDouble(),
-      config["clamp min"].toBool(),
-      config["min"].toDouble(),
-      config["clamp max"].toBool(),
-      config["max"].toDouble())
+                    config["rate"].toDouble(),
+                    config["sigma"].toDouble(),
+                    config["clamp min"].toBool(),
+                    config["min"].toDouble(),
+                    config["clamp max"].toBool(),
+                    config["max"].toDouble())
 {}
 
 double MutableNumber::get() const
@@ -24,24 +24,18 @@ double MutableNumber::get() const
 
 void MutableNumber::set(double val)
 {
-    if((!hasMin or val > min) and (!hasMax or val < max))
-    {
+    if((!hasMin or val > min) and (!hasMax or val < max)) {
         value = val;
-    }
-    else if(hasMin and val < min)
-    {
+    } else if(hasMin and val < min) {
         value = min;
-    }
-    else
-    {
+    } else {
         value = max;
     }
 }
 
 void MutableNumber::mutate()
 {
-    if(bernoulli(rate))
-    {
+    if(bernoulli(rate)) {
         set(value + normal(0, sigma*sigma));
     }
 }

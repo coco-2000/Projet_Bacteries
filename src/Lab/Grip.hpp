@@ -1,7 +1,8 @@
 #pragma once
 #include "CircularBody.hpp"
 
-class Grip : public CircularBody {
+class Grip : public CircularBody
+{
 public:
     /**
      * @brief Grip Constructeur

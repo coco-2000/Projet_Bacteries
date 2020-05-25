@@ -9,9 +9,9 @@ Nutriment::Nutriment(Quantity quantity, const Vec2d& position)
 
 Quantity Nutriment::takeQuantity(Quantity taking)
 {
-        taking = std::min(quantity, taking);
-        setQuantity(quantity - taking);
-        return taking;
+    taking = std::min(quantity, taking);
+    setQuantity(quantity - taking);
+    return taking;
 }
 
 void Nutriment::setQuantity(Quantity qt)
@@ -37,8 +37,7 @@ void Nutriment::displayQuantity(sf::RenderTarget& target) const
 {
     constexpr unsigned int TAILLE_FONTE(15); // taille de fonte
 
-    if(isDebugOn())
-    {
+    if(isDebugOn()) {
         auto const text = buildText(std::to_string(static_cast<int>(quantity)),
                                     shift({10,10}),
                                     getAppFont(),
@@ -52,8 +51,7 @@ void Nutriment::update(sf::Time dt)
 {
     const double growth =  getGrowthSpeed()* static_cast<double>(dt.asSeconds());
     if (quantity <= 2 * getMaxQuantity() and quantity + growth <= getAppEnv().getDistToPetri(getPosition())
-            and quantity + growth <= getAppEnv().minimumDistToObstacle(getPosition()))
-    {
+        and quantity + growth <= getAppEnv().minimumDistToObstacle(getPosition())) {
         setQuantity(quantity + growth);
     }
 }
@@ -72,7 +70,7 @@ double Nutriment::getMaxQuantity() const
 bool Nutriment::temperatureCondition(double temperature) const
 {
     return (getConfig()["growth"]["min temperature"].toDouble() <= temperature) and
-            (getConfig()["growth"]["max temperature"].toDouble() >= temperature);
+           (getConfig()["growth"]["max temperature"].toDouble() >= temperature);
 }
 
 bool Nutriment::isEmpty() const

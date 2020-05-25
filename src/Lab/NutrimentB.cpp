@@ -9,7 +9,9 @@ unsigned int NutrimentB::nutriBCounter(0);
 
 NutrimentB::NutrimentB(Quantity quantity, const Vec2d& position)
     : Nutriment(quantity, position)
-{ ++ nutriBCounter; }
+{
+    ++ nutriBCounter;
+}
 
 j::Value const& NutrimentB::getConfig() const
 {
@@ -63,7 +65,7 @@ double NutrimentB::getScoreCoefficient(const TwitchingBacterium& bacterie) const
 
 double NutrimentB::getScoreCoefficient(const PoisonBacterium& bacterie) const
 {
-   return 1 / getShortConfig().nutrimentB_resistance_factor;
+    return 1 / getShortConfig().nutrimentB_resistance_factor;
 }
 
 unsigned int NutrimentB::getNutriBCounter()

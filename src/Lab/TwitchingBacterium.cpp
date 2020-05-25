@@ -13,16 +13,21 @@ TwitchingBacterium::TwitchingBacterium(const Vec2d& position)
                 uniform(getShortConfig().twitchingbact_min_radius, getShortConfig().twitchingbact_max_radius),
                 uniform(getShortConfig().twitchingbact_min_energy, getShortConfig().twitchingbact_max_energy),
                 getConfig()["color"],
-                {{"tentacle speed", MutableNumber::positive(getConfig()["tentacle"]["speed"])},
-                {"tentacle length", MutableNumber::positive(getConfig()["tentacle"]["length"])}}),
-      grip(position, getRadius()/4),
-      state(IDLE)
+{ {"tentacle speed", MutableNumber::positive(getConfig()["tentacle"]["speed"])},
+    {"tentacle length", MutableNumber::positive(getConfig()["tentacle"]["length"])}
+}),
+grip(position, getRadius()/4),
+state(IDLE)
 
-{ ++twitchCounter; }
+{
+    ++twitchCounter;
+}
 
 TwitchingBacterium::TwitchingBacterium(const TwitchingBacterium& other)
     : Bacterium(other), grip(getPosition(), getRadius()/4), state(IDLE)
-{ ++twitchCounter; }
+{
+    ++twitchCounter;
+}
 
 j::Value const& TwitchingBacterium::getConfig() const
 {
@@ -72,14 +77,25 @@ void TwitchingBacterium::move(sf::Time dt)
 {
     const Nutriment* nutrimentPtr = getAppEnv().getNutrimentColliding(grip);
 
-    switch(state)
-    {
-        case IDLE : state = WAIT_TO_DEPLOY; break;
-        case WAIT_TO_DEPLOY : waitToDeploy(dt); break;
-        case DEPLOY : deploy(dt, nutrimentPtr); break;
-        case ATTRACT : attract(dt, nutrimentPtr); break;
-        case RETRACT : retract (dt); break;
-        case EAT : eat(nutrimentPtr); break;
+    switch(state) {
+    case IDLE :
+        state = WAIT_TO_DEPLOY;
+        break;
+    case WAIT_TO_DEPLOY :
+        waitToDeploy(dt);
+        break;
+    case DEPLOY :
+        deploy(dt, nutrimentPtr);
+        break;
+    case ATTRACT :
+        attract(dt, nutrimentPtr);
+        break;
+    case RETRACT :
+        retract (dt);
+        break;
+    case EAT :
+        eat(nutrimentPtr);
+        break;
     }
 
     nutrimentPtr = nullptr;
@@ -106,8 +122,7 @@ void TwitchingBacterium::deploy(sf::Time dt, const Nutriment* nutrimentPtr)
         state = ATTRACT;
 
     else if((grip.getPosition() - getPosition()).length() >= getProperty("tentacle length").get()
-            or getAppEnv().doesCollideWithDish(grip) or getAppEnv().doesCollideWithObstacle(grip))
-    {
+            or getAppEnv().doesCollideWithDish(grip) or getAppEnv().doesCollideWithObstacle(grip)) {
         state = RETRACT;
         if(getAppEnv().doesCollideWithObstacle(grip))
             setLost(true);
@@ -117,16 +132,16 @@ void TwitchingBacterium::deploy(sf::Time dt, const Nutriment* nutrimentPtr)
 void TwitchingBacterium::attract(sf::Time dt, const Nutriment* nutrimentPtr)
 {
 
-     const double distTentacule = getProperty("tentacle speed").get()*dt.asSeconds();
-     const Vec2d deltaPos((grip.getPosition() - getPosition()) * distTentacule * getShortConfig().twitchingbact_speed_factor);
+    const double distTentacule = getProperty("tentacle speed").get()*dt.asSeconds();
+    const Vec2d deltaPos((grip.getPosition() - getPosition()) * distTentacule * getShortConfig().twitchingbact_speed_factor);
 
-     CircularBody::move(deltaPos);
-     consumeEnergy(deltaPos.length() * getStepEnergy());
+    CircularBody::move(deltaPos);
+    consumeEnergy(deltaPos.length() * getStepEnergy());
 
-     if (nutrimentPtr == nullptr)
-         state = RETRACT;
-     else if (*nutrimentPtr & *this)
-         state = EAT;
+    if (nutrimentPtr == nullptr)
+        state = RETRACT;
+    else if (*nutrimentPtr & *this)
+        state = EAT;
 }
 
 void TwitchingBacterium::tentacleInit()
@@ -199,4 +214,6 @@ unsigned int TwitchingBacterium::getTwitchCounter()
 }
 
 TwitchingBacterium::~TwitchingBacterium()
-{ -- twitchCounter; }
+{
+    -- twitchCounter;
+}

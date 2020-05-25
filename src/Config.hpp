@@ -34,11 +34,13 @@ public:
     bool getDebug();
 
     // returns read
-    j::Value& getJsonRead(){
+    j::Value& getJsonRead()
+    {
         return mConfig;
     }
 
-    j::Value const& getJsonRead() const {
+    j::Value const& getJsonRead() const
+    {
         return mConfig;
     }
 

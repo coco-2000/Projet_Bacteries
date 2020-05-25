@@ -8,15 +8,20 @@ unsigned int PoisonBacterium::poisonCounter(0);
 
 PoisonBacterium::PoisonBacterium(const Vec2d& position)
     : SwimmingBacterium(position, Vec2d::fromRandomAngle(), uniform(getShortConfig().poisonbact_min_radius, getShortConfig().poisonbact_max_radius),
-                         uniform(getShortConfig().poisonbact_min_energy, getShortConfig().poisonbact_max_energy), getConfig()["color"],
-                        {{"speed", MutableNumber::positive(getConfig()["speed"])},
-                         {"tumble better prob", MutableNumber::positive(getConfig()["tumble"]["better"])},
-                         {"tumble worse prob", MutableNumber::positive(getConfig()["tumble"]["worse"])}}), delayPoison(sf::Time::Zero)
-{ ++poisonCounter; }
+                        uniform(getShortConfig().poisonbact_min_energy, getShortConfig().poisonbact_max_energy), getConfig()["color"],
+{ {"speed", MutableNumber::positive(getConfig()["speed"])},
+    {"tumble better prob", MutableNumber::positive(getConfig()["tumble"]["better"])},
+    {"tumble worse prob", MutableNumber::positive(getConfig()["tumble"]["worse"])}
+}), delayPoison(sf::Time::Zero)
+{
+    ++poisonCounter;
+}
 
 PoisonBacterium::PoisonBacterium(const PoisonBacterium& other)
     : SwimmingBacterium(other)
-{ ++poisonCounter; }
+{
+    ++poisonCounter;
+}
 
 Quantity PoisonBacterium::eatableQuantity(NutrimentA& nutriment) const
 {
@@ -72,14 +77,14 @@ void PoisonBacterium::move(sf::Time dt)
 {
     SwimmingBacterium::move(dt);
 
-    if(delayPoison >= getShortConfig().poisonbact_poison_delay)
-    {
+    if(delayPoison >= getShortConfig().poisonbact_poison_delay) {
         dropPoison();
         delayPoison = sf::Time::Zero;
-    }
-    else
+    } else
         delayPoison += dt;
 }
 
 PoisonBacterium::~PoisonBacterium()
-{ --poisonCounter; }
+{
+    --poisonCounter;
+}

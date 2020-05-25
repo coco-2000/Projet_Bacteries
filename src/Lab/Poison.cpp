@@ -9,7 +9,9 @@ unsigned int Poison::poisonCounter(0);
 Poison::Poison(Vec2d const& position)
     : Nutriment(uniform(getShortConfig().poison_min_qty, getShortConfig().poison_max_qty),
                 position)
-{ ++poisonCounter; }
+{
+    ++poisonCounter;
+}
 
 j::Value const& Poison::getConfig() const
 {
@@ -73,4 +75,6 @@ double Poison::getScoreCoefficient(const PoisonBacterium& bacterie) const
 }
 
 Poison::~Poison()
-{ --poisonCounter; }
+{
+    --poisonCounter;
+}

@@ -9,7 +9,9 @@
 
 Swarm::Swarm(const std::string& id, const std::vector <SwarmBacterium*>& group)
     : id(id), group(group), color(getColor())
-{ setLeader(); }
+{
+    setLeader();
+}
 
 void Swarm::update(sf::Time dt)
 {
@@ -25,34 +27,30 @@ void Swarm::addBacterium(SwarmBacterium* bacterie)
 {
     group.push_back(bacterie);
 
-    if(leader == nullptr)
-    {
+    if(leader == nullptr) {
         setLeader();
     }
 }
 
 void Swarm::supprBacterium(SwarmBacterium* bacterie)
 {
-    for(auto& element : group)
-    {
-        if(element == bacterie)
-        {
+    for(auto& element : group) {
+        if(element == bacterie) {
             element = nullptr;
             break;
         }
     }
     group.erase(std::remove(group.begin(), group.end(), nullptr),
-                       group.end());
+                group.end());
 
-    if(bacterie == leader)
-    {
+    if(bacterie == leader) {
         setLeader();
     }
 }
 
 const Vec2d& Swarm::getLeaderPosition() const
 {
-     return leader->getPosition();
+    return leader->getPosition();
 }
 
 const std::string& Swarm::getId() const
@@ -62,22 +60,15 @@ const std::string& Swarm::getId() const
 
 void Swarm::setLeader()
 {
-    if(group.empty())
-    {
+    if(group.empty()) {
         leader = nullptr;
-    }
-    else if(group.size() == 1)
-    {
+    } else if(group.size() == 1) {
         leader = group.front();
-    }
-    else
-    {
+    } else {
         SwarmBacterium* tmp(group.front());
-        for(const auto& bacterie : group)
-        {
+        for(const auto& bacterie : group) {
             if (getAppEnv().getPositionScore(bacterie->getPosition(), *bacterie)
-                > getAppEnv().getPositionScore(tmp->getPosition(), *tmp))
-            {
+                > getAppEnv().getPositionScore(tmp->getPosition(), *tmp)) {
                 tmp = bacterie;
             }
         }
@@ -93,7 +84,7 @@ const j::Value& Swarm::getConfig() const
 
 Vec2d Swarm::f(Vec2d position, Vec2d speed) const
 {
-        return (getConfig()[id]["force factor"].toDouble()) * (getLeaderPosition() - position);
+    return (getConfig()[id]["force factor"].toDouble()) * (getLeaderPosition() - position);
 }
 
 bool Swarm::IsLeader(const SwarmBacterium* bacterie) const
@@ -103,8 +94,7 @@ bool Swarm::IsLeader(const SwarmBacterium* bacterie) const
 
 Swarm::~Swarm()
 {
-    for(auto& bacterie : group)
-    {
+    for(auto& bacterie : group) {
         bacterie = nullptr;
     }
     leader = nullptr;

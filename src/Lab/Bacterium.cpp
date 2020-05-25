@@ -18,8 +18,7 @@ Bacterium::Bacterium(const Vec2d& position, const Vec2d& direction, double radiu
 
 void Bacterium::divide()
 {
-    if(energy >= getDivideEnergy())
-    {
+    if(energy >= getDivideEnergy()) {
         energy /= 2;
         Bacterium* copy(clone());
         copy->mutate();
@@ -38,8 +37,7 @@ void Bacterium::mutate()
 {
     color.mutate();
 
-    for(auto& param : paramMutables)
-    {
+    for(auto& param : paramMutables) {
         param.second.mutate();
     }
 }
@@ -105,8 +103,7 @@ void Bacterium::displayEnergy(sf::RenderTarget& target) const
 {
     constexpr unsigned int TAILLE_FONTE(15); // taille de fonte
 
-    if(isDebugOn())
-    {
+    if(isDebugOn()) {
         target.draw(buildText(std::to_string(static_cast<int>(energy)),
                               shift({10,10}),
                               getAppFont(),
@@ -129,13 +126,10 @@ void Bacterium::update(sf::Time dt)
 
 void Bacterium::collision()
 {
-    if (getAppEnv().doesCollideWithObstacle(*this))
-    {
+    if (getAppEnv().doesCollideWithObstacle(*this)) {
         setLost(true);
         strategy2();
-    }
-    else if(getAppEnv().doesCollideWithDish(*this))
-    {
+    } else if(getAppEnv().doesCollideWithDish(*this)) {
         setLost(true);
         direction = - direction;
         manageGap();
@@ -144,7 +138,7 @@ void Bacterium::collision()
 
 void Bacterium::manageGap()
 {
-   double dist(-getAppEnv().getDistToPetri(getPosition()) + getRadius());
+    double dist(-getAppEnv().getDistToPetri(getPosition()) + getRadius());
 
     if(dist > 0)
         CircularBody::move(dist * getAppEnv().getMiddleDirectionVector(getPosition()));
@@ -154,21 +148,18 @@ void Bacterium::consumeNutriment(sf::Time dt)
 {
     Nutriment* nutrimentPtr = getAppEnv().getNutrimentColliding(*this);
 
-    if(nutrimentPtr != nullptr and consumeCounter >= getDelay() and !abstinence)
-    {
+    if(nutrimentPtr != nullptr and consumeCounter >= getDelay() and !abstinence) {
         consumeCounter = sf::Time::Zero;
         eat(*nutrimentPtr);
         nutrimentPtr = nullptr;
         setLost(false);
-    }
-    else
-      consumeCounter += dt;
+    } else
+        consumeCounter += dt;
 }
 
 void Bacterium::manageLost(sf::Time dt)
 {
-    if (timeLost >= getMaxTimeLost())
-    {
+    if (timeLost >= getMaxTimeLost()) {
         setLost(false);
     }
 
@@ -208,7 +199,7 @@ MutableNumber Bacterium::getProperty(const std::string& key) const
 void Bacterium::rotationAngle(sf::Time dt)
 {
     auto const angleDiff = angleDelta(direction.angle(), angle); // calcule la différence entre le nouvel
-                                                                      // angle de direction et l'ancien
+    // angle de direction et l'ancien
     auto dalpha = PI * dt.asSeconds();    // calcule dα
     dalpha = std::min(dalpha, std::abs(angleDiff)); // on ne peut tourner plus que de angleDiff
 
@@ -258,8 +249,8 @@ void Bacterium::setDirection(const Vec2d& newDir)
 
 void Bacterium::setLost(bool islost)
 {
-   lost = islost;
-   timeLost = sf::Time::Zero;
+    lost = islost;
+    timeLost = sf::Time::Zero;
 }
 
 double Bacterium::getOldScore() const
@@ -274,8 +265,8 @@ bool Bacterium::isLost() const
 
 void Bacterium::eat(Nutriment& nutriment)
 {
-  Quantity eaten(nutriment.eatenBy(*this));
-  energy += eaten;
+    Quantity eaten(nutriment.eatenBy(*this));
+    energy += eaten;
 }
 
 void Bacterium::lostTrySwitch(sf::Time dt)
@@ -285,8 +276,7 @@ void Bacterium::lostTrySwitch(sf::Time dt)
     const double lambda(getLostLambdaSwitch());
     const double switchProba = lambda != 0 ? 1 - exp(- timeSwitch.asSeconds() / lambda) : 1;
 
-    if(bernoulli(switchProba))
-    {
+    if(bernoulli(switchProba)) {
         strategy1();
         timeSwitch = sf::Time::Zero;
     }
@@ -301,8 +291,7 @@ void Bacterium::strategy2()
 {
     constexpr int N(20); // nb de directions aléatoires à générer
 
-    for(int i(0); i < N; ++i)
-    {
+    for(int i(0); i < N; ++i) {
         const Vec2d newDir (Vec2d::fromRandomAngle());
         double newScore = helperPositionScore (newDir, *this);
 

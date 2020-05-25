@@ -9,16 +9,21 @@ unsigned int SimpleBacterium::simpleCounter(0);
 
 SimpleBacterium::SimpleBacterium(const Vec2d& position)
     : SwimmingBacterium(position, Vec2d::fromRandomAngle(), uniform(getShortConfig().simplebact_min_radius, getShortConfig().simplebact_max_radius),
-                uniform(getShortConfig().simplebact_min_energy, getShortConfig().simplebact_max_energy), getConfig()["color"],
-                {{"speed", MutableNumber::positive(getConfig()["speed"])},
-                 {"tumble better prob", MutableNumber::positive(getConfig()["tumble"]["better"])},
-                 {"tumble worse prob", MutableNumber::positive(getConfig()["tumble"]["worse"])}})
-{ ++simpleCounter; }
+                        uniform(getShortConfig().simplebact_min_energy, getShortConfig().simplebact_max_energy), getConfig()["color"],
+{ {"speed", MutableNumber::positive(getConfig()["speed"])},
+    {"tumble better prob", MutableNumber::positive(getConfig()["tumble"]["better"])},
+    {"tumble worse prob", MutableNumber::positive(getConfig()["tumble"]["worse"])}
+})
+{
+    ++simpleCounter;
+}
 
 
 SimpleBacterium::SimpleBacterium(const SimpleBacterium& other)
     : SwimmingBacterium(other)
-{ ++simpleCounter; }
+{
+    ++simpleCounter;
+}
 
 SimpleBacterium* SimpleBacterium::clone() const
 {
@@ -66,4 +71,6 @@ double SimpleBacterium::getScoreCoefficient(const Poison& poison) const
 }
 
 SimpleBacterium::~SimpleBacterium()
-{ --simpleCounter; }
+{
+    --simpleCounter;
+}

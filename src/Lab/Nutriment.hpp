@@ -28,10 +28,10 @@ public :
      */
     void drawOn(sf::RenderTarget& target) const override;
 
-   /**
-    * @brief update Effectue la croissance d'un nutriment en mettant à jour sa quantité et son rayon
-    * @param dt Pas de temps après lequel lequel le nutriment est mise à jour
-    */
+    /**
+     * @brief update Effectue la croissance d'un nutriment en mettant à jour sa quantité et son rayon
+     * @param dt Pas de temps après lequel lequel le nutriment est mise à jour
+     */
     void update(sf::Time dt) override;
 
     /**
@@ -160,7 +160,7 @@ private :
      * méthode virtuelle pure
      * @brief getConfig Raccourci pour accéder aux paramètres relatifs aux nutriments
      */
-     virtual j::Value const& getConfig() const = 0;
+    virtual j::Value const& getConfig() const = 0;
 
     /**
      * @brief Suppression du constructeur de copie pour empêcher son utilisation car il n'est

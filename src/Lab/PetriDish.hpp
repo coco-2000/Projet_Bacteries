@@ -26,7 +26,7 @@ public:
      * @param bacterie Instance à ajouter à l'assiette
      * @return true si la bacterie a pu être placé dans l'assiette false sinon
      */
-   bool addBacterium(Bacterium* bacterie);
+    bool addBacterium(Bacterium* bacterie);
 
     /**
      * @brief addNutriment Ajoute un nutriment à l'assiette de Petri

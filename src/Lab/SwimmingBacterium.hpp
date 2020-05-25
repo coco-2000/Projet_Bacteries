@@ -16,9 +16,9 @@ public:
      * @param abstinence Indique si la bacterie consomme des nutriments ou non
      */
     SwimmingBacterium(const Vec2d& position, const Vec2d& direction, double radius,
-                       Quantity energy, const MutableColor& color,
-                       const std::map<std::string, MutableNumber>& paramMutables = {},
-                       bool abstinence = 0);
+                      Quantity energy, const MutableColor& color,
+                      const std::map<std::string, MutableNumber>& paramMutables = {},
+                      bool abstinence = 0);
 
     /**
      * @brief SwimmingBacterium Constructeur de copie

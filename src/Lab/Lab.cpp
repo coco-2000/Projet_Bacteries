@@ -6,13 +6,48 @@ Lab::Lab()
     : petri(getApp().getCentre(), (0.95/2)*getApp().getLabSize().x)
 {
     namesGraph = {
-        {s::GENERAL,                [&]() { return petri.getPropertyGeneral();}             },
-        {s::SIMPLE_BACTERIA,        [&]() { return petri.getPropertySimpleBacteria();}      },
-        {s::TWITCHING_BACTERIA,     [&]() { return petri.getPropertyTwitchingBacteria();}   },
-        {s::BACTERIA,               [&]() { return petri.getPropertyBacteria();}            },
-        {s::BACTERIA_DIVISION,      [&]() { return petri.getPropertyBacteriaDivision();}    },
-        {s::NUTRIMENT_QUANTITY,     [&]() { return petri.getPropertyNutrimentQuantity();}   },
-        {s::NUTRIMENT,              [&]() { return petri.getPropertyNutriment();}           },
+        {
+            s::GENERAL,                [&]()
+            {
+                return petri.getPropertyGeneral();
+            }
+        },
+        {
+            s::SIMPLE_BACTERIA,        [&]()
+            {
+                return petri.getPropertySimpleBacteria();
+            }
+        },
+        {
+            s::TWITCHING_BACTERIA,     [&]()
+            {
+                return petri.getPropertyTwitchingBacteria();
+            }
+        },
+        {
+            s::BACTERIA,               [&]()
+            {
+                return petri.getPropertyBacteria();
+            }
+        },
+        {
+            s::BACTERIA_DIVISION,      [&]()
+            {
+                return petri.getPropertyBacteriaDivision();
+            }
+        },
+        {
+            s::NUTRIMENT_QUANTITY,     [&]()
+            {
+                return petri.getPropertyNutrimentQuantity();
+            }
+        },
+        {
+            s::NUTRIMENT,              [&]()
+            {
+                return petri.getPropertyNutriment();
+            }
+        },
     };
 }
 
@@ -149,7 +184,7 @@ void Lab::deleteObstacle(const Vec2d& position)
 
 void Lab::createWall(const Vec2d& position1, const Vec2d& position2)
 {
-   petri.createWall(position1, position2);
+    petri.createWall(position1, position2);
 }
 
 Vec2d Lab::getLastObstaclePos() const

@@ -9,7 +9,9 @@ unsigned int NutrimentA::nutriACounter(0);
 
 NutrimentA::NutrimentA(Quantity quantity, const Vec2d& position)
     : Nutriment(quantity, position)
-{++ nutriACounter;}
+{
+    ++ nutriACounter;
+}
 
 j::Value const& NutrimentA::getConfig() const
 {

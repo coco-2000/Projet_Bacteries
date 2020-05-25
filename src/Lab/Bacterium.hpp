@@ -215,7 +215,7 @@ protected :
     MutableNumber getProperty(const std::string& key) const;
 
     /**
-     * @brief strategy1 Première façon d'effectuer le basculement : choisir au hasard une direction 
+     * @brief strategy1 Première façon d'effectuer le basculement : choisir au hasard une direction
      * (associé à l'étiquette "single random vector" dans le fichier de configuration)
      */
     void strategy1();
