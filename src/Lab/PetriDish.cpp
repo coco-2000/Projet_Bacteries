@@ -373,7 +373,7 @@ const Vec2d& PetriDish::getLastObstaclePos() const
     return obstacles.back()->getPosition();
 }
 
-double PetriDish::getMeanMutableParam(const std::string &s) const
+double PetriDish::getAverageMutableParam(const std::string &s) const
 {
     double value(0.0);
     double sum(0);
@@ -400,7 +400,7 @@ double PetriDish::getTotalNutriment() const
     return value;
 }
 
-double PetriDish::getMeanDivisionBacteria() const
+double PetriDish::getAverageDivisionBacteria() const
 {
     double mean(0);
     for(const auto& bacteria : bacteries)
@@ -430,25 +430,25 @@ GraphData PetriDish::getPropertyNutrimentQuantity() const
 
 GraphData PetriDish::getPropertySimpleBacteria() const
 {
-    return {{s::BETTER, getMeanMutableParam(s::BETTER)},
-            {s::WORSE, (double)getMeanMutableParam(s::WORSE)}};
+    return {{s::BETTER, getAverageMutableParam(s::BETTER)},
+            {s::WORSE, (double)getAverageMutableParam(s::WORSE)}};
 }
 
 GraphData PetriDish::getPropertyTwitchingBacteria() const
 {
     return {
-        {s::TENTACLE_LENGTH, getMeanMutableParam(s::TENTACLE_LENGTH)},
-        {s::TENTACLE_SPEED, getMeanMutableParam(s::TENTACLE_SPEED)}};
+        {s::TENTACLE_LENGTH, getAverageMutableParam(s::TENTACLE_LENGTH)},
+        {s::TENTACLE_SPEED, getAverageMutableParam(s::TENTACLE_SPEED)}};
 }
 
 GraphData PetriDish::getPropertyBacteria() const
 {
-    return {{s::SPEED, getMeanMutableParam(s::SPEED)}};
+    return {{s::SPEED, getAverageMutableParam(s::SPEED)}};
 }
 
 GraphData PetriDish::getPropertyBacteriaDivision() const
 {
-    return {{s::BACTERIA_DIVISION, getMeanDivisionBacteria()}};
+    return {{s::BACTERIA_DIVISION, getAverageDivisionBacteria()}};
 }
 
 GraphData PetriDish::getPropertyNutriment() const
