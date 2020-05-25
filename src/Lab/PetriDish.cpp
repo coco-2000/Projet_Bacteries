@@ -413,7 +413,7 @@ double PetriDish::getAverageDivisionBacteria() const
 GraphData PetriDish::getPropertyGeneral() const
 {
     return {
-        {s::SIMPLE_BACTERIA, SimpleBacterium::getSimpleCounter() - PoisonBacterium::getPoisonCounter()},
+        {s::SIMPLE_BACTERIA, SimpleBacterium::getSimpleCounter()},
         {s::TWITCHING_BACTERIA, TwitchingBacterium::getTwitchCounter()},
         {s::SWARM_BACTERIA, SwarmBacterium::getSwarmCounter()},
         {s::POISON_BACTERIA, PoisonBacterium::getPoisonCounter()},
@@ -447,7 +447,7 @@ GraphData PetriDish::getPropertyBacteria() const
 
 GraphData PetriDish::getPropertyBacteriaDivision() const
 {
-    return {{s::BACTERIA_DIVISION, getAverageDivisionBacteria()}};
+    return {{s::MEAN_DIVISION, getAverageDivisionBacteria()}};
 }
 
 GraphData PetriDish::getPropertyNutriment() const
