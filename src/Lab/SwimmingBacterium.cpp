@@ -98,3 +98,10 @@ Vec2d SwimmingBacterium::f(Vec2d position, Vec2d speed) const
 {
     return {0, 0};
 }
+
+void SwimmingBacterium::setLost(bool isLost)
+{
+    Bacterium::setLost(isLost);
+    setTimeSwitch(sf::Time::Zero);
+}
+

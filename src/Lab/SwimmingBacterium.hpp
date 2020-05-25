@@ -35,17 +35,10 @@ protected :
     void move(sf::Time dt) override;
 
     /**
-     * @brief consumeNutriment gère la consommation des bacteries
-     * @param dt Pas de temps après lequel la bactérie est mise à jour
+     * @brief setLost Modifie l'attribut lost et initialise timeLost et timeSwitch à 0
+     * @param islost la nouvelle valeur de lost
      */
-    //void consumeNutriment(sf::Time dt) override;
-
-    /**
-     * @brief manageLost Vérifie si le délai pour être perdue est dépassé, met l'attribut lost à false
-     * (la bactérie n'est plus perdue) et met à jour timeLost
-     * @param dt Pas de temps après lequel la simulation est mise à jour
-     */
-    //void manageLost(sf::Time dt) override;
+    void setLost(bool islost);
 
 private :
     double timeFlagellum;

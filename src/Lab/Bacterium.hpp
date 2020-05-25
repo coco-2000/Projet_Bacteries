@@ -230,7 +230,7 @@ protected :
      * @brief consumeNutriment gère la consommation des bacteries
      * @param dt Pas de temps après lequel la bactérie est mise à jour
      */
-    virtual void consumeNutriment(sf::Time dt);
+    void consumeNutriment(sf::Time dt);
 
     /**
      * @brief getTimeSwitch
@@ -253,10 +253,10 @@ protected :
     double getLostEnergyFactor() const;
 
     /**
-     * @brief setLost Modifie l'attribut lost
-     * @param islost la nouvelle valeur de lost et initialise timeLost à 0
+     * @brief setLost Modifie l'attribut lost et initialise timeLost à 0
+     * @param islost la nouvelle valeur de lost
      */
-    void setLost(bool islost);
+    virtual void setLost(bool islost);
 
     /**
      * @brief lostTrySwitch Calcul la probabilité pour l'instance courante de bactérie de basculer
@@ -270,7 +270,7 @@ protected :
      * (la bactérie n'est plus perdue) et met à jour timeLost
      * @param dt Pas de temps après lequel la simulation est mise à jour
      */
-    virtual void manageLost(sf::Time dt);
+    void manageLost(sf::Time dt);
 
 private :
 

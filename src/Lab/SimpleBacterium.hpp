@@ -73,6 +73,8 @@ public:
      */
     SimpleBacterium* clone() const override;
 
+
+
     /**
      * @brief ~SimpleBacterium Destructeur
      * Décrémente le compteur d'instances
