@@ -36,9 +36,9 @@ protected :
 
     /**
      * @brief setLost Modifie l'attribut lost et initialise timeLost et timeSwitch à 0
-     * @param islost la nouvelle valeur de lost
+     * @param isLost la nouvelle valeur de lost
      */
-    void setLost(bool islost);
+    void setLost(bool isLost) override;
 
 private :
     double timeFlagellum;
