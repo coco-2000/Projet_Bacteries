@@ -58,13 +58,15 @@ Ce projet utilise  [Cmake](https://cmake.org/) pour compiler
 
 ## FICHIERS DE CONFIGURATION
 
-Les fichiers de configuration à utiliser pour application sont app5.json et
-app7.json. Le premier donne des chances de survies optimales à la population
-bleue, le second stabilise l'ensemble des populations et permet
-d'atteindre un équilibre.
-Pour FightTest, il existe un ficher appFight.json qui facilite l'observation
-des comportements souhaités.
-...
+Dans le fichier app.json nous avons dû ajouter les paramètres suivants :
+- Ajout de la classe Poison parmi les nutriments avec les mêmes paramètres que les autres classes de nutriments
+    (ajout de la texture poison dans le dossier res)
+- Ajout de la classe PoisonBacterium parmi les bactéries avec les mêmes paramètres qu'une SimpleBacterium
+    + le delai entre 2 dépôt de poison
+- Pour toutes les classes de bactéries : ajout de paramètres relatifs au mode perdue (lost) tel que la durée du mode perdue,
+    le facteur de diminution de la consommation d'énergie (bactéries se mettent en mode réserve), le facteur lambda qui paramètrise
+    la probabilité de basculer pour les bactéries perdues
+- Ajout de la classe Obstacle avec comme paramètres : le rayon des obstables, le gradient pour le calcul du score et la texture
 
 ## COMMANDES
 

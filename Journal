@@ -125,6 +125,10 @@ Toutes les parties antérieures sont fonctionelles
 - Problèmes : Comment gérer la perception du gradient avec des nutriments cachés par un obstacle ? Prise en compte des obstacles dans la perception du
                 gradient avec impact négatif (répusion)
               Présence de point fixe du gradient qui attire les bactéries et les bloquent -> Conséquence des choix d'implémentation
+              Faire en sorte de pouvoir créer des espaces indépendants sur la boite de Petri où les bactéries évoluent en autarcie :
+                       - possibilité de pouvoir créer des murs d'obstacles
+                       - implémentation du mode perdu : quand les bactéries tapent les obstacles ou le bord de la Petri elles s'éloignent de l'obstacle
+                           sans prise en compte des nutriments et évoluent aléatoirement pendant un certain temps
               Implémentation d'un mécanisme au cours duquel la bactérie ne "voyait" plus les obstacles par un système d'intersections mais ceci diminuait
                 considérablement les performances du programme.
 
