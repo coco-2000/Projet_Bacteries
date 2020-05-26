@@ -1,9 +1,5 @@
 #include "Swarm.hpp"
 #include "../Application.hpp"
-#include "../Utility/MutableColor.hpp"
-#include <string>
-#include "../Utility/Utility.hpp"
-#include <SFML/Graphics.hpp>
 #include "SwarmBacterium.hpp"
 
 

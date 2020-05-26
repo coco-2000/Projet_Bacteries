@@ -1,6 +1,5 @@
 #include "TwitchingBacterium.hpp"
 #include "Application.hpp"
-#include <SFML/Graphics.hpp>
 #include "../Utility/Utility.hpp"
 #include "NutrimentA.hpp"
 #include "NutrimentB.hpp"
