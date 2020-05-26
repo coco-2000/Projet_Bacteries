@@ -14,12 +14,12 @@ const std::string& Stats::getCurrentTitle() const
 
 void Stats::next()
 {
-    setActive((1 + currentId)%graphSet.size());
+    setActive(graphSet.size() == 0 ? currentId : ((currentId+1)%graphSet.size()));
 }
 
 void Stats::previous()
 {
-    setActive((currentId-1)%graphSet.size());
+    setActive(graphSet.size() == 0 ? currentId : ((currentId-1)%graphSet.size()));
 }
 
 void Stats::reset()

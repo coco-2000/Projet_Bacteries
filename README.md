@@ -22,7 +22,6 @@ Ils constituent un apport nutritif différent selon les bacéries, et peuvent m�
 Ainsi grâce aux nutriments, les bactéries gagnent de l'énergie et lorque celle-ci est suffisante, elles peuvent se diviser
 Les bactéries sont dotées de certains paramètres pouvant muter comme par exemple la vitesse, la couleur ou la longueur d'un tentacule.
 Ainsi lors de la division, la bactérie clonée herite des caractéristiques de la bactérie d'origine à l'exception de celles qui auront muté.
-idée :Sélection naturelle les paramètres évoluent vers celles qui pour une situation données donnent les meilleurs chances de survie
 
 Pour survivre malgré la compétition qui sévi entre elles, les bactéries adoptent des stratégies différentes; certaines sont dotées de comportements de groupe et suivent avec confiance un leader,
 tandis que d'autres déposent des poisons afin de tuer les concurrents.
@@ -44,7 +43,7 @@ Ce projet utilise  [Cmake](https://cmake.org/) pour compiler
 
 ##CIBLES PRINCIPALES:
 
-* application -> correspond à l'application finale.
+* Finalapplication -> correspond à l'application finale.
 * CircularBodyTest -> permet de tester les fonctionnalités liées à la détection de collision
 * nutrimentTest -> permet de tester graphiquement la génération automatiques des nutriments dans l'assiette de Petri
 * mutableTest -> Vérifie si les méthodes permettant la création de MutableNumber respecte bien les conditions demandées
@@ -79,6 +78,9 @@ Nous avons modifié le calcul du gradient sur l'assiette de Petri en ajoutant un
 Pour cela nous avons reproduit l'implémentation de l'impact différencié des nutriments ce qui fait que selon son type et celui du nutriment
 considéré, le comportement de la bactérie sera différent. Ainsi les bactéries auront tendance à être repoussées par les nutriments toxiques pour elles
 et attirées par les nutriments nutritifs (hormis les poisons pour lesquelles nous avons fait le choix de ne pas les prendre ne compte dans les calculs)
+
+Afin d'éviter que certaines twitchingbacterium restent immortelles si la vitesse de leur tentacule a muté pour une valeur nulle,
+nous avons fait en sorte qu'une twitching bacterium perde constamment un petit peu d'énergie.
 
 ### EXTENSIONS
 
