@@ -107,7 +107,6 @@ Toutes les parties antérieures sont fonctionelles
 
 - Problème : Parfois toutes les SwarmBacterium meurent d'un coup : gestion de la mise à jour du leader en faute
 
-
 *************************************************
 ##Semaine 8 - Partie 5
 
@@ -133,9 +132,9 @@ Toutes les parties antérieures sont fonctionelles
 
 - *Constance* : création des murs pour que les bactéries puissent vivre en autonomie, implémentation du mode perdu pour les obstacles
                 et pour la petri, ajout de la texture de l'obstacle
--*Emma*      : correction d'un bug du mode perdu, résolution des bactéries sortant de la pétri, implémentation du mode perdu SwarmBacterium, ajout graphes
-               poison bacterium
--*ensemble*  : conception du mode perdu SwarmBacterium,
+- *Emma*      : correction d'un bug du mode perdu, résolution des bactéries sortant de la pétri, implémentation du mode perdu SwarmBacterium, ajout graphes
+                poison bacterium
+- *ensemble*  : conception du mode perdu SwarmBacterium,
 
 - Problèmes : Bactéries se collent parfois sur le bord de la petri ->  mode perdu lors des collisions sur la petri pour un comportement
               similaire à celui des obstacles
@@ -145,10 +144,9 @@ Toutes les parties antérieures sont fonctionelles
 *************************************************
 ##Semaine 11 - Partie 6
 
-- *Constance* : Ecriture ReadMe, résolution immortalité des twitching bacterium, résolution tumble worse nul, création de nouveaux
-                fichier de configuration,
+- *Constance* : Ecriture ReadMe, résolution immortalité des twitching bacterium, résolution tumble worse nul
                 Rajout stats : nb moyen de division par bactérie et décompte des sous classes de nutriment
 - *Emma* : Création de la classe SwimmingBacterium, superclasse de Poison et SimpleBacterium pour rassembler les méthodes communes,
-           création des raccourcis dans la classe Config
+           création des raccourcis dans la classe Config, complément ReadMe
 
 - *ensemble* : relecture générale du code, commentaires, modifications + corrections des bugs
