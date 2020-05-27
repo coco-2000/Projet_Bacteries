@@ -133,7 +133,7 @@ Toutes les parties antérieures sont fonctionelles
 - *Constance* : création des murs pour que les bactéries puissent vivre en autonomie, implémentation du mode perdu pour les obstacles
                 et pour la petri, ajout de la texture de l'obstacle
 - *Emma*      : correction d'un bug du mode perdu, résolution des bactéries sortant de la pétri, implémentation du mode perdu SwarmBacterium, ajout graphes
-                poison bacterium
+                ajout graphe poison bacterium et poison
 - *ensemble*  : conception du mode perdu SwarmBacterium,
 
 - Problèmes : Bactéries se collent parfois sur le bord de la petri ->  mode perdu lors des collisions sur la petri pour un comportement
